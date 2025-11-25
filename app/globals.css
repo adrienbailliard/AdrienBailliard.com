@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+
+@theme
+{
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+
+  --color-primary: #306CE4;
+
+  --color-light-fg: #FFFFFF;
+  --color-dark-fg: #000000;
+
+  --color-dark-muted-text: #707070;
+  --color-light-muted-text: #ADADAD;
+
+  --color-light-bg: #F0F0F0;
+  --color-dark-bg: #0F0F0F;
+  --color-dark-elevated-bg: #222222;
+
+  --color-selection-text: rgba(85, 109, 166, 0.45);
+
+  --color-error: #AD3937;
+
+  --spacing-header: 60px;
+  --spacing-header-xl: 80px;
+}
+
+
+@layer base
+{
+  html {
+    @apply scroll-smooth h-full;
+  }
+
+  body {
+    @apply font-display text-base text-light-fg antialiased h-full grid grid-rows-[1fr_auto];
+  }
+
+  main {
+    @apply mt-header xl:mt-header-xl;
+  }
+
+  ::selection {
+    @apply bg-selection-text;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-elevated-bg;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-dark-muted-text;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    @apply bg-light-muted-text;
+  }
+
+  header, footer, section {
+    @apply px-[5%];
+  }
+
+  section {
+    @apply py-16 md:py-26 lg:py-30 scroll-mt-[var(--spacing-header)] xl:scroll-mt-[var(--spacing-header-xl)];
+  }
+
+  h2 + div {
+    @apply mt-11 md:mt-18 lg:mt-22;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  input,
+  textarea {
+    @apply bg-light-fg text-dark-fg outline-none rounded-lg;
+  }
+
+  ::placeholder {
+    @apply font-light text-dark-muted-text;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  blockquote {
+    @apply leading-tight;
+  }
+
+  h1 {
+    @apply text-[40px] sm:text-5xl md:text-[56px];
+  }
+
+  h2 {
+    @apply text-4xl md:text-5xl;
+  }
+  
+  h3 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  blockquote,
+  h4 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h5 {
+    @apply text-xl md:text-2xl;
+  }
+
+  h3 + p,
+  h2 + p {
+    @apply mt-5 md:mt-6;
+  }
+
+  blockquote + figcaption,
+  h4 + p {
+    @apply mt-4 md:mt-5;
+  }
+
+  li + li {
+    @apply mt-5.5 md:mt-7;
+  }
+
+  p,
+  figcaption,
+  ul {
+    @apply font-sans md:text-lg;
+  }
+
+  p + p {
+    @apply mt-3 md:mt-4;
+  }
+
+  h1 + a,
+  h2 + a,
+  p + div,
+  p + a,
+  p + form,
+  p + button {
+    @apply mt-8 md:mt-10;
+  }
+
+  h1 + p,
+  svg + h4,
+  form + p,
+  button + p {
+    @apply mt-7 md:mt-9;
+  }
+
+  section > div:first-child,
+  footer > div:first-child {
+    @apply max-w-[1408px] mx-auto;
+  }
+}
+
+
+@layer components
+{
+  .hero {
+    @apply -mt-[var(--spacing-header)] xl:-mt-[var(--spacing-header-xl)] min-h-screen bg-dark-bg flex flex-col items-center justify-center;
+  }
+
+  .illustrations {
+    @apply rounded-md brightness-90;
+  }
+
+  .p-link {
+    @apply underline underline-offset-3 italic;
+  }
+
+  .base-link {
+    @apply font-semibold flex gap-4 items-center;
+  }
+
+  .base-arrow {
+    @apply duration-200 h-3 w-2;
+  }
+
+  .base-button {
+    @apply rounded-lg py-3 md:py-3.5 px-5 font-semibold;
+  }
+
+  .contact p {
+    @apply text-base font-medium;
+  }
+
+  .contact {
+    @apply p-8 sm:p-10 bg-dark-bg text-light-fg rounded-md;
+  }
+
+  .contact input,
+  .contact textarea {
+    @apply w-full mt-2;
+  }
+
+  .contact h5 {
+    @apply mb-5;
+  }
+
+  .contact input,
+  .contact textarea,
+  .contact button {
+    @apply h-10.5 p-3;
+  }
+
+  .contact textarea {
+    @apply min-h-42;
+  }
+
+  .contact button {
+    @apply rounded-lg font-medium w-full flex items-center justify-center duration-100; 
+  }
+
+  #terms h2,
+  #terms h4 {
+    @apply font-medium;
+  }
+
+  #terms p + h4 {
+    @apply mt-8 md:mt-10;
+  }
+}
+
+
+@layer utilities
+{
+  .inset-border {
+    box-shadow: inset 0 0 0 1.5px;
+  }
+}

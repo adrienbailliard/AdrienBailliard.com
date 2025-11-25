@@ -1,0 +1,5 @@
+Crawl-delay: 10
+User-agent: *
+Disallow:
+
+Sitemap: https://adrienbailliard.com/sitemap.xml
