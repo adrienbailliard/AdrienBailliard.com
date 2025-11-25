@@ -9,7 +9,7 @@ import Link from "@/components/ui/Link";
 import CTA from "@/components/CTA";
 
 
-const pathname = "/consultation/";
+const pathname = "/consultation";
 export const metadata = getMetadata(pathname);
 
 

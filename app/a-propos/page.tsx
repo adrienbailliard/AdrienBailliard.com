@@ -9,7 +9,7 @@ import Image from "next/image";
 import Logo from "@/components/icons/logo";
 
 
-const pathname = "/a-propos/";
+const pathname = "/a-propos";
 
 export const metadata = getMetadata(pathname);
 

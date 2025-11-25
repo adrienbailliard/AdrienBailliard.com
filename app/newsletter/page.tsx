@@ -8,7 +8,7 @@ import Newsletters from "@/components/newsletter/Newsletters";
 import AutoMonday from "@/components/icons/autoMonday";
 
 
-const pathname = "/newsletter/";
+const pathname = "/newsletter";
 export const metadata = getMetadata(pathname);
 
 

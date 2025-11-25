@@ -9,7 +9,7 @@ import Form from '@/components/ui/BaseForm';
 import Arrow from "@/components/icons/arrow";
 
 
-const pathname = "/le-systeme-d-elite/";
+const pathname = "/le-systeme-d-elite";
 export const metadata = getMetadata(pathname);
 
 

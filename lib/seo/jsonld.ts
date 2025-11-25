@@ -10,22 +10,29 @@ type BreadcrumbElement = {
 };
 
 
+function getBreadcrumb(pathname: string, index: number, listLength: number): BreadcrumbElement
+{
+    return {
+        "@type": "ListItem",
+        position: index + 1,
+        name: pageMapping.get(pathname)!.name,
+        item: index == listLength - 1 ? undefined : site.url + pathname
+    };
+}
+
+
 function getBreadcrumbList(pathname: string): Array<BreadcrumbElement>
 {
-    const segments = pathname.split('/');
-    const itemList: Array<BreadcrumbElement> = new Array(segments.length - 1);
+    const segments = pathname == "/" ? [ "" ] : pathname.split('/');
+    const itemList: Array<BreadcrumbElement> = new Array(segments.length);
     let currentPathname = "";
 
-    for (let i = 0; i < segments.length - 1; i++)
-    {
-        currentPathname += segments[i] + "/";
+    itemList[0] = getBreadcrumb("/", 0, segments.length);
 
-        itemList[i] = {
-            "@type": "ListItem",
-            position: i + 1,
-            name: pageMapping.get(currentPathname)!.name,
-            item: i == segments.length - 2 ? undefined : site.url + currentPathname
-        };
+    for (let i = 1; i < segments.length; i++)
+    {
+        currentPathname += "/" + segments[i];
+        itemList[i] = getBreadcrumb(currentPathname, i, segments.length);
     }
 
     return itemList;
@@ -59,10 +66,10 @@ export function getJsonLd(pathname: string): Record<string, unknown>
                 "inLanguage": "fr-FR",
                 "potentialAction": [
                     {
-                    "@type": "ReadAction",
-                    "target": [
-                        pageUrl
-                    ]
+                        "@type": "ReadAction",
+                        "target": [
+                            pageUrl
+                        ]
                     }
                 ]
             },

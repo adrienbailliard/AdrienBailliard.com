@@ -20,7 +20,7 @@ const pageMapping: Map<string,
         }
     ],
     [
-        "/newsletter/",
+        "/newsletter",
         {
             name: "Newsletter",
             title: "Auto Monday",
@@ -28,35 +28,35 @@ const pageMapping: Map<string,
         }
     ],
     [
-        "/consultation/",
+        "/consultation",
         {
             name: "Consultation",
             description: "Réserve une consultation 1:1 avec Adrien Bailliard pour automatiser ton business avec des systèmes performants, comme les meilleurs dirigeants."
         }
     ],
     [
-        "/le-systeme-d-elite/",
+        "/le-systeme-d-elite",
         {
             name: "Le Système d'Élite",
             description: "Les protocoles exacts du Top 1% en market making, rassemblés dans un guide gratuit pour créer des systèmes performants."
         }
     ],
     [
-        "/a-propos/",
+        "/a-propos",
         {
             name: "À Propos",
             description: "Fondateur d'Auto Monday, Adrien Bailliard conçoit des systèmes performants qui libèrent ton temps. Découvre son histoire."
         }
     ],
     [
-        "/contact/",
+        "/contact",
         {
             name: "Contact",
             description: "Contacte Adrien Bailliard à propos d'automatisation, de systèmes performants et d'opportunités de collaboration."
         }
     ],
     [
-        "/conditions-generales/",
+        "/conditions-generales",
         {
             name: "Conditions Générales",
             description: "Consulte les conditions générales d'utilisation et la politique de confidentialité du site d'Adrien Bailliard."

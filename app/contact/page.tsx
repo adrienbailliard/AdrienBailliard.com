@@ -8,7 +8,7 @@ import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
 
 
-const pathname = "/contact/";
+const pathname = "/contact";
 export const metadata = getMetadata(pathname);
 
 

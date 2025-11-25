@@ -4,7 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 
 
-const pathname = "/conditions-generales/";
+const pathname = "/conditions-generales";
 
 export const metadata = getMetadata(pathname);
 
