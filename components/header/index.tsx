@@ -13,24 +13,22 @@ import { handleScrollLock } from "@/components/header/utils";
 import pageMapping from "@/config/pageMapping";
 import site from "@/config/site";
 
+import { useAuth } from '@/context/authentification';
 
-export default function Header({ isAdmin }: { isAdmin: boolean })
+
+export default function Header()
 {
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const [ isPopupOpen, setIsPopupOpen ] = useState(false);
     const pathname = usePathname();
     const pageEntries = useMemo(() => Array.from(pageMapping.entries()), []);
     const [ctaHref, ctaPage] = pageEntries[pageEntries.length - 2];
+    const { isAdmin, logout } = useAuth();
     const actionButtonText = isAdmin ? "Quitter" : "S'inscrire";
 
     const closeMenuAndHandlePopup = () => {
         setIsMenuOpen(false);
         setIsPopupOpen(!isPopupOpen);
-    };
-
-    const logoutAdmin = () => {
-        document.cookie = `${site.adminCookie.name}=; path=${site.adminCookie.path}; max-age=0`;
-        window.location.reload();
     };
 
     useEffect(() => {
@@ -40,7 +38,7 @@ export default function Header({ isAdmin }: { isAdmin: boolean })
 
     useEffect(() => handleScrollLock(isPopupOpen), [isPopupOpen]);
     const getLinkClass = (href: string) => pathname === href ? " underline" : "";
-    const actionButton = isAdmin ? logoutAdmin : closeMenuAndHandlePopup;
+    const actionButton = isAdmin ? logout : closeMenuAndHandlePopup;
 
 
     return (
