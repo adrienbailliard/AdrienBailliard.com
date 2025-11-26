@@ -7,7 +7,7 @@ export async function sendConfirmation(email: string): Promise<void>
 {
     const content = `
         <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 48px; padding-bottom: 64px; text-align: center;">
-            <a target="_blank" href="${site.url}/newsletter/"><img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday - Logo" style="width: 100%; border-radius: 6px;"/></a>
+            <a target="_blank" href="${site.url}/newsletter"><img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday - Logo" style="width: 100%; border-radius: 6px;"/></a>
         </div>
 
         <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-bottom: 64px; color: black; font-size: 16px;">
@@ -46,7 +46,7 @@ export async function sendConfirmation(email: string): Promise<void>
                 Adrien Bailliard
             </p>
             <p style="margin-top: 24px; line-height: 24px; color: black; font-size: 16px;">
-                PS : En attendant la prochaine newsletter, tu peux <a target="_blank" href="${site.url}/consultation/" style="color: #306CE4; font-weight: bold; text-underline-offset: 3px; font-size: 16px;">réserver une consultation 1:1</a> pour libérer ton temps grâce à des systèmes sur mesure.
+                PS : En attendant la prochaine newsletter, tu peux <a target="_blank" href="${site.url}/consultation" style="color: #306CE4; font-weight: bold; text-underline-offset: 3px; font-size: 16px;">réserver une consultation 1:1</a> pour libérer ton temps grâce à des systèmes sur mesure.
             </p>
         </div>
     `;

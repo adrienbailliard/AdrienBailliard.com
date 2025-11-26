@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 
 import Popup from "@/components/header/Popup";
@@ -10,8 +10,8 @@ import MobileMenu from "@/components/header/MobileMenu";
 import BurgerButton from "@/components/header/BurgerButton";
 import { handleScrollLock } from "@/components/header/utils";
 
+import pageMapping from "@/config/pageMapping";
 import site from "@/config/site";
-
 
 
 export default function Header({ isAdmin }: { isAdmin: boolean })
@@ -19,6 +19,9 @@ export default function Header({ isAdmin }: { isAdmin: boolean })
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const [ isPopupOpen, setIsPopupOpen ] = useState(false);
     const pathname = usePathname();
+    const pageEntries = useMemo(() => Array.from(pageMapping.entries()), []);
+    const [ctaHref, ctaPage] = pageEntries[pageEntries.length - 2];
+    const actionButtonText = isAdmin ? "Quitter" : "S'inscrire";
 
     const closeMenuAndHandlePopup = () => {
         setIsMenuOpen(false);
@@ -30,17 +33,14 @@ export default function Header({ isAdmin }: { isAdmin: boolean })
         window.location.reload();
     };
 
-    const getLinkClass = (href: string) => pathname === href ? " underline" : "";
-    const actionButton = isAdmin ? logoutAdmin : closeMenuAndHandlePopup;
-    const actionButtonText = isAdmin ? "Quitter" : "S'inscrire";
-
-
     useEffect(() => {
         setIsMenuOpen(false);
         setIsPopupOpen(false);
     }, [pathname]);
 
     useEffect(() => handleScrollLock(isPopupOpen), [isPopupOpen]);
+    const getLinkClass = (href: string) => pathname === href ? " underline" : "";
+    const actionButton = isAdmin ? logoutAdmin : closeMenuAndHandlePopup;
 
 
     return (
@@ -50,8 +50,8 @@ export default function Header({ isAdmin }: { isAdmin: boolean })
                     role="navigation"
                     className="flex justify-between items-center h-header xl:h-header-xl underline-offset-10"
                 >
-                    <Link href="/" className="text-base xl:text-lg font-medium">
-                        ADRIEN BAILLIARD
+                    <Link href="/" className="text-base xl:text-lg font-medium uppercase">
+                        { site.name }
                     </Link>
 
                     <MobileMenu
@@ -60,14 +60,18 @@ export default function Header({ isAdmin }: { isAdmin: boolean })
                         getLinkClass={getLinkClass}
                         isOpen={isMenuOpen}
                         actionButtonText={actionButtonText}
+                        pageEntries={pageEntries}
                     />
 
                     <div className="flex items-center max-[520px]:gap-2 gap-5 lg:gap-8 xl:gap-11">
-                        <DesktopMenu getLinkClass={getLinkClass}/>
+                        <DesktopMenu
+                            getLinkClass={getLinkClass}
+                            pageEntries={pageEntries}
+                        />
 
                         <div className="flex gap-4 max-[360px]:hidden m-auto">
-                            <Link href="/contact/" className="max-[520px]:hidden px-4 xl:px-6 h-8.5 xl:h-11 inline-flex items-center rounded-lg inset-border">
-                                Contact
+                            <Link href={ctaHref} className="max-[520px]:hidden px-4 xl:px-6 h-8.5 xl:h-11 inline-flex items-center rounded-lg inset-border">
+                                { ctaPage.name }
                             </Link>
                             <button
                                 onClick={actionButton}

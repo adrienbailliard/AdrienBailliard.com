@@ -71,7 +71,7 @@ export default function Home()
               { " et ayant déjà généré jusqu'à 15 000 €/mois." }
             </p>
             <div className="flex items-center justify-between">
-              <Link href="/a-propos/" variant="button-primary">
+              <Link href="/a-propos" variant="button-primary">
                 { "Lis Mon Histoire" }
               </Link>
               <Logo className="h-12 md:h-13"/>
@@ -100,21 +100,21 @@ export default function Home()
               Icon={Newsletter}
               title="Newsletter"
               paragraph="Chaque lundi, des systèmes concrets pour automatiser intelligemment."
-              href="/newsletter/"
+              href="/newsletter"
               cta="Reçois la Newsletter"
             />
             <ServicePreview
               Icon={Guide}
               title="Le Système d'Élite"
               paragraph="Les secrets derrière les systèmes les plus performants, enfin accessibles."
-              href="/le-systeme-d-elite/"
+              href="/le-systeme-d-elite"
               cta="Télécharge le Guide PDF"
             />
             <ServicePreview
               Icon={Consultation}
               title="Consultation"
               paragraph="Un accompagnement 1:1 pour créer des systèmes sur mesure."
-              href="/consultation/"
+              href="/consultation"
               cta="Réserve ton Appel"
               className="max-lg:col-span-full"
             />
@@ -136,7 +136,7 @@ export default function Home()
           }/>
           <div className="text-center mt-10 md:mt-12 lg:mt-14">
             <Link
-              href="/newsletter/"
+              href="/newsletter"
               variant="button-primary"
             >
               { "Explore Les Éditions" }

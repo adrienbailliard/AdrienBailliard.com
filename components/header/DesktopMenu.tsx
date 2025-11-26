@@ -1,20 +1,21 @@
 import Link from "next/link";
-import pageMapping from "@/config/pageMapping";
+import { PageEntries } from "@/config/pageMapping";
 
 
 interface DesktopNavProps
 {
-  getLinkClass: (href: string) => string;
+    getLinkClass: (href: string) => string;
+    pageEntries: PageEntries;
 }
 
 
-export default function DesktopMenu({ getLinkClass }: DesktopNavProps)
+export default function DesktopMenu({ pageEntries, getLinkClass }: DesktopNavProps)
 {
     return (
         <div className="hidden lg:flex gap-8 xl:gap-11">
             {
-                Array.from(pageMapping.entries()).map(([key, value], index) =>
-                    index > 0 && index < pageMapping.size - 2
+                pageEntries.map(([key, value], index) =>
+                    index > 0 && index < pageEntries.length - 2
                     ? (
                         <Link
                             key={key}

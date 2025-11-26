@@ -59,7 +59,7 @@ export default function Consultation()
       >
         <Link
           className="max-w-lg w-full"
-          href="/contact/"
+          href="/contact"
           variant="button-primary"
         >
           { "Planifie Ton Appel" }

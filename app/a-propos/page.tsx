@@ -81,7 +81,7 @@ export default function About()
           </p>
           <p>
             { "2. À 17 ans, j'ai créé un robot de trading générant jusqu'à 15 000 €/mois en autonomie. J'en dévoile les coulisses dans " }
-            <Link href="/le-systeme-d-elite/" className="p-link">
+            <Link href="/le-systeme-d-elite" className="p-link">
               { "Le Système d'Élite" }
             </Link>
             { "." }
@@ -100,7 +100,7 @@ export default function About()
           </p>
           <p>
             { "7. " }
-            <Link href="/newsletter/" className="p-link">
+            <Link href="/newsletter" className="p-link">
               Auto Monday
             </Link>
             { " est né d'une ambition : libérer le temps des ambitieux grâce à des systèmes qui accélèrent leur croissance." }

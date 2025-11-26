@@ -2,6 +2,8 @@ import Link from "next/link";
 import Linkedin from "@/components/icons/linkedin";
 import pageMapping from "@/config/pageMapping";
 
+import site from "@/config/site";
+
 
 
 export default function Footer()
@@ -13,8 +15,8 @@ export default function Footer()
             role="navigation"
             className="flex items-center max-xl:flex-col max-xl:gap-5"
           >
-          <Link href="/" className="text-lg font-medium basis-3/16">
-            ADRIEN BAILLIARD
+          <Link href="/" className="text-lg font-medium basis-3/16 uppercase">
+            { site.name }
           </Link>
           <div className="flex gap-x-6 md:gap-x-11 gap-y-1 basis-5/8 justify-center flex-wrap">
             {
@@ -47,7 +49,7 @@ export default function Footer()
           <div className="text-light-muted-text">
             © {new Date().getFullYear()} Adrien Bailliard. Tous droits réservés.
           </div>
-          <Link href="/conditions-generales/" className="font-medium">
+          <Link href="/conditions-generales" className="font-medium">
             Conditions générales
           </Link>
         </div>

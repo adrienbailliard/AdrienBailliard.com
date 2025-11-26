@@ -73,3 +73,4 @@ for (const [, value] of pageMapping)
 
 
 export default pageMapping as Map<string, PageMapping>;
+export type PageEntries = Array<[string, PageMapping]>;
