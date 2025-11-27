@@ -16,7 +16,12 @@ export async function handleSubmit(
         button.disabled = true;
         button.classList.add("cursor-default");
 
-        await action(formData);
+        try {
+            await action(formData);
+        }
+        catch {
+            setHasError(true);
+        }
     }
     else
         setHasError(true);
