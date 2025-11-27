@@ -40,7 +40,7 @@ export async function sendGuide(email: string): Promise<void>
           Découvre comment automatiser pour gagner en performance.
         </p>
         <p style="margin-top: 24px; line-height: 24px; margin-bottom: 0px; color: black; font-size: 16px;">
-          Adrien Bailliard
+          ${ site.name }
         </p>
       </div>
     `;

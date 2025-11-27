@@ -43,7 +43,7 @@ export async function sendConfirmation(email: string): Promise<void>
             <p style="margin-top: 24px; margin-bottom: 0px; color: black; line-height: 24px; font-size: 16px;">
                 À très vite !
                 <br />
-                Adrien Bailliard
+                ${ site.name }
             </p>
             <p style="margin-top: 24px; line-height: 24px; color: black; font-size: 16px;">
                 PS : En attendant la prochaine newsletter, tu peux <a target="_blank" href="${site.url}/consultation" style="color: #306CE4; font-weight: bold; text-underline-offset: 3px; font-size: 16px;">réserver une consultation 1:1</a> pour libérer ton temps grâce à des systèmes sur mesure.
