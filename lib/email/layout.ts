@@ -28,7 +28,7 @@ export default function Layout(children: string): string
               <div style="background-color: #222222; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding-top: 13px; padding-bottom: 18px; padding-left: 5%; padding-right: 5%;">
                 <table style="width: 100%; text-align: center;">
                   <tr>
-                    <td style="padding: 0; padding-bottom: 6px;">
+                    <td style="padding: 0; padding-bottom: 14px;">
                       <a target="_blank" href="https://www.linkedin.com/in/adrienbailliard/" style="display: inline-block; padding: 11px;">
                         <img src="${site.url}${site.emailAssetsFolder}linkedin.png" alt="LinkedIn - ${ site.name }"/>
                       </a>
