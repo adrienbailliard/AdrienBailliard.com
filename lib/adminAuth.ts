@@ -32,7 +32,7 @@ export async function updateAdminCookie(cookies: ResponseCookies, token?: string
     {
         cookies.set(site.adminCookie.name, await generateAdminLoginToken(site.adminCookie.maxAge), {
             secure: true,
-            sameSite: 'strict',
+            sameSite: 'lax',
             path: site.adminCookie.path,
             maxAge: site.adminCookie.maxAge
         });
