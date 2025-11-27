@@ -25,11 +25,11 @@ export default function Layout(children: string): string
               ${children}
 
 
-              <div style="background-color: #222222; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding-top: 21px; padding-bottom: 24px; padding-left: 5%; padding-right: 5%;">
+              <div style="background-color: #222222; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding-top: 13px; padding-bottom: 18px; padding-left: 5%; padding-right: 5%;">
                 <table style="width: 100%; text-align: center;">
                   <tr>
-                    <td style="padding: 0; padding-bottom: 17px;">
-                      <a target="_blank" href="https://www.linkedin.com/in/adrienbailliard/" style="padding-left: 11px; padding-right: 11px; padding-top: 23px; padding-bottom: 8px;">
+                    <td style="padding: 0; padding-bottom: 6px;">
+                      <a target="_blank" href="https://www.linkedin.com/in/adrienbailliard/" style="display: inline-block; padding: 11px;">
                         <img src="${site.url}${site.emailAssetsFolder}linkedin.png" alt="LinkedIn - ${ site.name }"/>
                       </a>
                     </td>
