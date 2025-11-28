@@ -62,7 +62,7 @@ export default function Consultation()
           href="/contact"
           variant="button-primary"
         >
-          { "Planifie Ton Appel" }
+          { "Réserve Mon Audit Gratuit" }
         </Link>
       </CTA>
     </main>

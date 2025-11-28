@@ -90,7 +90,7 @@ export default function About()
             { "3. À l'école 42, j'affine ce qui fait un système performant : fiabilité, optimisation et scalabilité." }
           </p>
           <p>
-            { "4. Mon chien Thatcher (Texas de Tara des Hauts Lilas) est titré Champion dans 4 pays. La réussite ne tombe pas du ciel, et se construit avec méthode." }
+            { "4. Mon chien Thatcher (Texas de Tara des Hauts Lilas) est titré Champion dans 3 pays. La réussite ne tombe pas du ciel, et se construit avec méthode." }
           </p>
           <p>
             { "5. Le scoutisme m'a appris le leadership et l'organisation. Les meilleures organisations fonctionnent même lorsque le chef s'absente." }
