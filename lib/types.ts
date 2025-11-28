@@ -9,15 +9,15 @@ export type MessageInput = {
 
 
 export type GuideStats = {
-  totalEmails: number;
-  weeklyEmails: number;
-  redemmanders: number;
-  maxRequests: number;
+  total_emails: number;
+  weekly_emails: number;
+  retries: number;
+  max_requests: number;
 };
 
 
 export type SubscriberStats = {
-  totalSubscribers: number;
-  weeklySubscribers: number;
-  unsubscribeRate: number;
+  total_subscribers: number;
+  weekly_subscribers: number;
+  unsubscribe_rate: number;
 };
