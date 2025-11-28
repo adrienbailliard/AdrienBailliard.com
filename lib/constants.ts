@@ -9,3 +9,4 @@ export const MAX_FECTH_EMAIL_RETRY = 10;
 export const FECTH_EMAIL_DELAY = 6000;
 export const WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000;
 export const STATS_REVALIDATE = 180;
+export const STATS_PERCENTAGE_PRECISION = 1;
