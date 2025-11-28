@@ -1,5 +1,4 @@
 import "./globals.css";
-import { headers } from 'next/headers';
 import { Nunito, Plus_Jakarta_Sans } from 'next/font/google'
 
 import Header from "@/components/header";
@@ -21,13 +20,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>)
 {
-  const headersList = await headers();
-  const adminCookie = headersList.get('x-is-admin');
-
   return (
     <html lang="fr" data-scroll-behavior="smooth">
       <body className={`${plusJakartaSans.variable} ${nunito.variable}`}>
-        <AuthProvider initialIsAdmin={ adminCookie === "true" }>
+        <AuthProvider>
           <Header />
           {children}
           <Footer />

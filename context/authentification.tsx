@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import site from "@/config/site";
 
 
@@ -9,19 +9,20 @@ const AuthContext = createContext({
 });
 
 
-interface AuthProviderProps {
-  children: React.ReactNode;
-  initialIsAdmin: boolean;
-}
-
-export function AuthProvider({ children, initialIsAdmin }: AuthProviderProps)
+export function AuthProvider({ children }: { children: React.ReactNode })
 {
-  const [isAdmin, setIsAdmin] = useState(initialIsAdmin);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const logout = () => {
     setIsAdmin(false);
     document.cookie = `${site.adminCookie.name}=; path=${site.adminCookie.path}; max-age=0`;
   };
+
+  useEffect(() => {
+    setIsAdmin(
+      document.cookie.startsWith(`${site.adminCookie.name}=`)
+    );
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isAdmin, logout }}>
