@@ -11,7 +11,7 @@ const AuthContext = createContext({
 
 export function AuthProvider({ children }: { children: React.ReactNode })
 {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 
   const logout = () => {
     setIsAdmin(false);
@@ -23,6 +23,10 @@ export function AuthProvider({ children }: { children: React.ReactNode })
       document.cookie.startsWith(`${site.adminCookie.name}=`)
     );
   }, []);
+
+
+  if (isAdmin === null)
+    return null;
 
   return (
     <AuthContext.Provider value={{ isAdmin, logout }}>
