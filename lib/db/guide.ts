@@ -20,7 +20,7 @@ export async function getGuideStats(): Promise<GuideStats>
     SELECT 
       COUNT(*) as totalEmails,
       COUNT(*) FILTER (WHERE created_at > (EXTRACT(epoch FROM now()) * 1000 - ${WEEK_IN_MS})) as weeklyEmails,
-      ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / COUNT(*), 2) as redemmanders,
+      ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / NULLIF(COUNT(*), 0), 2) as redemmanders,
       MAX(request_count) as maxRequests
     FROM guide_requests
   ` as GuideStats[];

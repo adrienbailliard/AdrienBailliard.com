@@ -24,7 +24,7 @@ export async function getSubscriberStats(): Promise<SubscriberStats>
     SELECT 
       COUNT(*) as totalSubscribers,
       COUNT(*) FILTER (WHERE created_at > (EXTRACT(epoch FROM now()) * 1000 - ${WEEK_IN_MS})) as weeklySubscribers,
-      ROUND(100.0 * COUNT(*) FILTER (WHERE unsubscribed = true) / COUNT(*), 2) as unsubscribeRate
+      ROUND(100.0 * COUNT(*) FILTER (WHERE unsubscribed = true) / NULLIF(COUNT(*), 0), 2) as unsubscribeRate
     FROM subscribers
   ` as SubscriberStats[];
   
