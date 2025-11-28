@@ -1,4 +1,4 @@
-import { emailStatus, DOMAIN_CACHE_TTL_MS, EMAIL_PATTERN, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/form/constants";
+import { emailStatus, DOMAIN_CACHE_TTL_MS, EMAIL_PATTERN, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
 import { getDomainData, upsertDomain } from "@/lib/db/domains";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 

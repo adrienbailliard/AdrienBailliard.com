@@ -1,5 +1,5 @@
 import { sql } from "@/lib/db/client";
-import { emailStatus } from "@/lib/form/constants";
+import { emailStatus } from "@/lib/constants";
 
 
 type DomainData = {

@@ -28,13 +28,10 @@ export async function isAdminLoginToken(token: string)
 
 export async function updateAdminCookie(cookies: ResponseCookies, token?: string | null)
 {
-    if (token && await isAdminLoginToken(token))
-    {
-        cookies.set(site.adminCookie.name, await generateAdminLoginToken(site.adminCookie.maxAge), {
-            secure: true,
-            sameSite: 'lax',
-            path: site.adminCookie.path,
-            maxAge: site.adminCookie.maxAge
-        });
-    }
+    cookies.set(site.adminCookie.name, await generateAdminLoginToken(site.adminCookie.maxAge), {
+        secure: true,
+        sameSite: 'lax',
+        path: site.adminCookie.path,
+        maxAge: site.adminCookie.maxAge
+    });
 }

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
-import { EMAIL_PATTERN } from "@/lib/form/constants";
+import { EMAIL_PATTERN } from "@/lib/constants";
 import site from "@/config/site";
 import { handleSubmit } from "@/lib/form/handlers";
 import { request } from "@/app/actions/guide";
