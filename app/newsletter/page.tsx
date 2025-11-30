@@ -6,6 +6,7 @@ import Script from "next/script";
 import Form from '@/components/ui/BaseForm';
 import Newsletters from "@/components/newsletter/Newsletters";
 import AutoMonday from "@/components/icons/autoMonday";
+import Stats from "@/components/Stats";
 
 
 const pathname = "/newsletter";
@@ -19,6 +20,8 @@ export default function Newsletter()
   return (
     <main className="bg-light-bg">
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
+
+      <Stats type="subscribers"/>
 
       <section className="bg-dark-bg text-light-fg">
         <div className="flex max-lg:flex-col items-center lg:justify-between gap-10 lg:gap-20">

@@ -8,6 +8,12 @@ export type MessageInput = {
 };
 
 
+export type StatResponse = {
+  value: number | string;
+  label: string;
+};
+
+
 export type GuideStats = {
   total_emails: number;
   weekly_emails: number;

@@ -1,5 +1,6 @@
 import { sql } from '@/lib/db/client';
-import { GuideStats } from '@/lib/types';
+import { GuideStats, StatResponse } from '@/lib/types';
+import { formatPercentage, adaptLabel } from '@/lib/utils';
 import { WEEK_IN_MS, STATS_PERCENTAGE_PRECISION } from '@/lib/constants';
 
 
@@ -14,7 +15,7 @@ export async function insertRequestGuide(email: string): Promise<void>
 }
 
 
-export async function getGuideStats(): Promise<GuideStats>
+export async function getGuideStats(): Promise<Array<StatResponse>>
 {
   const result = await sql `
     SELECT 
@@ -25,5 +26,19 @@ export async function getGuideStats(): Promise<GuideStats>
     FROM guide_requests
   ` as GuideStats[];
   
-  return result[0];
+  const stats = result[0];
+
+
+  return [
+    { value: stats.total_emails, label:
+      adaptLabel(stats.total_emails, { singular: 'Email total', plural: 'Emails totaux' })
+    },
+    { value: stats.weekly_emails, label: 
+      adaptLabel(stats.weekly_emails, {singular: 'Email cette semaine', plural: 'Emails cette semaine' })
+    },
+    { value: formatPercentage(stats.retries), label: 'Taux de relance' },
+    { value: stats.max_requests, label:
+      adaptLabel(stats.max_requests, {singular: 'Relance maximale', plural: 'Relances maximales' })
+    }
+  ];
 }

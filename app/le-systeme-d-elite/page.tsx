@@ -7,6 +7,7 @@ import Image from "next/image";
 import CTA from "@/components/CTA";
 import Form from '@/components/ui/BaseForm';
 import Arrow from "@/components/icons/arrow";
+import Stats from "@/components/Stats";
 
 
 const pathname = "/le-systeme-d-elite";
@@ -20,6 +21,8 @@ export default function TheEliteSystem()
   return (
     <main className="bg-light-bg">
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
+
+      <Stats type="guide"/>
 
       <section className="text-light-fg bg-dark-bg relative">
         <div className="relative max-sm:min-h-80">

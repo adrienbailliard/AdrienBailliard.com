@@ -1,5 +1,6 @@
 import { sql } from '@/lib/db/client';
-import { SubscriberStats } from '@/lib/types';
+import { SubscriberStats, StatResponse } from '@/lib/types';
+import { formatPercentage, adaptLabel } from '@/lib/utils';
 import { WEEK_IN_MS, STATS_PERCENTAGE_PRECISION } from '@/lib/constants';
 
 
@@ -18,7 +19,7 @@ export async function addSubscriber(email: string): Promise<boolean>
 }
 
 
-export async function getSubscriberStats(): Promise<SubscriberStats>
+export async function getSubscriberStats(): Promise<Array<StatResponse>>
 {
   const result = await sql `
     SELECT 
@@ -28,5 +29,16 @@ export async function getSubscriberStats(): Promise<SubscriberStats>
     FROM subscribers
   ` as SubscriberStats[];
   
-  return result[0];
+  const stats = result[0];
+
+
+  return [
+    { value: stats.total_subscribers, label:
+      adaptLabel(stats.total_subscribers, { singular: 'Abonné total', plural: 'Abonnés totaux' })
+    },
+    { value: stats.weekly_subscribers, label:
+      adaptLabel(stats.weekly_subscribers, { singular: 'Abonné cette semaine', plural: 'Abonnés cette semaine' })
+    },
+    { value: formatPercentage(stats.unsubscribe_rate), label: 'Taux de désinscription' }
+  ];
 }
