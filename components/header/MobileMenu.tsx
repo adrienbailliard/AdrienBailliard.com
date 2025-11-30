@@ -22,7 +22,7 @@ export default function MobileMenu({ pageEntries, actionButtonText, actionButton
         <>
             <div
                 onClick={() => setIsOpen(false)}
-                className={ "absolute inset-0 top-full h-[100vh] "
+                className={ "absolute inset-0 top-full h-[100dvh] "
                 + ( isOpen
                     ? "visible"
                     : "invisible"
@@ -30,7 +30,7 @@ export default function MobileMenu({ pageEntries, actionButtonText, actionButton
             }/>
             <div className=
                 {
-                    "hidden duration-250 absolute top-full left-0 w-full flex-col bg-dark-bg pt-6 pb-8 max-lg:flex items-center gap-7 max-h-[calc(100vh-var(--spacing-header))] overflow-y-auto "
+                    "hidden duration-250 absolute top-full left-0 w-full flex-col bg-dark-bg pt-6 pb-8 max-lg:flex items-center gap-7 max-h-[calc(100dvh-var(--spacing-header))] overflow-y-auto "
                     + (isOpen
                         ? "visible opacity-100"
                         : "-translate-y-3.5 invisible opacity-0"

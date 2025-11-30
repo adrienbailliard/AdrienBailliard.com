@@ -4,6 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 
 import ContactForm from "@/components/ContactForm";
+import Stats from "@/components/Stats";
 import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
 
@@ -20,6 +21,8 @@ export default function Contact()
     <main className="bg-light-bg">
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
       
+      <Stats type="messages"/>
+
       <section className="bg-dark-bg text-light-fg">
         <div className="flex max-sm:gap-7 max-sm:text-center max-sm:flex-col-reverse sm:justify-between items-center gap-12">
           <div className="max-w-2xl">

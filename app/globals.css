@@ -166,7 +166,7 @@
 @layer components
 {
   .hero {
-    @apply -mt-[var(--spacing-header)] xl:-mt-[var(--spacing-header-xl)] min-h-screen bg-dark-bg flex flex-col items-center justify-center;
+    @apply -mt-[var(--spacing-header)] xl:-mt-[var(--spacing-header-xl)] min-h-dvh bg-dark-bg flex flex-col items-center justify-center;
   }
 
   .illustrations {

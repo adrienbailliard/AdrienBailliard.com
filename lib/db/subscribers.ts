@@ -1,7 +1,7 @@
 import { sql } from '@/lib/db/client';
-import { SubscriberStats, StatResponse } from '@/lib/types';
+import { SubscribersStats, StatResponse } from '@/lib/types';
 import { formatPercentage, adaptLabel, formatGain } from '@/lib/utils';
-import { WEEK_IN_MS, STATS_PERCENTAGE_PRECISION } from '@/lib/constants';
+import { STATS_PERCENTAGE_PRECISION } from '@/lib/constants';
 
 
 export async function addSubscriber(email: string): Promise<boolean>
@@ -19,22 +19,22 @@ export async function addSubscriber(email: string): Promise<boolean>
 }
 
 
-export async function getSubscriberStats(): Promise<Array<StatResponse>>
+export async function getSubscribersStats(): Promise<Array<StatResponse>>
 {
   const result = await sql `
     SELECT 
       COUNT(*) as total_subscribers,
-      COUNT(*) FILTER (WHERE created_at > (EXTRACT(epoch FROM now()) * 1000 - ${WEEK_IN_MS})) as weekly_subscribers,
+      COUNT(*) FILTER (WHERE created_at > now() - INTERVAL '7 days') as weekly_subscribers,
       ROUND(100.0 * COUNT(*) FILTER (WHERE unsubscribed = true) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as unsubscribe_rate
     FROM subscribers
-  ` as SubscriberStats[];
+  ` as SubscribersStats[];
 
   const stats = result[0];
 
 
   return [
     { value: stats.total_subscribers, label:
-      adaptLabel(stats.total_subscribers, { singular: 'Abonné total', plural: 'Abonnés totaux' })
+      adaptLabel(stats.total_subscribers, { singular: 'Total d\'abonné', plural: 'Total d\'abonnés' })
     },
     { value: formatGain(stats.weekly_subscribers), label:
       adaptLabel(stats.weekly_subscribers, { singular: 'Abonné cette semaine', plural: 'Abonnés cette semaine' })

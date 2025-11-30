@@ -38,7 +38,7 @@ function StatCard({ stat }: StatCardProps)
 
 
 interface StatsProps {
-  type: 'guide' | 'subscribers';
+  type: 'guide' | 'subscribers' | 'messages';
 }
 
 const fetcher = (url: string) => fetch(url).then(r => r.json());

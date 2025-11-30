@@ -4,6 +4,7 @@ import { after } from 'next/server'
 
 import { getValidEmail, isValidString, normalizeString } from "@/lib/form/validators";
 import { sendMessage } from "@/lib/email/messages";
+import { insertMessage } from "@/lib/db/messages";
 import { MessageInput } from "@/lib/types";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 
@@ -32,6 +33,7 @@ export async function contact(formData: FormData): Promise<void>
                 return;
         }
 
+        await insertMessage(data as MessageInput);
         await sendMessage(data as MessageInput);
     });
 }

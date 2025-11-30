@@ -1,11 +1,11 @@
-import { getSubscribersStats } from '@/lib/db/subscribers';
+import { getMessagesStats } from '@/lib/db/messages';
 import { STATS_REVALIDATE } from '@/lib/constants';
 
 
 export async function GET()
 {
-    const stats = await getSubscribersStats();
-    
+    const stats = await getMessagesStats();
+
     return Response.json(stats, {
         headers: {
             'Cache-Control': 'public, s-maxage=' + STATS_REVALIDATE

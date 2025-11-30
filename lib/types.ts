@@ -1,3 +1,6 @@
+import { emailStatus } from "@/lib/constants";
+
+
 export type MessageInput = {
   firstName: string;
   lastName: string;
@@ -8,6 +11,13 @@ export type MessageInput = {
 };
 
 
+export type DomainData = {
+  domain: string;
+  status: emailStatus;
+  checked_at: Date;
+}
+
+
 export type StatResponse = {
   value: number | string;
   label: string;
@@ -15,13 +25,20 @@ export type StatResponse = {
 
 
 export type GuideStats = {
-  total_emails: number;
-  weekly_emails: number;
+  total_contacts: number;
+  weekly_contacts: number;
   retries: number;
 };
 
 
-export type SubscriberStats = {
+export type MessagesStats = {
+  total_messages: number;
+  weekly_messages: number;
+  contacts: number;
+};
+
+
+export type SubscribersStats = {
   total_subscribers: number;
   weekly_subscribers: number;
   unsubscribe_rate: number;

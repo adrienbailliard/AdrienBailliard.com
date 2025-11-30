@@ -1,7 +1,7 @@
 import { sql } from '@/lib/db/client';
 import { GuideStats, StatResponse } from '@/lib/types';
 import { formatPercentage, adaptLabel, formatGain } from '@/lib/utils';
-import { WEEK_IN_MS, STATS_PERCENTAGE_PRECISION } from '@/lib/constants';
+import { STATS_PERCENTAGE_PRECISION } from '@/lib/constants';
 
 
 export async function insertRequestGuide(email: string): Promise<void>
@@ -19,8 +19,8 @@ export async function getGuideStats(): Promise<Array<StatResponse>>
 {
   const result = await sql `
     SELECT 
-      COUNT(*) as total_emails,
-      COUNT(*) FILTER (WHERE created_at > (EXTRACT(epoch FROM now()) * 1000 - ${WEEK_IN_MS})) as weekly_emails,
+      COUNT(*) as total_contacts,
+      COUNT(*) FILTER (WHERE created_at > now() - INTERVAL '7 days') as weekly_contacts,
       ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as retries
     FROM guide_requests
   ` as GuideStats[];
@@ -29,11 +29,11 @@ export async function getGuideStats(): Promise<Array<StatResponse>>
 
 
   return [
-    { value: stats.total_emails, label:
-      adaptLabel(stats.total_emails, { singular: 'Email total', plural: 'Emails totaux' })
+    { value: stats.total_contacts, label:
+      adaptLabel(stats.total_contacts, { singular: 'Total de contact', plural: 'Total de contacts' })
     },
-    { value: formatGain(stats.weekly_emails), label: 
-      adaptLabel(stats.weekly_emails, {singular: 'Email cette semaine', plural: 'Emails cette semaine' })
+    { value: formatGain(stats.weekly_contacts), label: 
+      adaptLabel(stats.weekly_contacts, {singular: 'Contact cette semaine', plural: 'Contacts cette semaine' })
     },
     { value: formatPercentage(stats.retries), label: 'Taux de relance' }
   ];

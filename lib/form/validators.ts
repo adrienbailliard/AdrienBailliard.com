@@ -1,4 +1,4 @@
-import { emailStatus, DOMAIN_CACHE_TTL_MS, EMAIL_PATTERN, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
+import { emailStatus, EMAIL_PATTERN, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
 import { getDomainData, upsertDomain } from "@/lib/db/domains";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 
@@ -13,7 +13,7 @@ async function isValidEmail(email: string): Promise<boolean>
     const domain = email.split("@")[1];
     const domainData = await getDomainData(domain);
 
-    if (domainData && domainData.checked_at + DOMAIN_CACHE_TTL_MS > Date.now())
+    if (domainData)
         return domainData.status === emailStatus.VALID;
 
     const request = await fetchEmailWithRetry(email);
