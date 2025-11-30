@@ -13,7 +13,7 @@ interface StatCardProps {
 function StatCard({ stat }: StatCardProps)
 {
     return (
-        <div className='flex items-center md:h-[61.5px] md:px-12 lg:px-16 md:[&:not(:last-child)]:border-r md:[&:not(:last-child)]:border-dark-muted-text'>
+        <div className='flex items-center md:h-[61.5px] md:px-12 lg:px-16'>
             <div>
                 {
                     stat
