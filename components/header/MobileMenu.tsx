@@ -15,8 +15,8 @@ interface MobileMenuProps
 
 export default function MobileMenu({ pageEntries, actionButtonText, actionButton, getLinkClass, isOpen, setIsOpen }: MobileMenuProps)
 {
-    const fadeSlideUp = () => isOpen ? "duration-500 visible opacity-100 " : "-translate-y-2 invisible opacity-0 ";
-    const delayInc = 40;
+    const fadeSlideUp = () => isOpen ? "duration-500 visible opacity-100 " : "duration-300 -translate-y-2 invisible opacity-0 ";
+    const delayInc = 35;
 
     return (
         <>
