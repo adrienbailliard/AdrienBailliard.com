@@ -21,7 +21,7 @@ export async function getGuideStats(): Promise<Array<StatResponse>>
     SELECT 
       COUNT(*) as total_contacts,
       COUNT(*) FILTER (WHERE created_at > now() - INTERVAL '7 days') as weekly_contacts,
-      ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as retries
+      ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as retries_rate
     FROM guide_requests
   ` as GuideStats[];
 
@@ -35,6 +35,6 @@ export async function getGuideStats(): Promise<Array<StatResponse>>
     { value: formatGain(stats.weekly_contacts), label: 
       adaptLabel(stats.weekly_contacts, {singular: 'Contact cette semaine', plural: 'Contacts cette semaine' })
     },
-    { value: formatPercentage(stats.retries), label: 'Taux de relance' }
+    { value: formatPercentage(stats.retries_rate), label: 'Taux de relance' }
   ];
 }

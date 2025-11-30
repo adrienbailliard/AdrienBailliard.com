@@ -27,7 +27,7 @@ export type StatResponse = {
 export type GuideStats = {
   total_contacts: number;
   weekly_contacts: number;
-  retries: number;
+  retries_rate: number;
 };
 
 
