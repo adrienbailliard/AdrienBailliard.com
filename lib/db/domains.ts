@@ -1,6 +1,6 @@
 import { sql } from "@/lib/db/client";
 import { DomainData } from "@/lib/types";
-import { DOMAIN_CACHE_TTL_MS } from "@/lib/constants";
+import { DOMAIN_CACHE_TTL_DAYS } from "@/lib/constants";
 
 
 export async function getDomainData(domain: string): Promise<DomainData | null>
@@ -8,7 +8,7 @@ export async function getDomainData(domain: string): Promise<DomainData | null>
   const result = await sql`
     SELECT domain, status, checked_at
     FROM domains
-    WHERE domain = ${domain} AND checked_at > now() - INTERVAL '${DOMAIN_CACHE_TTL_MS} milliseconds'
+    WHERE domain = ${domain} AND checked_at > now() - make_interval(days => ${DOMAIN_CACHE_TTL_DAYS})
   ` as DomainData[];
 
   return result[0] ?? null;
