@@ -22,7 +22,7 @@ export default function MobileMenu({ pageEntries, actionButtonText, actionButton
         <>
             <div
                 onClick={() => setIsOpen(false)}
-                className={ "absolute inset-0 top-full h-[100dvh] "
+                className={ "absolute inset-0 top-full h-screen "
                 + ( isOpen
                     ? "visible"
                     : "invisible"

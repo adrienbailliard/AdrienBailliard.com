@@ -16,7 +16,7 @@ export default function BottomLine()
 
     return (
         <div 
-            className={ "absolute inset-x-0 bottom-0 h-[0.5vh] bg-light-fg "
+            className={ "absolute inset-x-0 bottom-0 h-[0.5svh] bg-light-fg "
               + (hasScrolled ? "opacity-0" : "opacity-100 duration-1000")
             }
         />
