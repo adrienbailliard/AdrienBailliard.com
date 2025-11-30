@@ -18,7 +18,6 @@ export type GuideStats = {
   total_emails: number;
   weekly_emails: number;
   retries: number;
-  max_requests: number;
 };
 
 

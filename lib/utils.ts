@@ -1,6 +1,6 @@
 export function formatPercentage(value: number): string
 {
-    return `${value == 0 ? 0 : value}%`;
+    return `${ value == 0 || value == 100 ? Math.floor(value) : value }%`;
 }
 
 

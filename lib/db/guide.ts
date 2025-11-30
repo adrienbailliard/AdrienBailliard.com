@@ -21,8 +21,7 @@ export async function getGuideStats(): Promise<Array<StatResponse>>
     SELECT 
       COUNT(*) as total_emails,
       COUNT(*) FILTER (WHERE created_at > (EXTRACT(epoch FROM now()) * 1000 - ${WEEK_IN_MS})) as weekly_emails,
-      ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as retries,
-      MAX(request_count) as max_requests
+      ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as retries
     FROM guide_requests
   ` as GuideStats[];
   
@@ -33,12 +32,9 @@ export async function getGuideStats(): Promise<Array<StatResponse>>
     { value: stats.total_emails, label:
       adaptLabel(stats.total_emails, { singular: 'Email total', plural: 'Emails totaux' })
     },
-    { value: stats.weekly_emails, label: 
+    { value: `+${stats.weekly_emails}`, label: 
       adaptLabel(stats.weekly_emails, {singular: 'Email cette semaine', plural: 'Emails cette semaine' })
     },
-    { value: formatPercentage(stats.retries), label: 'Taux de relance' },
-    { value: stats.max_requests, label:
-      adaptLabel(stats.max_requests, {singular: 'Relance maximale', plural: 'Relances maximales' })
-    }
+    { value: formatPercentage(stats.retries), label: 'Taux de relance' }
   ];
 }

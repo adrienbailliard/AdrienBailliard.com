@@ -28,7 +28,7 @@ export async function getSubscriberStats(): Promise<Array<StatResponse>>
       ROUND(100.0 * COUNT(*) FILTER (WHERE unsubscribed = true) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as unsubscribe_rate
     FROM subscribers
   ` as SubscriberStats[];
-  
+
   const stats = result[0];
 
 
@@ -36,7 +36,7 @@ export async function getSubscriberStats(): Promise<Array<StatResponse>>
     { value: stats.total_subscribers, label:
       adaptLabel(stats.total_subscribers, { singular: 'Abonné total', plural: 'Abonnés totaux' })
     },
-    { value: stats.weekly_subscribers, label:
+    { value: `+${stats.weekly_subscribers}`, label:
       adaptLabel(stats.weekly_subscribers, { singular: 'Abonné cette semaine', plural: 'Abonnés cette semaine' })
     },
     { value: formatPercentage(stats.unsubscribe_rate), label: 'Taux de désinscription' }
