@@ -52,15 +52,15 @@ export default function Stats({ type }: StatsProps)
         return null;
 
 
-    const { data, isLoading, error } = useSWR<StatResponse[]>(`/api/stats/${type}`, fetcher);
+    const { data } = useSWR<StatResponse[]>(`/api/stats/${type}`, fetcher);
 
     return (
         <section className="text-light-fg bg-dark-bg pb-0">
             <div className="flex max-md:text-center max-md:gap-7 max-md:flex-col max-md:items-center md:justify-center">
                 {
-                    isLoading || error
-                    ? [...Array(3)].map((_, i) => <StatCard key={i}/>)
-                    : data?.map((stat, i) => <StatCard stat={stat} key={i}/>)
+                    Array.isArray(data)
+                    ? data.map((stat, i) => <StatCard stat={stat} key={i}/>)
+                    : [...Array(3)].map((_, i) => <StatCard key={i}/>)
                 }
             </div>
         </section>
