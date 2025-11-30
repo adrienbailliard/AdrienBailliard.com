@@ -15,7 +15,7 @@ interface MobileMenuProps
 
 export default function MobileMenu({ pageEntries, actionButtonText, actionButton, getLinkClass, isOpen, setIsOpen }: MobileMenuProps)
 {
-    const fadeSlideUp = () => isOpen ? "duration-350 visible opacity-100 " : "-translate-y-2 invisible opacity-0 ";
+    const fadeSlideUp = () => isOpen ? "duration-500 visible opacity-100 " : "-translate-y-2 invisible opacity-0 ";
     const delayInc = 40;
 
     return (
@@ -30,7 +30,7 @@ export default function MobileMenu({ pageEntries, actionButtonText, actionButton
             }/>
             <div className=
                 {
-                    "hidden duration-250 absolute top-full left-0 w-full flex-col bg-dark-bg pt-6 pb-8 max-lg:flex items-center gap-7 max-h-[calc(100dvh-var(--spacing-header))] overflow-y-auto "
+                    "hidden duration-300 absolute top-full left-0 w-full flex-col bg-dark-bg pt-6 pb-8 max-lg:flex items-center gap-7 max-h-[calc(100dvh-var(--spacing-header))] overflow-y-auto "
                     + (isOpen
                         ? "visible opacity-100"
                         : "-translate-y-3.5 invisible opacity-0"

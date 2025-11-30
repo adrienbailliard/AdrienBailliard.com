@@ -14,7 +14,7 @@ type PopupProps = {
 
 export default function Popup({ isOpen, setIsOpen }: PopupProps)
 {
-    const animationDuration = 300;
+    const animationDuration = 500;
     const [ isClosed, setIsClosed ] = useState(true);
 
 
@@ -34,7 +34,7 @@ export default function Popup({ isOpen, setIsOpen }: PopupProps)
         <>
             <div
                 onClick={() => setIsOpen(false)}
-                className={ "duration-200 bg-black/55 fixed inset-0 z-50 "
+                className={ "duration-300 bg-black/55 fixed inset-0 z-50 "
                 + ( isOpen
                     ? "visible opacity-100"
                     : "invisible opacity-0"
