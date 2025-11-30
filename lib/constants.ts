@@ -7,5 +7,5 @@ export const EMAIL_PATTERN = String.raw`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-
 export const DOMAIN_CACHE_TTL_DAYS = 30;
 export const MAX_FECTH_EMAIL_RETRY = 10;
 export const FECTH_EMAIL_DELAY = 6000;
-export const STATS_REVALIDATE = 120;
+export const STATS_REVALIDATE = 60;
 export const STATS_PERCENTAGE_PRECISION = 1;
