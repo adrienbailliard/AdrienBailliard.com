@@ -7,6 +7,7 @@ import Form from '@/components/ui/BaseForm';
 import Newsletters from "@/components/newsletter/Newsletters";
 import AutoMonday from "@/components/icons/autoMonday";
 import Stats from "@/components/Stats";
+import Divider from "@/components/Divider";
 
 
 const pathname = "/newsletter";
@@ -22,6 +23,7 @@ export default function Newsletter()
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
 
       <Stats type="subscribers"/>
+      <Divider variant="light" adminOnly={true}/>
 
       <section className="bg-dark-bg text-light-fg">
         <div className="flex max-lg:flex-col items-center lg:justify-between gap-10 lg:gap-20">

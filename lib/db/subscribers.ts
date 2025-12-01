@@ -34,7 +34,7 @@ export async function getSubscribersStats(): Promise<Array<StatResponse>>
 
   return [
     { value: stats.total_subscribers, label:
-      adaptLabel(stats.total_subscribers, { singular: 'Total d\'abonné', plural: 'Total d\'abonnés' })
+      adaptLabel(stats.total_subscribers, { singular: 'Abonné total', plural: 'Abonnés totaux' })
     },
     { value: formatGain(stats.weekly_subscribers), label:
       adaptLabel(stats.weekly_subscribers, { singular: 'Abonné cette semaine', plural: 'Abonnés cette semaine' })

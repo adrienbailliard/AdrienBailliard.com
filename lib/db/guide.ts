@@ -30,7 +30,7 @@ export async function getGuideStats(): Promise<Array<StatResponse>>
 
   return [
     { value: stats.total_contacts, label:
-      adaptLabel(stats.total_contacts, { singular: 'Total de contact', plural: 'Total de contacts' })
+      adaptLabel(stats.total_contacts, { singular: 'Contact total', plural: 'Contacts totaux' })
     },
     { value: formatGain(stats.weekly_contacts), label: 
       adaptLabel(stats.weekly_contacts, {singular: 'Contact cette semaine', plural: 'Contacts cette semaine' })

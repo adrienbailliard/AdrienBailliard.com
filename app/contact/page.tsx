@@ -8,6 +8,7 @@ import LastMessages from "@/components/LastMessages";
 import Stats from "@/components/Stats";
 import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
+import Divider from "@/components/Divider";
 
 
 const pathname = "/contact";
@@ -23,6 +24,8 @@ export default function Contact()
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
       
       <Stats type="messages"/>
+      <Divider variant="light" adminOnly={true}/>
+      <LastMessages />
 
       <section className="bg-dark-bg text-light-fg">
         <div className="flex max-sm:gap-7 max-sm:text-center max-sm:flex-col-reverse sm:justify-between items-center gap-12">
@@ -43,8 +46,6 @@ export default function Contact()
           <Plane className="w-37.5 max-sm:w-25 max-md:w-30 text-primary"/>
         </div>
       </section>
-
-      <LastMessages />
 
       <section className="bg-light-bg">
         <div>

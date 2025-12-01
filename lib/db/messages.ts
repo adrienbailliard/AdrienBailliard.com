@@ -41,7 +41,7 @@ export async function getMessagesStats(): Promise<Array<StatResponse>>
 
   return [
     { value: stats.total_messages, label:
-      adaptLabel(stats.total_messages, { singular: 'Total de message', plural: 'Total de messages' })
+      adaptLabel(stats.total_messages, { singular: 'Message total', plural: 'Messages totaux' })
     },
     { value: formatGain(stats.weekly_messages), label: 
       adaptLabel(stats.weekly_messages, {singular: 'Message cette semaine', plural: 'Messages cette semaine' })

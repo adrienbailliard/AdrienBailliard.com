@@ -61,7 +61,7 @@
     @apply bg-light-muted-text;
   }
 
-  header, footer, section {
+  header, footer, main > * {
     @apply px-[5%];
   }
 
@@ -160,7 +160,7 @@
     @apply mt-7 md:mt-9;
   }
 
-  section > div:first-child,
+  main > * > div:first-child,
   footer > div:first-child {
     @apply max-w-[1408px] mx-auto;
   }

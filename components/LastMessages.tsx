@@ -47,7 +47,7 @@ export default function LastMessages()
     const { data } = useSWR<Message[]>(`/api/messages/last`, fetcher);
 
     return (
-        <section className="text-light-fg bg-dark-bg pt-0">
+        <section className="text-light-fg bg-dark-bg pb-0">
             <div>
                 <h5>
                     Derniers Messages

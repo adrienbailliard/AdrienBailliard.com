@@ -5,7 +5,6 @@ import { useAuth } from '@/context/authentification';
 import { StatResponse } from '@/lib/types';
 
 
-
 interface StatCardProps {
   stat?: StatResponse;
 }
@@ -36,7 +35,6 @@ function StatCard({ stat }: StatCardProps)
 }
 
 
-
 interface StatsProps {
   type: 'guide' | 'subscribers' | 'messages';
 }
@@ -55,7 +53,7 @@ export default function Stats({ type }: StatsProps)
     const { data } = useSWR<StatResponse[]>(`/api/${type}/stats`, fetcher);
 
     return (
-        <section className="text-light-fg bg-dark-bg pb-0">
+        <section className="text-light-fg bg-dark-bg">
             <div className="flex max-md:text-center max-md:gap-7 max-md:flex-col max-md:items-center md:justify-center">
                 {
                     Array.isArray(data)
