@@ -73,6 +73,10 @@
     @apply mt-11 md:mt-18 lg:mt-22;
   }
 
+  h5 + div {
+    @apply mt-5;
+  }
+
   button {
     @apply cursor-pointer;
   }
@@ -200,10 +204,6 @@
   .contact input,
   .contact textarea {
     @apply w-full mt-2;
-  }
-
-  .contact h5 {
-    @apply mb-5;
   }
 
   .contact input,

@@ -52,7 +52,7 @@ export default function Stats({ type }: StatsProps)
         return null;
 
 
-    const { data } = useSWR<StatResponse[]>(`/api/stats/${type}`, fetcher);
+    const { data } = useSWR<StatResponse[]>(`/api/${type}/stats`, fetcher);
 
     return (
         <section className="text-light-fg bg-dark-bg pb-0">

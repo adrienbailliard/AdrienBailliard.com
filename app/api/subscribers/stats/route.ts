@@ -1,5 +1,5 @@
 import { getSubscribersStats } from '@/lib/db/subscribers';
-import { STATS_REVALIDATE } from '@/lib/constants';
+import { DATA_REVALIDATE } from '@/lib/constants';
 
 
 export async function GET()
@@ -8,7 +8,7 @@ export async function GET()
     
     return Response.json(stats, {
         headers: {
-            'Cache-Control': 'public, s-maxage=' + STATS_REVALIDATE
+            'Cache-Control': 'public, s-maxage=' + DATA_REVALIDATE
         }
     });
 }

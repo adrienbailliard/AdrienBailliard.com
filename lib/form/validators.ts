@@ -3,7 +3,7 @@ import { getDomainData, upsertDomain } from "@/lib/db/domains";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 
 
-const emailRegex = new RegExp(EMAIL_PATTERN);
+const emailRegex = new RegExp("^" + EMAIL_PATTERN);
 
 async function isValidEmail(email: string): Promise<boolean>
 {

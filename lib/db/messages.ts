@@ -1,5 +1,5 @@
 import { sql } from '@/lib/db/client';
-import { MessagesStats, StatResponse, MessageInput } from '@/lib/types';
+import { MessagesStats, StatResponse, MessageInput, Message } from '@/lib/types';
 import { adaptLabel, formatGain } from '@/lib/utils';
 
 
@@ -9,6 +9,20 @@ export async function insertMessage({ firstName, lastName, email, company, categ
         INSERT INTO messages (first_name, last_name, email, company, category, message)
         VALUES (${firstName}, ${lastName}, ${email}, ${company}, ${category}, ${message})
     `;
+}
+
+
+export async function getLastMessages(): Promise<Message[]>
+{
+  const result = await sql `
+    SELECT
+      first_name, last_name, email, company, category, message, created_at
+    FROM messages
+    ORDER BY created_at DESC
+    LIMIT 10
+  ` as Message[];
+
+  return result;
 }
 
 

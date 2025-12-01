@@ -4,6 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 
 import ContactForm from "@/components/ContactForm";
+import LastMessages from "@/components/LastMessages";
 import Stats from "@/components/Stats";
 import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
@@ -42,6 +43,8 @@ export default function Contact()
           <Plane className="w-37.5 max-sm:w-25 max-md:w-30 text-primary"/>
         </div>
       </section>
+
+      <LastMessages />
 
       <section className="bg-light-bg">
         <div>

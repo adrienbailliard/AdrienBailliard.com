@@ -11,6 +11,11 @@ export type MessageInput = {
 };
 
 
+export type Message = MessageInput & {
+  created_at: Date;
+};
+
+
 export type DomainData = {
   domain: string;
   status: emailStatus;

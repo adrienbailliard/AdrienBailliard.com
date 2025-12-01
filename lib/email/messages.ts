@@ -16,65 +16,67 @@ export async function sendMessage({ firstName, lastName, email, company, categor
 
 
     <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 64px; padding-bottom: 64px;">
-      <div style="background-color: #0F0F0F; border-radius: 6px; padding: 24px;">
+      <div style="background-color: #0F0F0F; border-radius: 6px; padding: 32px;">
         <h2 style="font-weight: 400; font-size: 20px; margin-top: 0px; margin-bottom: 20px; color: white;">
           Coordonnées
         </h2>
-        <table style="width: 100%; word-break: break-word;">
+        <table style="width: 100%;">
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0;" width="35%">
-              Prénom
-            </td>
-            <td style="font-size: 16px; padding: 0; padding-left: 8px; color: white;" width="65%">
-              ${firstName}
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 10px;" width="35%">
+            <td style="font-size: 16px; color: #ADADAD; padding: 0;">
               Nom
             </td>
-            <td style="font-size: 16px; padding: 0; padding-top: 10px; padding-left: 8px; color: white;" width="65%">
-              ${lastName}
+          </tr>
+          <tr style="vertical-align: top;">
+            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
+              ${firstName} ${lastName}
             </td>
           </tr>
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 10px;" width="35%">
-              Email
-            </td>
-            <td style="font-size: 16px; padding: 0; padding-top: 10px; padding-left: 8px; text-decoration: none; color: white;" width="65%">
-              ${email}
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 10px;" width="35%">
+            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 24px;">
               Entreprise
             </td>
-            <td style="font-size: 16px; padding: 0; padding-top: 10px; padding-left: 8px; color: white;" width="65%">
+          </tr>
+          <tr style="vertical-align: top;">
+            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
               ${company}
+            </td>
+          </tr>
+          <tr style="vertical-align: top;">
+            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 24px;">
+              Email
+            </td>
+          </tr>
+          <tr style="vertical-align: top;">
+            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
+              ${email}
             </td>
           </tr>
         </table>
       </div>
 
-      <div style="background-color: #0F0F0F; border-radius: 6px; padding: 24px; margin-top: 32px;">
+      <div style="background-color: #0F0F0F; border-radius: 6px; padding: 32px; margin-top: 32px;">
         <h2 style="font-weight: 400; font-size: 20px; margin-top: 0px; margin-bottom: 20px; color: white;">
           Demande
         </h2>
-        <table style="width: 100%; word-break: break-word;">
+        <table style="width: 100%;">
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0;" width="35%">
+            <td style="font-size: 16px; color: #ADADAD; padding: 0;">
               Catégorie
             </td>
-            <td style="font-size: 16px; padding: 0; padding-left: 8px; color: white;" width="65%">
+          </tr>
+          <tr style="vertical-align: top;">
+            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
               ${category}
             </td>
           </tr>
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 10px;" width="35%">
+            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 24px;">
               Message
             </td>
-            <td style="font-size: 16px; padding: 0; padding-top: 10px; padding-left: 8px; color: white;" width="65%">
-              ${message}
+          </tr>
+          <tr style="vertical-align: top;">
+            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
+              ${message.replace(/\n/g, '<br>')}
             </td>
           </tr>
         </table>
