@@ -36,7 +36,7 @@ function MessageCard({ message, now }: StatCardProps)
 
     return (
         <div
-            className='message-card cursor-pointer relative'
+            className='message-card cursor-pointer relative px-3'
             onClick={ handleMessageClick }
         >
             <div
