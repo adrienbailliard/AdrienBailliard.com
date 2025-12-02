@@ -4,11 +4,11 @@ import Layout from "@/lib/email/layout";
 import site from "@/config/site";
 
 
-export async function sendMessage({ firstName, lastName, email, company, category, message }: MessageInput): Promise<void>
+export async function sendMessage({ firstName, lastName, email, company, category, content }: MessageInput): Promise<void>
 {
-  const content = `
+  const html = `
     <div style="background-color: #0F0F0F; text-align: center; padding-bottom: 64px; padding-left: 5%; padding-right: 5%; padding-top: 45px;">
-      <img src="${site.url}${site.emailAssetsFolder}plane.png" alt="Message qui s'envoie">
+      <img src="${ site.url }${ site.emailAssetsFolder }plane.png" alt="Message qui s'envoie">
       <h1 style="font-weight: 400; font-size: 32px; margin-top: 28px; margin-bottom: 0; color: white;">
         Un message vient d'être envoyé
       </h1>
@@ -28,7 +28,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
           </tr>
           <tr style="vertical-align: top;">
             <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${firstName} ${lastName}
+              ${ firstName } ${ lastName }
             </td>
           </tr>
           <tr style="vertical-align: top;">
@@ -38,7 +38,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
           </tr>
           <tr style="vertical-align: top;">
             <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${company}
+              ${ company }
             </td>
           </tr>
           <tr style="vertical-align: top;">
@@ -48,7 +48,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
           </tr>
           <tr style="vertical-align: top;">
             <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${email}
+              ${ email }
             </td>
           </tr>
         </table>
@@ -66,7 +66,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
           </tr>
           <tr style="vertical-align: top;">
             <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${category}
+              ${ category }
             </td>
           </tr>
           <tr style="vertical-align: top;">
@@ -76,7 +76,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
           </tr>
           <tr style="vertical-align: top;">
             <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${message.replace(/\n/g, '<br>')}
+              ${ content.replace(/\n/g, '<br>') }
             </td>
           </tr>
         </table>
@@ -90,6 +90,6 @@ export async function sendMessage({ firstName, lastName, email, company, categor
     to: [process.env.EMAIL_RECEIVER!],
     replyTo: email,
     subject: `Nouveau Message - ${firstName} ${lastName}`,
-    html: Layout(content)
+    html: Layout(html)
   });
 }

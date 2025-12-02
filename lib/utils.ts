@@ -17,3 +17,21 @@ export function formatGain(value: number): string
 {
     return value > 0 ? `+${value}` : value.toString();
 }
+
+
+export function formatDate(value: string, now: Date): string
+{
+    const date = new Date(value);
+    const daysDiff = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+
+    if (!daysDiff)
+        return date.toLocaleString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+    if (daysDiff == 1)
+        return 'hier';
+
+    if (daysDiff <= 6)
+        return date.toLocaleString('fr-FR', { weekday: 'long' });
+
+    return date.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}

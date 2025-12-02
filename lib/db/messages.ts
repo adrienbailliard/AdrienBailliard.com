@@ -3,11 +3,11 @@ import { MessagesStats, StatResponse, MessageInput, Message } from '@/lib/types'
 import { adaptLabel, formatGain } from '@/lib/utils';
 
 
-export async function insertMessage({ firstName, lastName, email, company, category, message }: MessageInput): Promise<void>
+export async function insertMessage({ firstName, lastName, email, company, category, content }: MessageInput): Promise<void>
 {
     await sql `
-        INSERT INTO messages (first_name, last_name, email, company, category, message)
-        VALUES (${firstName}, ${lastName}, ${email}, ${company}, ${category}, ${message})
+        INSERT INTO messages (first_name, last_name, email, company, category, content)
+        VALUES (${firstName}, ${lastName}, ${email}, ${company}, ${category}, ${content})
     `;
 }
 
@@ -16,7 +16,7 @@ export async function getLastMessages(): Promise<Message[]>
 {
   const result = await sql `
     SELECT
-      first_name, last_name, email, company, category, message, created_at
+      first_name, last_name, email, company, category, content, created_at
     FROM messages
     ORDER BY created_at DESC
     LIMIT 10

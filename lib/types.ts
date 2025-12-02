@@ -7,19 +7,21 @@ export type MessageInput = {
   email: string;
   company: string;
   category: string;
-  message: string;
+  content: string;
 };
 
 
 export type Message = MessageInput & {
-  created_at: Date;
+  first_name: string;
+  last_name: string;
+  created_at: string;
 };
 
 
 export type DomainData = {
   domain: string;
   status: emailStatus;
-  checked_at: Date;
+  checked_at: string;
 }
 
 

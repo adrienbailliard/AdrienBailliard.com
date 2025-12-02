@@ -8,7 +8,6 @@ import Popup from "@/components/header/Popup";
 import DesktopMenu from "@/components/header/DesktopMenu";
 import MobileMenu from "@/components/header/MobileMenu";
 import BurgerButton from "@/components/header/BurgerButton";
-import { handleScrollLock } from "@/components/header/utils";
 
 import pageMapping from "@/config/pageMapping";
 import site from "@/config/site";
@@ -16,20 +15,45 @@ import site from "@/config/site";
 import { useAuth } from '@/context/authentification';
 
 
+
+function handleScrollLock(isPopupOpen: boolean)
+{
+    if (isPopupOpen) {
+        document.body.style.overflow = "hidden";
+        document.body.style.touchAction = "none";
+    }
+    else {
+        document.body.style.overflow = "";
+        document.body.style.touchAction = "";
+    }
+
+    return () => {
+        document.body.style.overflow = "";
+        document.body.style.touchAction = "";
+    };
+}
+
+
+
 export default function Header()
 {
     const [ isMenuOpen, setIsMenuOpen ] = useState(false);
     const [ isPopupOpen, setIsPopupOpen ] = useState(false);
     const pathname = usePathname();
-    const pageEntries = useMemo(() => Array.from(pageMapping.entries()), []);
-    const [ctaHref, ctaPage] = pageEntries[pageEntries.length - 2];
     const { isAdmin, logout } = useAuth();
+    const pageEntries = useMemo(() => Array.from(pageMapping.entries()), []);
+
+    const [ctaHref, ctaPage] = pageEntries[pageEntries.length - 2];
     const actionButtonText = isAdmin ? "Quitter" : "S'inscrire";
+    const getLinkClass = (href: string) => pathname === href ? " underline" : "";
 
     const closeMenuAndHandlePopup = () => {
         setIsMenuOpen(false);
         setIsPopupOpen(!isPopupOpen);
     };
+
+    const actionButton = isAdmin ? logout : closeMenuAndHandlePopup;
+
 
     useEffect(() => {
         setIsMenuOpen(false);
@@ -37,8 +61,6 @@ export default function Header()
     }, [pathname]);
 
     useEffect(() => handleScrollLock(isPopupOpen), [isPopupOpen]);
-    const getLinkClass = (href: string) => pathname === href ? " underline" : "";
-    const actionButton = isAdmin ? logout : closeMenuAndHandlePopup;
 
 
     return (

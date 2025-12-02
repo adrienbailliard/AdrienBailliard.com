@@ -20,7 +20,7 @@ export async function contact(formData: FormData): Promise<void>
 
         const data: Partial<MessageInput> = { email };
         const fields: Array<keyof Omit<MessageInput, "email">> =
-            ["firstName", "lastName", "company", "category", "message"];
+            ["firstName", "lastName", "company", "category", "content"];
 
 
         for (const field of fields)

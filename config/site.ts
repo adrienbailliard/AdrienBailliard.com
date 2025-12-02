@@ -14,7 +14,7 @@ const site = {
         path: "/",
         name: "magic_link",
         tokenExpiration: 10 * 60,
-        maxAge: 2 * 60 * 60
+        maxAge: 24 * 60 * 60
     },
     errorMessage: "Une erreur est survenue."
 };

@@ -79,7 +79,7 @@ export default function ContactForm()
                                 <input name="category" type="hidden" value={selected}/>
                                 <div className={ "transition-opacity duration-300 " + (selected == "" ? "h-0 overflow-hidden opacity-0" : "mt-8 opacity-100") }>
                                     <p>Message</p>
-                                    <textarea name="message" maxLength={fieldMaxLengths.message} required/>
+                                    <textarea name="content" maxLength={fieldMaxLengths.content} required/>
                                 </div>
                             </div>
                             <Button
