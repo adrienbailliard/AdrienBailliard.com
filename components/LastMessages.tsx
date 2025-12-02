@@ -20,12 +20,33 @@ function MessageCard({ message, now }: StatCardProps)
 {
     const [expanded, setExpanded] = useState(false);
 
+    const markAsReadIfNeeded = async () => {
+        if (!message.is_read)
+        {
+            message.is_read = true;
+            await fetch(`/api/messages/${message.id}/read`, { method: 'POST' });
+        }
+    };
+
+    const handleMessageClick = async () => {
+        setExpanded(!expanded);
+        await markAsReadIfNeeded();
+    };
+
+
     return (
         <div
-            className='message-card cursor-pointer'
-            onClick={ () => setExpanded(!expanded) }
+            className='message-card cursor-pointer relative'
+            onClick={ handleMessageClick }
         >
-            <div className='line-clamp-1'>
+            <div
+                className={ `line-clamp-1 
+                    ${
+                        !message.is_read && `before:absolute before:-left-4 sm:before:-left-5 before:top-1/2 before:-translate-y-1/2
+                        before:w-2 before:h-2 before:bg-primary before:rounded-full`
+                    }`
+                }
+            >
                 { `${message.first_name} ${message.last_name}` }
             </div>
             <div className='text-light-muted-text'>

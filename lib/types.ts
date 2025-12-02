@@ -15,6 +15,8 @@ export type Message = MessageInput & {
   first_name: string;
   last_name: string;
   created_at: string;
+  is_read: boolean;
+  id: number;
 };
 
 

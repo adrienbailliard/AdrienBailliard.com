@@ -6,7 +6,7 @@ import { DOMAIN_CACHE_TTL_DAYS } from "@/lib/constants";
 export async function getDomainData(domain: string): Promise<DomainData | null>
 {
   const result = await sql`
-    SELECT domain, status, checked_at
+    SELECT *
     FROM domains
     WHERE domain = ${domain} AND checked_at > now() - make_interval(days => ${DOMAIN_CACHE_TTL_DAYS})
   ` as DomainData[];
