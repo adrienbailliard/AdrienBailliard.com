@@ -20,48 +20,67 @@ type MessageCardProps = {
 function MessageCard({ message, now, inSelection }: MessageCardProps)
 {
     const [expanded, setExpanded] = useState(false);
+    const [selected, setSelected] = useState(false);
 
     useEffect(() => {
         if (inSelection)
             setExpanded(false);
+        else
+            setSelected(false);
     }, [inSelection]);
 
 
     const handleMessageClick = async () =>
     {
-        setExpanded(!inSelection && !expanded);
-        if (!message.is_read) {
-            message.is_read = true;
-            await fetch(`/api/messages/${message.id}/read`, { method: 'POST' });
+        if (inSelection)
+            setSelected(!selected);
+        else
+        {
+            setExpanded(!expanded);
+            if (!message.is_read) {
+                message.is_read = true;
+                await fetch(`/api/messages/${message.id}/read`, { method: 'POST' });
+            }
         }
     };
 
 
     return (
-        <div
-            className={ `message-card cursor-pointer relative [:hover,:active]:border-light-muted-text [&:hover+&,&:active+&]:border-t-light-muted-text
-                ${ !message.is_read && !inSelection && `before:w-2 before:h-2 before:bg-primary before:rounded-full
-                    before:absolute before:-left-3.5 sm:before:-left-4 before:top-1/2 before:-translate-y-1/2
+        <div className='message-card-border [:hover,:active]:border-y-light-muted-text [&:hover+&,&:active+&]:border-t-light-muted-text'>
+            <div
+                className={ `message-card cursor-pointer duration-300 before:duration-300 overflow-hidden relative
+                    before:w-4 before:h-4 before:bg-transparent before:absolute before:top-1/2 before:-translate-y-1/2
+                    before:border before:border-light-muted-text before:-left-12.5 before:text-sm
+                    ${ inSelection && `pl-12.5 before:left-0 ${ selected && "duration-initial before:content-['✓'] before:flex before:items-center before:justify-center" }` }
                 ` }
-            ` }
-            onClick={ handleMessageClick }
-        >
-            <div className="truncate text-lg font-medium">
-                { `${message.first_name} ${message.last_name}` }
-            </div>
-            <time className='text-light-muted-text ml-auto mt-0.5'>
-                { formatDate(message.created_at, now) }
-            </time>
-            <p className="text-base line-clamp-2 break-all col-span-full text-light-muted-text">
-                <span className='text-light-fg'>{ message.category }</span>
-                { !expanded && ` - ${ message.content }` }
-            </p>
-            { expanded && (
-                 <p className="text-base text-light-muted-text col-span-full whitespace-pre-wrap">
-                    { message.content }
+                onClick={ handleMessageClick }
+            >
+                <div
+                    className={ !message.is_read
+                        ? `relative before:w-2 before:h-2 before:bg-primary before:rounded-full
+                            before:absolute before:-left-5 before:top-1/2 before:-translate-y-1/2
+                        ` : ""
+                    }
+                >
+                    <div className="text-lg font-medium line-clamp-1 break-all">
+                        { `${message.first_name} ${message.last_name}` }
+                    </div>
+                </div>
+                <time className='text-light-muted-text ml-auto mt-0.5'>
+                    { formatDate(message.created_at, now) }
+                </time>
+                <p className="text-base line-clamp-2 col-span-full text-light-muted-text">
+                    <span className='text-light-fg'>{ message.category }</span>
+                    { !expanded && ` - ${ message.content }` }
                 </p>
-            )}
+                { expanded && (
+                    <p className="text-base text-light-muted-text col-span-full whitespace-pre-wrap">
+                        { message.content }
+                    </p>
+                )}
+            </div>
         </div>
+        
     );
 }
 
@@ -69,7 +88,7 @@ function MessageCard({ message, now, inSelection }: MessageCardProps)
 function MessageSkeletonCard()
 {
     return (
-        <div className='message-card animate-pulse items-center gap-y-2'>
+        <div className='message-card message-card-border animate-pulse items-center gap-y-2'>
             <div className='rounded-lg w-25 h-4.5 bg-light-fg'></div>
             <div className='bg-light-muted-text rounded-lg w-8.5 h-4 ml-auto'></div>
             <div className='text-light-muted-text flex items-center whitespace-pre col-span-full'>
@@ -106,7 +125,7 @@ export default function LastMessages()
                     <h5>
                         { messages.length === 0 ? "Aucun Message" : "Messages" }
                     </h5>
-                    { messages.length > 0 && (
+                    { Array.isArray(data) && data.length > 0 && (
                         <button
                             className='text-primary font-medium'
                             onClick={ () => setInSelection(!inSelection) }

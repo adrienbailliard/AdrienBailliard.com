@@ -226,9 +226,13 @@
   }
 
   .message-card {
-    @apply grid gap-x-3 sm:gap-x-4 px-3 sm:px-4 py-3 sm:py-4 border border-transparent
-      [:not(:last-child)]:border-b-0 [:not(:first-child)]:border-t-dark-muted-text
+    @apply grid gap-x-3 sm:gap-x-4 px-5 py-3 sm:py-4
       font-sans select-none grid-cols-[minmax(0,1fr)_80px];
+  }
+
+  .message-card-border {
+    @apply border-y border-transparent
+      [:not(:last-child)]:border-b-0 [:not(:first-child)]:border-t-dark-muted-text;
   }
 
   .stat-card {
