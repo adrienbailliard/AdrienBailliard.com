@@ -32,18 +32,14 @@ function MessageCard({ message, now }: MessageCardProps)
 
     return (
         <div
-            className={ `message-card cursor-pointer relative
-                [:hover,:active]:border-light-muted-text [&:hover+&,&:active+&]:border-t-light-muted-text
-            ` }
+            className={ `message-card cursor-pointer relative [:hover,:active]:border-light-muted-text [&:hover+&,&:active+&]:border-t-light-muted-text
+                ${ !message.is_read && `before:w-2 before:h-2 before:bg-primary before:rounded-full
+                    before:absolute before:-left-3.5 sm:before:-left-4 before:top-1/2 before:-translate-y-1/2
+                ` }
+            ` }
             onClick={ handleMessageClick }
         >
-            <div
-                className={ `truncate text-lg font-medium ${ !message.is_read && `
-                        before:absolute before:-left-4 sm:before:-left-5 before:top-1/2 before:-translate-y-1/2
-                        before:w-2 before:h-2 before:bg-primary before:rounded-full`
-                    }`
-                }
-            >
+            <div className="truncate text-lg font-medium">
                 { `${message.first_name} ${message.last_name}` }
             </div>
             <time className='text-light-muted-text ml-auto mt-1'>
