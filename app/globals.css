@@ -230,7 +230,8 @@
   }
 
   .message-card {
-    @apply grid gap-6 sm:gap-8 py-3 sm:py-4 border-b last:border-none border-dark-muted-text
+    @apply grid gap-6 sm:gap-8 py-3 sm:py-4 border border-transparent
+      [:not(:last-child)]:border-b-0 [:not(:first-child)]:border-t-dark-muted-text
       font-sans select-none grid-cols-[200px_minmax(0,1fr)_80px];
   }
 

@@ -36,7 +36,7 @@ function MessageCard({ message, now }: StatCardProps)
 
     return (
         <div
-            className='message-card cursor-pointer relative px-3'
+            className='message-card cursor-pointer relative px-3 hover:border-light-muted-text [&:hover+&]:border-t-light-muted-text'
             onClick={ handleMessageClick }
         >
             <div
@@ -110,7 +110,9 @@ export default function LastMessages()
                 <h5>
                     Derniers Messages
                 </h5>
-                { messages }
+                <div>
+                    { messages }
+                </div>
             </div>
         </section>
     );
