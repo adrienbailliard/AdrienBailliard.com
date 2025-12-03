@@ -198,7 +198,7 @@
   }
 
   .contact {
-    @apply p-8 sm:p-10 bg-dark-bg text-light-fg rounded-md;
+    @apply p-7 sm:p-10 bg-dark-bg text-light-fg rounded-md;
   }
 
   .contact input,
@@ -230,9 +230,9 @@
   }
 
   .message-card {
-    @apply grid gap-6 sm:gap-8 py-3 sm:py-4 border border-transparent
+    @apply grid gap-x-3 sm:gap-x-4 px-3 sm:px-4 py-3 sm:py-4 border border-transparent
       [:not(:last-child)]:border-b-0 [:not(:first-child)]:border-t-dark-muted-text
-      font-sans select-none grid-cols-[200px_minmax(0,1fr)_80px];
+      font-sans select-none grid-cols-[minmax(0,1fr)_80px];
   }
 
   .stat-card {

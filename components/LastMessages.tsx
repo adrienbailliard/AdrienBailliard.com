@@ -20,53 +20,48 @@ function MessageCard({ message, now }: StatCardProps)
 {
     const [expanded, setExpanded] = useState(false);
 
-    const markAsReadIfNeeded = async () => {
-        if (!message.is_read)
-        {
+    const handleMessageClick = async () =>
+    {
+        setExpanded(!expanded);
+        if (!message.is_read) {
             message.is_read = true;
             await fetch(`/api/messages/${message.id}/read`, { method: 'POST' });
         }
     };
 
-    const handleMessageClick = async () => {
-        setExpanded(!expanded);
-        await markAsReadIfNeeded();
-    };
-
 
     return (
         <div
-            className='message-card cursor-pointer relative px-3 hover:border-light-muted-text [&:hover+&]:border-t-light-muted-text'
+            className={ `message-card cursor-pointer relative
+                [:hover,:active]:border-light-muted-text [&:hover+&,&:active+&]:border-t-light-muted-text
+            ` }
             onClick={ handleMessageClick }
         >
             <div
-                className={ `line-clamp-1 
-                    ${
-                        !message.is_read && `before:absolute before:-left-4 sm:before:-left-5 before:top-1/2 before:-translate-y-1/2
+                className={ `truncate ${ !message.is_read && `
+                        before:absolute before:-left-4 sm:before:-left-5 before:top-1/2 before:-translate-y-1/2
                         before:w-2 before:h-2 before:bg-primary before:rounded-full`
                     }`
                 }
             >
                 { `${message.first_name} ${message.last_name}` }
             </div>
-            <div className='text-light-muted-text'>
-                <p className="line-clamp-1 wrap-anywhere">
+            <time className='text-light-muted-text text-sm ml-auto mt-1'>
+                { formatDate(message.created_at, now) }
+            </time>
+            <div className='text-light-muted-text col-span-full'>
+                <p className={ `line-clamp-2 break-all ${expanded && "text-light-fg"}` }>
                     <span className="text-light-fg">
                         { message.category }
                     </span>
                     { !expanded && ` - ${ message.content }` }
                 </p>
-                {
-                    expanded && (
-                        <p className='whitespace-pre-wrap'>
-                            { message.content }
-                        </p>
-                    )
-                }
+                { expanded && (
+                    <p className='whitespace-pre-wrap'>
+                        { message.content }
+                    </p>
+                )}
             </div>
-            <time className='text-light-muted-text text-sm ml-auto mt-1'>
-                { formatDate(message.created_at, now) }
-            </time>
         </div>
     );
 }
@@ -77,12 +72,12 @@ function MessageSkeletonCard()
     return (
         <div className='message-card animate-pulse items-center'>
             <div className='rounded-lg w-25 h-4 bg-light-fg'></div>
-            <div className='text-light-muted-text flex items-center whitespace-pre'>
+            <div className='bg-light-muted-text rounded-lg w-8.5 h-3.5 ml-auto mb-2'></div>
+            <div className='text-light-muted-text flex items-center whitespace-pre col-span-full'>
                 <div className='rounded-lg w-18 h-4 bg-light-fg'></div>
                 { " - " }
                 <div className='bg-light-muted-text rounded-lg w-full max-w-175 h-4'></div>
             </div>
-            <div className='bg-light-muted-text rounded-lg w-8.5 h-3.5 ml-auto'></div>
         </div>
     );
 }
