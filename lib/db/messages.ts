@@ -12,13 +12,12 @@ export async function insertMessage({ firstName, lastName, email, company, categ
 }
 
 
-export async function getLastMessages(): Promise<Message[]>
+export async function getMessages(): Promise<Message[]>
 {
   const result = await sql `
     SELECT *
     FROM messages
     ORDER BY created_at DESC
-    LIMIT 10
   ` as Message[];
 
   return result;

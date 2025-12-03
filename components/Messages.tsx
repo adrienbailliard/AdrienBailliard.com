@@ -110,7 +110,7 @@ export default function LastMessages()
 
 
     const [inSelection, setInSelection] = useState(false);
-    const { data } = useSWR<Message[]>(`/api/messages/last`, fetcher);
+    const { data } = useSWR<Message[]>(`/api/messages`, fetcher);
     const now = new Date();
 
     const messages = Array.isArray(data)

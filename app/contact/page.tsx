@@ -4,7 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 
 import ContactForm from "@/components/ContactForm";
-import LastMessages from "@/components/LastMessages";
+import Messages from "@/components/Messages";
 import Stats from "@/components/Stats";
 import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
@@ -25,7 +25,7 @@ export default function Contact()
       
       <Stats type="messages"/>
       <Divider variant="light" adminOnly={true}/>
-      <LastMessages />
+      <Messages />
 
       <section className="bg-dark-bg text-light-fg">
         <div className="flex max-sm:gap-7 max-sm:text-center max-sm:flex-col-reverse sm:justify-between items-center gap-12">
