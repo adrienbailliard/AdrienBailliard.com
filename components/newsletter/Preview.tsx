@@ -27,7 +27,7 @@ export function Preview({ title, paragraph, href, date }: PreviewProps)
                     <p className="text-base text-dark-muted-text max-sm:mt-5 mt-0 lg:mt-5">
                         {date}
                     </p>
-                    <h5 className="font-medium mt-2">
+                    <h5 className="font-medium mt-2 pb-0">
                         {site.newsletterSlogan + title}
                     </h5>
                     <p className="text-base mt-2">

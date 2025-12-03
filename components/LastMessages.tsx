@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from 'swr';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from '@/context/authentification';
 import { formatDate } from '@/lib/utils';
 import { Message } from '@/lib/types';
@@ -12,17 +12,24 @@ const fetcher = (url: string) => fetch(url).then(r => r.json());
 type MessageCardProps = {
     message: Message;
     now: Date;
+    inSelection: boolean;
 }
 
 
 
-function MessageCard({ message, now }: MessageCardProps)
+function MessageCard({ message, now, inSelection }: MessageCardProps)
 {
     const [expanded, setExpanded] = useState(false);
 
+    useEffect(() => {
+        if (inSelection)
+            setExpanded(false);
+    }, [inSelection]);
+
+
     const handleMessageClick = async () =>
     {
-        setExpanded(!expanded);
+        setExpanded(!inSelection && !expanded);
         if (!message.is_read) {
             message.is_read = true;
             await fetch(`/api/messages/${message.id}/read`, { method: 'POST' });
@@ -33,7 +40,7 @@ function MessageCard({ message, now }: MessageCardProps)
     return (
         <div
             className={ `message-card cursor-pointer relative [:hover,:active]:border-light-muted-text [&:hover+&,&:active+&]:border-t-light-muted-text
-                ${ !message.is_read && `before:w-2 before:h-2 before:bg-primary before:rounded-full
+                ${ !message.is_read && !inSelection && `before:w-2 before:h-2 before:bg-primary before:rounded-full
                     before:absolute before:-left-3.5 sm:before:-left-4 before:top-1/2 before:-translate-y-1/2
                 ` }
             ` }
@@ -42,7 +49,7 @@ function MessageCard({ message, now }: MessageCardProps)
             <div className="truncate text-lg font-medium">
                 { `${message.first_name} ${message.last_name}` }
             </div>
-            <time className='text-light-muted-text ml-auto mt-1'>
+            <time className='text-light-muted-text ml-auto mt-0.5'>
                 { formatDate(message.created_at, now) }
             </time>
             <p className="text-base line-clamp-2 break-all col-span-full text-light-muted-text">
@@ -83,20 +90,31 @@ export default function LastMessages()
         return null;
 
 
+    const [inSelection, setInSelection] = useState(false);
     const { data } = useSWR<Message[]>(`/api/messages/last`, fetcher);
     const now = new Date();
 
     const messages = Array.isArray(data)
-        ? data.map((message, i) => <MessageCard message={message} now={now} key={i}/>)
+        ? data.map((message, i) => <MessageCard message={message} now={now} key={i} inSelection={inSelection}/>)
         : [...Array(4)].map((_, i) => <MessageSkeletonCard key={i}/>);
 
 
     return (
         <section className="text-light-fg bg-dark-bg pb-0">
             <div>
-                <h5>
-                    Derniers Messages
-                </h5>
+                <div className='flex justify-between'>
+                    <h5>
+                        { messages.length === 0 ? "Aucun Message" : "Messages" }
+                    </h5>
+                    { messages.length > 0 && (
+                        <button
+                            className='text-primary font-medium'
+                            onClick={ () => setInSelection(!inSelection) }
+                        >
+                            { inSelection ? "Annuler" : "Sélectionner" }
+                        </button>
+                    )}
+                </div>
                 <div>
                     { messages }
                 </div>

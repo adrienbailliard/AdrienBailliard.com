@@ -113,11 +113,7 @@
   }
 
   h5 {
-    @apply text-xl md:text-2xl;
-  }
-
-  h5 + div {
-    @apply pt-5;
+    @apply text-xl md:text-2xl pb-5;
   }
 
   h3 + p,
@@ -237,6 +233,10 @@
 
   .stat-card {
     @apply flex flex-col max-md:items-center md:px-12 lg:px-16;
+  }
+
+  .bullet-list {
+    @apply flex items-center gap-3.5 before:w-3.5 before:h-3.5 before:bg-transparent before:border-primary before:border-2 before:rounded-full;
   }
 }
 

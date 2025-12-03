@@ -4,7 +4,6 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 import Link from "next/link";
 
-import ListItem from "@/components/ui/ListItem";
 import Image from "next/image";
 import Logo from "@/components/icons/logo";
 
@@ -33,18 +32,18 @@ export default function About()
             </p>
           </div>
           <ul className="text-dark-muted-text shrink-0">
-            <ListItem>
+            <li className="bullet-list">
               { "Fondateur d'Auto Monday" }
-            </ListItem>
-            <ListItem>
+            </li>
+            <li className="bullet-list">
               70 000€ générés
-            </ListItem>
-            <ListItem>
+            </li>
+            <li className="bullet-list">
               250 000 vues en 1 mois
-            </ListItem>
-            <ListItem>
+            </li>
+            <li className="bullet-list">
               { "5 ans d'automatisation" }
-            </ListItem>
+            </li>
           </ul>
         </div>
         <Logo className="h-[28%] sm:h-[42%] top-[25%] sm:top-1/2 -left-7 -translate-y-1/2 absolute text-dark-fg/5"/>
