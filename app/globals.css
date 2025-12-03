@@ -230,11 +230,6 @@
       font-sans select-none grid-cols-[minmax(0,1fr)_80px];
   }
 
-  .message-card-border {
-    @apply border-y border-transparent
-      [:not(:last-child)]:border-b-0 [:not(:first-child)]:border-t-dark-muted-text;
-  }
-
   .stat-card {
     @apply flex flex-col max-md:items-center md:px-12 lg:px-16;
   }
