@@ -4,7 +4,7 @@ const fieldMaxLengths = {
     category: 50,
     lastName: 80,
     company: 150,
-    content: 2000
+    content: 1000
 };
 
 

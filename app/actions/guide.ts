@@ -14,7 +14,7 @@ export async function request(formData: FormData): Promise<void>
         const email = await getValidEmail(formData);
 
         if (!email)
-            return;
+            throw new Error("Email invalide");
 
         await insertRequestGuide(email);
         await sendGuide(email);

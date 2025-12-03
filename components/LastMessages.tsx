@@ -9,14 +9,14 @@ import { Message } from '@/lib/types';
 
 const fetcher = (url: string) => fetch(url).then(r => r.json());
 
-type StatCardProps = {
+type MessageCardProps = {
     message: Message;
     now: Date;
 }
 
 
 
-function MessageCard({ message, now }: StatCardProps)
+function MessageCard({ message, now }: MessageCardProps)
 {
     const [expanded, setExpanded] = useState(false);
 
@@ -38,7 +38,7 @@ function MessageCard({ message, now }: StatCardProps)
             onClick={ handleMessageClick }
         >
             <div
-                className={ `truncate ${ !message.is_read && `
+                className={ `truncate text-lg font-medium ${ !message.is_read && `
                         before:absolute before:-left-4 sm:before:-left-5 before:top-1/2 before:-translate-y-1/2
                         before:w-2 before:h-2 before:bg-primary before:rounded-full`
                     }`
@@ -46,22 +46,18 @@ function MessageCard({ message, now }: StatCardProps)
             >
                 { `${message.first_name} ${message.last_name}` }
             </div>
-            <time className='text-light-muted-text text-sm ml-auto mt-1'>
+            <time className='text-light-muted-text ml-auto mt-1'>
                 { formatDate(message.created_at, now) }
             </time>
-            <div className='text-light-muted-text col-span-full'>
-                <p className={ `line-clamp-2 break-all ${expanded && "text-light-fg"}` }>
-                    <span className="text-light-fg">
-                        { message.category }
-                    </span>
-                    { !expanded && ` - ${ message.content }` }
+            <p className="text-base line-clamp-2 break-all col-span-full text-light-muted-text">
+                <span className='text-light-fg'>{ message.category }</span>
+                { !expanded && ` - ${ message.content }` }
+            </p>
+            { expanded && (
+                 <p className="text-base text-light-muted-text col-span-full whitespace-pre-wrap">
+                    { message.content }
                 </p>
-                { expanded && (
-                    <p className='whitespace-pre-wrap'>
-                        { message.content }
-                    </p>
-                )}
-            </div>
+            )}
         </div>
     );
 }
@@ -70,9 +66,9 @@ function MessageCard({ message, now }: StatCardProps)
 function MessageSkeletonCard()
 {
     return (
-        <div className='message-card animate-pulse items-center'>
-            <div className='rounded-lg w-25 h-4 bg-light-fg'></div>
-            <div className='bg-light-muted-text rounded-lg w-8.5 h-3.5 ml-auto mb-2'></div>
+        <div className='message-card animate-pulse items-center gap-y-2'>
+            <div className='rounded-lg w-25 h-4.5 bg-light-fg'></div>
+            <div className='bg-light-muted-text rounded-lg w-8.5 h-4 ml-auto'></div>
             <div className='text-light-muted-text flex items-center whitespace-pre col-span-full'>
                 <div className='rounded-lg w-18 h-4 bg-light-fg'></div>
                 { " - " }
@@ -101,7 +97,7 @@ export default function LastMessages()
 
     return (
         <section className="text-light-fg bg-dark-bg pb-0">
-            <div className='inset-border contact'>
+            <div>
                 <h5>
                     Derniers Messages
                 </h5>

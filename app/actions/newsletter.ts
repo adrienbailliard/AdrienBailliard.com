@@ -15,7 +15,7 @@ export async function subscribe(formData: FormData): Promise<void>
         const email = await getValidEmail(formData);
 
         if (!email)
-            return;
+            throw new Error("Email invalide");
 
         if (email == process.env.EMAIL_RECEIVER!)
             await sendAdminLoginLink();

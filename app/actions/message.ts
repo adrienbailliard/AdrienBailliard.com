@@ -2,7 +2,7 @@
 
 import { after } from 'next/server'
 
-import { getValidEmail, isValidString, normalizeString } from "@/lib/form/validators";
+import { getValidEmail, getValidString } from "@/lib/form/validators";
 import { sendMessage } from "@/lib/email/messages";
 import { insertMessage } from "@/lib/db/messages";
 import { MessageInput } from "@/lib/types";
@@ -16,7 +16,7 @@ export async function contact(formData: FormData): Promise<void>
         const email = await getValidEmail(formData);
 
         if (!email)
-            return;
+            throw new Error("Email invalide");
 
         const data: Partial<MessageInput> = { email };
         const fields: Array<keyof Omit<MessageInput, "email">> =
@@ -26,11 +26,12 @@ export async function contact(formData: FormData): Promise<void>
         for (const field of fields)
         {
             const rawValue = formData.get(field);
+            const str = getValidString(rawValue, fieldMaxLengths[field]);
 
-            if (isValidString(rawValue, fieldMaxLengths[field]))
-                data[field] = normalizeString(rawValue as string);
-            else
-                return;
+            if (!str)
+                throw new Error(`Champ ${field} invalide`);
+
+            data[field] = str;
         }
 
         await insertMessage(data as MessageInput);

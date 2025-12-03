@@ -51,27 +51,21 @@ async function fetchEmailWithRetry(email: string): Promise<Response>
 export async function getValidEmail(formData: FormData): Promise<string | null>
 {
     const raw = formData.get('email');
+    const str = getValidString(raw, fieldMaxLengths.email);
 
-    if (!isValidString(raw, fieldMaxLengths.email))
+    if (!str)
         return null;
 
-    const email = normalizeString(raw as string, true);
-    const valid = await isValidEmail(email);
-
-    return valid ? email : null;
+    const email = str.toLowerCase();
+    return await isValidEmail(email) ? email : null;
 }
 
 
-export function isValidString(str: unknown, maxLength: number): boolean
+export function getValidString(value: unknown, maxLength: number): string | null
 {
-    return typeof str === "string" && str.length > 0 && str.length <= maxLength;
-}
+    if (typeof value !== "string")
+        return null;
 
-
-export function normalizeString(str: string, isEmail: boolean = false): string
-{
-    if (isEmail)
-        str = str.toLowerCase();
-
-    return str.trim();
+    const str = value.trim().replace(/\r/g, '');
+    return str.length > 0 && str.length <= maxLength ? str : null;
 }

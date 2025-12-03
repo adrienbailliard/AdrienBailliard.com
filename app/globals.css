@@ -116,6 +116,10 @@
     @apply text-xl md:text-2xl;
   }
 
+  h5 + div {
+    @apply pt-5;
+  }
+
   h3 + p,
   h2 + p {
     @apply mt-5 md:mt-6;
@@ -191,10 +195,6 @@
 
   .contact p {
     @apply text-base font-medium;
-  }
-
-  .contact h5 {
-     @apply pb-5;
   }
 
   .contact {
