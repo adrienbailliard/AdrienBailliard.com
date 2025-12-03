@@ -198,7 +198,7 @@
   }
 
   .contact {
-    @apply p-7 sm:p-10 bg-dark-bg text-light-fg rounded-md;
+    @apply p-7 sm:p-9 bg-dark-bg text-light-fg rounded-md;
   }
 
   .contact input,

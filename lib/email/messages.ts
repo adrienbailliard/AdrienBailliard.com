@@ -54,7 +54,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
         </table>
       </div>
 
-      <div style="background-color: #0F0F0F; border-radius: 6px; padding: 28px; margin-top: 32px;">
+      <div style="background-color: #0F0F0F; border-radius: 6px; padding: 28px; margin-top: 28px;">
         <h2 style="font-weight: 400; font-size: 20px; margin-top: 0px; margin-bottom: 20px; color: white;">
           Demande
         </h2>

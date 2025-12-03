@@ -35,7 +35,7 @@ export default function ContactForm()
                     </Button>
                 ) :
                 (
-                    <form onSubmit={(e) => handleSubmit(e, contact, setIsSubmitted, setHasError)} className="flex justify-between gap-8 flex-wrap items-start">
+                    <form onSubmit={(e) => handleSubmit(e, contact, setIsSubmitted, setHasError)} className="flex justify-between gap-7 sm:gap-9 flex-wrap items-start">
                         <div className="w-full max-w-xl mx-auto contact">
                             <h5>
                                 Coordonnées
@@ -60,7 +60,7 @@ export default function ContactForm()
                             </div>
                         </div>
                         <div className="w-full max-w-xl mx-auto">
-                            <div className="mb-8 contact">
+                            <div className="mb-7 sm:mb-9 contact">
                                 <h5>
                                     Ta Demande
                                 </h5>
