@@ -8,7 +8,13 @@ type MessageSelectorProps = {
 }
 
 
-export default function Selector({ isSelected, setIsSelected }: MessageSelectorProps)
+export function supportSelector(inSelectionMode: boolean)
+{
+    return `duration-300 relative ${ inSelectionMode && "pl-10" }`;
+}
+
+
+export function Selector({ isSelected, setIsSelected }: MessageSelectorProps)
 {
     const { selection } = useMessageActions();
     const [ inSelection ] = selection;

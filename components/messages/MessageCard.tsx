@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+
+import { useMessageActions } from '@/context/messageActions';
+import { Selector, supportSelector } from "@/components/messages/Selector";
 import { formatDate } from '@/lib/utils';
 import { Message } from '@/lib/types';
 
@@ -11,13 +14,14 @@ type MessageCardProps = {
 
 export default function MessageCard({ message, now }: MessageCardProps)
 {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const [isSelected, setIsSelected] = useState(false);
+    const { selection, selectAll } = useMessageActions();
+    const [ inSelection ] = selection;
+    const [ isAllSelected ] = selectAll;
+    const [ isExpanded, setIsExpanded ] = useState(false);
+    const [ isSelected, setIsSelected ] = useState(false);
 
-    return (<></>);
-/*
-    useEffect(() => inSelectionMode ? setIsExpanded(false) : setIsSelected(false), [inSelectionMode]);
-    useEffect(() => setIsSelected(selectAllAction), [selectAllAction]);
+    useEffect(() => inSelection ? setIsExpanded(false) : setIsSelected(false), [inSelection]);
+    useEffect(() => setIsSelected(isAllSelected), [isAllSelected]);
 
 
     const handleMessageClick = async () =>
@@ -31,11 +35,10 @@ export default function MessageCard({ message, now }: MessageCardProps)
 
 
     return (
-        <div className={ supportSelector(inSelectionMode) }>
+        <div className={ supportSelector(inSelection) }>
             <Selector
                 setIsSelected={setIsSelected}
                 isSelected={isSelected}
-                inSelectionMode={inSelectionMode}
             />
             <div
                 className={ `message-card cursor-pointer` }
@@ -66,5 +69,5 @@ export default function MessageCard({ message, now }: MessageCardProps)
                 )}
             </div>
         </div>
-    );*/
+    );
 }
