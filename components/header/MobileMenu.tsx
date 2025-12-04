@@ -58,7 +58,7 @@ export default function MobileMenu({ pageEntries, actionButtonText, actionButton
                 }
                 <button
                     onClick={ actionButton }
-                    className={fadeSlideUp() + "min-[360px]:hidden px-4 h-8 inset-border rounded-lg"}
+                    className={fadeSlideUp() + "min-[360px]:hidden px-4 h-8 inset-border rounded-lg font-medium"}
                     style={{ transitionDelay: ((pageEntries.length + 1) * delayInc) + 'ms' }}
                 >
                     {actionButtonText}

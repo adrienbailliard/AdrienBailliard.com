@@ -3,10 +3,12 @@ import { createContext, useContext, useState, useEffect } from "react";
 import site from "@/config/site";
 
 
-const AuthContext = createContext({
-  isAdmin: false,
-  logout: () => {}
-});
+type AuthContextType = {
+  isAdmin: boolean;
+  logout: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | null>(null);
 
 
 export function AuthProvider({ children }: { children: React.ReactNode })
@@ -20,7 +22,7 @@ export function AuthProvider({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     setIsAdmin(
-      document.cookie.startsWith(`${site.adminCookie.name}=`)
+      document.cookie.includes(`${site.adminCookie.name}=`)
     );
   }, []);
 
@@ -36,6 +38,11 @@ export function AuthProvider({ children }: { children: React.ReactNode })
 }
 
 
-export function useAuth() {
-  return useContext(AuthContext);
+export function useAuth(): AuthContextType 
+{
+  const context = useContext(AuthContext);
+  if (!context)
+    throw new Error("AuthContext used outside an AuthProvider");
+
+  return context;
 }

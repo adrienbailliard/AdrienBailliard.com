@@ -90,12 +90,12 @@ export default function Header()
                         />
 
                         <div className="flex gap-4 max-[360px]:hidden m-auto">
-                            <Link href={ctaHref} className="max-[520px]:hidden px-4 xl:px-6 h-8.5 xl:h-11 inline-flex items-center rounded-lg inset-border">
+                            <Link href={ctaHref} className="max-[520px]:hidden px-4 xl:px-6 h-8.5 xl:h-11 inline-flex items-center rounded-lg inset-border font-medium">
                                 { ctaPage.name }
                             </Link>
                             <button
                                 onClick={actionButton}
-                                className="px-4 xl:px-6 h-8.5 xl:h-11 bg-light-fg text-dark-fg rounded-lg"
+                                className="px-4 xl:px-6 h-8.5 xl:h-11 bg-light-fg text-dark-fg rounded-lg font-medium"
                             >
                                 {actionButtonText}
                             </button>

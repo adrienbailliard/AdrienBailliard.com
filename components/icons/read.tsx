@@ -1,18 +1,22 @@
-export default function Read({ className }: { className: string })
+export default function Read({ className }: { className?: string })
 {
   return (
-    <svg viewBox="0 0 180 165" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_178_38)">
-            <path d="M15.75 78.3L81.9858 115.767C86.9471 118.573 93.0269 118.528 97.9462 115.649L161.75 78.3" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-            <path d="M6 154.04C6.00001 157.354 8.68631 160.04 12 160.04H168C171.314 160.04 174 157.354 174 154.04V75.5403H180V154.04C180 160.668 174.627 166.04 168 166.04H12C5.3726 166.04 1.34287e-05 160.668 0 154.04V69.5403H6V154.04ZM79.1631 2.6028C85.0046 -0.816602 92.2247 -0.870323 98.1162 2.46217L153 33.5071V40.4006L95.1621 7.68483C91.1312 5.4048 86.1911 5.44114 82.1943 7.78053L23 42.4299V35.4788L79.1631 2.6028Z" fill="currentColor"/>
-            <path d="M32 33.7L10.8837 46.1295C5.99894 49.0048 3 54.2499 3 59.9181V86.27" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-            <path d="M146.5 33.2L168.963 46.0885C173.934 48.9409 177 54.2347 177 59.9663V86.62" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-        </g>
-        <defs>
-            <clipPath id="clip0_178_38">
-                <rect width="180" height="165" fill="white"/>
-            </clipPath>
-        </defs>
+    <svg viewBox="0 0 36 37" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_180_18)">
+        <path d="M4.5 20.5L16.19 27.09C17.2088 27.6736 18.4112 27.641 19.42 27.04L31.11 20.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M4.5 8.00976L16.19 1.41976C17.2088 0.836131 18.4112 0.868802 19.42 1.46976L31.11 8.00976" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M14.5 2.4L2.75193 8.95991C1.66643 9.48269 1 10.4363 1 11.4669V16.2582" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <path d="M27.2251 5.85L33.2169 9.19335C34.3215 9.71198 35.0029 10.6745 35.0029 11.7166V16.5627" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <mask id="path-5-inside-1_180_18" fill="white">
+          <path d="M0 14H36V34.5C36 35.8807 34.8807 37 33.5 37H2.5C1.11929 37 0 35.8807 0 34.5V14Z"/>
+        </mask>
+        <path d="M0 14H36H0ZM38 34.5C38 36.9853 35.9853 39 33.5 39H2.5C0.0147186 39 -2 36.9853 -2 34.5H2C2 34.7761 2.22386 35 2.5 35H33.5C33.7761 35 34 34.7761 34 34.5H38ZM2.5 39C0.0147186 39 -2 36.9853 -2 34.5V14H2V34.5C2 34.7761 2.22386 35 2.5 35V39ZM38 14V34.5C38 36.9853 35.9853 39 33.5 39V35C33.7761 35 34 34.7761 34 34.5V14H38Z" fill="currentColor" mask="url(#path-5-inside-1_180_18)"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_180_18">
+          <rect width="36" height="37" fill="white"/>
+        </clipPath>
+      </defs>
     </svg>
   );
 }

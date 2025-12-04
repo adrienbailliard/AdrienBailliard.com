@@ -1,12 +1,13 @@
-export default function Unread({ className }: { className: string })
+export default function Unread({ className }: { className?: string })
 {
   return (
-    <svg viewBox="0 0 202 151" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-        <circle cx="158.5" cy="42.5" r="37.5" fill="currentColor"/>
-        <path d="M15.75 63.8L81.7888 101.155C86.8554 104.021 93.0787 103.91 98.0391 100.863L125.5 84" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-        <line x1="177" y1="109" x2="177" y2="92" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-        <path d="M87 40H104" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-        <path d="M99 43H12C8.68629 43 6 45.6863 6 49V139C6 142.314 8.68629 145 12 145H168C171.314 145 174 142.314 174 139V101H180V139L179.996 139.31C179.834 145.691 174.691 150.834 168.31 150.996L168 151H12L11.6904 150.996C5.30896 150.834 0.165501 145.691 0.00390625 139.31L0 139V49C9.66416e-07 42.3726 5.37258 37 12 37H99V43Z" fill="currentColor"/>
+    <svg viewBox="0 0 40 30" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 15C35.866 15 39 11.866 39 8C39 4.13401 35.866 1 32 1C28.134 1 25 4.13401 25 8C25 11.866 28.134 15 32 15Z" fill="currentColor"/>
+      <path d="M4.5 13.5L16.1945 20.093C17.1984 20.6648 18.4328 20.6436 19.4164 20.0374L24.8516 16.6887" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M35 21.5563V18.3775" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M17 8H20.3663" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M19.604 8.74172H2.37624C1.82942 8.74172 1.38614 9.18648 1.38614 9.7351V27.6159C1.38614 28.1644 1.82942 28.6093 2.37624 28.6093H33.2673C33.8141 28.6093 34.2574 28.1644 34.2574 27.6159V20.0662H35.6436V27.6159L35.6428 27.6775C35.6107 28.9452 34.5923 29.967 33.3287 29.9992L33.2673 30H2.37624L2.31493 29.9992C1.05128 29.967 0.0327725 28.9452 0.000773515 27.6775L0 27.6159V9.7351C1.9137e-07 8.4184 1.06388 7.35099 2.37624 7.35099H19.604V8.74172Z" fill="currentColor"/>
+      <path d="M17 9H2.5C2.22386 9 2 9.22386 2 9.5V27.5C2 27.7761 2.22386 28 2.5 28H33.5C33.7761 28 34 27.7761 34 27.5V19.0176H36V27.5C36 28.7943 35.0164 29.8592 33.7559 29.9873L33.5 30H2.5L2.24414 29.9873C1.06772 29.8677 0.132274 28.9323 0.0126953 27.7559L0 27.5V9.5C0 8.11929 1.11929 7 2.5 7H17V9Z" fill="currentColor"/>
     </svg>
   );
 }

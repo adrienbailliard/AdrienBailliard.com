@@ -1,4 +1,4 @@
-export default function Newsletter({ className }: { className: string })
+export default function Newsletter({ className }: { className?: string })
 {
   return (
     <svg viewBox="0 0 232 185" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">

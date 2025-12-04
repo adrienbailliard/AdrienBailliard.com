@@ -1,19 +1,24 @@
-export default function Dustbin({ className }: { className: string })
+export default function Dustbin({ className }: { className?: string })
 {
   return (
-    <svg viewBox="0 0 153 150" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0_178_63)">
-            <path d="M128.761 23L119.861 138.69C119.501 143.379 115.59 147 110.888 147H43.1123C38.4096 147 34.4994 143.379 34.1387 138.69L25.2393 23H128.761Z" stroke="currentColor" strokeWidth="6"/>
-            <line x1="92.5" y1="61" x2="92.5" y2="110" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-            <line x1="3" y1="-3" x2="52" y2="-3" transform="matrix(0 1 1 0 64.5 58)" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-            <line x1="3" y1="23" x2="150.013" y2="23" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
-            <path d="M110.677 23.5L106.6 9.36719C105.427 5.30051 101.705 2.50018 97.4727 2.5H55.5273C51.2949 2.50018 47.5735 5.30051 46.4004 9.36719L42.3232 23.5H110.677Z" stroke="currentColor" strokeWidth="5"/>
+    <svg viewBox="0 0 38 37" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_180_58)">
+        <mask id="mask0_180_58" style={{maskType: "luminance"}} maskUnits="userSpaceOnUse" x="0" y="0" width="38" height="37">
+          <path d="M38 0H0V37H38V0Z" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_180_58)">
+          <path d="M31.443 5.65L29.2428 34.0542C29.1581 35.1466 28.2411 35.99 27.1381 35.99H10.3049C9.20184 35.99 8.28479 35.1466 8.20013 34.0542L6 5.65H31.443Z" stroke="currentColor" strokeWidth="2"/>
+          <path d="M23.0981 15.17V27.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M15.1504 15.17V27.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M1 5.65H37" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          <path d="M26.7165 5.6L25.7955 2.48762C25.5348 1.6067 24.7077 1.00004 23.7671 1H13.3492C12.4087 1.00004 11.5815 1.6067 11.3209 2.48762L10.3999 5.6H26.7165Z" stroke="currentColor" strokeWidth="2"/>
         </g>
-        <defs>
-            <clipPath id="clip0_178_63">
-                <rect width="153" height="150" fill="white"/>
-            </clipPath>
-        </defs>
+      </g>
+      <defs>
+        <clipPath id="clip0_180_58">
+          <rect width="38" height="37" fill="white"/>
+        </clipPath>
+      </defs>
     </svg>
   );
 }

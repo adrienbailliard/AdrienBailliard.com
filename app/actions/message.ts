@@ -16,7 +16,7 @@ export async function contact(formData: FormData): Promise<void>
         const email = await getValidEmail(formData);
 
         if (!email)
-            throw new Error("Email invalide");
+            throw new Error("Invalid email");
 
         const data: Partial<MessageInput> = { email };
         const fields: Array<keyof Omit<MessageInput, "email">> =
@@ -29,7 +29,7 @@ export async function contact(formData: FormData): Promise<void>
             const str = getValidString(rawValue, fieldMaxLengths[field]);
 
             if (!str)
-                throw new Error(`Champ ${field} invalide`);
+                throw new Error(`Invalid ${field} field`);
 
             data[field] = str;
         }
