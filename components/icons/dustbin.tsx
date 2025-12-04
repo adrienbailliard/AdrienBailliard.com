@@ -1,7 +1,7 @@
 export default function Dustbin({ className }: { className?: string })
 {
   return (
-    <svg viewBox="0 0 38 37" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 38 39" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_180_58)">
         <mask id="mask0_180_58" style={{maskType: "luminance"}} maskUnits="userSpaceOnUse" x="0" y="0" width="38" height="37">
           <path d="M38 0H0V37H38V0Z" fill="white"/>

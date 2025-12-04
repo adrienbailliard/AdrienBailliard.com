@@ -5,6 +5,7 @@ import { useMessageActions } from '@/context/messageActions';
 type MessageSelectorProps = {
     isSelected: boolean;
     setIsSelected: (value: boolean) => void;
+    className?: string;
 }
 
 
@@ -14,7 +15,7 @@ export function supportSelector(inSelectionMode: boolean)
 }
 
 
-export function Selector({ isSelected, setIsSelected }: MessageSelectorProps)
+export function Selector({ isSelected, setIsSelected, className }: MessageSelectorProps)
 {
     const { selection } = useMessageActions();
     const [ inSelection ] = selection;
@@ -30,7 +31,7 @@ export function Selector({ isSelected, setIsSelected }: MessageSelectorProps)
         >
             <div className={ `h-4.5 w-4.5 bg-transparent border border-dark-muted-text m-auto
                     group-[:hover,:active]:border-light-fg
-                    ${ inSelection && isSelected && "border-light-fg" }
+                    ${ inSelection && isSelected && "border-light-fg" } ${ className }
                 `}
             />
             { isSelected && <Check className='w-3 absolute left-4.5 top-1/2 -translate-y-1/2'/> }

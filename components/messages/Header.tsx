@@ -36,8 +36,8 @@ export default function Header({ data }: HeaderProps)
             {
                 inSelection
                 ? (
-                    <div className={ `flex gap-3 items-center justify-between text-light-muted-text text-xs
-                        [&>button]:[:hover,:active]:text-light-fg [&>button]:min-h-10.5 [&>button]:min-w-10.5 *:[&_svg]:h-4.5 *:[&_svg]:m-auto
+                    <div className={ `flex gap-3 items-center justify-between text-light-fg text-xs
+                        [&>button]:min-h-10.5 [&>button]:min-w-10.5 *:[&_svg]:h-4.5 *:[&_svg]:m-auto
                     `}>
                         <button onClick={ () => setRemoveAction(isRemoveAction + 1) }>
                             <Dustbin />
@@ -52,6 +52,7 @@ export default function Header({ data }: HeaderProps)
             <Selector
                 setIsSelected={setIsAllSelected}
                 isSelected={isAllSelected}
+                className="border-light-fg"
             />
             <button
                 className='text-primary font-medium'
