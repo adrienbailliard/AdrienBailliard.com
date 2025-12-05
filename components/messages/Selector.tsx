@@ -23,7 +23,6 @@ export function Selector({ isSelected, onClick, inSelection, highlightCheckBox, 
             onClick={ onClick }
             aria-label={ ariaLabel }
             aria-pressed={ isSelected }
-            role="checkbox"
             className={ `duration-300 cursor-pointer w-12 h-12 group absolute top-1/2 -translate-y-1/2
                 ${ inSelection
                     ? "opacity-100 visible -left-13.75"

@@ -33,7 +33,7 @@ export default function Messages()
                     <div className='max-h-[50svh] overflow-y-auto'>
                         {
                             data
-                            ? data.map((message, i) => <MessageCard message={message} now={now} key={i}/>)
+                            ? data.map((message, i) => <MessageCard message={message} now={now} key={message.id}/>)
                             : [...Array(4)].map((_, i) => <MessageSkeletonCard key={i}/>)
                         }
                     </div>
