@@ -2,7 +2,7 @@ export default function Unread({ className }: { className?: string })
 {
   return (
     <svg viewBox="0 0 40 32" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M32 15C35.866 15 39 11.866 39 8C39 4.13401 35.866 1 32 1C28.134 1 25 4.13401 25 8C25 11.866 28.134 15 32 15Z" fill="currentColor"/>
+      <path d="M32 15C35.866 15 39 11.866 39 8C39 4.13401 35.866 1 32 1C28.134 1 25 4.13401 25 8C25 11.866 28.134 15 32 15Z" fill="var(--color-primary)"/>
       <path d="M4.5 13.5L16.1945 20.093C17.1984 20.6648 18.4328 20.6436 19.4164 20.0374L24.8516 16.6887" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       <path d="M35 21.5563V18.3775" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       <path d="M17 8H20.3663" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>

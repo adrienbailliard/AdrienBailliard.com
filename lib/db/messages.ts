@@ -24,12 +24,21 @@ export async function getMessages(): Promise<Message[]>
 }
 
 
-export async function markMessageAsRead(messageId: string): Promise<void>
+export async function deleteMessages(ids: Array<number>): Promise<void>
 {
-  await sql `
+  await sql`
+    DELETE FROM messages
+    WHERE id = ANY(${ids});
+  `;
+}
+
+
+export async function setMessagesType(ids: Array<number>, areRead: boolean): Promise<void>
+{
+  await sql`
     UPDATE messages
-    SET is_read = true
-    WHERE id = ${messageId}
+    SET is_read = ${areRead}
+    WHERE id = ANY(${ids});
   `;
 }
 

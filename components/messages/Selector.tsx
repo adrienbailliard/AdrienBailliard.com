@@ -1,40 +1,47 @@
 import Check from "@/components/icons/check";
-import { useMessageActions } from '@/context/messageActions';
 
 
 type MessageSelectorProps = {
     isSelected: boolean;
-    setIsSelected: (value: boolean) => void;
-    className?: string;
+    inSelection: boolean;
+    onClick?: () => void;
+    highlightCheckBox?: boolean;
+    ariaLabel: string; 
 }
 
 
-export function supportSelector(inSelectionMode: boolean)
+export function supportSelector(inSelection: boolean)
 {
-    return `duration-300 relative ${ inSelectionMode && "pl-10" }`;
+    return `duration-300 relative ${ inSelection && "ml-10" }`;
 }
 
 
-export function Selector({ isSelected, setIsSelected, className }: MessageSelectorProps)
+export function Selector({ isSelected, onClick, inSelection, highlightCheckBox, ariaLabel }: MessageSelectorProps)
 {
-    const { selection } = useMessageActions();
-    const [ inSelection ] = selection;
-
     return (
         <button
-            className={ `duration-300 cursor-pointer w-12 h-12 group
-                absolute top-1/2 -translate-y-1/2 ${ inSelection
-                    ? "opacity-100 visible -left-3.75"
-                    : "opacity-0 invisible -left-13.75" }
+            onClick={ onClick }
+            aria-label={ ariaLabel }
+            aria-pressed={ isSelected }
+            role="checkbox"
+            className={ `duration-300 cursor-pointer w-12 h-12 group absolute top-1/2 -translate-y-1/2
+                ${ inSelection
+                    ? "opacity-100 visible -left-13.75"
+                    : "opacity-0 invisible -left-23.75"
+                }
             ` }
-            onClick={ () => setIsSelected(!isSelected) }
         >
-            <div className={ `h-4.5 w-4.5 bg-transparent border border-dark-muted-text m-auto
-                    group-[:hover,:active]:border-light-fg
-                    ${ inSelection && isSelected && "border-light-fg" } ${ className }
+            <div className={ `h-4.5 w-4.5 bg-transparent border m-auto group-[:hover,:active]:border-light-fg
+                    ${ highlightCheckBox ? "border-light-fg" : "border-dark-muted-text" }
+                    ${ inSelection && isSelected && "border-light-fg" }
                 `}
             />
-            { isSelected && <Check className='w-3 absolute left-4.5 top-1/2 -translate-y-1/2'/> }
+            {
+                isSelected && <Check
+                    className='w-3 absolute left-4.5 top-1/2 -translate-y-1/2'
+                    aria-hidden="true"
+                />
+            }
         </button>
     );
 }

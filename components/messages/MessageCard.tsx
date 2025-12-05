@@ -14,60 +14,68 @@ type MessageCardProps = {
 
 export default function MessageCard({ message, now }: MessageCardProps)
 {
-    const { selection, selectAll } = useMessageActions();
-    const [ inSelection ] = selection;
-    const [ isAllSelected ] = selectAll;
     const [ isExpanded, setIsExpanded ] = useState(false);
-    const [ isSelected, setIsSelected ] = useState(false);
+    const { selection, selected } = useMessageActions();
+    const [ selectedIds, setSelectedIds ] = selected;
+    const [ inSelection ] = selection;
 
-    useEffect(() => inSelection ? setIsExpanded(false) : setIsSelected(false), [inSelection]);
-    useEffect(() => setIsSelected(isAllSelected), [isAllSelected]);
+    useEffect(() => setIsExpanded(false), [inSelection]);
 
-
-    const handleMessageClick = async () =>
+    const handleExpandMessage = () =>
     {
-        setIsExpanded(!isExpanded);
+        setIsExpanded(prev => !prev);
         if (!message.is_read) {
             message.is_read = true;
-            await fetch(`/api/messages/${message.id}/read`, { method: 'POST' });
+            fetch(`/api/messages/type`, { method: 'POST', body: JSON.stringify({ ids: [message.id], areRead: true }) });
         }
     };
 
+    const toggleSelectMessage = (isSelected: boolean) =>
+    {
+        setSelectedIds(prev => {
+            const newSet = new Set(prev);
+            isSelected ? newSet.delete(message.id) : newSet.add(message.id);
+            return newSet;
+        });
+    };
+
+    const handleMessageClick = () => inSelection
+        ? toggleSelectMessage(selectedIds.has(message.id)) : handleExpandMessage();
+
 
     return (
-        <div className={ supportSelector(inSelection) }>
+        <div
+            className={ `message-card cursor-pointer group ${supportSelector(inSelection)}`}
+            onClick={ handleMessageClick }
+        >
             <Selector
-                setIsSelected={setIsSelected}
-                isSelected={isSelected}
+                isSelected={ selectedIds.has(message.id) }
+                ariaLabel={ "Sélectionner" }
+                inSelection={inSelection}
             />
             <div
-                className={ `message-card cursor-pointer` }
-                onClick={ handleMessageClick }
+                className={ !message.is_read
+                    ? `relative before:w-2 before:h-2 before:bg-primary before:rounded-full
+                        before:absolute before:-left-5 before:top-1/2 before:-translate-y-1/2
+                    ` : ""
+                }
             >
-                <div
-                    className={ !message.is_read
-                        ? `relative before:w-2 before:h-2 before:bg-primary before:rounded-full
-                            before:absolute before:-left-5 before:top-1/2 before:-translate-y-1/2
-                        ` : ""
-                    }
-                >
-                    <div className="text-lg font-medium line-clamp-1 break-all">
-                        { `${message.first_name} ${message.last_name}` }
-                    </div>
+                <div className="text-lg font-medium line-clamp-1 break-all">
+                    { `${message.first_name} ${message.last_name}` }
                 </div>
-                <time className='text-light-muted-text ml-auto mt-0.5'>
-                    { formatDate(message.created_at, now) }
-                </time>
-                <p className="text-base line-clamp-2 sm:line-clamp-1 col-span-full text-light-muted-text">
-                    <span className='text-light-fg'>{ message.category }</span>
-                    { !isExpanded && ` - ${ message.content }` }
-                </p>
-                { isExpanded && (
-                    <p className="text-base text-light-muted-text col-span-full whitespace-pre-wrap">
-                        { message.content }
-                    </p>
-                )}
             </div>
+            <time className='text-light-muted-text ml-auto mt-0.5'>
+                { formatDate(message.created_at, now) }
+            </time>
+            <p className="text-base line-clamp-2 sm:line-clamp-1 col-span-full text-light-muted-text">
+                <span className='text-light-fg'>{ message.category }</span>
+                { !isExpanded && ` - ${ message.content }` }
+            </p>
+            { isExpanded && (
+                <p className="text-base text-light-muted-text col-span-full whitespace-pre-wrap">
+                    { message.content }
+                </p>
+            )}
         </div>
     );
 }

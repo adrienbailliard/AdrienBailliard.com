@@ -4,9 +4,7 @@ import { createContext, useContext, useState } from "react";
 
 type MessageActionsContextType = {
   selection: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  selectAll: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  read: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  remove: [number, React.Dispatch<React.SetStateAction<number>>];
+  selected: [Set<number>, React.Dispatch<React.SetStateAction<Set<number>>>];
 }
 
 const MessageActionsContext = createContext<MessageActionsContextType | null>(null);
@@ -17,9 +15,7 @@ export function MessageActionsProvider({ children }: { children: React.ReactNode
   return (
     <MessageActionsContext.Provider value={{
       selection: useState(false),
-      selectAll: useState(false),
-      read: useState(false),
-      remove: useState(0)
+      selected: useState(new Set())
     }}>
       {children}
     </MessageActionsContext.Provider>

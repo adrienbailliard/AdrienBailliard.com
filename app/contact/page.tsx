@@ -4,7 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 
 import ContactForm from "@/components/ContactForm";
-import Messages from "@/components/messages/Messages";
+import Messages from "@/components/messages";
 import Stats from "@/components/Stats";
 import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";

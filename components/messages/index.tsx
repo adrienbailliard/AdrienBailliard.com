@@ -14,23 +14,23 @@ const fetcher = (url: string) =>
     fetch(url).then(r => r.json());
 
 
-export default function LastMessages()
+export default function Messages()
 {
     const { isAdmin } = useAuth();
 
     if (!isAdmin)
         return null;
 
-    const { data } = useSWR<Message[]>(`/api/messages`, fetcher);
+    const { data, mutate } = useSWR<Message[]>(`/api/messages`, fetcher);
     const now = new Date();
 
 
     return (
         <section className="text-light-fg bg-dark-bg pb-0">
-            <div>
+            <div className='overflow-x-hidden'>
                 <MessageActionsProvider>
-                    <Header data={data} />
-                    <div className='divide-y divide-dark-muted-text pt-5'>
+                    <Header data={data} mutateMessages={mutate}/>
+                    <div className='h-svh-full-minus-menu overflow-y-auto'>
                         {
                             data
                             ? data.map((message, i) => <MessageCard message={message} now={now} key={i}/>)
