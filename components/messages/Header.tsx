@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { KeyedMutator } from 'swr';
 
 import { Selector, supportSelector } from "@/components/messages/Selector";
@@ -27,8 +27,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
     const safeData = data ?? [];
 
 
-    useEffect(() =>
-    {
+    useEffect(() => {
         const selectedMessages = safeData.filter(message => selectedIds.has(message.id));
         const allRead = selectedMessages.every(message => message.is_read);
 
@@ -36,10 +35,10 @@ export default function Header({ data, mutateMessages }: HeaderProps)
     }, [selectedIds, data]);
 
 
-    const handleDelete = () =>
-    {
+    const handleDelete = () => {
         const newData = safeData.filter(msg => !selectedIds.has(msg.id));
         mutateMessages(newData, { revalidate: false });
+        setSelectedIds(new Set());
 
         fetch(`/api/messages/delete`, {
             method: 'POST',
@@ -47,8 +46,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
         });
     };
 
-    const handleReadToggle = () =>
-    {
+    const handleReadToggle = () => {
         const newData = safeData.map(msg => selectedIds.has(msg.id) ? { ...msg, is_read: isReadAction } : msg);
         mutateMessages(newData, { revalidate: false });
 
@@ -69,7 +67,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
 
 
     if (!data)
-        return (<h5>Messages</h5>);
+        return (<h5 className="mb-5">Messages</h5>);
 
     if (data.length === 0)
         return (<h5>Aucun Message</h5>);

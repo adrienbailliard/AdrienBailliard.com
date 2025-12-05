@@ -246,10 +246,6 @@
 
 @layer utilities
 {
-  .h-svh-full-minus-menu {
-    @apply max-h-[calc(100svh-var(--spacing-header))] xl:max-h-[calc(100svh-var(--spacing-header-xl))];
-  }
-
   .inset-border {
     box-shadow: inset 0 0 0 1.5px;
   }

@@ -30,11 +30,11 @@ export default function Messages()
             <div className='overflow-x-hidden'>
                 <MessageActionsProvider>
                     <Header data={data} mutateMessages={mutate}/>
-                    <div className='h-svh-full-minus-menu overflow-y-auto'>
+                    <div className='max-h-[50svh] overflow-y-auto'>
                         {
                             data
                             ? data.map((message, i) => <MessageCard message={message} now={now} key={i}/>)
-                            : [...Array(3)].map((_, i) => <MessageSkeletonCard key={i}/>)
+                            : [...Array(4)].map((_, i) => <MessageSkeletonCard key={i}/>)
                         }
                     </div>
                 </MessageActionsProvider>
