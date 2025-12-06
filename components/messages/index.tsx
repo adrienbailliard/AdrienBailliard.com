@@ -31,7 +31,7 @@ export default function Messages()
             <div className='overflow-x-hidden'>
                 <MessageActionsProvider>
                     <Header data={safeData} mutateMessages={mutate}/>
-                    <div className='max-h-[50svh] overflow-y-auto'>
+                    <div className='max-h-[65svh] overflow-y-auto'>
                         {
                             safeData
                             ? safeData.map((message, i) => <MessageCard message={message} now={now} key={message.id}/>)
