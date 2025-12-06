@@ -12,7 +12,7 @@ import { useState } from "react";
 
 
 type HeaderProps = {
-    data: Array<Message> | undefined;
+    data: Array<Message> | null;
     mutateMessages: KeyedMutator<Message[]>;
 }
 
@@ -32,7 +32,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
         const allRead = selectedMessages.every(message => message.is_read);
 
         setIsReadAction(!allRead);
-    }, [selectedIds, data]);
+    }, [selectedIds, safeData]);
 
 
     const handleDelete = () => {

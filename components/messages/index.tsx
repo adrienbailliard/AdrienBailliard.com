@@ -22,6 +22,7 @@ export default function Messages()
         return null;
 
     const { data, mutate } = useSWR<Message[]>(`/api/messages`, fetcher);
+    const safeData = Array.isArray(data) ? data : null;
     const now = new Date();
 
 
@@ -29,11 +30,11 @@ export default function Messages()
         <section className="text-light-fg bg-dark-bg pb-0">
             <div className='overflow-x-hidden'>
                 <MessageActionsProvider>
-                    <Header data={data} mutateMessages={mutate}/>
+                    <Header data={safeData} mutateMessages={mutate}/>
                     <div className='max-h-[50svh] overflow-y-auto'>
                         {
-                            data
-                            ? data.map((message, i) => <MessageCard message={message} now={now} key={message.id}/>)
+                            safeData
+                            ? safeData.map((message, i) => <MessageCard message={message} now={now} key={message.id}/>)
                             : [...Array(4)].map((_, i) => <MessageSkeletonCard key={i}/>)
                         }
                     </div>
