@@ -4,7 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 
 import Form from '@/components/ui/BaseForm';
-import Newsletters from "@/components/newsletter/Newsletters";
+import Newsletters from "@/components/newsletter/published";
 import AutoMonday from "@/components/icons/autoMonday";
 import Stats from "@/components/Stats";
 import Divider from "@/components/Divider";

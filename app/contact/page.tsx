@@ -47,11 +47,7 @@ export default function Contact()
         </div>
       </section>
 
-      <section className="bg-light-bg">
-        <div>
-          <ContactForm/>
-        </div>
-      </section>
+      <ContactForm/>
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import { Preview, PreviewProps } from "@/components/newsletter/Preview";
+import { Preview, PreviewProps } from "@/components/newsletter/published/Preview";
 
 
 type NewslettersProps = {
