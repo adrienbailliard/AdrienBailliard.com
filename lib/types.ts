@@ -1,6 +1,3 @@
-import { emailStatus } from "@/lib/constants";
-
-
 export type MessageInput = {
   firstName: string;
   lastName: string;
@@ -18,13 +15,6 @@ export type Message = MessageInput & {
   is_read: boolean;
   id: number;
 };
-
-
-export type DomainData = {
-  domain: string;
-  status: emailStatus;
-  checked_at: string;
-}
 
 
 export type StatResponse = {

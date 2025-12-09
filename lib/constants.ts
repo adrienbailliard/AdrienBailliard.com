@@ -1,4 +1,4 @@
-export enum emailStatus {
+export enum domainStatus {
   INVALID = 0,
   VALID = 1
 }

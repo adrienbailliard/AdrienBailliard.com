@@ -1,5 +1,5 @@
-import { emailStatus, EMAIL_PATTERN, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
-import { getDomainData, upsertDomain } from "@/lib/db/domains";
+import { domainStatus, EMAIL_PATTERN, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
+import { getDomainStatus, upsertDomain } from "@/lib/db/domains";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 
 
@@ -11,20 +11,20 @@ async function isValidEmail(email: string): Promise<boolean>
         return false;
 
     const domain = email.split("@")[1];
-    const domainData = await getDomainData(domain);
+    let status = await getDomainStatus(domain);
 
-    if (domainData)
-        return domainData.status === emailStatus.VALID;
+    if (status)
+        return status === domainStatus.VALID;
 
     const request = await fetchEmailWithRetry(email);
 
     const result = await request.json();
-    const status = result.disposable === true || result.mx_record === null
-        ? emailStatus.INVALID
-        : emailStatus.VALID;
+    status = result.disposable === true || result.mx_record === null
+        ? domainStatus.INVALID
+        : domainStatus.VALID;
 
     upsertDomain(domain, status);
-    return status === emailStatus.VALID;
+    return status === domainStatus.VALID;
 }
 
 
