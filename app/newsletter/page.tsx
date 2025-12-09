@@ -4,7 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 
 import Form from '@/components/ui/BaseForm';
-import Newsletters from "@/components/newsletter/published";
+import PublishedNewsletters from "@/components/newsletter/published";
 import AutoMonday from "@/components/icons/autoMonday";
 import Stats from "@/components/Stats";
 import Divider from "@/components/Divider";
@@ -43,20 +43,17 @@ export default function Newsletter()
         </div>
       </section>
 
-      <section className="bg-light-bg text-dark-fg">
-        <div>
-          <Newsletters title="Toutes les Éditions" data={
-            [
-              {
-                title: "Automatiser Sans Complexité",
-                paragraph: "Des systèmes élégants qui travaillent pour toi, afin de gagner du temps sans ajouter de friction.",
-                href: "/newsletter/",
-                date: "Première édition en préparation"
-              }
-            ]
-          }/>
-        </div>
-      </section>
+      <PublishedNewsletters
+        title="Toutes les Éditions"
+        data={[
+          {
+            title: "Automatiser Sans Complexité",
+            paragraph: "Des systèmes élégants qui travaillent pour toi, afin de gagner du temps sans ajouter de friction.",
+            href: "/newsletter/",
+            date: "Première édition en préparation"
+          }
+        ]}
+      />
     </main>
   );
 }

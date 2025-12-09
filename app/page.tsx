@@ -13,7 +13,7 @@ import Form from '@/components/ui/BaseForm';
 import BottomLine from '@/components/ui/BottomLine';
 import Link from "@/components/ui/Link";
 import ServicePreview from "@/components/ui/ServicePreview";
-import Newsletters from "@/components/newsletter/published";
+import PublishedNewsletters from "@/components/newsletter/published";
 
 
 const pathname = "/";
@@ -122,28 +122,18 @@ export default function Home()
         </div>
       </section>
 
-      <section className="bg-light-bg text-dark-fg">
-        <div>
-          <Newsletters title="Newsletters Récentes" data={
-            [
-              {
-                title: "Automatiser Sans Complexité",
-                paragraph: "Des systèmes élégants qui travaillent pour toi, afin de gagner du temps sans ajouter de friction.",
-                href: "/newsletter/",
-                date: "Première édition en préparation"
-              }
-            ]
-          }/>
-          <div className="text-center mt-10 md:mt-12 lg:mt-14">
-            <Link
-              href="/newsletter"
-              variant="button-primary"
-            >
-              { "Explore Les Éditions" }
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PublishedNewsletters
+        title="Newsletters Récentes"
+        cta={true}
+        data={[
+          {
+            title: "Automatiser Sans Complexité",
+            paragraph: "Des systèmes élégants qui travaillent pour toi, afin de gagner du temps sans ajouter de friction.",
+            href: "/newsletter/",
+            date: "Première édition en préparation"
+          }
+        ]}
+      />
     </main>
   );
 }
