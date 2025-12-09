@@ -5,6 +5,7 @@ import Script from "next/script";
 
 import Form from '@/components/ui/BaseForm';
 import PublishedNewsletters from "@/components/newsletter/published";
+import NewsletterDrafts from "@/components/newsletter/drafts";
 import AutoMonday from "@/components/icons/autoMonday";
 import Stats from "@/components/Stats";
 import Divider from "@/components/Divider";
@@ -24,6 +25,7 @@ export default function Newsletter()
 
       <Stats type="newsletter"/>
       <Divider variant="light" adminOnly={true}/>
+      <NewsletterDrafts />
 
       <section className="bg-dark-bg text-light-fg">
         <div className="flex max-lg:flex-col items-center lg:justify-between gap-10 lg:gap-20">
