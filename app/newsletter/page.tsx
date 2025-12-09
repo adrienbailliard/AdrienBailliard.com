@@ -22,7 +22,7 @@ export default function Newsletter()
     <main className="bg-light-bg">
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
 
-      <Stats type="subscribers"/>
+      <Stats type="newsletter"/>
       <Divider variant="light" adminOnly={true}/>
 
       <section className="bg-dark-bg text-light-fg">

@@ -8,6 +8,14 @@ export type MessageInput = {
 };
 
 
+export type NewsletterDraft = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  updated_at: Date;
+};
+
+
 export type Message = MessageInput & {
   first_name: string;
   last_name: string;

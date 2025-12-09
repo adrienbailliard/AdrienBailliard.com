@@ -8,7 +8,7 @@ import { StatResponse } from '@/lib/types';
 const fetcher = (url: string) => fetch(url).then(r => r.json());
 
 interface StatsProps {
-  type: 'guide' | 'subscribers' | 'messages';
+  type: 'guide' | 'newsletter' | 'messages';
 }
 
 interface StatCardProps {
