@@ -14,7 +14,7 @@ export default function Header({ dataCount }: HeaderProps)
     return (
         <div className="flex justify-between items-center">
             <h5>{ dataCount === 0 ? "Aucun Brouillon" : "Brouillons" }</h5>
-            <Link href="/newsletter" className='text-primary font-medium'>
+            <Link href="/newsletter/modifier" className='text-primary font-medium'>
                 Créer
             </Link>
         </div>

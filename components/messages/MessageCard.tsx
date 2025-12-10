@@ -45,7 +45,7 @@ export default function MessageCard({ message, now }: MessageCardProps)
 
     return (
         <div
-            className={ `message-card cursor-pointer group ${supportSelector(inSelection)}`}
+            className={ `message-card element-list cursor-pointer group ${supportSelector(inSelection)}`}
             onClick={ handleMessageClick }
         >
             <Selector

@@ -1,3 +1,38 @@
+/**
+* @category Newsletter
+*/
+
+export type BaseNewsletter = {
+  slug: string;
+  title: string;
+  excerpt: string;
+};
+
+
+export type NewsletterContent = {
+  content: string;
+};
+
+
+export type PublishedNewsletterPreview = BaseNewsletter & {
+  published_at: string;
+};
+
+
+export type NewsletterDraftPreview = BaseNewsletter & {
+  updated_at: string;
+};
+
+
+export type PublishedNewsletter = PublishedNewsletterPreview & NewsletterContent;
+export type NewsletterDraft = BaseNewsletter & NewsletterContent;
+
+
+
+/**
+* @category Message
+*/
+
 export type MessageInput = {
   firstName: string;
   lastName: string;
@@ -5,14 +40,6 @@ export type MessageInput = {
   company: string;
   category: string;
   content: string;
-};
-
-
-export type NewsletterDraft = {
-  slug: string;
-  title: string;
-  excerpt: string;
-  updated_at: Date;
 };
 
 
@@ -24,6 +51,11 @@ export type Message = MessageInput & {
   id: number;
 };
 
+
+
+/**
+* @category Statistics
+*/
 
 export type StatResponse = {
   value: number | string;

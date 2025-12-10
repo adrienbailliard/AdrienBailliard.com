@@ -229,9 +229,12 @@
     @apply mt-8 md:mt-10;
   }
 
+  .element-list {
+    @apply gap-x-3 sm:gap-x-4 px-5 py-3 sm:py-4 font-sans select-none;
+  }
+
   .message-card {
-    @apply grid gap-x-3 sm:gap-x-4 px-5 py-3 sm:py-4
-      font-sans select-none grid-cols-[minmax(0,1fr)_80px];
+    @apply grid grid-cols-[minmax(0,1fr)_80px];
   }
 
   .stat-card {

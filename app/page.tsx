@@ -128,9 +128,9 @@ export default function Home()
         data={[
           {
             title: "Automatiser Sans Complexité",
-            paragraph: "Des systèmes élégants qui travaillent pour toi, afin de gagner du temps sans ajouter de friction.",
-            href: "/newsletter/",
-            date: "Première édition en préparation"
+            excerpt: "Des systèmes élégants qui travaillent pour toi, afin de gagner du temps sans ajouter de friction.",
+            slug: "en-attente",
+            published_at: "Première édition en préparation"
           }
         ]}
       />
