@@ -13,11 +13,8 @@ type DraftCardProps = {
 export default function DraftCard({ draft, now }: DraftCardProps)
 {
     return (
-        <Link href={`/newsletter/${draft.slug}`} className="newsletter-draft-card-wrapper">
-            <div className="newsletter-card-list-icon font-bold text-xs flex items-center justify-center">
-                { draft.title.charAt(0) }
-            </div>
-            <div className="card-list flex-1">
+        <Link href={`/newsletter/${draft.slug}`}>
+            <div className="card-list">
                 <div className="card-title">
                     { draft.title }
                 </div>
