@@ -122,18 +122,7 @@ export default function Home()
         </div>
       </section>
 
-      <PublishedNewsletters
-        title="Newsletters Récentes"
-        cta={true}
-        data={[
-          {
-            title: "Automatiser Sans Complexité",
-            excerpt: "Des systèmes élégants qui travaillent pour toi, afin de gagner du temps sans ajouter de friction.",
-            slug: "en-attente",
-            published_at: "Première édition en préparation"
-          }
-        ]}
-      />
+      <PublishedNewsletters title="Newsletters Récentes" cta={true} limit={2} />
     </main>
   );
 }

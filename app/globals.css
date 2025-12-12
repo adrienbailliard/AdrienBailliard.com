@@ -234,7 +234,7 @@
   }
 
   .newsletter-card-list-icon {
-    @apply w-7 h-7 rounded-full bg-light-fg;
+    @apply w-7 h-7 rounded-full border-2 ml-5;
   }
 
   .card-list {

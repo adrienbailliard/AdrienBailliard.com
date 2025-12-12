@@ -19,7 +19,7 @@ export function formatGain(value: number): string
 }
 
 
-export function formatDate(value: string, now: Date): string
+export function formatAdminDate(value: string, now: Date): string
 {
     const date = new Date(value);
     const daysDiff = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
@@ -34,4 +34,14 @@ export function formatDate(value: string, now: Date): string
         return date.toLocaleString('fr-FR', { weekday: 'long' });
 
     return date.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+
+export function formatPublicDate(value: Date): string
+{
+    return value.toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    });
 }

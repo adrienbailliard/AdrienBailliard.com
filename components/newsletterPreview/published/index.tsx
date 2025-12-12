@@ -1,18 +1,30 @@
-import Link from "@/components/ui/Link";
-
+import { getPublishedNewsletterPreview } from "@/lib/db/newsletters";
 import { PreviewCard } from "./PreviewCard";
-import { PublishedNewsletterPreview } from "@/lib/types";
+import { Cta } from "./Cta";
 
 
 type NewslettersProps = {
     title: string;
-    data: Array<PublishedNewsletterPreview>;
     cta?: boolean;
+    limit?: number;
 }
 
 
-export default function Newsletters({ title, data, cta }: NewslettersProps)
+export default async function Newsletters({ title, cta, limit }: NewslettersProps)
 {
+    const previews = await getPublishedNewsletterPreview(limit);
+
+    if (previews.length === 0)
+    {
+        previews.push({
+            slug: "en-cours",
+            title: "Découvrir l'Inédit",
+            excerpt: "Notre newsletter arrive bientôt ! Préparez-vous à accéder aux stratégies exclusives du Top 1%.",
+            published_at: new Date()
+        });
+    }
+
+
     return (
         <section className="bg-light-bg text-dark-fg">
             <div>
@@ -20,21 +32,10 @@ export default function Newsletters({ title, data, cta }: NewslettersProps)
                     { title }
                 </h2>
                 <div className="flex max-lg:flex-col lg:grid grid-cols-2 max-w-6xl mx-auto gap-10 md:gap-12 lg:gap-16">
-                    {
-                        data.map((preview, index) =>
-                            <PreviewCard key={index} preview={preview} />)
-                    }
+                    { previews.map((preview, index) => <PreviewCard key={index} preview={preview} />) }
                 </div>
-                {
-                    cta && (
-                        <div className="text-center mt-10 md:mt-12 lg:mt-14">
-                            <Link href="/newsletter" variant="button-primary">
-                                { "Explore Les Éditions" }
-                            </Link>
-                        </div>
-                    )
-                }
+                { cta && <Cta />}
             </div>
-        </section> 
+        </section>
     );
 }

@@ -20,7 +20,7 @@ export default function NewsletterDrafts()
     if (!isAdmin)
         return null;
 
-    const { data } = useSWR<NewsletterDraftPreview[]>(`/api/newsletter/draft/previews`, fetcher);
+    const { data } = useSWR<NewsletterDraftPreview[]>(`/api/newsletter/drafts`, fetcher);
     const safeData = Array.isArray(data) ? data : null;
     const now = new Date();
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { useMessageActions } from '@/context/messageActions';
 import { Selector, supportSelector } from "@/components/messages/Selector";
-import { formatDate } from '@/lib/utils';
+import { formatAdminDate } from '@/lib/utils';
 import { Message } from '@/lib/types';
 
 
@@ -65,7 +65,7 @@ export default function MessageCard({ message, now }: MessageCardProps)
                 </div>
             </div>
             <time>
-                { formatDate(message.created_at, now) }
+                { formatAdminDate(message.created_at, now) }
             </time>
             <p className="card-container">
                 <span className='text-light-fg'>{ message.category }</span>

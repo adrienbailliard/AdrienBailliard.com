@@ -2,6 +2,7 @@ import Link from "next/link";
 import site from "@/config/site";
 
 import { PublishedNewsletterPreview } from "@/lib/types";
+import { formatPublicDate } from "@/lib/utils";
 
 
 type PreviewCardProps = {
@@ -17,20 +18,20 @@ export function PreviewCard({ preview }: PreviewCardProps)
                 <div className="bg-dark-bg text-light-fg h-54 sm:h-44 md:h-54 lg:h-64 rounded-md flex items-center justify-center p-8 lg:p-10 sm:basis-1/2 lg:basis-auto">
                     <h4 className="text-center uppercase">
                         <span className="font-extralight">
-                            {site.newsletterSlogan}
+                            { site.newsletterSlogan }
                         </span>
-                        {preview.title}
+                        { preview.title }
                     </h4>
                 </div>
                 <div className="sm:basis-1/2 lg:basis-auto max-sm:mt-5 mt-0 lg:mt-5">
                     <p className="text-base text-dark-muted-text">
-                        {preview.published_at}
+                        { formatPublicDate(preview.published_at) }
                     </p>
                     <h5 className="font-medium mt-2">
-                        {site.newsletterSlogan + preview.title}
+                        { site.newsletterSlogan + preview.title }
                     </h5>
                     <p className="text-base mt-2">
-                        {preview.excerpt}
+                        { preview.excerpt }
                     </p>
                 </div>
             </div>

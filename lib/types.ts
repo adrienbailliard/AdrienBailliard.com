@@ -10,7 +10,7 @@ export type BaseNewsletter = {
 
 
 export type PublishedNewsletterPreview = BaseNewsletter & {
-  published_at: string;
+  published_at: Date;
 };
 
 
