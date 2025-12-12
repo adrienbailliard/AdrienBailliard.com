@@ -1,5 +1,5 @@
 import { sql } from '@/lib/db/client';
-import { NewsletterDraftPreview, PublishedNewsletterPreview, NewsletterSlug } from '@/lib/types';
+import { NewsletterDraftPreview, PublishedNewsletterPreview, NewsletterSlug, Newsletter } from '@/lib/types';
 
 
 export async function getNewsletterDraftsPreviews(): Promise<NewsletterDraftPreview[]>
@@ -38,4 +38,16 @@ export async function getPublishedNewsletterSlugs(): Promise<NewsletterSlug[]>
     ` as NewsletterSlug[];
 
     return result;
+}
+
+
+export async function getNewsletterBySlug(slug: string): Promise<Newsletter | null>
+{
+    const result = await sql `
+        SELECT *
+        FROM newsletters
+        WHERE slug = ${slug}
+    ` as Newsletter[];
+
+    return result[0] || null;
 }

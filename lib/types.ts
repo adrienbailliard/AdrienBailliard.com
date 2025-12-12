@@ -23,6 +23,11 @@ export type NewsletterDraftPreview = BaseNewsletter & {
 };
 
 
+export type Newsletter = PublishedNewsletterPreview & NewsletterDraftPreview & {
+  content: string;
+};
+
+
 
 /**
 * @category Message

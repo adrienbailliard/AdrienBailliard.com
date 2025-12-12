@@ -1,10 +1,12 @@
-import { getIconsMetadata } from "@/lib/seo/metadata";
 import Link from "@/components/ui/Link";
+import { getIconsMetadata } from "@/lib/seo/metadata";
+
 
 export const metadata = {
   title: "Page Introuvable",
   ...getIconsMetadata(),
 };
+
 
 export default function NotFound()
 {
