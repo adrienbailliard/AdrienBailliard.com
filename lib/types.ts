@@ -9,11 +9,6 @@ export type BaseNewsletter = {
 };
 
 
-export type NewsletterContent = {
-  content: string;
-};
-
-
 export type PublishedNewsletterPreview = BaseNewsletter & {
   published_at: string;
 };
@@ -22,10 +17,6 @@ export type PublishedNewsletterPreview = BaseNewsletter & {
 export type NewsletterDraftPreview = BaseNewsletter & {
   updated_at: string;
 };
-
-
-export type PublishedNewsletter = PublishedNewsletterPreview & NewsletterContent;
-export type NewsletterDraft = BaseNewsletter & NewsletterContent;
 
 
 

@@ -4,8 +4,9 @@ import useSWR from 'swr';
 import { useAuth } from '@/context/authentification';
 import { NewsletterDraftPreview } from '@/lib/types';
 
-import Header from "@/components/newsletter/drafts/Header";
-import DraftCard from "@/components/newsletter/drafts/DraftCard";
+import Header from "./Header";
+import PreviewCard from "./PreviewCard";
+import SkeletonCard from "./SkeletonCard";
 
 
 const fetcher = (url: string) =>
@@ -21,6 +22,7 @@ export default function NewsletterDrafts()
 
     const { data } = useSWR<NewsletterDraftPreview[]>(`/api/newsletter/draft/previews`, fetcher);
     const safeData = Array.isArray(data) ? data : null;
+    const now = new Date();
 
 
     return (
@@ -30,8 +32,8 @@ export default function NewsletterDrafts()
                 <div className='max-h-[65svh] overflow-y-auto'>
                     {
                         safeData
-                        ? safeData.map((preview, i) => <DraftCard draft={preview} key={i}/>)
-                        : <></>
+                        ? safeData.map((preview, i) => <PreviewCard draft={preview} now={now} key={i}/>)
+                        : [...Array(4)].map((_, i) => <SkeletonCard key={i}/>)
                     }
                 </div>
             </div>

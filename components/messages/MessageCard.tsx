@@ -45,7 +45,7 @@ export default function MessageCard({ message, now }: MessageCardProps)
 
     return (
         <div
-            className={ `message-card element-list cursor-pointer group ${supportSelector(inSelection)}`}
+            className={ `card-list cursor-pointer group ${supportSelector(inSelection)}`}
             onClick={ handleMessageClick }
         >
             <Selector
@@ -60,14 +60,14 @@ export default function MessageCard({ message, now }: MessageCardProps)
                     ` : ""
                 }
             >
-                <div className="text-lg font-medium line-clamp-1 break-all">
+                <div className="card-title">
                     { `${message.first_name} ${message.last_name}` }
                 </div>
             </div>
-            <time className='text-light-muted-text ml-auto mt-0.5'>
+            <time>
                 { formatDate(message.created_at, now) }
             </time>
-            <p className="text-base line-clamp-2 sm:line-clamp-1 col-span-full text-light-muted-text">
+            <p className="card-container">
                 <span className='text-light-fg'>{ message.category }</span>
                 { !isExpanded && ` - ${ message.content }` }
             </p>

@@ -4,12 +4,12 @@ import site from "@/config/site";
 import { PublishedNewsletterPreview } from "@/lib/types";
 
 
-type PreviewProps = {
+type PreviewCardProps = {
   preview: PublishedNewsletterPreview;
 }
 
 
-export function Preview({ preview }: PreviewProps)
+export function PreviewCard({ preview }: PreviewCardProps)
 {
     return (
         <Link href={`/newsletter/${preview.slug}`}>

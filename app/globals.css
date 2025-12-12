@@ -229,12 +229,40 @@
     @apply mt-8 md:mt-10;
   }
 
-  .element-list {
-    @apply gap-x-3 sm:gap-x-4 px-5 py-3 sm:py-4 font-sans select-none;
+  .card-skeleton {
+    @apply items-center gap-y-2 flex-1 animate-pulse;
   }
 
-  .message-card {
-    @apply grid grid-cols-[minmax(0,1fr)_80px];
+  .newsletter-card-list-icon {
+    @apply w-7 h-7 rounded-full bg-light-fg;
+  }
+
+  .card-list {
+    @apply grid grid-cols-[minmax(0,1fr)_80px] gap-x-3 sm:gap-x-4 px-5 py-3 sm:py-4 font-sans select-none;
+  }
+  
+  .card-skeleton-title {
+    @apply rounded-lg w-25 h-4.5 bg-light-fg;
+  }
+
+  .card-skeleton-time {
+    @apply bg-light-muted-text rounded-lg w-8.5 h-4 ml-auto;
+  }
+
+  .card-skeleton-container {
+    @apply bg-light-muted-text rounded-lg w-full max-w-175 h-4;
+  }
+
+  .card-list time {
+    @apply text-light-muted-text ml-auto mt-0.5;
+  }
+
+  .card-container {
+    @apply text-base line-clamp-2 sm:line-clamp-1 col-span-full text-light-muted-text;
+  }
+
+  .card-title {
+    @apply text-lg font-medium line-clamp-1 break-all;
   }
 
   .stat-card {

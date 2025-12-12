@@ -13,7 +13,7 @@ import Form from '@/components/ui/BaseForm';
 import BottomLine from '@/components/ui/BottomLine';
 import Link from "@/components/ui/Link";
 import ServicePreview from "@/components/ui/ServicePreview";
-import PublishedNewsletters from "@/components/newsletter/published";
+import PublishedNewsletters from "@/components/newsletterPreview/published";
 
 
 const pathname = "/";

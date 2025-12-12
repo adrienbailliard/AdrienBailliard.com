@@ -1,6 +1,6 @@
 import Link from "@/components/ui/Link";
 
-import { Preview } from "@/components/newsletter/published/Preview";
+import { PreviewCard } from "./PreviewCard";
 import { PublishedNewsletterPreview } from "@/lib/types";
 
 
@@ -22,17 +22,14 @@ export default function Newsletters({ title, data, cta }: NewslettersProps)
                 <div className="flex max-lg:flex-col lg:grid grid-cols-2 max-w-6xl mx-auto gap-10 md:gap-12 lg:gap-16">
                     {
                         data.map((preview, index) =>
-                            <Preview key={index} preview={preview} />)
+                            <PreviewCard key={index} preview={preview} />)
                     }
                 </div>
                 {
                     cta && (
                         <div className="text-center mt-10 md:mt-12 lg:mt-14">
-                            <Link
-                            href="/newsletter"
-                            variant="button-primary"
-                            >
-                            { "Explore Les Éditions" }
+                            <Link href="/newsletter" variant="button-primary">
+                                { "Explore Les Éditions" }
                             </Link>
                         </div>
                     )
