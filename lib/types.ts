@@ -2,8 +2,12 @@
 * @category Newsletter
 */
 
-export type BaseNewsletter = {
+export type NewsletterSlug = {
   slug: string;
+};
+
+
+export type BaseNewsletter = NewsletterSlug & {
   title: string;
   excerpt: string;
 };

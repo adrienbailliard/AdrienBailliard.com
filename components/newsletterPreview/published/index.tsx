@@ -1,4 +1,4 @@
-import { getPublishedNewsletterPreview } from "@/lib/db/newsletters";
+import { getPublishedNewsletterPreviews } from "@/lib/db/newsletters";
 import { PreviewCard } from "./PreviewCard";
 import { Cta } from "./Cta";
 
@@ -12,7 +12,7 @@ type NewslettersProps = {
 
 export default async function Newsletters({ title, cta, limit }: NewslettersProps)
 {
-    const previews = await getPublishedNewsletterPreview(limit);
+    const previews = await getPublishedNewsletterPreviews(limit);
 
     if (previews.length === 0)
     {

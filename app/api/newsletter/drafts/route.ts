@@ -1,7 +1,7 @@
-import { getNewsletterDraftsPreview } from '@/lib/db/newsletters';
+import { getNewsletterDraftsPreviews } from '@/lib/db/newsletters';
 
 export async function GET()
 {
-    const drafts = await getNewsletterDraftsPreview();
+    const drafts = await getNewsletterDraftsPreviews();
     return Response.json(drafts);
 }

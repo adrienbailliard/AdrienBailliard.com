@@ -1,8 +1,8 @@
 import { sql } from '@/lib/db/client';
-import { NewsletterDraftPreview, PublishedNewsletterPreview } from '@/lib/types';
+import { NewsletterDraftPreview, PublishedNewsletterPreview, NewsletterSlug } from '@/lib/types';
 
 
-export async function getNewsletterDraftsPreview(): Promise<NewsletterDraftPreview[]>
+export async function getNewsletterDraftsPreviews(): Promise<NewsletterDraftPreview[]>
 {
     const result = await sql `
         SELECT slug, title, excerpt, updated_at
@@ -15,7 +15,7 @@ export async function getNewsletterDraftsPreview(): Promise<NewsletterDraftPrevi
 }
 
 
-export async function getPublishedNewsletterPreview(limit?: number): Promise<PublishedNewsletterPreview[]>
+export async function getPublishedNewsletterPreviews(limit?: number): Promise<PublishedNewsletterPreview[]>
 {
     const result = await sql `
         SELECT slug, title, excerpt, published_at
@@ -24,6 +24,18 @@ export async function getPublishedNewsletterPreview(limit?: number): Promise<Pub
         ORDER BY published_at DESC
         LIMIT ${limit}
     ` as PublishedNewsletterPreview[];
+
+    return result;
+}
+
+
+export async function getPublishedNewsletterSlugs(): Promise<NewsletterSlug[]>
+{
+    const result = await sql `
+        SELECT slug
+        FROM newsletters
+        WHERE newsletters.published_at IS NOT NULL
+    ` as NewsletterSlug[];
 
     return result;
 }
