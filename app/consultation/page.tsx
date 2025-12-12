@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import Arrow from "@/components/icons/arrow";
 import Link from "@/components/ui/Link";
-import CTA from "@/components/CTA";
+import Cta from "@/components/Cta";
 
 
 const pathname = "/consultation";
@@ -51,7 +51,7 @@ export default function Consultation()
         </div>
       </section>
 
-      <CTA
+      <Cta
         title="Parle-Moi de Ton Projet"
         paragraph="Chaque système est conçu pour ton activité. Voyons comment libérer ton temps et affiner tes process."
         variant="light"
@@ -64,7 +64,7 @@ export default function Consultation()
         >
           { "Réserve Mon Audit Gratuit" }
         </Link>
-      </CTA>
+      </Cta>
     </main>
   );
 }

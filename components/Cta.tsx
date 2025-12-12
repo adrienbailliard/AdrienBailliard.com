@@ -1,4 +1,4 @@
-type CTAProps = {
+type CtaProps = {
     title: React.ReactNode;
     paragraph: string;
     variant: "light" | "dark";
@@ -7,7 +7,7 @@ type CTAProps = {
 }
 
 
-export default function CTA({ title, paragraph, variant, children, className }: CTAProps)
+export default function Cta({ title, paragraph, variant, children, className }: CtaProps)
 {
     const oppositeColor = variant == "dark" ? "light" : "dark";
 

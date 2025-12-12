@@ -17,7 +17,7 @@ export default async function Newsletters({ title, cta, limit }: NewslettersProp
     if (previews.length === 0)
     {
         previews.push({
-            slug: "en-cours",
+            slug: "",
             title: "Découvrir l'Inédit",
             excerpt: "Notre newsletter arrive bientôt ! Préparez-vous à accéder aux stratégies exclusives du Top 1%.",
             published_at: new Date()

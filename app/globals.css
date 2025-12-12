@@ -238,7 +238,7 @@
   }
 
   .card-list {
-    @apply grid grid-cols-[minmax(0,1fr)_80px] gap-x-3 sm:gap-x-4 pl-5 py-3 sm:py-4 font-sans select-none;
+    @apply grid grid-cols-[minmax(0,1fr)_80px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 font-sans select-none;
   }
   
   .card-skeleton-title {
@@ -259,6 +259,10 @@
 
   .card-container {
     @apply text-base line-clamp-2 sm:line-clamp-1 col-span-full text-light-muted-text;
+  }
+
+  .newsletter-draft-card-wrapper {
+    @apply flex items-center gap-5.5;
   }
 
   .card-title {

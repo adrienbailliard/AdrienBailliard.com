@@ -1,7 +1,7 @@
 export default function SkeletonCard()
 {
     return (
-        <div className="flex items-center">
+        <div className="newsletter-draft-card-wrapper">
             <div className="newsletter-card-list-icon animate-pulse"/>
             <div className='card-list card-skeleton'>
                 <div className='card-skeleton-title' />

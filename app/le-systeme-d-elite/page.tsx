@@ -4,7 +4,7 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 import Script from "next/script";
 import Image from "next/image";
 
-import CTA from "@/components/CTA";
+import Cta from "@/components/Cta";
 import Form from '@/components/ui/BaseForm';
 import Arrow from "@/components/icons/arrow";
 import Stats from "@/components/Stats";
@@ -52,7 +52,7 @@ export default function TheEliteSystem()
         <div className="absolute z-0 bottom-0 left-0 w-full h-55 md:h-75 bg-gradient-to-t from-black from-65% to-black/0 to-100%"/>
       </section>
 
-      <CTA
+      <Cta
         title={ <>Construis Ton <span className="italic">{ "Système d'Élite" }</span></> }
         paragraph="Les protocoles exacts du Top 1% mondial, applicables dès aujourd'hui."
         variant="dark"
@@ -63,7 +63,7 @@ export default function TheEliteSystem()
         >
           Accède au Guide
         </Form>
-      </CTA>
+      </Cta>
     </main>
   );
 }

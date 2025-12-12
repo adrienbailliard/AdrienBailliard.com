@@ -29,13 +29,11 @@ export default function NewsletterDrafts()
         <section className="text-light-fg bg-dark-bg pb-0">
             <div>
                 <Header dataCount={safeData?.length}/>
-                <div className='max-h-[65svh] overflow-y-auto'>
-                    {
-                        safeData
-                        ? safeData.map((preview, i) => <PreviewCard draft={preview} now={now} key={i}/>)
-                        : [...Array(4)].map((_, i) => <SkeletonCard key={i}/>)
-                    }
-                </div>
+                {
+                    safeData
+                    ? safeData.map((preview, i) => <PreviewCard draft={preview} now={now} key={i}/>)
+                    : [...Array(4)].map((_, i) => <SkeletonCard key={i}/>)
+                }
             </div>
         </section> 
     );

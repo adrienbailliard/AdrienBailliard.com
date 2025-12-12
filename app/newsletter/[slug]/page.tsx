@@ -1,5 +1,5 @@
+import NotFound from "@/app/not-found";
 import { getNewsletterBySlug } from "@/lib/db/newsletters";
-import { notFound } from "next/navigation";
 
 
 type NewsletterPageProps = {
@@ -13,7 +13,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
   const newsletter = await getNewsletterBySlug(slug);
 
   if (!newsletter)
-    notFound();
+    return <NotFound />;
 
 
   return (
