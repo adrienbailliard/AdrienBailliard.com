@@ -32,7 +32,7 @@ export default function NewsletterDrafts()
                 {
                     safeData
                     ? safeData.map((preview, i) => <PreviewCard draft={preview} now={now} key={i}/>)
-                    : [...Array(4)].map((_, i) => <SkeletonCard key={i}/>)
+                    : [...Array(3)].map((_, i) => <SkeletonCard key={i}/>)
                 }
             </div>
         </section> 

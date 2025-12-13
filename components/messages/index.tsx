@@ -34,7 +34,7 @@ export default function Messages()
                     {
                         safeData
                         ? safeData.map((message, i) => <MessageCard message={message} now={now} key={message.id}/>)
-                        : [...Array(4)].map((_, i) => <MessageSkeletonCard key={i}/>)
+                        : [...Array(3)].map((_, i) => <MessageSkeletonCard key={i}/>)
                     }
                 </MessageActionsProvider>
             </div>

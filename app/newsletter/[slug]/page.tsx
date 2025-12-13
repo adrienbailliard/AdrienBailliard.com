@@ -1,5 +1,4 @@
-import NotFound from "@/app/not-found";
-import { getNewsletterBySlug } from "@/lib/db/newsletters";
+import { getPublishedNewsletterSlugs, getNewsletterBySlug } from "@/lib/db/newsletters";
 
 
 type NewsletterPageProps = {
@@ -7,16 +6,20 @@ type NewsletterPageProps = {
 };
 
 
+export const dynamicParams = false;
+
+export async function generateStaticParams()
+{
+  return getPublishedNewsletterSlugs();
+}
+
+
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
-  const newsletter = await getNewsletterBySlug(slug);
-
-  if (!newsletter)
-    return <NotFound />;
-
+  const newsletter = (await getNewsletterBySlug(slug))!;
 
   return (
-    <></>
+    <div>{ newsletter.content }</div>
   );
 }
