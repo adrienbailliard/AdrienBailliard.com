@@ -2,7 +2,7 @@
 
 import useSWR from 'swr';
 import { useAuth } from '@/context/authentification';
-import { NewsletterDraftPreview } from '@/lib/types';
+import { NewsletterDraftPreviewAPI } from '@/lib/types';
 
 import Header from "./Header";
 import PreviewCard from "./PreviewCard";
@@ -20,7 +20,7 @@ export default function NewsletterDrafts()
     if (!isAdmin)
         return null;
 
-    const { data } = useSWR<NewsletterDraftPreview[]>(`/api/newsletter/drafts`, fetcher);
+    const { data } = useSWR<NewsletterDraftPreviewAPI[]>(`/api/newsletter/drafts`, fetcher);
     const safeData = Array.isArray(data) ? data : null;
     const now = new Date();
 

@@ -13,18 +13,26 @@ export type BaseNewsletter = NewsletterSlug & {
 };
 
 
-export type PublishedNewsletterPreview = BaseNewsletter & {
+export type PublishedNewsletterPreviewDB = BaseNewsletter & {
   published_at: Date;
 };
 
 
-export type NewsletterDraftPreview = BaseNewsletter & {
+export type NewsletterDraftPreviewDB = BaseNewsletter & {
+  updated_at: Date;
+};
+
+
+export type NewsletterDraftPreviewAPI = BaseNewsletter & {
   updated_at: string;
 };
 
 
-export type Newsletter = PublishedNewsletterPreview & NewsletterDraftPreview & {
+export type NewsletterDB = BaseNewsletter & {
+  id: number;
   content: string;
+  updated_at: Date;
+  published_at: Date | null;
 };
 
 

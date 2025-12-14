@@ -1,21 +1,21 @@
 import { sql } from '@/lib/db/client';
-import { NewsletterDraftPreview, PublishedNewsletterPreview, NewsletterSlug, Newsletter } from '@/lib/types';
+import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterSlug, NewsletterDB } from '@/lib/types';
 
 
-export async function getNewsletterDraftsPreviews(): Promise<NewsletterDraftPreview[]>
+export async function getNewsletterDraftsPreviews(): Promise<NewsletterDraftPreviewDB[]>
 {
     const result = await sql `
         SELECT slug, title, excerpt, updated_at
         FROM newsletters
         WHERE newsletters.published_at IS NULL
         ORDER BY updated_at DESC
-    ` as NewsletterDraftPreview[];
+    ` as NewsletterDraftPreviewDB[];
 
     return result;
 }
 
 
-export async function getPublishedNewsletterPreviews(limit?: number): Promise<PublishedNewsletterPreview[]>
+export async function getPublishedNewsletterPreviews(limit?: number): Promise<PublishedNewsletterPreviewDB[]>
 {
     const result = await sql `
         SELECT slug, title, excerpt, published_at
@@ -23,7 +23,7 @@ export async function getPublishedNewsletterPreviews(limit?: number): Promise<Pu
         WHERE newsletters.published_at IS NOT NULL
         ORDER BY published_at DESC
         LIMIT ${limit}
-    ` as PublishedNewsletterPreview[];
+    ` as PublishedNewsletterPreviewDB[];
 
     return result;
 }
@@ -41,13 +41,13 @@ export async function getPublishedNewsletterSlugs(): Promise<NewsletterSlug[]>
 }
 
 
-export async function getNewsletterBySlug(slug: string): Promise<Newsletter | null>
+export async function getNewsletterBySlug(slug: string): Promise<NewsletterDB | null>
 {
     const result = await sql `
         SELECT *
         FROM newsletters
         WHERE slug = ${slug}
-    ` as Newsletter[];
+    ` as NewsletterDB[];
 
     return result[0] || null;
 }

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import site from "@/config/site";
 
-import { PublishedNewsletterPreview } from "@/lib/types";
+import { PublishedNewsletterPreviewDB } from "@/lib/types";
 import { formatPublicDate } from "@/lib/utils";
 
 
 type PreviewCardProps = {
-  preview: PublishedNewsletterPreview;
+  preview: PublishedNewsletterPreviewDB;
 }
 
 
