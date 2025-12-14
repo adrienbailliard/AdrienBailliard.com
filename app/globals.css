@@ -65,8 +65,12 @@
     @apply px-[5%];
   }
 
-  section {
+  section, article {
     @apply py-16 md:py-26 lg:py-30 scroll-mt-[var(--spacing-header)] xl:scroll-mt-[var(--spacing-header-xl)];
+  }
+
+  article h3 {
+    @apply font-medium mt-10 md:mt-12;
   }
 
   h2 + div {
@@ -160,6 +164,10 @@
   footer > div:first-child {
     @apply max-w-[1408px] mx-auto;
   }
+
+  time {
+    @apply text-light-muted-text;
+  }
 }
 
 
@@ -174,7 +182,7 @@
   }
 
   .p-link {
-    @apply underline underline-offset-3 italic;
+    @apply underline underline-offset-3;
   }
 
   .base-link {
@@ -250,7 +258,7 @@
   }
 
   .card-list time {
-    @apply text-light-muted-text ml-auto mt-0.5;
+    @apply ml-auto mt-0.5;
   }
 
   .card-container {

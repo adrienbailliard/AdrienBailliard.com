@@ -27,7 +27,7 @@ export default function Messages()
 
 
     return (
-        <section className="text-light-fg bg-dark-bg pb-0">
+        <section className="text-light-fg bg-dark-bg">
             <div className='overflow-x-hidden'>
                 <MessageActionsProvider>
                     <Header data={safeData} mutateMessages={mutate}/>

@@ -26,7 +26,7 @@ export default function NewsletterDrafts()
 
 
     return (
-        <section className="text-light-fg bg-dark-bg pb-0">
+        <section className="text-light-fg bg-dark-bg">
             <div>
                 <Header dataCount={safeData?.length}/>
                 {

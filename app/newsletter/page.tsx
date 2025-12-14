@@ -3,10 +3,9 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 
 import Script from "next/script";
 
-import Form from '@/components/ui/BaseForm';
 import PublishedNewsletters from "@/components/newsletterPreview/published";
 import NewsletterDrafts from "@/components/newsletterPreview/drafts";
-import AutoMonday from "@/components/icons/autoMonday";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import Stats from "@/components/Stats";
 import Divider from "@/components/Divider";
 
@@ -26,25 +25,8 @@ export default function Newsletter()
       <Stats type="newsletter"/>
       <Divider variant="light" adminOnly={true}/>
       <NewsletterDrafts />
-
-      <section className="bg-dark-bg text-light-fg">
-        <div className="flex max-lg:flex-col items-center lg:justify-between gap-10 lg:gap-20">
-          <div className="max-lg:text-center">
-            <h1>
-              <AutoMonday className="max-lg:w-full h-17.5 max-lg:m-auto max-sm:h-12.5 max-md:h-15"/>
-            </h1>
-            <p className="max-w-xl">
-              { "Les systèmes qui libèrent ton temps. Chaque lundi, une clé pour automatiser comme le Top 1%." }
-            </p>
-          </div>
-          <Form
-            className="max-w-md max-sm:w-full sm:min-w-0"
-          >
-            { "Rejoins" }
-          </Form>
-        </div>
-      </section>
-
+      
+      <NewsletterSignup />
       <PublishedNewsletters title="Toutes les Éditions" />
     </main>
   );

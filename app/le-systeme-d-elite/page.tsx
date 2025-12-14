@@ -8,7 +8,6 @@ import Cta from "@/components/Cta";
 import Form from '@/components/ui/BaseForm';
 import Arrow from "@/components/icons/arrow";
 import Stats from "@/components/Stats";
-import Divider from "@/components/Divider";
 
 
 const pathname = "/le-systeme-d-elite";
@@ -24,7 +23,6 @@ export default function TheEliteSystem()
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
 
       <Stats type="guide"/>
-      <Divider variant="light" adminOnly={true}/>
 
       <section className="text-light-fg bg-dark-bg relative">
         <div className="relative max-sm:min-h-80">
