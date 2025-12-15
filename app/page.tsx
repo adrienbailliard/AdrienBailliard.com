@@ -71,7 +71,7 @@ export default function Home()
               { " et ayant déjà généré jusqu'à 15 000 €/mois." }
             </p>
             <div className="flex items-center justify-between">
-              <Link href="/a-propos" variant="button-primary">
+              <Link href="/a-propos" variant="light-primary">
                 { "Lis Mon Histoire" }
               </Link>
               <Logo className="h-12 md:h-13"/>

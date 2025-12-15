@@ -60,7 +60,7 @@ export default function Consultation()
         <Link
           className="max-w-lg w-full"
           href="/contact"
-          variant="button-primary"
+          variant="light-primary"
         >
           { "Réserve Mon Audit Gratuit" }
         </Link>
