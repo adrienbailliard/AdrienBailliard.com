@@ -193,6 +193,10 @@
     @apply duration-200 h-3 w-2;
   }
 
+  .button-compact {
+    @apply px-4 xl:px-6 h-8.5 xl:h-11;
+  }
+
   .base-button {
     @apply rounded-lg py-3 md:py-3.5 px-5 font-semibold;
   }

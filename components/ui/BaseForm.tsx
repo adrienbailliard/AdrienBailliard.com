@@ -6,8 +6,8 @@ import fieldMaxLengths from "@/config/fieldMaxLengths";
 import { EMAIL_PATTERN } from "@/lib/constants";
 import site from "@/config/site";
 import { handleSubmit } from "@/lib/form/handlers";
-import { request } from "@/app/actions/guide";
-import { subscribe } from "@/app/actions/newsletter";
+import { request } from "@/lib/actions/guide";
+import { subscribe } from "@/lib/actions/newsletter";
 
 
 

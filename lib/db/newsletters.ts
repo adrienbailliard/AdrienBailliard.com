@@ -2,6 +2,26 @@ import { sql } from '@/lib/db/client';
 import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterSlug, DraftNewsletterDB, PublishedNewsletterDB } from '@/lib/types';
 
 
+
+export async function publishNewsletterById(id: number)
+{
+    await sql`
+        UPDATE newsletters
+        SET published_at = NOW()
+        WHERE id = ${id}
+    `;
+}
+
+
+export async function deleteNewsletterById(id: number)
+{
+    await sql`
+        DELETE FROM newsletters
+        WHERE id = ${id}
+    `;
+}
+
+
 export async function getNewsletterDraftsPreviews(): Promise<NewsletterDraftPreviewDB[]>
 {
     const result = await sql `

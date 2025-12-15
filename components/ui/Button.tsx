@@ -5,10 +5,11 @@ type ButtonProps = {
   name?: string;
   onClick?: () => void;
   className?: string;
+  disabled?: boolean;
 }
 
 
-export default function Button({ children, variant, type = "button", name, onClick, className }: ButtonProps)
+export default function Button({ children, variant, type = "button", name, onClick, className, disabled }: ButtonProps)
 {
   const baseStyles = " base-button " + className;
 
@@ -24,6 +25,7 @@ export default function Button({ children, variant, type = "button", name, onCli
       type={type}
       className={variantStyles[variant] + baseStyles}
       name={name}
+      disabled={disabled}
     >
       {children}
     </button>
