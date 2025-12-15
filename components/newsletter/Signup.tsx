@@ -2,7 +2,7 @@ import Form from '@/components/ui/BaseForm';
 import AutoMonday from "@/components/icons/autoMonday";
 
 
-export default async function NewsletterSignup()
+export default async function Signup()
 {
     return (
         <section className="bg-dark-bg text-light-fg">

@@ -1,5 +1,5 @@
 import { sql } from '@/lib/db/client';
-import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterSlug, DraftNewsletterDB, PublishedNewsletterDB } from '@/lib/types';
+import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterSlug, NewsletterDB } from '@/lib/types';
 
 
 
@@ -73,25 +73,13 @@ export async function getNewsletterDraftsSlugs(): Promise<NewsletterSlug[]>
 }
 
 
-export async function getPublishedNewsletterBySlug(slug: string): Promise<PublishedNewsletterDB | null>
+export async function getNewsletterBySlug(slug: string): Promise<NewsletterDB | null>
 {
     const result = await sql `
         SELECT *
         FROM newsletters
-        WHERE slug = ${slug} AND published_at IS NOT NULL
-    ` as PublishedNewsletterDB[];
-
-    return result[0] || null;
-}
-
-
-export async function getNewsletterDraftBySlug(slug: string): Promise<DraftNewsletterDB | null>
-{
-    const result = await sql `
-        SELECT *
-        FROM newsletters
-        WHERE slug = ${slug} AND published_at IS NULL
-    ` as DraftNewsletterDB[];
+        WHERE slug = ${slug}
+    ` as NewsletterDB[];
 
     return result[0] || null;
 }

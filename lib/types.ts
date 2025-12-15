@@ -7,7 +7,7 @@ export type NewsletterSlug = {
 };
 
 
-type BaseNewsletter = NewsletterSlug & {
+export type BaseNewsletter = NewsletterSlug & {
   title: string;
   excerpt: string;
 };
@@ -28,20 +28,11 @@ export type NewsletterDraftPreviewAPI = BaseNewsletter & {
 };
 
 
-type BaseContentNewsletter = BaseNewsletter & {
+export type NewsletterDB = BaseNewsletter & {
   id: number;
   content: string;
   updated_at: Date;
-}
-
-
-export type DraftNewsletterDB = BaseContentNewsletter & {
-  published_at: null;
-};
-
-
-export type PublishedNewsletterDB = BaseContentNewsletter & {
-  published_at: Date;
+  published_at: Date | null;
 };
 
 

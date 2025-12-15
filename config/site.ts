@@ -13,7 +13,7 @@ const site = {
     adminCookie: {
         path: "/",
         name: "magic_link",
-        tokenExpiration: 10 * 60,
+        tokenExpiration: 15 * 60,
         maxAge: 2 * 24 * 60 * 60
     },
     errorMessage: "Une erreur est survenue."

@@ -5,9 +5,9 @@ import Script from "next/script";
 
 import PublishedNewsletters from "@/components/newsletterPreview/published";
 import NewsletterDrafts from "@/components/newsletterPreview/drafts";
-import NewsletterSignup from "@/components/NewsletterSignup";
+import NewsletterSignup from "@/components/newsletter/Signup";
 import Stats from "@/components/Stats";
-import Divider from "@/components/Divider";
+import Divider from "@/components/ui/Divider";
 
 
 const pathname = "/newsletter";

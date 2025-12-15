@@ -11,7 +11,7 @@ type NewsletterContentProps = {
 };
 
 
-export default async function NewsletterContent({ title, content, date }: NewsletterContentProps)
+export default async function Content({ title, content, date }: NewsletterContentProps)
 {
     const processedContent = await remark()
         .use(html)

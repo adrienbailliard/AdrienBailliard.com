@@ -1,8 +1,8 @@
-import NewsletterContent from "@/components/NewsletterContent";
-import Divider from "@/components/Divider";
-import NewsletterDraftActions from "@/components/NewsletterDraftActions";
+import NewsletterContent from "@/components/newsletter/Content";
+import Divider from "@/components/ui/Divider";
+import NewsletterDraftActions from "@/components/newsletter/DraftActions";
 
-import { getNewsletterDraftsSlugs, getNewsletterDraftBySlug } from "@/lib/db/newsletters";
+import { getNewsletterDraftsSlugs, getNewsletterBySlug } from "@/lib/db/newsletters";
 
 
 type NewsletterPageProps = {
@@ -21,20 +21,19 @@ export async function generateStaticParams()
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
-  const newsletter = (await getNewsletterDraftBySlug(slug))!;
+  const newsletter = (await getNewsletterBySlug(slug))!;
 
 
   return (
     <main className="bg-light-bg">
       <NewsletterDraftActions id={newsletter.id} slug={slug} />
+      <Divider variant="light"/>
 
-      <section className="bg-dark-bg pt-0 text-center text-light-muted-text">
+      <section className="bg-dark-bg text-center text-light-muted-text">
         <div className="max-w-4xl">
           <p>{ newsletter.excerpt }</p>
         </div>
       </section>
-
-      <Divider variant="light"/>
 
       <NewsletterContent
         title={ newsletter.title }

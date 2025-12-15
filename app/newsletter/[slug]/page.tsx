@@ -1,7 +1,7 @@
-import NewsletterSignup from "@/components/NewsletterSignup";
-import NewsletterContent from "@/components/NewsletterContent";
+import NewsletterSignup from "@/components/newsletter/Signup";
+import NewsletterContent from "@/components/newsletter/Content";
 
-import { getPublishedNewsletterSlugs, getPublishedNewsletterBySlug } from "@/lib/db/newsletters";
+import { getPublishedNewsletterSlugs, getNewsletterBySlug } from "@/lib/db/newsletters";
 
 
 type NewsletterPageProps = {
@@ -20,14 +20,14 @@ export async function generateStaticParams()
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
-  const newsletter = (await getPublishedNewsletterBySlug(slug))!;
+  const newsletter = (await getNewsletterBySlug(slug))!;
 
   return (
     <main className="bg-light-bg grid grid-rows-[1fr_auto]">
       <NewsletterContent
         title={newsletter.title}
         content={newsletter.content}
-        date={newsletter.published_at}
+        date={newsletter.published_at!}
       />
       <NewsletterSignup />
     </main>

@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import site from "@/config/site";
 
 
@@ -14,10 +15,14 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode })
 {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const router = useRouter();
 
   const logout = () => {
     setIsAdmin(false);
     document.cookie = `${site.adminCookie.name}=; path=${site.adminCookie.path}; max-age=0`;
+
+    if (window.location.pathname.startsWith('/admin'))
+      router.push('/');
   };
 
   useEffect(() => {

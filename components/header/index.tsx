@@ -8,6 +8,7 @@ import Popup from "@/components/header/Popup";
 import DesktopMenu from "@/components/header/DesktopMenu";
 import MobileMenu from "@/components/header/MobileMenu";
 import BurgerButton from "@/components/header/BurgerButton";
+import BlockScroll from "@/components/ui/BlockScroll";
 
 import pageMapping from "@/config/pageMapping";
 import site from "@/config/site";
@@ -41,26 +42,12 @@ export default function Header()
         setIsPopupOpen(false);
     }, [pathname]);
 
-    useEffect(() => {
-        if (isPopupOpen) {
-            document.body.style.overflow = "hidden";
-            document.body.style.touchAction = "none";
-        }
-        else {
-            document.body.style.overflow = "";
-            document.body.style.touchAction = "";
-        }
-
-        return () => {
-            document.body.style.overflow = "";
-            document.body.style.touchAction = "";
-        };
-    }, [isPopupOpen]);
-
 
     return (
         <>
             <header className="fixed w-full top-0 bg-dark-bg z-20">
+                <BlockScroll isEnabled={isPopupOpen}/>
+
                 <nav
                     role="navigation"
                     className="flex justify-between items-center h-header xl:h-header-xl underline-offset-10"
@@ -101,8 +88,8 @@ export default function Header()
                 </nav>
             </header>
             <Popup
-                isOpen={isPopupOpen}
-                setIsOpen={setIsPopupOpen}
+                isEnabled={isPopupOpen}
+                setIsEnabled={setIsPopupOpen}
             />
         </>
     );

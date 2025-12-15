@@ -8,7 +8,7 @@ import Messages from "@/components/messages";
 import Stats from "@/components/Stats";
 import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
-import Divider from "@/components/Divider";
+import Divider from "@/components/ui/Divider";
 
 
 const pathname = "/contact";
