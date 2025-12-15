@@ -11,7 +11,7 @@ export default async function proxy(request: NextRequest)
   if (adminCookie && await isAdminLoginToken(adminCookie.value))
     await updateAdminCookie(res.cookies);
 
-  else if (request.nextUrl.pathname.startsWith('/api/'))
+  else if (request.nextUrl.pathname.startsWith('/api/') || request.nextUrl.pathname.startsWith('/admin/'))
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   return res;

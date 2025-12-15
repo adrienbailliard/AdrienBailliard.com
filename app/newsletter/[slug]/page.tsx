@@ -1,8 +1,7 @@
-import Link from "next/link";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import NewsletterContent from "@/components/NewsletterContent";
 
-import { getPublishedNewsletterSlugs, getNewsletterBySlug } from "@/lib/db/newsletters";
-import { formatPublicDate } from "@/lib/utils";
+import { getPublishedNewsletterSlugs, getPublishedNewsletterBySlug } from "@/lib/db/newsletters";
 
 
 type NewsletterPageProps = {
@@ -21,32 +20,11 @@ export async function generateStaticParams()
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
-  const newsletter = (await getNewsletterBySlug(slug))!;
+  const newsletter = (await getPublishedNewsletterBySlug(slug))!;
 
   return (
-    <main className="bg-light-bg">
-      <section className="bg-dark-bg text-light-fg">
-          <div className="text-center">
-            <h1 className="mb-5">Savoir Quand Automatiser</h1>
-            <time>
-              { formatPublicDate(newsletter.published_at!) }
-            </time>
-          </div>
-      </section>
-
-      <article className="bg-light-bg text-dark-fg">
-          <div className="max-w-4xl">
-            <p>
-              { "Bienvenue dans "}
-              <Link href="/" className="p-link">Auto Monday</Link>
-              { ", ton guide hebdomadaire pour maîtriser l'automatisation et ton temps." }
-            </p>
-            <h3>LE DÉFI</h3>
-            <h3>LA STRATÉGIE</h3>
-            <h3>L'EXÉCUTION</h3>
-          </div>
-      </article>
-
+    <main className="bg-light-bg grid grid-rows-[1fr_auto]">
+      <NewsletterContent title={newsletter.title} content={newsletter.content} date={newsletter.published_at}/>
       <NewsletterSignup />
     </main>
   );

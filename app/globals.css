@@ -168,6 +168,10 @@
   time {
     @apply text-light-muted-text;
   }
+
+  p a {
+    @apply underline underline-offset-3;
+  }
 }
 
 
@@ -179,10 +183,6 @@
 
   .illustrations {
     @apply rounded-md brightness-90;
-  }
-
-  .p-link {
-    @apply underline underline-offset-3;
   }
 
   .base-link {
