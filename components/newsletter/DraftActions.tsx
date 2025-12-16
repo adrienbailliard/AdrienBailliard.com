@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { publishDraft, deleteDraft } from "@/lib/actions/newsletter";
 
 import Button from "@/components/ui/Button";
-import Link from "@/components/ui/Link";
 import BlockScroll from "@/components/ui/BlockScroll";
 import Modal from "@/components/ui/Modal";
 
@@ -44,12 +43,6 @@ export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
                 <div className="flex gap-7 justify-center flex-wrap">
                     <BlockScroll isEnabled={ isActiveModal }/>
 
-                    <Link
-                        variant="light-primary"
-                        href={ `/admin/newsletter/modifier?slug=${slug}`
-                    }>
-                        Modifier
-                    </Link>
                     <Button
                         variant="light-primary"
                         onClick={ () => {
