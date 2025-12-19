@@ -18,13 +18,23 @@ export const generateStaticParams = async () => [];
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
-  const newsletter = (await getNewsletterBySlug(slug))!;
+  const newsletter = await getNewsletterBySlug(slug) || {
+    excerpt: "Description courte",
+    title: "Titre",
+    content: "Écris ton contenu..."
+  };
 
 
   return (
     <main className="bg-light-bg">
-      <NewsletterDraftActions id={newsletter.id} slug={slug} />
-      <Divider variant="light"/>
+      {
+        "id" in newsletter && (
+          <>
+            <NewsletterDraftActions id={newsletter.id} slug={newsletter.slug} />
+            <Divider variant="light"/>
+          </>
+        )
+      }
 
       <section className="bg-dark-bg text-center text-light-muted-text">
         <div className="max-w-4xl">
