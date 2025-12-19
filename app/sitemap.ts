@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>
   for (const [key] of pageMapping)
     result[i++] = { url: site.url + key };
 
-  for (const { slug } of newsletterSlugs)
+  for (const slug of newsletterSlugs)
     result[i++] = { url: `${site.url}/newsletter/${slug}` };
 
   return result;

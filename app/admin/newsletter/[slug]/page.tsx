@@ -2,7 +2,8 @@ import NewsletterContent from "@/components/newsletter/Content";
 import Divider from "@/components/ui/Divider";
 import NewsletterDraftActions from "@/components/newsletter/DraftActions";
 
-import { getNewsletterDraftsSlugs, getNewsletterBySlug } from "@/lib/db/newsletters";
+import { getNewsletterBySlug } from "@/lib/db/newsletters";
+
 
 
 type NewsletterPageProps = {
@@ -10,12 +11,8 @@ type NewsletterPageProps = {
 };
 
 
-export const dynamicParams = false;
+export const generateStaticParams = async () => [];
 
-export async function generateStaticParams()
-{
-  return getNewsletterDraftsSlugs();
-}
 
 
 export default async function NewsletterPage({ params }: NewsletterPageProps)

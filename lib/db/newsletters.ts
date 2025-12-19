@@ -1,7 +1,8 @@
 import { sql } from '@/lib/db/client';
-import { generateSlug } from "@/lib/utils";
+import { unstable_cache } from 'next/cache';
 
-import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterSlug, NewsletterDB, UpsertNewsletterParam } from '@/lib/types';
+import { generateSlug } from "@/lib/utils";
+import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterDB, UpsertNewsletterParam } from '@/lib/types';
 
 
 
@@ -67,42 +68,51 @@ export async function getNewsletterDraftsPreviews(): Promise<NewsletterDraftPrev
 }
 
 
-export async function getPublishedNewsletterPreviews(limit?: number): Promise<PublishedNewsletterPreviewDB[]>
-{
-    const result = await sql `
-        SELECT slug, title, excerpt, published_at
-        FROM newsletters
-        WHERE newsletters.published_at IS NOT NULL
-        ORDER BY published_at DESC
-        LIMIT ${limit}
-    ` as PublishedNewsletterPreviewDB[];
+export const getPublishedNewsletterPreviews = unstable_cache(
+    async (limit?: number): Promise<PublishedNewsletterPreviewDB[]> => {
+        const result = await sql `
+            SELECT slug, title, excerpt, published_at
+            FROM newsletters
+            WHERE newsletters.published_at IS NOT NULL
+            ORDER BY published_at DESC
+            LIMIT ${limit}
+        ` as PublishedNewsletterPreviewDB[];
 
-    return result;
-}
-
-
-export async function getPublishedNewsletterSlugs(): Promise<NewsletterSlug[]>
-{
-    const result = await sql `
-        SELECT slug
-        FROM newsletters
-        WHERE newsletters.published_at IS NOT NULL
-    ` as NewsletterSlug[];
-
-    return result;
-}
+        return result;
+    },
+    ['published-newsletter-previews'],
+    { tags: ['published-newsletter-previews'] }
+);
 
 
-export async function getNewsletterDraftsSlugs(): Promise<NewsletterSlug[]>
-{
-    const result = await sql `
-        SELECT slug
-        FROM newsletters
-        WHERE newsletters.published_at IS NULL
-    ` as NewsletterSlug[];
+export const getPublishedNewsletterSlugs = unstable_cache(
+    async (): Promise<Array<string>> => {
+        const result = await sql `
+            SELECT slug
+            FROM newsletters
+            WHERE newsletters.published_at IS NOT NULL
+        `;
 
-    return result;
-}
+        return result.map((row) => row.slug);
+    },
+    ['published-newsletter-slugs'],
+    { tags: ['published-newsletter-slugs'] }
+);
+
+
+export const getNewsletterDraftsSlugs = unstable_cache(
+    async (): Promise<Array<string>> => {
+        const result = await sql `
+            SELECT slug
+            FROM newsletters
+            WHERE newsletters.published_at IS NULL
+        `;
+
+        return result.map((row) => row.slug);
+    },
+    ['newsletter-drafts-slugs'],
+    { tags: ['newsletter-drafts-slugs'] }
+);
 
 
 export async function getNewsletterBySlug(slug: string): Promise<NewsletterDB | null>

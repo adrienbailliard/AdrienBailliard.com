@@ -13,7 +13,7 @@ type DraftCardProps = {
 export default function DraftCard({ draft, now }: DraftCardProps)
 {
     return (
-        <Link href={`/admin/newsletters/${draft.slug}`}>
+        <Link href={`/admin/newsletter/${draft.slug}`}>
             <div className="card-list">
                 <div className="card-title">
                     { draft.title }

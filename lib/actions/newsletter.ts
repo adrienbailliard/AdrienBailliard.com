@@ -2,7 +2,7 @@
 
 import { after } from 'next/server';
 
-import { revalidatePath } from 'next/cache';
+import { updateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { publishNewsletterById, deleteNewsletterById } from "@/lib/db/newsletters";
@@ -34,16 +34,19 @@ export async function subscribe(formData: FormData): Promise<void>
 export async function publishDraft(id: number, slug: string)
 {
   await publishNewsletterById(id);
-  
-  revalidatePath(`/newsletter/${slug}`);
+
+  updateTag("published-newsletter-previews");
+  updateTag("published-newsletter-slugs");
+  updateTag("newsletter-drafts-slugs");
+
   redirect("/newsletter");
 }
 
 
-export async function deleteDraft(id: number, slug: string)
+export async function deleteDraft(id: number)
 {
   await deleteNewsletterById(id);
-  
-  revalidatePath(`/admin/${slug}`);
+
+  updateTag("newsletter-drafts-slugs");
   redirect("/newsletter");
 }

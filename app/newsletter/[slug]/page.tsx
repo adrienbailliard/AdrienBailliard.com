@@ -1,7 +1,8 @@
 import NewsletterSignup from "@/components/newsletter/Signup";
 import NewsletterContent from "@/components/newsletter/Content";
 
-import { getPublishedNewsletterSlugs, getNewsletterBySlug } from "@/lib/db/newsletters";
+import { getNewsletterBySlug } from "@/lib/db/newsletters";
+
 
 
 type NewsletterPageProps = {
@@ -9,12 +10,8 @@ type NewsletterPageProps = {
 };
 
 
-export const dynamicParams = false;
+export const generateStaticParams = async () => [];
 
-export async function generateStaticParams()
-{
-  return getPublishedNewsletterSlugs();
-}
 
 
 export default async function NewsletterPage({ params }: NewsletterPageProps)

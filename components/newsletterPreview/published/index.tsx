@@ -12,16 +12,16 @@ type NewslettersProps = {
 
 export default async function Newsletters({ title, cta, limit }: NewslettersProps)
 {
-    const previews = await getPublishedNewsletterPreviews(limit);
+    let previews = await getPublishedNewsletterPreviews(limit);
 
     if (previews.length === 0)
     {
-        previews.push({
+        previews = [{
             slug: "",
             title: "Découvrir l'Inédit",
             excerpt: "Notre newsletter arrive bientôt ! Préparez-vous à accéder aux stratégies exclusives du Top 1%.",
             published_at: new Date()
-        });
+        }];
     }
 
 
