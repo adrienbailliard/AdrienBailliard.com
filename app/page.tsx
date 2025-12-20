@@ -40,7 +40,7 @@ export default function Home()
           <Form className="max-w-2xl">
               Reçois la Newsletter
           </Form>
-          <p className="font-display text-light-muted-text text-sm md:text-base">
+          <p className="caption font-display text-light-muted-text text-sm md:text-base">
             { "Découvre comment mes systèmes ont généré " }
             <span className="text-primary font-bold">
               +70 000€

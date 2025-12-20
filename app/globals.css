@@ -155,8 +155,7 @@
 
   h1 + p,
   svg + h4,
-  form + p,
-  button + p {
+  .caption {
     @apply mt-7 md:mt-9;
   }
 
