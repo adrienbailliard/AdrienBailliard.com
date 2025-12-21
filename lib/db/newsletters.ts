@@ -2,7 +2,10 @@ import { sql } from '@/lib/db/client';
 import { unstable_cache } from 'next/cache';
 
 import { generateSlug } from "@/lib/utils";
-import { NewsletterPreviewDB, PublishedNewsletterPreviewDB, NewsletterDB, InsertNewsletterParam, UpdateNewsletterParam } from '@/lib/types';
+import { DRAFT_CREATION_SLUG } from "@/lib/constants";
+
+import { NewsletterPreviewDB, PublishedNewsletterPreviewDB, NewsletterDB,
+    InsertNewsletterParam, UpdateNewsletterParam } from '@/lib/types';
 
 
 
@@ -37,7 +40,7 @@ async function getUniqueSlug(title: string): Promise<string>
     `;
 
     if (result.length === 0)
-        return baseSlug;
+        return baseSlug === DRAFT_CREATION_SLUG ? `${baseSlug}-2` : baseSlug;
 
     const match = result[0].slug.match(/-(\d+)$/);
     const nextNumber = match ? parseInt(match[1]) + 1 : 2;

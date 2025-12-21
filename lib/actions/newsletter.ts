@@ -31,7 +31,7 @@ export async function subscribe(formData: FormData): Promise<void>
 }
 
 
-export async function publishDraft(id: number, slug: string)
+export async function publishDraft(id: number)
 {
   await publishNewsletterById(id);
 

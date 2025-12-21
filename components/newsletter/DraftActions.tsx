@@ -11,7 +11,6 @@ import Modal from "@/components/ui/Modal";
 
 type NewsletterDraftActionsProps = {
     id: number;
-    slug: string;
 };
 
 
@@ -30,7 +29,7 @@ const modalConfig = {
 
 
 
-export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
+export default function DraftActions({ id }: NewsletterDraftActionsProps)
 {
     const [ isActiveModal, setIsActiveModal ] = useState(false);
     const [ isActionPending, setIsActionPending ] = useState(false);
@@ -83,7 +82,7 @@ export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
                         variant="dark-primary"
                         className='button-compact py-0'
                         onClick={ () => {
-                            modalConfig[modalType].action(id, slug);
+                            modalConfig[modalType].action(id);
                             setIsActionPending(true);
                         }}
                     >
