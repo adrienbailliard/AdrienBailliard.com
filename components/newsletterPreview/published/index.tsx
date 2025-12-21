@@ -16,11 +16,14 @@ export default async function Newsletters({ title, cta, limit }: NewslettersProp
 
     if (previews.length === 0)
     {
+        const now = new Date();
+
         previews = [{
             slug: "",
             title: "Découvrir l'Inédit",
             excerpt: "Notre newsletter arrive bientôt ! Préparez-vous à accéder aux stratégies exclusives du Top 1%.",
-            published_at: new Date()
+            updated_at: now,
+            published_at: now
         }];
     }
 

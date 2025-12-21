@@ -2,42 +2,38 @@
 * @category Newsletter
 */
 
-export type BaseNewsletter = {
+
+type NewsletterContent = {
+  id: number;
+  content: string;
+};
+
+
+export type NewsletterPreviewDB = {
   title: string;
   excerpt: string;
   slug: string;
-};
-
-
-export type PublishedNewsletterPreviewDB = BaseNewsletter & {
-  published_at: Date;
-};
-
-
-export type NewsletterDraftPreviewDB = BaseNewsletter & {
-  updated_at: Date;
-};
-
-
-export type NewsletterDraftPreviewAPI = BaseNewsletter & {
-  updated_at: string;
-};
-
-
-export type NewsletterDB = BaseNewsletter & {
-  id: number;
-  content: string;
   updated_at: Date;
   published_at: Date | null;
 };
 
+export type PublishedNewsletterPreviewDB = NewsletterPreviewDB & {
+  published_at: Date
+}
 
-export type InsertNewsletterParam = Partial<NewsletterDB>
-  & Pick<NewsletterDB, "content" | "title" | "excerpt">;
+export type NewsletterDB = NewsletterPreviewDB & NewsletterContent;
 
 
-export type UpdateNewsletterParam = Partial<NewsletterDB>
-  & Pick<NewsletterDB, "id">;
+export type NewsletterPreviewAPI = Omit<NewsletterPreviewDB, "updated_at" | "published_at"> & {
+  updated_at: string;
+  published_at: string | null;
+};
+
+export type NewsletterAPI = NewsletterPreviewAPI & NewsletterContent;
+
+
+export type InsertNewsletterParam = Pick<NewsletterDB, "content" | "title" | "excerpt">;
+export type UpdateNewsletterParam = Partial<NewsletterDB> & Pick<NewsletterDB, "id">;
 
 
 

@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 import { formatAdminDate } from '@/lib/utils';
-import { NewsletterDraftPreviewAPI } from "@/lib/types";
+import { NewsletterPreviewAPI } from "@/lib/types";
 
 
 type DraftCardProps = {
-    draft: NewsletterDraftPreviewAPI;
+    draft: NewsletterPreviewAPI;
     now: Date;
 }
 

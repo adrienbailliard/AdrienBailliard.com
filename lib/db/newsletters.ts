@@ -2,7 +2,7 @@ import { sql } from '@/lib/db/client';
 import { unstable_cache } from 'next/cache';
 
 import { generateSlug } from "@/lib/utils";
-import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterDB, InsertNewsletterParam, UpdateNewsletterParam } from '@/lib/types';
+import { NewsletterPreviewDB, PublishedNewsletterPreviewDB, NewsletterDB, InsertNewsletterParam, UpdateNewsletterParam } from '@/lib/types';
 
 
 
@@ -80,14 +80,14 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Ne
 }
 
 
-export async function getNewsletterDraftsPreviews(): Promise<NewsletterDraftPreviewDB[]>
+export async function getNewsletterDraftsPreviews(): Promise<NewsletterPreviewDB[]>
 {
     const result = await sql `
         SELECT slug, title, excerpt, updated_at
         FROM newsletters
         WHERE newsletters.published_at IS NULL
         ORDER BY updated_at DESC
-    ` as NewsletterDraftPreviewDB[];
+    ` as NewsletterPreviewDB[];
 
     return result;
 }
