@@ -2,7 +2,7 @@ import { sql } from '@/lib/db/client';
 import { unstable_cache } from 'next/cache';
 
 import { generateSlug } from "@/lib/utils";
-import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterDB, UpsertNewsletterParam } from '@/lib/types';
+import { NewsletterDraftPreviewDB, PublishedNewsletterPreviewDB, NewsletterDB, InsertNewsletterParam, UpdateNewsletterParam } from '@/lib/types';
 
 
 
@@ -25,31 +25,56 @@ export async function deleteNewsletterById(id: number)
 }
 
 
-export async function upsertNewsletter(draft: UpsertNewsletterParam): Promise<NewsletterDB>
+async function getUniqueSlug(title: string): Promise<string>
 {
-    if (!draft.slug)
-        draft.slug = generateSlug(draft.title);
+    const baseSlug = generateSlug(title);
 
-    let result, slug = draft.slug, i = 2;
+    const result = await sql`
+        SELECT slug FROM newsletters 
+        WHERE slug ~ ${ "^" + baseSlug + "(-[0-9]+)?$" }
+        ORDER BY LENGTH(slug) DESC, slug DESC
+        LIMIT 1
+    `;
+
+    if (result.length === 0)
+        return baseSlug;
+
+    const match = result[0].slug.match(/-(\d+)$/);
+    const nextNumber = match ? parseInt(match[1]) + 1 : 2;
+
+    return `${baseSlug}-${nextNumber}`;
+}
 
 
-    do {
-        result = await sql`
-            INSERT INTO newsletters (slug, title, content, excerpt)
-            VALUES (${slug}, ${draft.title}, ${draft.content}, ${draft.excerpt})
-            ON CONFLICT (slug)
-            DO UPDATE SET
-                title = EXCLUDED.title,
-                content = EXCLUDED.content,
-                excerpt = EXCLUDED.excerpt,
-                updated_at = now()
-            WHERE newsletters.id = ${draft.id}
-            RETURNING *
-        ` as NewsletterDB[];
+export async function insertNewsletter(draft: InsertNewsletterParam): Promise<NewsletterDB>
+{
+    const slug = await getUniqueSlug(draft.title);
 
-        slug = `${draft.slug}-${i++}`;
-    }
-    while (result.length === 0);
+    const result = await sql`
+        INSERT INTO newsletters (slug, title, content, excerpt)
+        VALUES (${slug}, ${draft.title}, ${draft.content}, ${draft.excerpt})
+        RETURNING *
+    ` as NewsletterDB[];
+
+    return result[0];
+}
+
+
+export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterDB>
+{
+    const newSlug = draft.title ? await getUniqueSlug(draft.title) : undefined;
+
+    const result = await sql`
+        UPDATE newsletters
+        SET
+            slug = COALESCE(${newSlug}, slug),
+            title = COALESCE(${draft.title}, title),
+            content = COALESCE(${draft.content}, content),
+            excerpt = COALESCE(${draft.excerpt}, excerpt),
+            updated_at = now()
+        WHERE id = ${draft.id}
+        RETURNING *
+    ` as NewsletterDB[];
 
     return result[0];
 }
@@ -85,31 +110,27 @@ export const getPublishedNewsletterPreviews = unstable_cache(
 );
 
 
-export const getPublishedNewsletterSlugs = unstable_cache(
-    async (): Promise<Array<string>> => {
-        const result = await sql `
-            SELECT slug
-            FROM newsletters
-            WHERE newsletters.published_at IS NOT NULL
-        `;
+async function fetchSlugsByStatus(isPublished: boolean): Promise<string[]>
+{
+    const result = await sql`
+        SELECT slug
+        FROM newsletters
+        WHERE published_at IS ${ isPublished ? sql`NOT NULL` : sql`NULL` }
+    `;
 
-        return result.map((row) => row.slug);
-    },
+    return result.map((row) => row.slug);
+}
+
+
+export const getPublishedNewsletterSlugs = unstable_cache(
+    async () => fetchSlugsByStatus(true),
     ['published-newsletter-slugs'],
     { tags: ['published-newsletter-slugs'] }
 );
 
 
 export const getNewsletterDraftsSlugs = unstable_cache(
-    async (): Promise<Array<string>> => {
-        const result = await sql `
-            SELECT slug
-            FROM newsletters
-            WHERE newsletters.published_at IS NULL
-        `;
-
-        return result.map((row) => row.slug);
-    },
+    async () => fetchSlugsByStatus(false),
     ['newsletter-drafts-slugs'],
     { tags: ['newsletter-drafts-slugs'] }
 );

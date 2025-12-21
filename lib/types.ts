@@ -32,7 +32,13 @@ export type NewsletterDB = BaseNewsletter & {
 };
 
 
-export type UpsertNewsletterParam = Partial<NewsletterDB> & Pick<NewsletterDB, "content" | "title" | "excerpt">;
+export type InsertNewsletterParam = Partial<NewsletterDB>
+  & Pick<NewsletterDB, "content" | "title" | "excerpt">;
+
+
+export type UpdateNewsletterParam = Partial<NewsletterDB>
+  & Pick<NewsletterDB, "id">;
+
 
 
 /**
