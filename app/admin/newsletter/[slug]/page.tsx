@@ -35,7 +35,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
       {
         "id" in newsletter && (
           <>
-            <NewsletterDraftActions id={newsletter.id} />
+            <NewsletterDraftActions id={newsletter.id} slug={newsletter.slug} />
             <Divider variant="light"/>
           </>
         )
