@@ -51,6 +51,7 @@ export async function publishDraft(id: unknown, slug: unknown)
   await publishNewsletterById(validData.id);
 
   updateTag("published-newsletter-previews");
+  updateTag("newsletter-drafts-previews");
   updateTag("published-newsletter-slugs");
   revalidatePath(`/admin/newsletter/${validData.slug}`);
 
@@ -65,6 +66,7 @@ export async function deleteDraft(id: unknown, slug: unknown)
 
   await deleteNewsletterById(validData.id);
 
+  updateTag("newsletter-drafts-previews");
   revalidatePath(`/admin/newsletter/${validData.slug}`);
   redirect("/newsletter");
 }

@@ -96,8 +96,11 @@ async function getNewsletterPreviews(isPublished: boolean, limit?: number): Prom
 }
 
 
-export const getNewsletterDraftsPreviews =
-    async () => getNewsletterPreviews(false);
+export const getNewsletterDraftsPreviews = unstable_cache(
+    async () => getNewsletterPreviews(false),
+    ['newsletter-drafts-previews'],
+    { tags: ['newsletter-drafts-previews'] }
+);
 
 
 export const getPublishedNewsletterPreviews = unstable_cache(
