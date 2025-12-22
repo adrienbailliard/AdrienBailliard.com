@@ -1,71 +1,36 @@
-import { domainStatus, EMAIL_PATTERN, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
-import { getDomainStatus, upsertDomain } from "@/lib/db/domains";
+import { z } from "zod";
+import { MessageInput } from "@/lib/types";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 
 
-const emailRegex = new RegExp("^" + EMAIL_PATTERN);
+const EmailSchema = z.email().toLowerCase().max(fieldMaxLengths.email);
 
-async function isValidEmail(email: string): Promise<boolean>
+const ContactSchema = z.object({
+    email: EmailSchema,
+    firstName: z.string().trim().min(1).max(fieldMaxLengths.firstName),
+    lastName: z.string().trim().min(1).max(fieldMaxLengths.lastName),
+    company: z.string().trim().min(1).max(fieldMaxLengths.company),
+    category: z.string().trim().min(1).max(fieldMaxLengths.category),
+    content: z.string().transform(v => v.replace(/\r/g, ''))
+        .pipe(z.string().trim().min(1).max(fieldMaxLengths.content))
+});
+
+
+export function getValidEmail(formData: FormData): string
 {
-    if (!emailRegex.test(email))
-        return false;
-
-    const domain = email.split("@")[1];
-    let status = await getDomainStatus(domain);
-
-    if (status)
-        return status === domainStatus.VALID;
-
-    const request = await fetchEmailWithRetry(email);
-
-    const result = await request.json();
-    status = result.disposable === true || result.mx_record === null
-        ? domainStatus.INVALID
-        : domainStatus.VALID;
-
-    upsertDomain(domain, status);
-    return status === domainStatus.VALID;
+    const email = formData.get("email");
+    return EmailSchema.parse(email);
 }
 
 
-async function fetchEmailWithRetry(email: string): Promise<Response>
+export function getValidContactData(formData: FormData): MessageInput
 {
-    const url = `https://api.emailable.com/v1/verify?email=${email}&api_key=${process.env.EMAILABLE_API_KEY}`;
-    let i = 0;
-    let request = await fetch(url);
-
-    while (request.status === 249 && i < MAX_FECTH_EMAIL_RETRY)
-    {
-        await new Promise(resolve => setTimeout(resolve, FECTH_EMAIL_DELAY));
-        request = await fetch(url);
-        i++;
-    }
-
-    if (request.status !== 200)
-        throw new Error(`Email API error: ${request.status}`);
-
-    return request;
-}
-
-
-export async function getValidEmail(formData: FormData): Promise<string | null>
-{
-    const raw = formData.get('email');
-    const str = getValidString(raw, fieldMaxLengths.email);
-
-    if (!str)
-        return null;
-
-    const email = str.toLowerCase();
-    return await isValidEmail(email) ? email : null;
-}
-
-
-export function getValidString(value: unknown, maxLength: number): string | null
-{
-    if (typeof value !== "string")
-        return null;
-
-    const str = value.trim().replace(/\r/g, '');
-    return str.length > 0 && str.length <= maxLength ? str : null;
+    return ContactSchema.parse({
+        email: formData.get("email"),
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        company: formData.get("company"),
+        category: formData.get("category"),
+        content: formData.get("content"),
+    });
 }

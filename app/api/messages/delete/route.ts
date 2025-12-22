@@ -2,19 +2,13 @@ import { z } from 'zod';
 import { deleteMessages } from '@/lib/db/messages';
 
 
-const DeleteSchema = z.object({
-  ids: z.array(z.number()).min(1)
-});
-
+const IdsSchema = z.array(z.number().min(1)).min(1);
 
 export async function DELETE(request: Request)
 {
     const body = await request.json();
-    const result = DeleteSchema.safeParse(body);
+    const validIds = IdsSchema.parse(body.ids);
 
-    if (!result.success)
-        return Response.json({ error: "Invalid data" }, { status: 400 });
-
-    await deleteMessages(result.data.ids);
+    await deleteMessages(validIds);
     return Response.json({ success: true });
 }

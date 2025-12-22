@@ -1,40 +1,25 @@
 'use server';
-
 import { after } from 'next/server'
 
-import { getValidEmail, getValidString } from "@/lib/form/validators";
+import { isValidDomain } from "@/lib/form/domain-checker";
 import { sendMessage } from "@/lib/email/messages";
 import { insertMessage } from "@/lib/db/messages";
-import { MessageInput } from "@/lib/types";
-import fieldMaxLengths from "@/config/fieldMaxLengths";
+import { getValidContactData } from "@/lib/form/validators";
+
 
 
 export async function contact(formData: FormData): Promise<void>
 {
+    const validData = getValidContactData(formData);
+
     after(async () =>
     {
-        const email = await getValidEmail(formData);
+        const result = await isValidDomain(validData.email.split("@")[1]);
 
-        if (!email)
-            throw new Error("Invalid email");
+        if (!result)
+            throw new Error("Invalid domain");
 
-        const data: Partial<MessageInput> = { email };
-        const fields: Array<keyof Omit<MessageInput, "email">> =
-            ["firstName", "lastName", "company", "category", "content"];
-
-
-        for (const field of fields)
-        {
-            const rawValue = formData.get(field);
-            const str = getValidString(rawValue, fieldMaxLengths[field]);
-
-            if (!str)
-                throw new Error(`Invalid ${field} field`);
-
-            data[field] = str;
-        }
-
-        await insertMessage(data as MessageInput);
-        await sendMessage(data as MessageInput);
+        await insertMessage(validData);
+        await sendMessage(validData);
     });
 }

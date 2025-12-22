@@ -62,7 +62,7 @@ export async function insertNewsletter(draft: InsertNewsletterParam): Promise<Ne
 }
 
 
-export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterDB>
+export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterDB | null>
 {
     const newSlug = draft.title ? await getUniqueSlug(draft.title) : undefined;
 
@@ -78,7 +78,7 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Ne
         RETURNING *
     ` as NewsletterDB[];
 
-    return result[0];
+    return result[0] || null;
 }
 
 
@@ -128,13 +128,17 @@ export const getPublishedNewsletterBySlug =
     async (slug: string) => getNewsletterBySlug(slug, true);
 
 
-export async function getPublishedNewsletterSlugs(): Promise<string[]>
-{
-    const result = await sql`
-        SELECT slug
-        FROM newsletters
-        WHERE published_at IS NOT NULL
-    `;
+export const getPublishedNewsletterSlugs = unstable_cache(
+    async (): Promise<string[]> =>
+    {
+        const result = await sql`
+            SELECT slug
+            FROM newsletters
+            WHERE published_at IS NOT NULL
+        `;
 
-    return result.map((row) => row.slug);
-}
+        return result.map((row) => row.slug);
+    },
+    ['published-newsletter-slugs'],
+    { tags: ['published-newsletter-slugs'] }
+);

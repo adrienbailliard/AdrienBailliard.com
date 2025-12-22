@@ -1,20 +1,24 @@
 'use server';
-
 import { after } from 'next/server';
 
-import { getValidEmail } from "@/lib/form/validators";
 import { insertRequestGuide } from "@/lib/db/guide";
 import { sendGuide } from "@/lib/email/guide";
+
+import { isValidDomain } from "@/lib/form/domain-checker";
+import { getValidEmail } from "@/lib/form/validators";
+
 
 
 export async function request(formData: FormData): Promise<void>
 {
+    const email = getValidEmail(formData);
+
     after(async () =>
     {
-        const email = await getValidEmail(formData);
+        const result = await isValidDomain(email.split("@")[1]);
 
-        if (!email)
-            throw new Error("Invalid email");
+        if (!result)
+            throw new Error("Invalid domain");
 
         await insertRequestGuide(email);
         await sendGuide(email);
