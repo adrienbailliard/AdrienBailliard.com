@@ -1,11 +1,21 @@
-import { setMessagesType } from '@/lib/db/messages';
+import { z } from 'zod';
+import { updateMessagesReadStatus } from '@/lib/db/messages';
 
-export async function POST(request: Request)
+
+const UpdateStatusSchema = z.object({
+  ids: z.array(z.number()).min(1),
+  areRead: z.boolean()
+});
+
+
+export async function PATCH(request: Request)
 {
-    const { ids, areRead }: Record<string, unknown> = await request.json();
+    const body = await request.json();
+    const result = UpdateStatusSchema.safeParse(body);
 
-    if (typeof areRead === "boolean" && ids && Array.isArray(ids) && ids.length > 0)
-        await setMessagesType(ids, areRead);
+    if (!result.success)
+        return Response.json({ error: "Invalid data" }, { status: 400 });
 
+    await updateMessagesReadStatus(result.data.ids, result.data.areRead);
     return Response.json({ success: true });
 }

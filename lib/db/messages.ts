@@ -33,7 +33,7 @@ export async function deleteMessages(ids: Array<number>): Promise<void>
 }
 
 
-export async function setMessagesType(ids: Array<number>, areRead: boolean): Promise<void>
+export async function updateMessagesReadStatus(ids: Array<number>, areRead: boolean): Promise<void>
 {
   await sql`
     UPDATE messages

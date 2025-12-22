@@ -41,7 +41,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
         setSelectedIds(new Set());
 
         fetch(`/api/messages/delete`, {
-            method: 'POST',
+            method: 'DELETE',
             body: JSON.stringify({ ids: Array.from(selectedIds) })
         });
     };
@@ -51,7 +51,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
         mutateMessages(newData, { revalidate: false });
 
         fetch(`/api/messages/type`, {
-            method: 'POST',
+            method: 'PATCH',
             body: JSON.stringify({ ids: Array.from(selectedIds), areRead: isReadAction })
         });
     };
