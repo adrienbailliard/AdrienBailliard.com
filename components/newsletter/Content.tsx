@@ -20,7 +20,7 @@ export default async function Content({ title, content, date }: NewsletterConten
     return (
         <>
             <section className="bg-dark-bg text-light-fg">
-                <div className="text-center">
+                <div className="text-center max-w-4xl">
                     <h1 className="mb-5">{ title }</h1>
                     <time>
                         { formatPublicDate(date) }

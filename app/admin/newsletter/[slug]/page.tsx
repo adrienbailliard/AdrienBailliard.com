@@ -1,8 +1,11 @@
+import { notFound } from "next/navigation";
+
 import NewsletterContent from "@/components/newsletter/Content";
 import Divider from "@/components/ui/Divider";
 import NewsletterDraftActions from "@/components/newsletter/DraftActions";
 
-import { getNewsletterBySlug } from "@/lib/db/newsletters";
+import { DRAFT_CREATION_SLUG } from "@/lib/constants";
+import { getNewsletterDraftBySlug } from "@/lib/db/newsletters";
 
 
 
@@ -18,11 +21,13 @@ export const generateStaticParams = async () => [];
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
-  const newsletter = await getNewsletterBySlug(slug) || {
-    excerpt: "Description courte",
-    title: "Titre",
-    content: "Écris ton contenu..."
-  };
+
+  const newsletter = slug === DRAFT_CREATION_SLUG
+    ? { excerpt: "Description courte", title: "Titre", content: "Écris ton contenu..." }
+    : await getNewsletterDraftBySlug(slug);
+
+  if (!newsletter)
+    notFound();
 
 
   return (

@@ -1,7 +1,9 @@
+import { notFound } from "next/navigation";
+
 import NewsletterSignup from "@/components/newsletter/Signup";
 import NewsletterContent from "@/components/newsletter/Content";
 
-import { getNewsletterBySlug } from "@/lib/db/newsletters";
+import { getPublishedNewsletterBySlug } from "@/lib/db/newsletters";
 
 
 
@@ -17,7 +19,11 @@ export const generateStaticParams = async () => [];
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
-  const newsletter = (await getNewsletterBySlug(slug))!;
+  const newsletter = await getPublishedNewsletterBySlug(slug);
+
+  if (!newsletter)
+    notFound();
+
 
   return (
     <main className="bg-light-bg grid grid-rows-[1fr_auto]">

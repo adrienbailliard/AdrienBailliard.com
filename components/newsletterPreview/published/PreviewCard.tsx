@@ -1,12 +1,12 @@
 import Link from "next/link";
 import site from "@/config/site";
 
-import { PublishedNewsletterPreviewDB } from "@/lib/types";
+import { NewsletterPreviewDB } from "@/lib/types";
 import { formatPublicDate } from "@/lib/utils";
 
 
 type PreviewCardProps = {
-  preview: PublishedNewsletterPreviewDB;
+  preview: NewsletterPreviewDB;
 }
 
 
@@ -25,7 +25,7 @@ export function PreviewCard({ preview }: PreviewCardProps)
                 </div>
                 <div className="sm:basis-1/2 lg:basis-auto max-sm:mt-5 mt-0 lg:mt-5">
                     <p className="text-base text-dark-muted-text">
-                        { formatPublicDate(preview.published_at) }
+                        { formatPublicDate(preview.published_at!) }
                     </p>
                     <h5 className="font-medium mt-2">
                         { site.newsletterSlogan + preview.title }

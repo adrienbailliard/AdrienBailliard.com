@@ -17,10 +17,6 @@ export type NewsletterPreviewDB = {
   published_at: Date | null;
 };
 
-export type PublishedNewsletterPreviewDB = NewsletterPreviewDB & {
-  published_at: Date
-}
-
 export type NewsletterDB = NewsletterPreviewDB & NewsletterContent;
 
 
