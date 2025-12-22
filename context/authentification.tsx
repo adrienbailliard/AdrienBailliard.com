@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import site from "@/config/site";
 
 
+
 type AuthContextType = {
   isAdmin: boolean;
   logout: () => void;
@@ -12,9 +13,10 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 
+
 export function AuthProvider({ children }: { children: React.ReactNode })
 {
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const router = useRouter();
 
   const logout = () => {
@@ -25,15 +27,9 @@ export function AuthProvider({ children }: { children: React.ReactNode })
       router.push('/');
   };
 
-  useEffect(() => {
-    setIsAdmin(
-      document.cookie.includes(`${site.adminCookie.name}=`)
-    );
-  }, []);
+  useEffect(() =>
+    setIsAdmin(document.cookie.includes(`${site.adminCookie.name}=`)), []);
 
-
-  if (isAdmin === null)
-    return null;
 
   return (
     <AuthContext.Provider value={{ isAdmin, logout }}>
@@ -41,6 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode })
     </AuthContext.Provider>
   );
 }
+
 
 
 export function useAuth(): AuthContextType 

@@ -17,7 +17,7 @@ export default async function proxy(request: NextRequest)
     await updateAdminCookie(res.cookies);
 
   else if (pathname.startsWith('/api/') || pathname.startsWith('/admin'))
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.error();
 
 
   const isPublicNewsletter = pathname.startsWith('/newsletter/');
