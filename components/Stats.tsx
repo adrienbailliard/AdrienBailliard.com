@@ -42,12 +42,10 @@ function StatSkeletonCard()
 export default function Stats({ type }: StatsProps)
 {
     const { isAdmin } = useAuth();
+    const { data } = useSWR<StatResponse[]>(isAdmin ? `/api/${type}/stats` : null, fetcher);
 
     if (!isAdmin)
         return null;
-
-
-    const { data } = useSWR<StatResponse[]>(`/api/${type}/stats`, fetcher);
 
     const stats = Array.isArray(data)
         ? data.map((stat, i) => <StatCard stat={stat} key={i}/>)

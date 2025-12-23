@@ -17,11 +17,11 @@ const fetcher = (url: string) =>
 export default function Messages()
 {
     const { isAdmin } = useAuth();
+    const { data, mutate } = useSWR<Message[]>(isAdmin ? `/api/messages` : null, fetcher);
 
     if (!isAdmin)
         return null;
 
-    const { data, mutate } = useSWR<Message[]>(`/api/messages`, fetcher);
     const safeData = Array.isArray(data) ? data : null;
     const now = new Date();
 

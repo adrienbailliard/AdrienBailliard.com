@@ -16,11 +16,11 @@ const fetcher = (url: string) =>
 export default function NewsletterDrafts()
 {
     const { isAdmin } = useAuth();
+    const { data } = useSWR<NewsletterPreviewAPI[]>(isAdmin ? `/api/newsletter/drafts` : null, fetcher);
 
     if (!isAdmin)
         return null;
 
-    const { data } = useSWR<NewsletterPreviewAPI[]>(`/api/newsletter/drafts`, fetcher);
     const safeData = Array.isArray(data) ? data : null;
     const now = new Date();
 
