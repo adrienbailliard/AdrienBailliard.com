@@ -10,15 +10,14 @@ import Read from "@/components/icons/read";
 import Unread from "@/components/icons/unread";
 
 
-
 type HeaderProps = {
     data: Array<Message> | null;
     mutateMessages: KeyedMutator<Message[]>;
+    onOptimisticAction: (newData: Message[], apiCall: Promise<Response>) => Promise<void>;
 }
 
 
-
-export default function Header({ data, mutateMessages }: HeaderProps)
+export default function Header({ data, onOptimisticAction }: HeaderProps)
 {
     const { selection, selected } = useMessageActions();
     const [ inSelection, setInSelection ] = selection;
@@ -31,23 +30,6 @@ export default function Header({ data, mutateMessages }: HeaderProps)
     const isReadAction = !selectedMessages.every(msg => msg.is_read);
 
 
-    const performOptimisticAction = async (newData: Message[], apiCall: Promise<Response>) => {
-        const previousData = [...safeData];
-        mutateMessages(newData, { revalidate: false });
-
-        try {
-            const response = await apiCall;
-
-            if (!response.ok)
-                throw new Error();
-        }
-        catch {
-            mutateMessages(previousData, { revalidate: false });
-            mutateMessages();
-        }
-    };
-
-
     const handleDelete = () => {
         const newData = safeData.filter(msg => !selectedIds.has(msg.id));
         const apiCall = fetch(`/api/messages/delete`, {
@@ -56,7 +38,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
             signal: AbortSignal.timeout(ACTION_TIMEOUT)
         });
 
-        performOptimisticAction(newData, apiCall);
+        onOptimisticAction(newData, apiCall);
         setSelectedIds(new Set());
     };
 
@@ -69,7 +51,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
             signal: AbortSignal.timeout(ACTION_TIMEOUT)
         });
 
-        performOptimisticAction(newData, apiCall);
+        onOptimisticAction(newData, apiCall);
     };
 
 
