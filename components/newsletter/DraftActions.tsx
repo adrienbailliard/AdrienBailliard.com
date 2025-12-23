@@ -36,6 +36,17 @@ export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
     const [ isActionPending, setIsActionPending ] = useState(false);
     const [ modalType, setModalType ] = useState<"publish" | "delete">('publish');
 
+    
+    const executeAction = async () => {
+        setIsActionPending(true);
+        try {
+            await modalConfig[modalType].action(id, slug);
+        }
+        catch {
+            setIsActionPending(false);
+        }
+    };
+
 
     return (
         <>
@@ -82,10 +93,8 @@ export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
                     <Button
                         variant="dark-primary"
                         className='button-compact py-0'
-                        onClick={ () => {
-                            modalConfig[modalType].action(id, slug);
-                            setIsActionPending(true);
-                        }}
+                        disabled={ isActionPending }
+                        onClick={ executeAction }
                     >
                         { isActionPending
                             ? modalConfig[modalType].loadingText
