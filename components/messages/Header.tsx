@@ -3,6 +3,7 @@ import { KeyedMutator } from 'swr';
 import { Selector, supportSelector } from "@/components/messages/Selector";
 import { useMessageActions } from '@/context/messageActions';
 import { Message } from '@/lib/types';
+import { ACTION_TIMEOUT } from "@/lib/constants";
 
 import Dustbin from "@/components/icons/dustbin";
 import Read from "@/components/icons/read";
@@ -42,6 +43,7 @@ export default function Header({ data, mutateMessages }: HeaderProps)
         }
         catch {
             mutateMessages(previousData, { revalidate: false });
+            mutateMessages();
         }
     };
 
@@ -50,7 +52,8 @@ export default function Header({ data, mutateMessages }: HeaderProps)
         const newData = safeData.filter(msg => !selectedIds.has(msg.id));
         const apiCall = fetch(`/api/messages/delete`, {
             method: 'DELETE',
-            body: JSON.stringify({ ids: Array.from(selectedIds) })
+            body: JSON.stringify({ ids: Array.from(selectedIds) }),
+            signal: AbortSignal.timeout(ACTION_TIMEOUT)
         });
 
         performOptimisticAction(newData, apiCall);
@@ -62,7 +65,8 @@ export default function Header({ data, mutateMessages }: HeaderProps)
         const newData = safeData.map(msg => selectedIds.has(msg.id) ? { ...msg, is_read: isReadAction } : msg);
         const apiCall = fetch(`/api/messages/type`, {
             method: 'PATCH',
-            body: JSON.stringify({ ids: Array.from(selectedIds), areRead: isReadAction })
+            body: JSON.stringify({ ids: Array.from(selectedIds), areRead: isReadAction }),
+            signal: AbortSignal.timeout(ACTION_TIMEOUT)
         });
 
         performOptimisticAction(newData, apiCall);
