@@ -7,24 +7,19 @@ export async function handleSubmit(
 {
     event.preventDefault();
 
-    if (navigator.onLine)
-    {
-        const formData = new FormData(event.currentTarget);
-        const button = event.currentTarget.elements.namedItem("submitButton") as HTMLButtonElement;
+    const formData = new FormData(event.currentTarget);
+    const button = event.currentTarget.elements.namedItem("submitButton") as HTMLButtonElement;
 
-        button.textContent = "Envoi...";
-        button.disabled = true;
-        button.classList.add("cursor-default");
+    button.textContent = "Envoi...";
+    button.disabled = true;
+    button.classList.add("cursor-default");
 
-        try {
-            await action(formData);
-        }
-        catch {
-            setHasError(true);
-        }
+    try {
+        await action(formData);
     }
-    else
+    catch {
         setHasError(true);
+    }
 
     setIsSubmitted(true);
 }

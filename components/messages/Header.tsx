@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { KeyedMutator } from 'swr';
 
 import { Selector, supportSelector } from "@/components/messages/Selector";
@@ -8,7 +7,7 @@ import { Message } from '@/lib/types';
 import Dustbin from "@/components/icons/dustbin";
 import Read from "@/components/icons/read";
 import Unread from "@/components/icons/unread";
-import { useState } from "react";
+
 
 
 type HeaderProps = {
@@ -17,9 +16,9 @@ type HeaderProps = {
 }
 
 
+
 export default function Header({ data, mutateMessages }: HeaderProps)
 {
-    const [ isReadAction, setIsReadAction ] = useState(false);
     const { selection, selected } = useMessageActions();
     const [ inSelection, setInSelection ] = selection;
     const [ selectedIds, setSelectedIds ] = selected;
@@ -27,33 +26,46 @@ export default function Header({ data, mutateMessages }: HeaderProps)
     const safeData = data ?? [];
 
 
-    useEffect(() => {
-        const selectedMessages = safeData.filter(message => selectedIds.has(message.id));
-        const allRead = selectedMessages.every(message => message.is_read);
+    const selectedMessages = safeData.filter(msg => selectedIds.has(msg.id));
+    const isReadAction = !selectedMessages.every(msg => msg.is_read);
 
-        setIsReadAction(!allRead);
-    }, [selectedIds, safeData]);
+
+    const performOptimisticAction = async (newData: Message[], apiCall: Promise<Response>) => {
+        const previousData = [...safeData];
+        mutateMessages(newData, { revalidate: false });
+
+        try {
+            const response = await apiCall;
+
+            if (!response.ok)
+                throw new Error();
+        }
+        catch {
+            mutateMessages(previousData, { revalidate: false });
+        }
+    };
 
 
     const handleDelete = () => {
         const newData = safeData.filter(msg => !selectedIds.has(msg.id));
-        mutateMessages(newData, { revalidate: false });
-        setSelectedIds(new Set());
-
-        fetch(`/api/messages/delete`, {
+        const apiCall = fetch(`/api/messages/delete`, {
             method: 'DELETE',
             body: JSON.stringify({ ids: Array.from(selectedIds) })
         });
+
+        performOptimisticAction(newData, apiCall);
+        setSelectedIds(new Set());
     };
 
-    const handleReadToggle = () => {
-        const newData = safeData.map(msg => selectedIds.has(msg.id) ? { ...msg, is_read: isReadAction } : msg);
-        mutateMessages(newData, { revalidate: false });
 
-        fetch(`/api/messages/type`, {
+    const handleReadToggle = async () => {
+        const newData = safeData.map(msg => selectedIds.has(msg.id) ? { ...msg, is_read: isReadAction } : msg);
+        const apiCall = fetch(`/api/messages/type`, {
             method: 'PATCH',
             body: JSON.stringify({ ids: Array.from(selectedIds), areRead: isReadAction })
         });
+
+        performOptimisticAction(newData, apiCall);
     };
 
 
