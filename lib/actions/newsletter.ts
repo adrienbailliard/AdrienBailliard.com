@@ -44,7 +44,7 @@ export async function subscribe(formData: FormData): Promise<void>
 
 
 
-export async function publishDraft(id: unknown, slug: unknown)
+export async function publishDraft(id: number, slug: string)
 {
   const validData = DraftActionSchema.parse({ id, slug });
 
@@ -60,7 +60,7 @@ export async function publishDraft(id: unknown, slug: unknown)
 
 
 
-export async function deleteDraft(id: unknown, slug: unknown)
+export async function deleteDraft(id: number, slug: string)
 {
   const validData = DraftActionSchema.parse({ id, slug });
 
