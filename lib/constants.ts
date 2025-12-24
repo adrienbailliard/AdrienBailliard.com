@@ -9,4 +9,3 @@ export const MAX_FECTH_EMAIL_RETRY = 10;
 export const FECTH_EMAIL_DELAY = 6000;
 export const STATS_PERCENTAGE_PRECISION = 1;
 export const DRAFT_CREATION_SLUG = 'creer';
-export const ACTION_TIMEOUT = 10000;

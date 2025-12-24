@@ -4,23 +4,20 @@ import { useMessageActions } from '@/context/messageActions';
 import { Selector, supportSelector } from "@/components/messages/Selector";
 import { formatAdminDate } from '@/lib/utils';
 import { Message } from '@/lib/types';
-import { ACTION_TIMEOUT } from "@/lib/constants";
 
 
 
 type MessageCardProps = {
     message: Message;
     now: Date;
-    currentData: Message[];
-    onOptimisticAction: (newData: Message[], apiCall: Promise<Response>) => Promise<void>;
 }
 
 
 
-export default function MessageCard({ message, now, currentData, onOptimisticAction }: MessageCardProps)
+export default function MessageCard({ message, now }: MessageCardProps)
 {
     const [ isExpanded, setIsExpanded ] = useState(false);
-    const { selection, selected } = useMessageActions();
+    const { selection, selected, onToggleRead } = useMessageActions();
     const [ selectedIds, setSelectedIds ] = selected;
     const [ inSelection ] = selection;
 
@@ -30,19 +27,9 @@ export default function MessageCard({ message, now, currentData, onOptimisticAct
     const handleExpandMessage = () =>
     {
         setIsExpanded(prev => !prev);
-        if (message.is_read) return;
 
-        const newData = currentData.map(m => m.id === message.id ? { ...m, is_read: true } : m);
-        const apiCall = fetch(`/api/messages/type`, {
-            method: 'PATCH',
-            body: JSON.stringify({ 
-                ids: [ message.id ], 
-                areRead: true 
-            }),
-            signal: AbortSignal.timeout(ACTION_TIMEOUT)
-        });
-
-        onOptimisticAction(newData, apiCall);
+        if (!message.is_read)
+            onToggleRead(true, new Set([ message.id ]));
     };
 
 

@@ -1,58 +1,22 @@
-import { KeyedMutator } from 'swr';
-
 import { Selector, supportSelector } from "@/components/messages/Selector";
 import { useMessageActions } from '@/context/messageActions';
-import { Message } from '@/lib/types';
-import { ACTION_TIMEOUT } from "@/lib/constants";
 
 import Dustbin from "@/components/icons/dustbin";
 import Read from "@/components/icons/read";
 import Unread from "@/components/icons/unread";
 
 
-type HeaderProps = {
-    data: Array<Message> | null;
-    mutateMessages: KeyedMutator<Message[]>;
-    onOptimisticAction: (newData: Message[], apiCall: Promise<Response>) => Promise<void>;
-}
 
-
-export default function Header({ data, onOptimisticAction }: HeaderProps)
+export default function Header()
 {
-    const { selection, selected } = useMessageActions();
+    const { selection, selected, data, onDelete, onToggleRead } = useMessageActions();
     const [ inSelection, setInSelection ] = selection;
     const [ selectedIds, setSelectedIds ] = selected;
 
     const safeData = data ?? [];
 
-
     const selectedMessages = safeData.filter(msg => selectedIds.has(msg.id));
     const isReadAction = !selectedMessages.every(msg => msg.is_read);
-
-
-    const handleDelete = () => {
-        const newData = safeData.filter(msg => !selectedIds.has(msg.id));
-        const apiCall = fetch(`/api/messages/delete`, {
-            method: 'DELETE',
-            body: JSON.stringify({ ids: Array.from(selectedIds) }),
-            signal: AbortSignal.timeout(ACTION_TIMEOUT)
-        });
-
-        onOptimisticAction(newData, apiCall);
-        setSelectedIds(new Set());
-    };
-
-
-    const handleReadToggle = async () => {
-        const newData = safeData.map(msg => selectedIds.has(msg.id) ? { ...msg, is_read: isReadAction } : msg);
-        const apiCall = fetch(`/api/messages/type`, {
-            method: 'PATCH',
-            body: JSON.stringify({ ids: Array.from(selectedIds), areRead: isReadAction }),
-            signal: AbortSignal.timeout(ACTION_TIMEOUT)
-        });
-
-        onOptimisticAction(newData, apiCall);
-    };
 
 
     const toggleSelectionMode = () => {
@@ -80,13 +44,13 @@ export default function Header({ data, onOptimisticAction }: HeaderProps)
                         [&>button]:min-h-10.5 [&>button]:min-w-10.5 *:[&_svg]:h-4.5 *:[&_svg]:m-auto
                     `}>
                         <button
-                            onClick={ handleDelete }
+                            onClick={ onDelete }
                             aria-label="Supprimer les messages"
                         >
                             <Dustbin />
                         </button>
                         <button
-                            onClick={ handleReadToggle }
+                            onClick={ () => onToggleRead(isReadAction) }
                             aria-label={`Marquer comme ${ isReadAction ? "lu" : "non lu" }`}
                         >
                             { isReadAction ? <Read /> : <Unread /> }
