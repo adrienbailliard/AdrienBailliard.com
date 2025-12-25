@@ -3,21 +3,22 @@ import { KeyedMutator } from 'swr';
 
 
 
-async function performOptimisticAction(data: Message[], oldData: Message[], mutate: KeyedMutator<Message[]>, apiCall: Promise<Response>)
+async function performOptimisticAction(data: Message[], mutate: KeyedMutator<Message[]>, apiCall: Promise<Response>)
 {
-    const previousData = [...oldData];
-    mutate(data, { revalidate: false });
-
-    try {
+    const action = async () => {
         const response = await apiCall;
 
         if (!response.ok)
             throw new Error();
-    }
-    catch {
-        mutate(previousData, { revalidate: false });
-        mutate();
-    }
+
+        return data;
+    };
+
+    return mutate(action(), {
+        optimisticData: data,
+        rollbackOnError: true,
+        revalidate: false
+    }).catch(() => mutate());
 };
 
 
@@ -32,7 +33,7 @@ export function deleteMessages(data: Message[], ids: Set<number>, mutate: KeyedM
         body: JSON.stringify({ ids: idArray })
     });
 
-    performOptimisticAction(newData, data, mutate, apiCall);
+    performOptimisticAction(newData, mutate, apiCall);
 }
 
 
@@ -48,5 +49,5 @@ export function toggleReadStatus(data: Message[], ids: Set<number>, isRead: bool
         body: JSON.stringify({ ids: idArray, areRead: isRead })
     });
 
-    performOptimisticAction(newData, data, mutate, apiCall);
+    performOptimisticAction(newData, mutate, apiCall);
 }
