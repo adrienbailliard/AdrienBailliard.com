@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { useMessageActions } from '@/context/messageActions';
 import { Selector, supportSelector } from "@/components/messages/Selector";
@@ -21,8 +21,6 @@ export default function MessageCard({ message, now }: MessageCardProps)
     const [ selectedIds, setSelectedIds ] = selected;
     const [ inSelection ] = selection;
 
-    useEffect(() => setIsExpanded(false), [inSelection]);
-
 
     const handleExpandMessage = () =>
     {
@@ -42,6 +40,7 @@ export default function MessageCard({ message, now }: MessageCardProps)
         });
     };
 
+    
     const handleMessageClick = () => inSelection
         ? toggleSelectMessage(selectedIds.has(message.id)) : handleExpandMessage();
 

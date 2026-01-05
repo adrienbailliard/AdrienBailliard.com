@@ -245,7 +245,7 @@
   }
 
   .card-list {
-    @apply grid grid-cols-[minmax(0,1fr)_80px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 font-sans select-none;
+    @apply grid grid-cols-[minmax(0,1fr)_90px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 font-sans select-none;
   }
 
   .card-skeleton-title {
