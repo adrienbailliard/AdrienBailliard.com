@@ -4,7 +4,7 @@ import { unstable_cache } from 'next/cache';
 import { generateSlug } from "@/lib/utils";
 import { DRAFT_CREATION_SLUG } from "@/lib/constants";
 
-import { NewsletterPreviewDB, NewsletterDB, InsertNewsletterParam, UpdateNewsletterParam } from '@/lib/types';
+import { NewsletterPreviewDB, NewsletterDB, InsertNewsletterParam, UpdateNewsletterParam, NewsletterSlug } from '@/lib/types';
 
 
 
@@ -48,21 +48,21 @@ async function getUniqueSlug(title: string): Promise<string>
 }
 
 
-export async function insertNewsletter(draft: InsertNewsletterParam): Promise<NewsletterDB>
+export async function insertNewsletter(draft: InsertNewsletterParam): Promise<NewsletterSlug>
 {
     const slug = await getUniqueSlug(draft.title);
 
     const result = await sql`
         INSERT INTO newsletters (slug, title, content, excerpt)
         VALUES (${slug}, ${draft.title}, ${draft.content}, ${draft.excerpt})
-        RETURNING *
-    ` as NewsletterDB[];
+        RETURNING slug
+    ` as NewsletterSlug[];
 
     return result[0];
 }
 
 
-export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterDB | null>
+export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterSlug | null>
 {
     const newSlug = draft.title ? await getUniqueSlug(draft.title) : undefined;
 
@@ -75,8 +75,8 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Ne
             excerpt = COALESCE(${draft.excerpt}, excerpt),
             updated_at = now()
         WHERE id = ${draft.id}
-        RETURNING *
-    ` as NewsletterDB[];
+        RETURNING slug
+    ` as NewsletterSlug[];
 
     return result[0] || null;
 }

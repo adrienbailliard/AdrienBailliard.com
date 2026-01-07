@@ -68,5 +68,6 @@ export async function deleteDraft(id: number, slug: string)
 
   updateTag("newsletter-drafts-previews");
   revalidatePath(`/admin/newsletter/${validData.slug}`);
+  
   redirect("/newsletter");
 }

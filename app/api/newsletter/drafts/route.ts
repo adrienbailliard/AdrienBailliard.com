@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { revalidateTag } from 'next/cache';
 import { getNewsletterDraftsPreviews, insertNewsletter, updateNewsletter } from '@/lib/db/newsletters';
 
 
@@ -34,8 +35,10 @@ export async function POST(request: Request)
   const body = await request.json();
   const validData = InsertDraftSchema.parse(body.draft);
 
-  const draft = await insertNewsletter(validData);
-  return Response.json(draft, { status: 201 });
+  const slug = await insertNewsletter(validData);
+  revalidateTag("newsletter-drafts-previews", { expire: 0 });
+
+  return Response.json(slug, { status: 201 });
 }
 
 
@@ -45,10 +48,13 @@ export async function PATCH(request: Request)
   const body = await request.json();
   const validData = UpdateDraftSchema.parse(body.draft);
 
-  const draft = await updateNewsletter(validData);
+  const slug = await updateNewsletter(validData);
 
-  if (!draft)
+  if (!slug)
     return Response.json({ error: "Draft not found" }, { status: 404 });
 
-  return Response.json(draft);
+  if (!validData.content)
+    revalidateTag("newsletter-drafts-previews", { expire: 0 });
+
+  return Response.json(slug);
 }

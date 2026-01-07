@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import NewsletterContent from "@/components/newsletter/Content";
 import Divider from "@/components/ui/Divider";
 import NewsletterDraftActions from "@/components/newsletter/DraftActions";
+import EditableField from "@/components/ui/EditableField";
 
 import { DRAFT_CREATION_SLUG } from "@/lib/constants";
 import { getNewsletterDraftBySlug } from "@/lib/db/newsletters";
@@ -43,7 +44,12 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
 
       <section className="bg-dark-bg text-center text-light-muted-text">
         <div className="max-w-4xl">
-          <p>{ newsletter.excerpt }</p>
+          <EditableField
+            newsletter={ newsletter }
+            field="excerpt"
+          >
+            <p>{ newsletter.excerpt }</p>
+          </EditableField>
         </div>
       </section>
 

@@ -83,7 +83,7 @@
 
   input,
   textarea {
-    @apply bg-light-fg text-dark-fg outline-none rounded-lg;
+    @apply bg-light-fg text-dark-fg outline-none rounded-lg p-3;
   }
 
   ::placeholder {
@@ -218,7 +218,6 @@
   }
 
   .contact input,
-  .contact textarea,
   .contact button {
     @apply h-10.5 p-3;
   }
