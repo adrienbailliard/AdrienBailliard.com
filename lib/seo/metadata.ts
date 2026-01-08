@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import site from "@/config/site";
-import pageMapping from "@/config/pageMapping";
+import { PageSEO } from "@/lib/types";
 
 
 
@@ -49,9 +49,8 @@ export function getMinimalMetadata(title: string): Metadata
 
 
 
-export function getMetadata(pathname: string): Metadata
+export function getMetadata({ pathname, title, description }: PageSEO): Metadata
 {
-    const { title, description } = pageMapping.get(pathname)!;
     const htmlTitle = pathname == "/" ? title : title + " - " + site.name;
 
     return {

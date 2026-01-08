@@ -3,19 +3,27 @@ import { getJsonLd } from "@/lib/seo/jsonld";
 
 import Script from "next/script";
 import Link from "next/link";
-
 import Image from "next/image";
+
 import Logo from "@/components/icons/logo";
+import { PageSEO } from "@/lib/types";
 
 
-const pathname = "/a-propos";
 
-export const metadata = getMetadata(pathname);
+const page: PageSEO = {
+  pathname: "/a-propos",
+  title: "À Propos",
+  description: "Fondateur d'Auto Monday, Adrien Bailliard conçoit des systèmes performants qui libèrent ton temps. Découvre son histoire."
+};
+
+
+export const metadata = getMetadata(page);
+
 
 
 export default function About()
 {
-  const jsonLd = getJsonLd(pathname);
+  const jsonLd = getJsonLd(page);
 
   return (
     <main className="bg-dark-bg">

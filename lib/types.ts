@@ -1,4 +1,17 @@
 /**
+* @category SEO
+*/
+
+
+export type PageSEO = {
+  pathname: string;
+  title: string;
+  description: string;
+};
+
+
+
+/**
 * @category Newsletter
 */
 

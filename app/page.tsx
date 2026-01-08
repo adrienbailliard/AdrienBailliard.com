@@ -15,15 +15,25 @@ import Link from "@/components/ui/Link";
 import ServicePreview from "@/components/ui/ServicePreview";
 import PublishedNewsletters from "@/components/newsletterPreview/published";
 
+import site from "@/config/site";
+import { PageSEO } from "@/lib/types";
 
-const pathname = "/";
 
-export const metadata = getMetadata(pathname);
+
+const page: PageSEO = {
+  pathname: "/",
+  title: site.name + " - " + site.description,
+  description: "Automatise comme le Top 1% avec Auto Monday, en recevant les systèmes qui libèrent ton temps. Chaque lundi, dans ta boîte mail."
+};
+
+
+export const metadata = getMetadata(page);
+
 
 
 export default function Home()
 {
-  const jsonLd = getJsonLd(pathname);
+  const jsonLd = getJsonLd(page);
 
   return (
     <main className="bg-light-bg">

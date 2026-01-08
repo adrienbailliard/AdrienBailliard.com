@@ -2,16 +2,24 @@ import { getMetadata } from "@/lib/seo/metadata";
 import { getJsonLd } from "@/lib/seo/jsonld";
 
 import Script from "next/script";
+import { PageSEO } from "@/lib/types";
 
 
-const pathname = "/conditions-generales";
 
-export const metadata = getMetadata(pathname);
+const page: PageSEO = {
+  pathname: "/conditions-generales",
+  title: "Conditions Générales",
+  description: "Consulte les conditions générales d'utilisation et la politique de confidentialité du site d'Adrien Bailliard."
+};
+
+
+export const metadata = getMetadata(page);
+
 
 
 export default function GeneralTerms()
 {
-  const jsonLd = getJsonLd(pathname);
+  const jsonLd = getJsonLd(page);
 
   return (
     <main className="bg-light-bg">

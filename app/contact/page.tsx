@@ -10,14 +10,24 @@ import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
 import Divider from "@/components/ui/Divider";
 
+import { PageSEO } from "@/lib/types";
 
-const pathname = "/contact";
-export const metadata = getMetadata(pathname);
+
+
+const page: PageSEO = {
+  pathname: "/contact",
+  title: "Contact",
+  description: "Contacte Adrien Bailliard à propos d'automatisation, de systèmes performants et d'opportunités de collaboration."
+};
+
+
+export const metadata = getMetadata(page);
+
 
 
 export default function Contact()
 {
-  const jsonLd = getJsonLd(pathname);
+  const jsonLd = getJsonLd(page);
 
   return (
     <main className="bg-light-bg">

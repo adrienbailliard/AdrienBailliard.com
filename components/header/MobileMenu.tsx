@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PageEntries } from "@/config/pageMapping";
+import { PageEntries } from "@/config/navigation";
 
 
 interface MobileMenuProps
@@ -50,7 +50,7 @@ export default function MobileMenu({ pageEntries, actionButtonText, actionButton
                                 }
                                 style={{ transitionDelay: (index * delayInc) + 'ms' }}
                             >
-                                {value.name}
+                                { value }
                             </Link>
                         )
                         : null

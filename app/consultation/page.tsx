@@ -8,14 +8,24 @@ import Arrow from "@/components/icons/arrow";
 import Link from "@/components/ui/Link";
 import Cta from "@/components/Cta";
 
+import { PageSEO } from "@/lib/types";
 
-const pathname = "/consultation";
-export const metadata = getMetadata(pathname);
+
+
+const page: PageSEO = {
+  pathname: "/consultation",
+  title: "Consultation",
+  description: "Réserve une consultation 1:1 avec Adrien Bailliard pour automatiser ton business avec des systèmes performants, comme les meilleurs dirigeants."
+};
+
+
+export const metadata = getMetadata(page);
+
 
 
 export default function Consultation()
 {
-  const jsonLd = getJsonLd(pathname);
+  const jsonLd = getJsonLd(page);
 
   return (
     <main className="bg-dark-bg">

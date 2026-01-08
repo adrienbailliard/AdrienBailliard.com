@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Linkedin from "@/components/icons/linkedin";
-import pageMapping from "@/config/pageMapping";
+import pages from "@/config/navigation";
 
 import site from "@/config/site";
 
@@ -20,14 +20,14 @@ export default function Footer()
           </Link>
           <div className="flex gap-x-6 md:gap-x-11 gap-y-1 basis-5/8 justify-center flex-wrap">
             {
-                Array.from(pageMapping.entries()).map(([key, value], index) =>
-                    index > 0 && index < pageMapping.size - 1
+                Array.from(pages.entries()).map(([key, value], index) =>
+                    index > 0 && index < pages.size - 1
                     ? (
                         <Link
                             key={key}
                             href={key}
                         >
-                            {value.name}
+                            { value }
                         </Link>
                     )
                     : null

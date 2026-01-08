@@ -10,7 +10,7 @@ import MobileMenu from "@/components/header/MobileMenu";
 import BurgerButton from "@/components/header/BurgerButton";
 import BlockScroll from "@/components/ui/BlockScroll";
 
-import pageMapping from "@/config/pageMapping";
+import pages from "@/config/navigation";
 import site from "@/config/site";
 
 import { useAuth } from '@/context/authentification';
@@ -23,7 +23,7 @@ export default function Header()
     const [ isPopupOpen, setIsPopupOpen ] = useState(false);
     const pathname = usePathname();
     const { isAdmin, logout } = useAuth();
-    const pageEntries = useMemo(() => Array.from(pageMapping.entries()), []);
+    const pageEntries = useMemo(() => Array.from(pages.entries()), []);
 
     const [ctaHref, ctaPage] = pageEntries[pageEntries.length - 2];
     const actionButtonText = isAdmin ? "Quitter" : "S'inscrire";
@@ -73,7 +73,7 @@ export default function Header()
 
                         <div className="flex gap-4 max-[360px]:hidden m-auto">
                             <Link href={ctaHref} className="max-[520px]:hidden button-compact inline-flex items-center rounded-lg inset-border font-medium">
-                                { ctaPage.name }
+                                { ctaPage }
                             </Link>
                             <button
                                 onClick={actionButton}

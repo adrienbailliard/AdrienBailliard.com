@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PageEntries } from "@/config/pageMapping";
+import { PageEntries } from "@/config/navigation";
 
 
 interface DesktopNavProps
@@ -22,7 +22,7 @@ export default function DesktopMenu({ pageEntries, getLinkClass }: DesktopNavPro
                             href={key}
                             className={getLinkClass(key)}
                         >
-                            {value.name}
+                            { value }
                         </Link>
                     )
                     : null

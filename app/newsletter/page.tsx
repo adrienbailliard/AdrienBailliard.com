@@ -9,14 +9,24 @@ import NewsletterSignup from "@/components/newsletter/Signup";
 import Stats from "@/components/Stats";
 import Divider from "@/components/ui/Divider";
 
+import { PageSEO } from "@/lib/types";
 
-const pathname = "/newsletter";
-export const metadata = getMetadata(pathname);
+
+
+const page: PageSEO = {
+  pathname: "/newsletter",
+  title: "Auto Monday",
+  description: "Auto Monday est une newsletter qui partage, chaque lundi, une clé pour automatiser comme le Top 1%. Abonne-toi gratuitement."
+};
+
+
+export const metadata = getMetadata(page);
+
 
 
 export default function Newsletter()
 {
-  const jsonLd = getJsonLd(pathname);
+  const jsonLd = getJsonLd(page);
 
   return (
     <main className="bg-light-bg">

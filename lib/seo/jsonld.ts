@@ -1,5 +1,8 @@
 import site from "@/config/site";
-import pageMapping from "@/config/pageMapping";
+import pages from "@/config/navigation";
+
+import { PageSEO } from "@/lib/types";
+
 
 
 type BreadcrumbElement = {
@@ -10,39 +13,41 @@ type BreadcrumbElement = {
 };
 
 
-function getBreadcrumb(pathname: string, index: number, listLength: number): BreadcrumbElement
+
+function getBreadcrumb(pathname: string, nameFallback: string, index: number, listLength: number): BreadcrumbElement
 {
     return {
         "@type": "ListItem",
         position: index + 1,
-        name: pageMapping.get(pathname)!.name,
+        name: pages.get(pathname) || nameFallback,
         item: index == listLength - 1 ? undefined : site.url + pathname
     };
 }
 
 
-function getBreadcrumbList(pathname: string): Array<BreadcrumbElement>
+
+function getBreadcrumbList(pathname: string, nameFallback: string): Array<BreadcrumbElement>
 {
     const segments = pathname == "/" ? [ "" ] : pathname.split('/');
     const itemList: Array<BreadcrumbElement> = new Array(segments.length);
     let currentPathname = "";
 
-    itemList[0] = getBreadcrumb("/", 0, segments.length);
+    itemList[0] = getBreadcrumb("/", nameFallback, 0, segments.length);
 
     for (let i = 1; i < segments.length; i++)
     {
         currentPathname += "/" + segments[i];
-        itemList[i] = getBreadcrumb(currentPathname, i, segments.length);
+        itemList[i] = getBreadcrumb(currentPathname, nameFallback, i, segments.length);
     }
 
     return itemList;
 }
 
 
-export function getJsonLd(pathname: string): Record<string, unknown>
+
+export function getJsonLd({ pathname, title, description }: PageSEO): Record<string, unknown>
 {
     const pageUrl = site.url + pathname;
-    const { title, description } = pageMapping.get(pathname)!;
 
     return {
         "@context": "https://schema.org",
@@ -106,7 +111,7 @@ export function getJsonLd(pathname: string): Record<string, unknown>
             {
                 "@type": "BreadcrumbList",
                 "@id": pageUrl + "#breadcrumb",
-                "itemListElement": getBreadcrumbList(pathname)
+                "itemListElement": getBreadcrumbList(pathname, title)
             }
         ]
     };
