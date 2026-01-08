@@ -53,7 +53,9 @@ export async function publishDraft(id: number, slug: string)
   updateTag("published-newsletter-previews");
   updateTag("newsletter-drafts-previews");
   updateTag("published-newsletter-slugs");
+
   revalidatePath(`/admin/newsletter/${validData.slug}`);
+  revalidatePath(`/newsletter/${validData.slug}`);
 
   redirect("/newsletter");
 }
@@ -68,6 +70,6 @@ export async function deleteDraft(id: number, slug: string)
 
   updateTag("newsletter-drafts-previews");
   revalidatePath(`/admin/newsletter/${validData.slug}`);
-  
+
   redirect("/newsletter");
 }

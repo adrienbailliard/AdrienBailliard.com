@@ -37,7 +37,9 @@ export async function POST(request: Request)
   const validData = InsertDraftSchema.parse(body.draft);
 
   const response = await insertNewsletter(validData);
+
   revalidateTag("newsletter-drafts-previews", { expire: 0 });
+  revalidatePath(`/admin/newsletter/${response.slug}`);
 
   return Response.json(response, { status: 201 });
 }
@@ -56,6 +58,9 @@ export async function PATCH(request: Request)
 
   if (!validData.content)
     revalidateTag("newsletter-drafts-previews", { expire: 0 });
+
+  if (validData.slug !== response.slug)
+    revalidatePath(`/admin/newsletter/${response.slug}`);
 
   revalidatePath(`/admin/newsletter/${validData.slug}`);
   return Response.json(response);
