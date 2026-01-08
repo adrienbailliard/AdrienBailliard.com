@@ -18,7 +18,7 @@ export default function EditableField({ children, newsletter, field }: EditableF
     const [isEditing, setIsEditing] = useState(false);
 
     return (
-        <div className="flex flex-col gap-1.5 items-center">
+        <div className="flex flex-col gap-1.5">
             {
                 isEditing
                 ? <EditorField

@@ -53,9 +53,9 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
       </section>
 
       <NewsletterContent
-        title={ newsletter.title }
-        content={ newsletter.content }
+        newsletter={ newsletter }
         date={ new Date() }
+        isEditable={true}
       />
     </main>
   );

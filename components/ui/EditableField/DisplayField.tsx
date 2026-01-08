@@ -12,7 +12,7 @@ export default function DisplayField({ children, setIsEditing }: DisplayFieldPro
     return (
         <>
             <button
-                className='text-primary font-medium'
+                className='text-primary font-medium self-end'
                 onClick={ () => setIsEditing(true) }
             >
                 Modifier

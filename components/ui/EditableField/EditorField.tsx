@@ -44,7 +44,7 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
             const data = await response.json();
 
             !newsletter.slug || newsletter.slug !== data.slug
-                ? router.replace(`/admin/newsletter/${data.slug}`)
+                ? router.replace(`/admin/newsletter/${data.slug}`, { scroll: false })
                 : router.refresh();
 
             setIsEditing(false);
@@ -57,7 +57,7 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
 
     return (
         <>
-            <div className="flex gap-7">
+            <div className="flex gap-7 self-end">
                 <button
                     className='text-primary font-medium'
                     onClick={ () => setIsEditing(false) }

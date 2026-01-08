@@ -26,8 +26,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
   return (
     <main className="bg-light-bg grid grid-rows-[1fr_auto]">
       <NewsletterContent
-        title={newsletter.title}
-        content={newsletter.content}
+        newsletter={ newsletter }
         date={newsletter.published_at!}
       />
       <NewsletterSignup />
