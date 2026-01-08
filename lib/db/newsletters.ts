@@ -1,4 +1,5 @@
 import { sql } from '@/lib/db/client';
+import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 
 import { generateSlug } from "@/lib/utils";
@@ -110,17 +111,18 @@ export const getPublishedNewsletterPreviews = unstable_cache(
 );
 
 
-async function getNewsletterBySlug(slug: string, isPublished: boolean): Promise<NewsletterDB | null>
-{
-    const result = await sql`
-        SELECT *
-        FROM newsletters
-        WHERE slug = ${slug}
-        AND published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
-    ` as NewsletterDB[];
+export const getNewsletterBySlug = cache(
+    async (slug: string, isPublished: boolean): Promise<NewsletterDB | null> => {
+        const result = await sql`
+            SELECT *
+            FROM newsletters
+            WHERE slug = ${slug}
+            AND published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
+        ` as NewsletterDB[];
 
-    return result[0] || null;
-}
+        return result[0] || null;
+    }
+);
 
 
 export const getNewsletterDraftBySlug =

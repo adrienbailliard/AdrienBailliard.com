@@ -4,7 +4,8 @@ import site from "@/config/site";
 import pageMapping from "@/config/pageMapping";
 
 
-export function getIconsMetadata(): Metadata
+
+function getIconsMetadata(): Metadata
 {
     return {
         icons: [
@@ -35,6 +36,17 @@ export function getIconsMetadata(): Metadata
         }
     };
 }
+
+
+
+export function getMinimalMetadata(title: string): Metadata
+{
+    return {
+      title: title,
+      ...getIconsMetadata()
+    };
+}
+
 
 
 export function getMetadata(pathname: string): Metadata

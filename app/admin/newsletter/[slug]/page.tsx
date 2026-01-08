@@ -1,15 +1,33 @@
 import { notFound } from "next/navigation";
+import { Metadata } from 'next';
 
 import NewsletterContent from "@/components/newsletter/Content";
 import Divider from "@/components/ui/Divider";
 import NewsletterDraftActions from "@/components/newsletter/DraftActions";
 import EditableField from "@/components/ui/EditableField";
 
+import { metadata } from "@/app/not-found";
+import { getMinimalMetadata } from "@/lib/seo/metadata";
 import { DRAFT_CREATION_SLUG } from "@/lib/constants";
 import { getNewsletterDraftBySlug } from "@/lib/db/newsletters";
 
 
 export const dynamic = 'force-static';
+
+
+export async function generateMetadata({ params }: NewsletterPageProps): Promise<Metadata>
+{
+  const { slug } = await params;
+
+  const newsletter = slug === DRAFT_CREATION_SLUG
+    ? { title: "Nouveau Brouillon" }
+    : await getNewsletterDraftBySlug(slug);
+
+  return newsletter
+    ? getMinimalMetadata(newsletter.title)
+    : metadata;
+}
+
 
 
 type NewsletterPageProps = {
