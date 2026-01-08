@@ -2,17 +2,15 @@ import { notFound } from "next/navigation";
 
 import NewsletterSignup from "@/components/newsletter/Signup";
 import NewsletterContent from "@/components/newsletter/Content";
-
 import { getPublishedNewsletterBySlug } from "@/lib/db/newsletters";
 
+
+export const dynamic = 'force-static';
 
 
 type NewsletterPageProps = {
   params: Promise<{ slug: string }>;
 };
-
-
-export const generateStaticParams = async () => [];
 
 
 

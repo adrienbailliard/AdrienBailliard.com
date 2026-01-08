@@ -12,7 +12,6 @@ export async function handleSubmit(
 
     button.textContent = "Envoi...";
     button.disabled = true;
-    button.classList.add("cursor-default");
 
     try {
         await action(formData);

@@ -9,13 +9,12 @@ import { DRAFT_CREATION_SLUG } from "@/lib/constants";
 import { getNewsletterDraftBySlug } from "@/lib/db/newsletters";
 
 
+export const dynamic = 'force-static';
+
 
 type NewsletterPageProps = {
   params: Promise<{ slug: string }>;
 };
-
-
-export const generateStaticParams = async () => [];
 
 
 

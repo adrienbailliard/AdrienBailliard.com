@@ -34,7 +34,7 @@ export type NewsletterAPI = NewsletterPreviewAPI & NewsletterContent;
 
 export type InsertNewsletterParam = Pick<NewsletterDB, "content" | "title" | "excerpt">;
 export type UpdateNewsletterParam = Partial<NewsletterDB> & Pick<NewsletterDB, "id">;
-export type EditorNewsletterParam = InsertNewsletterParam & Partial<Pick<NewsletterDB, "id">>;
+export type EditorNewsletterParam = InsertNewsletterParam & Partial<Pick<NewsletterDB, "id" | "slug">>;
 
 
 

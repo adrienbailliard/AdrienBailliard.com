@@ -81,6 +81,10 @@
     @apply cursor-pointer;
   }
 
+  button:disabled {
+    @apply cursor-default;
+  }
+
   input,
   textarea {
     @apply bg-light-fg text-dark-fg outline-none rounded-lg p-3;

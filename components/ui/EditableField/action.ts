@@ -1,4 +1,4 @@
-import { InsertNewsletterParam } from "@/lib/types";
+import { InsertNewsletterParam, EditorNewsletterParam } from "@/lib/types";
 
 
 
@@ -11,12 +11,13 @@ export async function postDraft(newsletter: InsertNewsletterParam, field: keyof 
 }
 
 
-export async function updateDraft(id: number, field: keyof InsertNewsletterParam, value: string): Promise<Response>
+export async function updateDraft(newsletter: EditorNewsletterParam, field: keyof InsertNewsletterParam, value: string): Promise<Response>
 {
     return fetch('/api/newsletter/drafts', {
         method: 'PATCH',
         body: JSON.stringify({ draft: {
-            id: id,
+            id: newsletter.id,
+            slug: newsletter.slug,
             [field]: value
         }})
     });

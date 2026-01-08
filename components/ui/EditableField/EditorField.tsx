@@ -25,18 +25,27 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
 
     const handleSave = async () =>
     {
+        if (newsletter[field] === value.trim())
+        {
+            setIsEditing(false);
+            return ;
+        }
+
         setIsSaving(true);
 
         try {
             const response = await (newsletter.id
-                ? updateDraft(newsletter.id, field, value)
+                ? updateDraft(newsletter, field, value)
                 : postDraft(newsletter, field, value));
 
             if (!response.ok)
                 throw new Error();
 
             const data = await response.json();
-            router.replace(`/admin/newsletter/${data.slug}`);
+
+            !newsletter.slug || newsletter.slug !== data.slug
+                ? router.replace(`/admin/newsletter/${data.slug}`)
+                : router.refresh();
 
             setIsEditing(false);
         }
@@ -58,7 +67,7 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
                 <button
                     onClick={handleSave}
                     className='text-primary font-medium'
-                    disabled={isSaving}
+                    disabled={isSaving || value.trim().length === 0}
                 >
                     { isSaving ? "Validation..." : "Valider" }
                 </button>
