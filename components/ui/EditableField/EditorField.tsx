@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { InsertNewsletterParam, EditorNewsletterParam } from "@/lib/types";
@@ -18,22 +18,22 @@ type EditorFieldProps = {
 export default function EditorField({ newsletter, field, setIsEditing }: EditorFieldProps)
 {
     const router = useRouter();
-    
+    const [, startTransition] = useTransition();
+
     const [isSaving, setIsSaving] = useState(false);
     const [value, setValue] = useState(newsletter[field]);
 
 
-    const handleSave = async () =>
-    {
+    const handleSave = async () => {
         if (newsletter[field] === value.trim())
         {
             setIsEditing(false);
             return ;
         }
 
-        setIsSaving(true);
-
         try {
+            setIsSaving(true);
+
             const response = await (newsletter.id
                 ? updateDraft(newsletter, field, value)
                 : postDraft(newsletter, field, value));
@@ -43,13 +43,16 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
 
             const data = await response.json();
 
-            !newsletter.slug || newsletter.slug !== data.slug
-                ? router.replace(`/admin/newsletter/${data.slug}`, { scroll: false })
-                : router.refresh();
+            startTransition(() => {
+                newsletter.slug !== data.slug
+                    ? router.replace(`/admin/newsletter/${data.slug}`, { scroll: false })
+                    : router.refresh();
 
-            setIsEditing(false);
+                setIsEditing(false);
+            });
         }
-        finally {
+
+        catch {
             setIsSaving(false);
         }
     };
