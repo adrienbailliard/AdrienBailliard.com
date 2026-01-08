@@ -49,9 +49,12 @@ export function formatPublicDate(value: Date): string
 
 export function generateSlug(title: string): string {
     return title
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
         .toLowerCase()
         .replace(/[^\w\s-]/g, '')
         .trim()
         .replace(/\s+/g, '-')
-        .replace(/-+/g, '-');
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
 }
