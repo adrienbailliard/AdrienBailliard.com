@@ -1,5 +1,5 @@
 "use client";
-import { useState, useTransition } from "react";
+import { useState, useTransition, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 import { InsertNewsletterParam, EditorNewsletterParam } from "@/lib/types";
@@ -58,6 +58,16 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
     };
 
 
+    const autoFocusAtEnd = useCallback((node: HTMLTextAreaElement | null) => {
+        if (!node)
+            return;
+
+        const length = node.value.length;
+        node.focus();
+        node.setSelectionRange(length, length);
+    }, []);
+
+
     return (
         <>
             <div className="flex gap-7 self-end">
@@ -76,7 +86,8 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
                 </button>
             </div>
             <textarea
-                autoFocus
+                ref={ autoFocusAtEnd }
+                aria-label={ `Modifier le champ ${field}` }
                 className="field-sizing-content mt-2 w-full"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
