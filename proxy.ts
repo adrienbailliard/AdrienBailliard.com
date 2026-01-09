@@ -16,7 +16,7 @@ export default async function proxy(request: NextRequest)
     await updateAdminCookie(res.cookies);
 
   else if (pathname.startsWith('/api/') || pathname.startsWith('/admin'))
-    return NextResponse.error();
+    return NextResponse.rewrite(new URL('/404', request.url), { status: 404 });
 
 
   return res;
