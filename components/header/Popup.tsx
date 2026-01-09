@@ -17,7 +17,7 @@ export default function Popup({ isEnabled, setIsEnabled }: PopupProps)
             isEnabled={isEnabled}
             setIsEnabled={setIsEnabled}
         >
-            <h2>
+            <h2 id="modal-title">
                 Reçois <span className="[letter-spacing:-0.04em]">AUTO <span className="font-extralight">MONDAY</span></span>
             </h2>
             <p className='max-w-xs md:max-w-sm mx-auto'>

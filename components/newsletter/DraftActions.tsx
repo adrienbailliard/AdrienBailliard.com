@@ -79,7 +79,7 @@ export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
                 isEnabled={ isActiveModal }
                 setIsEnabled={ setIsActiveModal }
             >
-                <h3 className='mb-7 md:mb-11'>
+                <h3 className='mb-7 md:mb-11' id="modal-title">
                     { modalConfig[modalType].confirmText } ce brouillon ?
                 </h3>
                 <div>
