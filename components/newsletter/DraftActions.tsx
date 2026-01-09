@@ -85,7 +85,7 @@ export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
                 <div>
                     <Button
                         variant="light-primary"
-                        className='button-compact py-0 mr-5 md:mr-8'
+                        className='button-compact py-0 mr-5 md:mr-7'
                         onClick={ () => setIsActiveModal(false)}
                     >
                         Annuler
