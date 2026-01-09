@@ -40,20 +40,20 @@ export default function ContactForm()
                         </h5>
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
                             <div>
-                                <p>Prénom</p>
-                                <input name="firstName" type="text" autoComplete="given-name" maxLength={fieldMaxLengths.firstName} required/>
+                                <label htmlFor="firstName">Prénom</label>
+                                <input id="firstName" name="firstName" type="text" autoComplete="given-name" maxLength={fieldMaxLengths.firstName} required/>
                             </div>
                             <div>
-                                <p>Nom</p>
-                                <input name="lastName" type="text" autoComplete="family-name" maxLength={fieldMaxLengths.lastName} required/>
+                                <label htmlFor="lastName">Nom</label>
+                                <input id="lastName" name="lastName" type="text" autoComplete="family-name" maxLength={fieldMaxLengths.lastName} required/>
                             </div>
                             <div>
-                                <p>Email</p>
-                                <input name="email" type="email" autoComplete="email" pattern={EMAIL_PATTERN} maxLength={fieldMaxLengths.email} required/>
+                                <label htmlFor="email">Email</label>
+                                <input id="email" name="email" type="email" autoComplete="email" pattern={EMAIL_PATTERN} maxLength={fieldMaxLengths.email} required/>
                             </div>
                             <div>
-                                <p>Entreprise</p>
-                                <input name="company" type="text" autoComplete="organization" maxLength={fieldMaxLengths.company} required/>
+                                <label htmlFor="company">Entreprise</label>
+                                <input id="company" name="company" type="text" autoComplete="organization" maxLength={fieldMaxLengths.company} required/>
                             </div>
                         </div>
                     </div>
@@ -76,8 +76,8 @@ export default function ContactForm()
                             </div>
                             <input name="category" type="hidden" value={selected}/>
                             <div className={ "transition-opacity duration-300 " + (selected == "" ? "h-0 overflow-hidden opacity-0" : "mt-8 opacity-100") }>
-                                <p>Message</p>
-                                <textarea name="content" maxLength={fieldMaxLengths.content} required/>
+                                <label htmlFor="content">Message</label>
+                                <textarea id="content" name="content" maxLength={fieldMaxLengths.content} required/>
                             </div>
                         </div>
                         <Button

@@ -175,6 +175,10 @@
   p a {
     @apply underline underline-offset-3;
   }
+
+  label {
+    @apply text-base font-medium;
+  }
 }
 
 
@@ -202,10 +206,6 @@
 
   .button-compact {
     @apply px-4 xl:px-6 h-8.5 xl:h-11;
-  }
-
-  .contact p {
-    @apply text-base font-medium;
   }
 
   .contact h5 {
