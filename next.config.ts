@@ -5,12 +5,6 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/((?!assets/email/).*)",
-        headers: [
-          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
-        ]
-      },
-      {
         source: "/(.*)",
         headers: [
           { key: "X-Frame-Options", value: "DENY" },
