@@ -10,7 +10,6 @@ import Guide from "@/components/icons/guide";
 import Logo from "@/components/icons/logo";
 
 import Form from '@/components/ui/BaseForm';
-import BottomLine from '@/components/ui/BottomLine';
 import Link from "@/components/ui/Link";
 import ServicePreview from "@/components/ui/ServicePreview";
 import PublishedNewsletters from "@/components/newsletterPreview/published";
@@ -57,7 +56,6 @@ export default function Home()
             </span>
               { " automatiquement." }
           </p>
-          <BottomLine />
         </div>
       </section>
 
