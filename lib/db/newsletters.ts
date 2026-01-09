@@ -28,13 +28,14 @@ export async function deleteNewsletterById(id: number)
 }
 
 
-async function getUniqueSlug(title: string): Promise<string>
+async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
 {
     const baseSlug = generateSlug(title);
 
     const result = await sql`
         SELECT slug FROM newsletters 
         WHERE slug ~ ${ "^" + baseSlug + "(-[0-9]+)?$" }
+        ${ excludeId ? sql`AND id != ${excludeId}` : sql`` }
         ORDER BY LENGTH(slug) DESC, slug DESC
         LIMIT 1
     `;
@@ -65,7 +66,7 @@ export async function insertNewsletter(draft: InsertNewsletterParam): Promise<Ne
 
 export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterSlug | null>
 {
-    const newSlug = draft.title ? await getUniqueSlug(draft.title) : undefined;
+    const newSlug = draft.title ? await getUniqueSlug(draft.title, draft.id) : undefined;
 
     const result = await sql`
         UPDATE newsletters
