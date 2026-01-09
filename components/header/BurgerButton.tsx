@@ -10,7 +10,7 @@ export default function BurgerButton({ isOpen, setIsOpen }: BurgerButtonProps)
     return (
         <button
             aria-expanded={ isOpen }
-            aria-controls="Menu"
+            aria-label="Menu"
             onClick={ () => setIsOpen(!isOpen)}
             className={`flex justify-center items-center flex-col -mr-3 w-12 lg:hidden h-12 ${
                 isOpen ? "" : "space-y-1.5"
