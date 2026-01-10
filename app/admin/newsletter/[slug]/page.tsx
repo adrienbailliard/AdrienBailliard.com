@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from 'next';
 
-import NewsletterContent from "@/components/newsletter/Content";
+import NewsletterView, { NewsletterTitle, NewsletterContent } from "@/components/newsletter/View";
 import Divider from "@/components/ui/Divider";
 import NewsletterDraftActions from "@/components/newsletter/DraftActions";
 import EditableField from "@/components/ui/EditableField";
@@ -71,10 +71,24 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
         </div>
       </section>
 
-      <NewsletterContent
-        newsletter={ newsletter }
+      <NewsletterView
+        title={
+          <EditableField
+            newsletter={ newsletter }
+            field="title"
+          >
+            <NewsletterTitle value={ newsletter.title } />
+          </EditableField>
+        }
+        content={
+          <EditableField
+            newsletter={ newsletter }
+            field="content"
+          >
+            <NewsletterContent value={ newsletter.content } />
+          </EditableField>
+        }
         date={ new Date() }
-        isEditable={true}
       />
     </main>
   );

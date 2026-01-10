@@ -3,7 +3,7 @@ import Script from "next/script";
 import { Metadata } from 'next';
 
 import NewsletterSignup from "@/components/newsletter/Signup";
-import NewsletterContent from "@/components/newsletter/Content";
+import NewsletterView, { NewsletterTitle, NewsletterContent } from "@/components/newsletter/View";
 
 import { metadata } from "@/app/not-found";
 import { getMetadata } from "@/lib/seo/metadata";
@@ -57,10 +57,16 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
     <main className="bg-light-bg grid grid-rows-[1fr_auto]">
       <Script id="jsonld" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>
 
-      <NewsletterContent
-        newsletter={ newsletter }
+      <NewsletterView
+        title={
+          <NewsletterTitle value={ newsletter.title } />
+        }
+        content={
+          <NewsletterContent value={ newsletter.content } />
+        }
         date={newsletter.published_at!}
       />
+      
       <NewsletterSignup />
     </main>
   );
