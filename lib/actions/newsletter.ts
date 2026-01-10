@@ -8,11 +8,13 @@ import { z } from "zod";
 import { isValidDomain } from "@/lib/form/domain-checker";
 import { getValidEmail } from "@/lib/form/validators";
 
-import { publishNewsletterById, deleteNewsletterById } from "@/lib/db/newsletters";
+import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter } from "@/lib/db/newsletters";
 import { addSubscriber } from "@/lib/db/subscribers";
 
 import { sendConfirmation } from "@/lib/email/newsletter";
 import { sendAdminLoginLink } from "@/lib/email/admin";
+
+import { InsertNewsletterParam } from "@/lib/types";
 
 
 
@@ -20,6 +22,17 @@ const DraftActionSchema = z.object({
   id: z.number().min(1),
   slug: z.string().min(1)
 });
+
+
+const CreateDraftSchema = z.object({
+  title: z.string().trim().min(1),
+  content: z.string().trim().min(1),
+  excerpt: z.string().trim().min(1)
+});
+
+
+const UpdateDraftSchema = DraftActionSchema.extend(CreateDraftSchema.partial().shape)
+  .refine(data => data.title || data.content || data.excerpt);
 
 
 
@@ -72,4 +85,39 @@ export async function deleteDraft(id: number, slug: string)
   revalidatePath(`/admin/newsletter/${validData.slug}`);
 
   redirect("/newsletter");
+}
+
+
+
+export async function createDraft(draft: InsertNewsletterParam)
+{
+  const validData = CreateDraftSchema.parse(draft);
+  const response = await insertNewsletter(validData);
+
+  updateTag("newsletter-drafts-previews");
+  revalidatePath(`/admin/newsletter/${response.slug}`);
+
+  redirect(`/admin/newsletter/${response.slug}`);
+}
+
+
+
+export async function updateDraft(id: number, slug: string, data: Partial<InsertNewsletterParam>)
+{
+  const validData = UpdateDraftSchema.parse({ id, slug, ...data });
+  const response = await updateNewsletter(validData);
+
+  if (!response)
+    throw new Error("Draft not found");
+
+  if (!validData.content)
+    updateTag("newsletter-drafts-previews");
+
+  revalidatePath(`/admin/newsletter/${validData.slug}`);
+
+  if (validData.slug !== response.slug)
+  {
+    revalidatePath(`/admin/newsletter/${response.slug}`);
+    redirect(`/admin/newsletter/${response.slug}`);
+  }
 }
