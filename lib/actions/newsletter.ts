@@ -57,7 +57,7 @@ export async function subscribe(formData: FormData): Promise<void>
 
 
 
-export async function publishDraft(id: number, slug: string)
+export async function publishDraft(id: number, slug: string): Promise<void>
 {
   const validData = DraftActionSchema.parse({ id, slug });
 
@@ -75,7 +75,7 @@ export async function publishDraft(id: number, slug: string)
 
 
 
-export async function deleteDraft(id: number, slug: string)
+export async function deleteDraft(id: number, slug: string): Promise<void>
 {
   const validData = DraftActionSchema.parse({ id, slug });
 
@@ -89,7 +89,7 @@ export async function deleteDraft(id: number, slug: string)
 
 
 
-export async function createDraft(draft: InsertNewsletterParam)
+export async function createDraft(draft: InsertNewsletterParam): Promise<void>
 {
   const validData = CreateDraftSchema.parse(draft);
   const response = await insertNewsletter(validData);
@@ -102,7 +102,7 @@ export async function createDraft(draft: InsertNewsletterParam)
 
 
 
-export async function updateDraft(id: number, slug: string, data: Partial<InsertNewsletterParam>)
+export async function updateDraft(id: number, slug: string, data: Partial<InsertNewsletterParam>): Promise<void>
 {
   const validData = UpdateDraftSchema.parse({ id, slug, ...data });
   const response = await updateNewsletter(validData);
