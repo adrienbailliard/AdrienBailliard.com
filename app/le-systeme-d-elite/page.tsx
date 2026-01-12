@@ -9,11 +9,11 @@ import Form from '@/components/ui/BaseForm';
 import Arrow from "@/components/icons/arrow";
 import Stats from "@/components/Stats";
 
-import { PageSEO } from "@/lib/types";
+import { StaticPage } from "@/lib/types";
 
 
 
-const page: PageSEO = {
+const page: StaticPage = {
   pathname: "/le-systeme-d-elite",
   title: "Le Système d'Élite",
   description: "Les protocoles exacts du Top 1% en market making, rassemblés dans un guide gratuit pour créer des systèmes performants."

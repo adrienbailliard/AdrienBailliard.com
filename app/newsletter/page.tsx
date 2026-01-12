@@ -9,11 +9,11 @@ import NewsletterSignup from "@/components/newsletter/Signup";
 import Stats from "@/components/Stats";
 import Divider from "@/components/ui/Divider";
 
-import { PageSEO } from "@/lib/types";
+import { StaticPage } from "@/lib/types";
 
 
 
-const page: PageSEO = {
+const page: StaticPage = {
   pathname: "/newsletter",
   title: "Auto Monday",
   description: "Auto Monday est une newsletter qui partage, chaque lundi, une clé pour automatiser comme le Top 1%. Abonne-toi gratuitement."

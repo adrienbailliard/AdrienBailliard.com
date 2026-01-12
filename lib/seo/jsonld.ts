@@ -1,7 +1,7 @@
 import site from "@/config/site";
 import pages from "@/config/navigation";
 
-import { PageSEO } from "@/lib/types";
+import { Page } from "@/lib/types";
 
 
 
@@ -73,7 +73,7 @@ function getBreadcrumbList(pathname: string, nameFallback: string): Array<Breadc
 
 
 
-export function getJsonLd({ pathname, title, description, publishedAt }: PageSEO): Record<string, unknown>
+export function getJsonLd({ pathname, title, description, publishedAt }: Page): Record<string, unknown>
 {
     const pageUrl = site.url + pathname;
     const publishedAtISO = publishedAt && publishedAt.toISOString();

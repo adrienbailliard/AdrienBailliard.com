@@ -15,11 +15,11 @@ import ServicePreview from "@/components/ui/ServicePreview";
 import PublishedNewsletters from "@/components/newsletterPreview/published";
 
 import site from "@/config/site";
-import { PageSEO } from "@/lib/types";
+import { StaticPage } from "@/lib/types";
 
 
 
-const page: PageSEO = {
+const page: StaticPage = {
   pathname: "/",
   title: site.name + " - " + site.description,
   description: "Automatise comme le Top 1% avec Auto Monday, en recevant les systèmes qui libèrent ton temps. Chaque lundi, dans ta boîte mail."

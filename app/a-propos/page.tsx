@@ -6,11 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Logo from "@/components/icons/logo";
-import { PageSEO } from "@/lib/types";
+import { StaticPage } from "@/lib/types";
 
 
 
-const page: PageSEO = {
+const page: StaticPage = {
   pathname: "/a-propos",
   title: "À Propos",
   description: "Fondateur d'Auto Monday, Adrien Bailliard conçoit des systèmes performants qui libèrent ton temps. Découvre son histoire."

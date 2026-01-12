@@ -3,12 +3,24 @@
 */
 
 
-export type PageSEO = {
+export type BasePage = {
   pathname: string;
   title: string;
   description: string;
-  publishedAt?: Date;
 };
+
+
+export type StaticPage = BasePage & {
+  publishedAt?: never
+};
+
+
+export type ArticlePage = BasePage & {
+  publishedAt: Date | null
+};
+
+
+export type Page = StaticPage | ArticlePage;
 
 
 

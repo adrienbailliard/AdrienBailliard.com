@@ -8,11 +8,11 @@ import Arrow from "@/components/icons/arrow";
 import Link from "@/components/ui/Link";
 import Cta from "@/components/Cta";
 
-import { PageSEO } from "@/lib/types";
+import { StaticPage } from "@/lib/types";
 
 
 
-const page: PageSEO = {
+const page: StaticPage = {
   pathname: "/consultation",
   title: "Consultation",
   description: "Réserve une consultation 1:1 avec Adrien Bailliard pour automatiser ton business avec des systèmes performants, comme les meilleurs dirigeants."

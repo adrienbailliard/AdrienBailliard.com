@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
       pathname: `/newsletter/${slug}`,
       title: newsletter.title,
       description: newsletter.excerpt,
-      publishedAt: newsletter.published_at!
+      publishedAt: newsletter.published_at
     })
     : metadata;
 }
@@ -47,12 +47,14 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
     notFound();
 
 
-  const jsonLd = getJsonLd({
+  const articlePage = {
     pathname: `/newsletter/${slug}`,
     title: newsletter.title,
     description: newsletter.excerpt,
-    publishedAt: newsletter.published_at!
-  });
+    publishedAt: newsletter.published_at
+  };
+
+  const jsonLd = getJsonLd(articlePage);
 
 
   return (

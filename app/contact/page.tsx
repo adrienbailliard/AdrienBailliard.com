@@ -10,11 +10,11 @@ import Plane from "@/components/icons/plane";
 import Mail from "@/components/icons/mail";
 import Divider from "@/components/ui/Divider";
 
-import { PageSEO } from "@/lib/types";
+import { StaticPage } from "@/lib/types";
 
 
 
-const page: PageSEO = {
+const page: StaticPage = {
   pathname: "/contact",
   title: "Contact",
   description: "Contacte Adrien Bailliard à propos d'automatisation, de systèmes performants et d'opportunités de collaboration."
