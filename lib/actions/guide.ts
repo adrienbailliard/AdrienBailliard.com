@@ -4,6 +4,7 @@ import { updateTag } from 'next/cache';
 
 import { insertRequestGuide } from "@/lib/db/guide";
 import { sendGuide } from "@/lib/email/guide";
+import CACHE_TAGS from '@/lib/db/cache-tags';
 
 import { isValidDomain } from "@/lib/form/domain-checker";
 import { getValidEmail } from "@/lib/form/validators";
@@ -22,7 +23,7 @@ export async function request(formData: FormData): Promise<void>
             throw new Error("Invalid domain");
 
         await insertRequestGuide(email);
-        updateTag('guide-stats');
+        updateTag(CACHE_TAGS.guideStats);
         
         await sendGuide(email);
     });

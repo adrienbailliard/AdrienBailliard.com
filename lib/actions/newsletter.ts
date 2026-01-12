@@ -10,6 +10,7 @@ import { getValidEmail } from "@/lib/form/validators";
 
 import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter } from "@/lib/db/newsletters";
 import { addSubscriber } from "@/lib/db/subscribers";
+import CACHE_TAGS from '@/lib/db/cache-tags';
 
 import { sendConfirmation } from "@/lib/email/newsletter";
 import { sendAdminLoginLink } from "@/lib/email/admin";
@@ -52,7 +53,7 @@ export async function subscribe(formData: FormData): Promise<void>
 
     else if (await addSubscriber(email))
     {
-      updateTag('subscribers-stats');
+      updateTag(CACHE_TAGS.subscribersStats);
       await sendConfirmation(email);
     }
   });
@@ -66,9 +67,8 @@ export async function publishDraft(id: number, slug: string): Promise<void>
 
   await publishNewsletterById(validData.id);
 
-  updateTag("published-newsletter-previews");
-  updateTag("newsletter-drafts-previews");
-  updateTag("published-newsletter-slugs");
+  updateTag(CACHE_TAGS.newsletterPublished);
+  updateTag(CACHE_TAGS.newsletterDrafts);
 
   revalidatePath(`/admin/newsletter/${validData.slug}`);
   revalidatePath(`/newsletter/${validData.slug}`);
@@ -84,7 +84,7 @@ export async function deleteDraft(id: number, slug: string): Promise<void>
 
   await deleteNewsletterById(validData.id);
 
-  updateTag("newsletter-drafts-previews");
+  updateTag(CACHE_TAGS.newsletterDrafts);
   revalidatePath(`/admin/newsletter/${validData.slug}`);
 
   redirect("/newsletter");
@@ -97,7 +97,7 @@ export async function createDraft(draft: InsertNewsletterParam): Promise<void>
   const validData = CreateDraftSchema.parse(draft);
   const response = await insertNewsletter(validData);
 
-  updateTag("newsletter-drafts-previews");
+  updateTag(CACHE_TAGS.newsletterDrafts);
   revalidatePath(`/admin/newsletter/${response.slug}`);
 
   redirect(`/admin/newsletter/${response.slug}`);
@@ -114,7 +114,7 @@ export async function updateDraft(id: number, slug: string, data: Partial<Insert
     throw new Error("Draft not found");
 
   if (!validData.content)
-    updateTag("newsletter-drafts-previews");
+    updateTag(CACHE_TAGS.newsletterDrafts);
 
   revalidatePath(`/admin/newsletter/${validData.slug}`);
 

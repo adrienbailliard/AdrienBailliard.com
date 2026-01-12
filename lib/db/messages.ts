@@ -1,6 +1,8 @@
 import { unstable_cache } from 'next/cache';
 
 import { sql } from '@/lib/db/client';
+import CACHE_TAGS from '@/lib/db/cache-tags';
+
 import { MessagesStats, StatResponse, MessageInput, Message } from '@/lib/types';
 import { adaptLabel, formatGain } from '@/lib/utils';
 
@@ -25,8 +27,8 @@ export const getMessages = unstable_cache(
 
     return result;
   },
-  ['messages'],
-  { tags: ['messages'] }
+  [ CACHE_TAGS.messages ],
+  { tags: [ CACHE_TAGS.messages ] }
 );
 
 
@@ -76,6 +78,6 @@ export const getMessagesStats = unstable_cache(
       }
     ];
   },
-  ['messages-stats'],
-  { tags: ['messages-stats'] }
+  [ CACHE_TAGS.messagesStats ],
+  { tags: [ CACHE_TAGS.messagesStats ] }
 );

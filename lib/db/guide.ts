@@ -1,6 +1,7 @@
 import { unstable_cache } from 'next/cache';
 
 import { sql } from '@/lib/db/client';
+import CACHE_TAGS from '@/lib/db/cache-tags';
 import { GuideStats, StatResponse } from '@/lib/types';
 
 import { formatPercentage, adaptLabel, formatGain } from '@/lib/utils';
@@ -32,7 +33,6 @@ export const getGuideStats = unstable_cache(
 
     const stats = result[0];
 
-
     return [
       { value: stats.total_contacts, label:
         adaptLabel(stats.total_contacts, { singular: 'Contact total', plural: 'Contacts totaux' })
@@ -43,6 +43,6 @@ export const getGuideStats = unstable_cache(
       { value: formatPercentage(stats.retries_rate), label: 'Taux de relance' }
     ];
   },
-  ['guide-stats'],
-  { tags: ['guide-stats'] }
+  [ CACHE_TAGS.guideStats ],
+  { tags: [ CACHE_TAGS.guideStats ] }
 );

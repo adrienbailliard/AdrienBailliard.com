@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { revalidateTag } from 'next/cache';
 
+import CACHE_TAGS from '@/lib/db/cache-tags';
 import { updateMessagesReadStatus } from '@/lib/db/messages';
 
 
@@ -17,7 +18,7 @@ export async function PATCH(request: Request)
     const { ids, areRead } = UpdateStatusSchema.parse(body);
 
     await updateMessagesReadStatus(ids, areRead);
-    revalidateTag("messages", { expire: 0 });
+    revalidateTag(CACHE_TAGS.messages, { expire: 0 });
 
     return Response.json({ success: true });
 }

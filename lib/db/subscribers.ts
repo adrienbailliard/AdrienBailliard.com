@@ -1,6 +1,8 @@
 import { unstable_cache } from 'next/cache';
 
 import { sql } from '@/lib/db/client';
+import CACHE_TAGS from '@/lib/db/cache-tags';
+
 import { SubscribersStats, StatResponse } from '@/lib/types';
 import { formatPercentage, adaptLabel, formatGain } from '@/lib/utils';
 import { STATS_PERCENTAGE_PRECISION } from '@/lib/constants';
@@ -45,6 +47,6 @@ export const getSubscribersStats = unstable_cache(
       { value: formatPercentage(stats.unsubscribe_rate), label: 'Taux de désinscription' }
     ];
   },
-  ['subscribers-stats'],
-  { tags: ['subscribers-stats'] }
+  [ CACHE_TAGS.subscribersStats ],
+  { tags: [ CACHE_TAGS.subscribersStats ] }
 );

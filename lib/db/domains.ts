@@ -3,6 +3,7 @@ import { unstable_cache } from 'next/cache';
 import { DOMAIN_CACHE_TTL_DAYS, domainStatus } from "@/lib/constants";
 
 
+
 export const getDomainStatus = unstable_cache(
   async (domain: string): Promise<domainStatus | undefined> => {
     const result = await sql`
@@ -16,6 +17,7 @@ export const getDomainStatus = unstable_cache(
   ['domain-validation'],
   { revalidate: 86400 }
 );
+
 
 
 export async function upsertDomain(domain: string, status: number): Promise<void>

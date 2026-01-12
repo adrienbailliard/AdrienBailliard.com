@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { revalidateTag } from 'next/cache';
 
+import CACHE_TAGS from '@/lib/db/cache-tags';
 import { deleteMessages } from '@/lib/db/messages';
 
 
@@ -14,8 +15,8 @@ export async function DELETE(request: Request)
     const validIds = IdsSchema.parse(body.ids);
 
     await deleteMessages(validIds);
-    revalidateTag("messages-stats", { expire: 0 });
-    revalidateTag("messages", { expire: 0 });
+    revalidateTag(CACHE_TAGS.messagesStats, { expire: 0 });
+    revalidateTag(CACHE_TAGS.messages, { expire: 0 });
 
     return Response.json({ success: true });
 }

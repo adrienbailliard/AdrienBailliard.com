@@ -1,4 +1,6 @@
 import { sql } from '@/lib/db/client';
+import CACHE_TAGS from '@/lib/db/cache-tags';
+
 import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 
@@ -19,6 +21,7 @@ export async function publishNewsletterById(id: number)
 }
 
 
+
 export async function deleteNewsletterById(id: number)
 {
     await sql`
@@ -26,6 +29,7 @@ export async function deleteNewsletterById(id: number)
         WHERE id = ${id}
     `;
 }
+
 
 
 async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
@@ -50,6 +54,7 @@ async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
 }
 
 
+
 export async function insertNewsletter(draft: InsertNewsletterParam): Promise<NewsletterSlug>
 {
     const slug = await getUniqueSlug(draft.title);
@@ -62,6 +67,7 @@ export async function insertNewsletter(draft: InsertNewsletterParam): Promise<Ne
 
     return result[0];
 }
+
 
 
 export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterSlug | null>
@@ -84,6 +90,7 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Ne
 }
 
 
+
 async function getNewsletterPreviews(isPublished: boolean, limit?: number): Promise<NewsletterPreviewDB[]>
 {
     const result = await sql `
@@ -98,18 +105,21 @@ async function getNewsletterPreviews(isPublished: boolean, limit?: number): Prom
 }
 
 
+
 export const getNewsletterDraftsPreviews = unstable_cache(
     async () => getNewsletterPreviews(false),
-    ['newsletter-drafts-previews'],
-    { tags: ['newsletter-drafts-previews'] }
+    [ CACHE_TAGS.newsletterDrafts ],
+    { tags: [ CACHE_TAGS.newsletterDrafts ] }
 );
+
 
 
 export const getPublishedNewsletterPreviews = unstable_cache(
     async (limit?: number) => getNewsletterPreviews(true, limit),
-    ['published-newsletter-previews'],
-    { tags: ['published-newsletter-previews'] }
+    [ CACHE_TAGS.newsletterPublished ],
+    { tags: [ CACHE_TAGS.newsletterPublished ] }
 );
+
 
 
 export const getNewsletterBySlug = cache(
@@ -126,25 +136,11 @@ export const getNewsletterBySlug = cache(
 );
 
 
+
 export const getNewsletterDraftBySlug =
     async (slug: string) => getNewsletterBySlug(slug, false);
 
 
+
 export const getPublishedNewsletterBySlug =
     async (slug: string) => getNewsletterBySlug(slug, true);
-
-
-export const getPublishedNewsletterSlugs = unstable_cache(
-    async (): Promise<string[]> =>
-    {
-        const result = await sql`
-            SELECT slug
-            FROM newsletters
-            WHERE published_at IS NOT NULL
-        `;
-
-        return result.map((row) => row.slug);
-    },
-    ['published-newsletter-slugs'],
-    { tags: ['published-newsletter-slugs'] }
-);
