@@ -91,14 +91,13 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Ne
 
 
 
-async function getNewsletterPreviews(isPublished: boolean, limit?: number): Promise<NewsletterPreviewDB[]>
+async function getNewsletterPreviews(isPublished: boolean): Promise<NewsletterPreviewDB[]>
 {
     const result = await sql `
         SELECT slug, title, excerpt, updated_at, published_at
         FROM newsletters
         WHERE published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
         ORDER BY updated_at DESC
-        LIMIT ${limit}
     ` as NewsletterPreviewDB[];
 
     return result;
@@ -115,7 +114,7 @@ export const getNewsletterDraftsPreviews = unstable_cache(
 
 
 export const getPublishedNewsletterPreviews = unstable_cache(
-    async (limit?: number) => getNewsletterPreviews(true, limit),
+    async () => getNewsletterPreviews(true),
     [ CACHE_TAGS.newsletterPublished ],
     { tags: [ CACHE_TAGS.newsletterPublished ] }
 );

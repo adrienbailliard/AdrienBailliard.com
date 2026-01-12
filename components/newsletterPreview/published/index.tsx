@@ -3,6 +3,7 @@ import { PreviewCard } from "./PreviewCard";
 import { Cta } from "./Cta";
 
 
+
 type NewslettersProps = {
     title: string;
     cta?: boolean;
@@ -12,7 +13,8 @@ type NewslettersProps = {
 
 export default async function Newsletters({ title, cta, limit }: NewslettersProps)
 {
-    let previews = await getPublishedNewsletterPreviews(limit);
+    let previews = (await getPublishedNewsletterPreviews())
+        .slice(0, limit);
 
     if (previews.length === 0)
     {
@@ -35,7 +37,8 @@ export default async function Newsletters({ title, cta, limit }: NewslettersProp
                     { title }
                 </h2>
                 <div className="flex max-lg:flex-col lg:grid grid-cols-2 max-w-6xl mx-auto gap-10 md:gap-12 lg:gap-16">
-                    { previews.map((preview, index) => <PreviewCard key={index} preview={preview} />) }
+                    { previews.map((preview) =>
+                        <PreviewCard key={preview.slug} preview={preview} />) }
                 </div>
                 { cta && <Cta />}
             </div>
