@@ -50,7 +50,8 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
   const jsonLd = getJsonLd({
     pathname: `/newsletter/${slug}`,
     title: newsletter.title,
-    description: newsletter.excerpt
+    description: newsletter.excerpt,
+    publishedAt: newsletter.published_at!
   });
 
 

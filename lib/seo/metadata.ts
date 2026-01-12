@@ -52,6 +52,8 @@ export function getMinimalMetadata(title: string): Metadata
 export function getMetadata({ pathname, title, description, publishedAt }: PageSEO): Metadata
 {
     const htmlTitle = pathname == "/" ? title : title + " - " + site.name;
+    const publishedAtISO = publishedAt && publishedAt.toISOString();
+
 
     return {
         title: htmlTitle,
@@ -76,10 +78,10 @@ export function getMetadata({ pathname, title, description, publishedAt }: PageS
             ],
             locale: 'fr_FR',
             type: 'website',
-            ...(publishedAt && {
+            ...(publishedAtISO && {
                 type: 'article',
-                publishedTime: publishedAt.toISOString(),
-                modifiedTime: publishedAt.toISOString()
+                publishedTime: publishedAtISO,
+                modifiedTime: publishedAtISO
             })
         },
         twitter: {

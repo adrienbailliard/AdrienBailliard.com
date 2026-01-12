@@ -5,6 +5,32 @@ import { PageSEO } from "@/lib/types";
 
 
 
+const ENTITY_WEBSITE = {
+    "@type": "WebSite",
+    "@id": `${site.url}#website`,
+    "url": site.url,
+    "name": site.name,
+    "description": site.description,
+    "publisher": { "@id": `${site.url}#organization` },
+    "inLanguage": "fr-FR"
+};
+
+
+const ENTITY_ORG = {
+    "@type": "Organization",
+    "@id": `${site.url}#organization`,
+    "name": site.name,
+    "url": site.url,
+    "logo": {
+        "@type": "ImageObject",
+        "url": site.logo.url,
+        "width": site.logo.width,
+        "height": site.logo.height
+    }
+};
+
+
+
 type BreadcrumbElement = {
   "@type": "ListItem",
   position: number,
@@ -32,6 +58,7 @@ function getBreadcrumbList(pathname: string, nameFallback: string): Array<Breadc
     const itemList: Array<BreadcrumbElement> = new Array(segments.length);
     let currentPathname = "";
 
+
     itemList[0] = getBreadcrumb("/", nameFallback, 0, segments.length);
 
     for (let i = 1; i < segments.length; i++)
@@ -39,80 +66,66 @@ function getBreadcrumbList(pathname: string, nameFallback: string): Array<Breadc
         currentPathname += "/" + segments[i];
         itemList[i] = getBreadcrumb(currentPathname, nameFallback, i, segments.length);
     }
+    
 
     return itemList;
 }
 
 
 
-export function getJsonLd({ pathname, title, description }: PageSEO): Record<string, unknown>
+export function getJsonLd({ pathname, title, description, publishedAt }: PageSEO): Record<string, unknown>
 {
     const pageUrl = site.url + pathname;
+    const publishedAtISO = publishedAt && publishedAt.toISOString();
+
+
+    const graph: any[] = [
+        {
+            "@type": "WebPage",
+            "@id": pageUrl,
+            "url": pageUrl,
+            "name": title,
+            "description": description,
+            "isPartOf": { "@id": ENTITY_WEBSITE["@id"] },
+            "breadcrumb": { "@id": `${pageUrl}#breadcrumb` },
+            "datePublished": publishedAtISO,
+            "dateModified": publishedAtISO,
+            "inLanguage": "fr-FR"
+        },
+        ENTITY_WEBSITE,
+        ENTITY_ORG,
+        {
+            "@type": "BreadcrumbList",
+            "@id": `${pageUrl}#breadcrumb`,
+            "itemListElement": getBreadcrumbList(pathname, title)
+        }
+    ];
+
+
+    if (publishedAtISO)
+    {
+        graph.push({
+            "@type": "NewsArticle",
+            "@id": `${pageUrl}#article`,
+            "isPartOf": { "@id": pageUrl },
+            "mainEntityOfPage": { "@id": pageUrl },
+            "headline": title,
+            "description": description,
+            "datePublished": publishedAtISO,
+            "dateModified": publishedAtISO,
+            "image": site.logo.url,
+            "author": {
+                "@type": "Person",
+                "name": site.name,
+                "url": site.url
+            },
+            "publisher": { "@id": ENTITY_ORG["@id"] }
+        });
+    }
+
 
     return {
         "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "WebPage",
-                "@id": pageUrl,
-                "url": pageUrl,
-                "name": title,
-                "isPartOf": {
-                    "@id": site.url + "#website"
-                },
-                "about": {
-                    "@id": site.url + "#organization"
-                },
-                "description": description,
-                "breadcrumb": {
-                    "@id": pageUrl + "#breadcrumb"
-                },
-                "dateModified": new Date().toISOString().replace('Z', '+00:00'),
-                "inLanguage": "fr-FR",
-                "potentialAction": [
-                    {
-                        "@type": "ReadAction",
-                        "target": [
-                            pageUrl
-                        ]
-                    }
-                ]
-            },
-            {
-                "@type": "WebSite",
-                "@id": site.url + "#website",
-                "url": site.url,
-                "name": site.name,
-                "description": site.description,
-                "publisher": {
-                    "@id": site.url + "#organization"
-                },
-                "inLanguage": "fr-FR"
-            },
-            {
-                "@type": "Organization",
-                "@id": site.url + "#organization",
-                "name": site.name,
-                "url": site.url,
-                "logo": {
-                    "@type": "ImageObject",
-                    "@id": site.url + "#logo",
-                    "inLanguage": "fr-FR",
-                    "url": site.logo.url,
-                    "contentUrl": site.logo.url,
-                    "width": site.logo.width,
-                    "height": site.logo.height,
-                    "caption": site.name
-                },
-                "image": {
-                    "@id": site.url + "#logo"
-                }
-            },
-            {
-                "@type": "BreadcrumbList",
-                "@id": pageUrl + "#breadcrumb",
-                "itemListElement": getBreadcrumbList(pathname, title)
-            }
-        ]
+        "@graph": graph
     };
 }
