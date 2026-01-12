@@ -7,6 +7,7 @@ export type PageSEO = {
   pathname: string;
   title: string;
   description: string;
+  publishedAt?: Date;
 };
 
 

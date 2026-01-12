@@ -49,7 +49,7 @@ export function getMinimalMetadata(title: string): Metadata
 
 
 
-export function getMetadata({ pathname, title, description }: PageSEO): Metadata
+export function getMetadata({ pathname, title, description, publishedAt }: PageSEO): Metadata
 {
     const htmlTitle = pathname == "/" ? title : title + " - " + site.name;
 
@@ -76,6 +76,11 @@ export function getMetadata({ pathname, title, description }: PageSEO): Metadata
             ],
             locale: 'fr_FR',
             type: 'website',
+            ...(publishedAt && {
+                type: 'article',
+                publishedTime: publishedAt.toISOString(),
+                modifiedTime: publishedAt.toISOString()
+            })
         },
         twitter: {
             card: "summary_large_image",

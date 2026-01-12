@@ -24,7 +24,8 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
     ? getMetadata({
       pathname: `/newsletter/${slug}`,
       title: newsletter.title,
-      description: newsletter.excerpt
+      description: newsletter.excerpt,
+      publishedAt: newsletter.published_at!
     })
     : metadata;
 }
