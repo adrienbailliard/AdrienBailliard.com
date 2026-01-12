@@ -1,5 +1,6 @@
 'use server';
 import { after } from 'next/server';
+import { updateTag } from 'next/cache';
 
 import { insertRequestGuide } from "@/lib/db/guide";
 import { sendGuide } from "@/lib/email/guide";
@@ -21,6 +22,8 @@ export async function request(formData: FormData): Promise<void>
             throw new Error("Invalid domain");
 
         await insertRequestGuide(email);
+        updateTag('guide-stats');
+        
         await sendGuide(email);
     });
 }

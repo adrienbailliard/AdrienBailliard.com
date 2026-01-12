@@ -1,5 +1,8 @@
 import { z } from 'zod';
+import { revalidateTag } from 'next/cache';
+
 import { updateMessagesReadStatus } from '@/lib/db/messages';
+
 
 
 const UpdateStatusSchema = z.object({
@@ -14,5 +17,7 @@ export async function PATCH(request: Request)
     const { ids, areRead } = UpdateStatusSchema.parse(body);
 
     await updateMessagesReadStatus(ids, areRead);
+    revalidateTag("messages", { expire: 0 });
+
     return Response.json({ success: true });
 }

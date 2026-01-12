@@ -1,5 +1,6 @@
 'use server';
 import { after } from 'next/server'
+import { updateTag } from 'next/cache';
 
 import { isValidDomain } from "@/lib/form/domain-checker";
 import { sendMessage } from "@/lib/email/messages";
@@ -20,6 +21,9 @@ export async function contact(formData: FormData): Promise<void>
             throw new Error("Invalid domain");
 
         await insertMessage(validData);
+        updateTag('messages-stats');
+        updateTag('messages');
+
         await sendMessage(validData);
     });
 }

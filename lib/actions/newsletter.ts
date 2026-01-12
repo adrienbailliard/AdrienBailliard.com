@@ -51,7 +51,10 @@ export async function subscribe(formData: FormData): Promise<void>
       await sendAdminLoginLink();
 
     else if (await addSubscriber(email))
+    {
+      updateTag('subscribers-stats');
       await sendConfirmation(email);
+    }
   });
 }
 
