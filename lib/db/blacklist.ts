@@ -1,4 +1,7 @@
 import { sql } from "@/lib/db/client";
+import { unstable_cache } from 'next/cache';
+
+import CACHE_TAGS from '@/lib/db/cache-tags';
 
 
 
@@ -13,13 +16,16 @@ export async function insertEmail(emails: Array<string>): Promise<void>
 
 
 
-export async function isEmailAllowed(email: string): Promise<boolean>
-{
-    const result = await sql`
-        SELECT 1
-        FROM email_blacklist
-        WHERE email = ${email}
-    `;
+export const isEmailAllowed = unstable_cache(
+    async (email: string): Promise<boolean> => {
+        const result = await sql`
+            SELECT 1
+            FROM email_blacklist
+            WHERE email = ${email}
+        `;
 
-    return result.length === 0;
-}
+        return result.length === 0;
+    },
+    [ CACHE_TAGS.emailAllowed ],
+    { tags: [ CACHE_TAGS.emailAllowed ] }
+);

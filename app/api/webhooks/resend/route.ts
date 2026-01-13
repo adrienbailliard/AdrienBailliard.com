@@ -32,6 +32,7 @@ export async function POST(req: Request)
       ]);
 
       revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
+      revalidateTag(CACHE_TAGS.emailAllowed, { expire: 0 });
     }
 
 

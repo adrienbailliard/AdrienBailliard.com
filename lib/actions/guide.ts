@@ -15,18 +15,14 @@ import { getValidEmail } from "@/lib/form/validators";
 export async function request(formData: FormData): Promise<void>
 {
     const email = getValidEmail(formData);
-    const isAllowed = await isEmailAllowed(email);
-
-    if (!isAllowed)
-        return;
-
 
     after(async () =>
     {
-        const result = await isValidDomain(email.split("@")[1]);
+        const isAllowed = await isEmailAllowed(email);
+        if (!isAllowed) return;
 
-        if (!result)
-            throw new Error("Invalid domain");
+        const isDomainValid = await isValidDomain(email.split("@")[1]);
+        if (!isDomainValid) return;
 
         await Promise.all([
             insertRequestGuide(email),

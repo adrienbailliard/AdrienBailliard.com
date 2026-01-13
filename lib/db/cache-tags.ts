@@ -6,7 +6,9 @@ const CACHE_TAGS = {
 
     newsletterDrafts: 'newsletter-drafts-previews',
     newsletterPublished: 'published-newsletter-previews',
-    subscribersStats: 'subscribers-stats'
+    subscribersStats: 'subscribers-stats',
+
+    emailAllowed: 'email-allowed'
 };
 
 

@@ -15,18 +15,14 @@ import { getValidContactData } from "@/lib/form/validators";
 export async function contact(formData: FormData): Promise<void>
 {
     const validData = getValidContactData(formData);
-    const isAllowed = await isEmailAllowed(validData.email);
-
-    if (!isAllowed)
-        return;
-
 
     after(async () =>
     {
-        const result = await isValidDomain(validData.email.split("@")[1]);
+        const isAllowed = await isEmailAllowed(validData.email);
+        if (!isAllowed) return; 
 
-        if (!result)
-            throw new Error("Invalid domain");
+        const isDomainValid = await isValidDomain(validData.email.split("@")[1]);
+        if (!isDomainValid) return;
 
         await Promise.all([
             insertMessage(validData),
