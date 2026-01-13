@@ -79,7 +79,7 @@ export function getJsonLd({ pathname, title, description, publishedAt }: Page): 
     const publishedAtISO = publishedAt && publishedAt.toISOString();
 
 
-    const graph: any[] = [
+    const graph: Array<Record<string, any>> = [
         {
             "@type": "WebPage",
             "@id": pageUrl,

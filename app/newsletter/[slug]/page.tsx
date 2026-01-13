@@ -37,7 +37,6 @@ type NewsletterPageProps = {
 };
 
 
-
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
