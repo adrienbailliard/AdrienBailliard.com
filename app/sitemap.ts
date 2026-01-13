@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>
   for (const newsletter of newsletterPreview)
     result[i++] = {
       url: `${site.url}/newsletter/${newsletter.slug}`,
-      lastModified: newsletter.updated_at
+      lastModified: newsletter.published_at!
     };
 
 
