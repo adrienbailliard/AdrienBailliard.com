@@ -1,5 +1,9 @@
+import { revalidateTag } from 'next/cache';
+import CACHE_TAGS from '@/lib/db/cache-tags';
+
 import { resend } from "@/lib/email/client";
 import { insertEmail } from "@/lib/db/blacklist";
+import { unsubscribe } from "@/lib/db/subscribers";
 
 
 
@@ -17,7 +21,19 @@ export async function POST(req: Request)
       webhookSecret: process.env.RESEND_WEBHOOK_SECRET!,
     });
 
-    await insertEmail(result.data.to);
+
+    if (result.type === 'email.complained' || result.type === 'email.bounced')
+    {
+      const emails = result.data.to;
+
+      await Promise.all([
+          insertEmail(emails),
+          unsubscribe(emails)
+      ]);
+
+      revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
+    }
+
 
     return Response.json({ success: true });
 }

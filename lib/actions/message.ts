@@ -3,9 +3,11 @@ import { after } from 'next/server'
 import { updateTag } from 'next/cache';
 
 import CACHE_TAGS from '@/lib/db/cache-tags';
-import { isValidDomain } from "@/lib/form/domain-checker";
+import { isEmailAllowed } from "@/lib/db/blacklist";
 import { sendMessage } from "@/lib/email/messages";
 import { insertMessage } from "@/lib/db/messages";
+
+import { isValidDomain } from "@/lib/form/domain-checker";
 import { getValidContactData } from "@/lib/form/validators";
 
 
@@ -13,6 +15,11 @@ import { getValidContactData } from "@/lib/form/validators";
 export async function contact(formData: FormData): Promise<void>
 {
     const validData = getValidContactData(formData);
+    const isAllowed = await isEmailAllowed(validData.email);
+
+    if (!isAllowed)
+        return;
+
 
     after(async () =>
     {
@@ -21,10 +28,12 @@ export async function contact(formData: FormData): Promise<void>
         if (!result)
             throw new Error("Invalid domain");
 
-        await insertMessage(validData);
+        await Promise.all([
+            insertMessage(validData),
+            sendMessage(validData)
+        ]);
+
         updateTag(CACHE_TAGS.messagesStats);
         updateTag(CACHE_TAGS.messages);
-
-        await sendMessage(validData);
     });
 }

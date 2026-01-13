@@ -10,6 +10,7 @@ import { getValidEmail } from "@/lib/form/validators";
 
 import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter } from "@/lib/db/newsletters";
 import { addSubscriber } from "@/lib/db/subscribers";
+import { isEmailAllowed } from "@/lib/db/blacklist";
 import CACHE_TAGS from '@/lib/db/cache-tags';
 
 import { sendConfirmation } from "@/lib/email/newsletter";
@@ -40,6 +41,11 @@ const UpdateDraftSchema = DraftActionSchema.extend(CreateDraftSchema.partial().s
 export async function subscribe(formData: FormData): Promise<void>
 {
   const email = getValidEmail(formData);
+  const isAllowed = await isEmailAllowed(email);
+
+  if (!isAllowed)
+    return;
+
 
   after(async () =>
   {

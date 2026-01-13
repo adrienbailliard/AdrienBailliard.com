@@ -10,3 +10,16 @@ export async function insertEmail(emails: Array<string>): Promise<void>
         ON CONFLICT (email) DO NOTHING
     `;
 }
+
+
+
+export async function isEmailAllowed(email: string): Promise<boolean>
+{
+    const result = await sql`
+        SELECT 1
+        FROM email_blacklist
+        WHERE email = ${email}
+    `;
+
+    return result.length === 0;
+}

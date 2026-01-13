@@ -25,6 +25,17 @@ export async function addSubscriber(email: string): Promise<boolean>
 
 
 
+export async function unsubscribe(emails: Array<string>): Promise<void>
+{
+    await sql `
+        UPDATE subscribers
+        SET unsubscribed = true
+        WHERE email = ANY(${emails})
+    `;
+}
+
+
+
 export const getSubscribersStats = unstable_cache(
   async (): Promise<Array<StatResponse>> => {
     const result = await sql `
