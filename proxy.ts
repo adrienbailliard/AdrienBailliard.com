@@ -15,7 +15,8 @@ export default async function proxy(request: NextRequest)
   if (adminCookie && await isAdminLoginToken(adminCookie.value))
     await updateAdminCookie(res.cookies);
 
-  else if (pathname.startsWith('/api/') || pathname.startsWith('/admin'))
+  else if (pathname.startsWith('/api/') && pathname !== "/api/webhooks/resend"
+    || pathname.startsWith('/admin'))
     return NextResponse.rewrite(new URL('/404', request.url), { status: 404 });
 
 
