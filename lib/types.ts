@@ -40,27 +40,25 @@ export type NewsletterSlug = {
 };
 
 
-export type NewsletterPreviewDB = NewsletterSlug & {
+export type NewsletterPreview = NewsletterSlug & {
   title: string;
   excerpt: string;
   updated_at: Date;
   published_at: Date | null;
 };
 
-export type NewsletterDB = NewsletterPreviewDB & NewsletterContent;
+export type Newsletter = NewsletterPreview & NewsletterContent;
 
 
-export type NewsletterPreviewAPI = Omit<NewsletterPreviewDB, "updated_at" | "published_at"> & {
+export type SerializedNewsletterPreview = Omit<NewsletterPreview, "updated_at" | "published_at"> & {
   updated_at: string;
   published_at: string | null;
 };
 
-export type NewsletterAPI = NewsletterPreviewAPI & NewsletterContent;
 
-
-export type InsertNewsletterParam = Pick<NewsletterDB, "content" | "title" | "excerpt">;
-export type UpdateNewsletterParam = Partial<NewsletterDB> & Pick<NewsletterDB, "id">;
-export type EditorNewsletterParam = InsertNewsletterParam & Partial<Pick<NewsletterDB, "id" | "slug">>;
+export type InsertNewsletterParam = Pick<Newsletter, "content" | "title" | "excerpt">;
+export type UpdateNewsletterParam = Partial<InsertNewsletterParam> & Pick<Newsletter, "id">;
+export type EditorNewsletterParam = InsertNewsletterParam & Partial<Pick<Newsletter, "id" | "slug">>;
 
 
 

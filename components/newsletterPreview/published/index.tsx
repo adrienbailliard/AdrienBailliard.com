@@ -18,7 +18,7 @@ export default async function Newsletters({ title, cta, limit }: NewslettersProp
 
     if (previews.length === 0)
     {
-        const now = new Date();
+        const now = new Date().toISOString();
 
         previews = [{
             slug: "",

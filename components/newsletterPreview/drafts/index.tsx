@@ -2,7 +2,7 @@
 
 import useSWR from 'swr';
 import { useAuth } from '@/context/authentification';
-import { NewsletterPreviewAPI } from '@/lib/types';
+import { SerializedNewsletterPreview } from '@/lib/types';
 
 import Header from "./Header";
 import PreviewCard from "./PreviewCard";
@@ -16,7 +16,7 @@ const fetcher = (url: string) =>
 export default function NewsletterDrafts()
 {
     const { isAdmin } = useAuth();
-    const { data } = useSWR<NewsletterPreviewAPI[]>(isAdmin ? `/api/newsletter/drafts` : null, fetcher);
+    const { data } = useSWR<SerializedNewsletterPreview[]>(isAdmin ? `/api/newsletter/drafts` : null, fetcher);
 
     if (!isAdmin)
         return null;

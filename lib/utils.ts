@@ -37,9 +37,11 @@ export function formatAdminDate(value: string, now: Date): string
 }
 
 
-export function formatPublicDate(value: Date): string
+export function formatPublicDate(value: string | Date): string
 {
-    return value.toLocaleDateString('fr-FR', {
+    const date = typeof value === "string" ? new Date(value) : value;
+
+    return date.toLocaleDateString('fr-FR', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
