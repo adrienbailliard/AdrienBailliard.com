@@ -7,10 +7,12 @@ export function formatPercentage(value: number): string
 }
 
 
+
 export function adaptLabel(value: number, labels: { singular: string, plural: string }): string
 {
     return value > 1 ? labels.plural : labels.singular;
 }
+
 
 
 export function formatGain(value: number): string
@@ -19,22 +21,26 @@ export function formatGain(value: number): string
 }
 
 
-export function formatAdminDate(value: string, now: Date): string
+
+export function formatAdminDate(value: string, nowMidnight: number): string
 {
     const date = new Date(value);
-    const daysDiff = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
 
-    if (!daysDiff)
+    const timestampDiff = new Date(date).setHours(0, 0, 0, 0) - nowMidnight;
+    const daysDiff = Math.round(timestampDiff / (1000 * 60 * 60 * 24));
+
+    if (daysDiff === 0)
         return date.toLocaleString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
-    if (daysDiff == 1)
-        return 'hier';
+    if (daysDiff == 1) return 'demain';
+    if (daysDiff == -1) return 'hier';
 
-    if (daysDiff <= 6)
+    if (Math.abs(daysDiff) <= 6)
         return date.toLocaleString('fr-FR', { weekday: 'long' });
 
     return date.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
+
 
 
 export function formatPublicDate(value: string | Date): string
@@ -47,6 +53,7 @@ export function formatPublicDate(value: string | Date): string
         year: 'numeric',
     });
 }
+
 
 
 export function generateSlug(title: string): string {

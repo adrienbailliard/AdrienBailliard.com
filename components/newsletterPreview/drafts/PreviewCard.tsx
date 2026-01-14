@@ -4,13 +4,14 @@ import { formatAdminDate } from '@/lib/utils';
 import { SerializedNewsletterPreview } from "@/lib/types";
 
 
+
 type DraftCardProps = {
     draft: SerializedNewsletterPreview;
-    now: Date;
+    nowMidnight: number;
 }
 
 
-export default function DraftCard({ draft, now }: DraftCardProps)
+export default function DraftCard({ draft, nowMidnight }: DraftCardProps)
 {
     return (
         <Link href={`/admin/newsletter/${draft.slug}`}>
@@ -19,7 +20,7 @@ export default function DraftCard({ draft, now }: DraftCardProps)
                     { draft.title }
                 </div>
                 <time>
-                    { formatAdminDate(draft.updated_at, now) }
+                    { formatAdminDate(draft.scheduled_for || draft.updated_at, nowMidnight) }
                 </time>
                 <p className="card-container">
                     { draft.excerpt }

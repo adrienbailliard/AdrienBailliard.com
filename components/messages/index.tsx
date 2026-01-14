@@ -24,7 +24,7 @@ export default function Messages()
         return null;
 
     const safeData = Array.isArray(data) ? data : null;
-    const now = new Date();
+    const nowMidnight = new Date().setHours(0, 0, 0, 0);
 
 
     return (
@@ -35,7 +35,7 @@ export default function Messages()
                     {
                         safeData
                         ? safeData.map((message, i) =>
-                            <MessageCard message={message} now={now} key={message.id}/>)
+                            <MessageCard message={message} nowMidnight={nowMidnight} key={message.id}/>)
                         : [...Array(3)].map((_, i) =>
                             <MessageSkeletonCard key={i}/>)
                     }

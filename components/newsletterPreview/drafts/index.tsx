@@ -9,30 +9,47 @@ import PreviewCard from "./PreviewCard";
 import SkeletonCard from "./SkeletonCard";
 
 
+
 const fetcher = (url: string) =>
     fetch(url).then(r => r.json());
 
 
-export default function NewsletterDrafts()
+type NewsletterListProps = {
+    title: {
+        hasItems: string;
+        isEmpty: string;
+    };
+    apiUrl: string;
+    showCreate?: boolean;
+    className?: string;
+}
+
+
+export default function NewsletterList({ title, apiUrl, showCreate = false, className }: NewsletterListProps)
 {
     const { isAdmin } = useAuth();
-    const { data } = useSWR<SerializedNewsletterPreview[]>(isAdmin ? `/api/newsletter/drafts` : null, fetcher);
+    const { data } = useSWR<SerializedNewsletterPreview[]>(isAdmin ? apiUrl : null, fetcher);
 
     if (!isAdmin)
         return null;
 
     const safeData = Array.isArray(data) ? data : null;
-    const now = new Date();
+    const nowMidnight = new Date().setHours(0, 0, 0, 0);
 
 
     return (
-        <section className="text-light-fg bg-dark-bg">
+        <section className={`text-light-fg bg-dark-bg ${className}`}>
             <div>
-                <Header dataCount={safeData?.length}/>
+                <Header
+                    dataCount={safeData?.length}
+                    title={title}
+                    showCreate={showCreate}
+                />
                 {
                     safeData
-                    ? safeData.map((preview, i) => <PreviewCard draft={preview} now={now} key={i}/>)
-                    : [...Array(3)].map((_, i) => <SkeletonCard key={i}/>)
+                        ? safeData.map((preview, i) =>
+                            <PreviewCard draft={preview} nowMidnight={nowMidnight} key={i}/>)
+                        : [...Array(3)].map((_, i) => <SkeletonCard key={i}/>)
                 }
             </div>
         </section> 

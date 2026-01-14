@@ -34,7 +34,24 @@ export default function Newsletter()
 
       <Stats type="newsletter"/>
       <Divider variant="light" adminOnly={true}/>
-      <NewsletterDrafts />
+
+      <NewsletterDrafts
+        title={{
+          hasItems: "À venir",
+          isEmpty: "Rien de prévu"
+        }}
+        apiUrl="/api/newsletter/drafts/scheduled"
+      />
+
+      <NewsletterDrafts
+        title={{
+          hasItems: "En cours",
+          isEmpty: "Rien en cours"
+        }}
+        apiUrl="/api/newsletter/drafts"
+        showCreate={true}
+        className="pt-0"
+      />
       
       <NewsletterSignup />
       <PublishedNewsletters title="Toutes les Éditions" />
