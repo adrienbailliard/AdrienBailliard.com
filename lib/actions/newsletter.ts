@@ -69,6 +69,7 @@ export async function publishDraft(id: number): Promise<void>
 
   updateTag(CACHE_TAGS.newsletterPublished);
   updateTag(CACHE_TAGS.newsletterDrafts);
+  updateTag(CACHE_TAGS.newsletterScheduled);
 
   revalidatePath(`/admin/newsletter/${result.slug}`);
   revalidatePath(`/newsletter/${result.slug}`);
@@ -86,6 +87,7 @@ export async function deleteDraft(id: number): Promise<void>
   if (!result) return;
 
   updateTag(CACHE_TAGS.newsletterDrafts);
+  updateTag(CACHE_TAGS.newsletterScheduled);
   revalidatePath(`/admin/newsletter/${result.slug}`);
 
   redirect("/newsletter");
@@ -114,7 +116,10 @@ export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
   if (!result) return;
 
   if (!validData.content)
+  {
     updateTag(CACHE_TAGS.newsletterDrafts);
+    updateTag(CACHE_TAGS.newsletterScheduled);
+  }
 
   revalidatePath(`/admin/newsletter/${result.old_slug}`);
 
