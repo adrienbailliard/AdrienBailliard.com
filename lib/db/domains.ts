@@ -9,7 +9,8 @@ export const getDomainStatus = unstable_cache(
     const result = await sql`
       SELECT status
       FROM domains
-      WHERE domain = ${domain} AND checked_at > now() - make_interval(days => ${DOMAIN_CACHE_TTL_DAYS})
+      WHERE domain = ${domain}
+        AND checked_at > now() - make_interval(days => ${DOMAIN_CACHE_TTL_DAYS})
     ` as [{ status: domainStatus }];
 
     return result[0]?.status;

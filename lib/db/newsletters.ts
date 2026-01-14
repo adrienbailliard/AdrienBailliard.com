@@ -5,14 +5,14 @@ import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 
 import { generateSlug } from "@/lib/utils";
-import { DRAFT_CREATION_SLUG } from "@/lib/constants";
+import { DRAFT_CREATION_SLUG, newsletterStatus } from "@/lib/constants";
 
 import { NewsletterPreview, Newsletter, InsertNewsletterParam, UpdateNewsletterParam, NewsletterSlug,
     SerializedNewsletterPreview } from '@/lib/types';
 
 
 
-export async function publishNewsletterById(id: number)
+export async function publishNewsletterById(id: number): Promise<void>
 {
     await sql`
         UPDATE newsletters
@@ -23,7 +23,18 @@ export async function publishNewsletterById(id: number)
 
 
 
-export async function deleteNewsletterById(id: number)
+export async function scheduleNewsletterById(id: number, date: Date | null): Promise<void>
+{
+    await sql`
+        UPDATE newsletters
+        SET scheduled_for = ${ date }
+        WHERE id = ${id}
+    `;
+}
+
+
+
+export async function deleteNewsletterById(id: number): Promise<void>
 {
     await sql`
         DELETE FROM newsletters
@@ -40,7 +51,7 @@ async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
     const result = await sql`
         SELECT slug FROM newsletters 
         WHERE slug ~ ${ "^" + baseSlug + "(-[0-9]+)?$" }
-        ${ excludeId ? sql`AND id != ${excludeId}` : sql`` }
+            ${ excludeId ? sql`AND id != ${excludeId}` : sql`` }
         ORDER BY LENGTH(slug) DESC, slug DESC
         LIMIT 1
     `;
@@ -92,33 +103,44 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Ne
 
 
 
-async function getNewsletterPreviews(isPublished: boolean): Promise<NewsletterPreview[]>
-{
-    const result = await sql `
-        SELECT slug, title, excerpt, updated_at, published_at
-        FROM newsletters
-        WHERE published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
-        ORDER BY updated_at DESC
-    ` as NewsletterPreview[];
+const getNewsletterPreviews = (status: newsletterStatus, tag: string) => 
+    unstable_cache(
+        async (): Promise<SerializedNewsletterPreview[]> => {
+            const result = await sql `
+                SELECT slug, title, excerpt, updated_at, published_at, scheduled_for
+                FROM newsletters
+                WHERE ${
+                    status === newsletterStatus.PUBLISHED 
+                        ? sql`published_at IS NOT NULL` 
+                        : sql`published_at IS NULL AND scheduled_for IS ${
+                            status === newsletterStatus.SCHEDULED ? sql`NOT NULL` : sql`NULL`
+                        }`
+                }
+                ORDER BY ${
+                    status === newsletterStatus.PUBLISHED 
+                        ? sql`published_at DESC`
+                        : status === newsletterStatus.SCHEDULED 
+                            ? sql`scheduled_for ASC`
+                            : sql`updated_at DESC`
+                }
+            ` as NewsletterPreview[];
 
-    return result;
-}
+            return result.map(row => ({
+                ...row,
+                updated_at: row.updated_at.toISOString(),
+                published_at: row.published_at?.toISOString() || null,
+                scheduled_for: row.scheduled_for?.toISOString() || null,
+            }));
+        },
+        [ tag ],
+        { tags: [tag] }
+    );
 
 
 
-export const getNewsletterDraftsPreviews = unstable_cache(
-    async () => getNewsletterPreviews(false),
-    [ CACHE_TAGS.newsletterDrafts ],
-    { tags: [ CACHE_TAGS.newsletterDrafts ] }
-) as unknown as () => Promise<SerializedNewsletterPreview[]>;
-
-
-
-export const getPublishedNewsletterPreviews = unstable_cache(
-    async () => getNewsletterPreviews(true),
-    [ CACHE_TAGS.newsletterPublished ],
-    { tags: [ CACHE_TAGS.newsletterPublished ] }
-) as unknown as () => Promise<SerializedNewsletterPreview[]>;
+export const getNewsletterDraftsPreviews = getNewsletterPreviews(newsletterStatus.DRAFT, CACHE_TAGS.newsletterDrafts);
+export const getPublishedNewsletterPreviews = getNewsletterPreviews(newsletterStatus.PUBLISHED, CACHE_TAGS.newsletterPublished);
+export const getScheduledNewsletterPreviews = getNewsletterPreviews(newsletterStatus.SCHEDULED, CACHE_TAGS.newsletterScheduled);
 
 
 
@@ -128,7 +150,7 @@ export const getNewsletterBySlug = cache(
             SELECT *
             FROM newsletters
             WHERE slug = ${slug}
-            AND published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
+                AND published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
         ` as Newsletter[];
 
         return result[0] || null;

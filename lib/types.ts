@@ -45,14 +45,16 @@ export type NewsletterPreview = NewsletterSlug & {
   excerpt: string;
   updated_at: Date;
   published_at: Date | null;
+  scheduled_for: Date | null;
 };
 
 export type Newsletter = NewsletterPreview & NewsletterContent;
 
 
-export type SerializedNewsletterPreview = Omit<NewsletterPreview, "updated_at" | "published_at"> & {
+export type SerializedNewsletterPreview = Omit<NewsletterPreview, "updated_at" | "published_at" | "scheduled_for"> & {
   updated_at: string;
   published_at: string | null;
+  scheduled_for: string | null;
 };
 
 

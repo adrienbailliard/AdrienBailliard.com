@@ -13,22 +13,8 @@ type NewslettersProps = {
 
 export default async function Newsletters({ title, cta, limit }: NewslettersProps)
 {
-    let previews = (await getPublishedNewsletterPreviews())
+    const previews = (await getPublishedNewsletterPreviews())
         .slice(0, limit);
-
-    if (previews.length === 0)
-    {
-        const now = new Date().toISOString();
-
-        previews = [{
-            slug: "",
-            title: "Découvrir l'Inédit",
-            excerpt: "Notre newsletter arrive bientôt ! Préparez-vous à accéder aux stratégies exclusives du Top 1%.",
-            updated_at: now,
-            published_at: now
-        }];
-    }
-
 
     return (
         <section className="bg-light-bg text-dark-fg">
