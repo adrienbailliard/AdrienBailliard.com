@@ -105,8 +105,8 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Ne
 
 const getNewsletterPreviews = (status: newsletterStatus, tag: string) => 
     unstable_cache(
-        async (): Promise<SerializedNewsletterPreview[]> => {
-            const result = await sql `
+        async () => {
+            return await sql `
                 SELECT slug, title, excerpt, updated_at, published_at, scheduled_for
                 FROM newsletters
                 WHERE ${
@@ -123,18 +123,11 @@ const getNewsletterPreviews = (status: newsletterStatus, tag: string) =>
                             ? sql`scheduled_for ASC`
                             : sql`updated_at DESC`
                 }
-            ` as NewsletterPreview[];
-
-            return result.map(row => ({
-                ...row,
-                updated_at: row.updated_at.toISOString(),
-                published_at: row.published_at?.toISOString() || null,
-                scheduled_for: row.scheduled_for?.toISOString() || null,
-            }));
+            ` as Array<NewsletterPreview>;
         },
         [ tag ],
         { tags: [tag] }
-    );
+    ) as () => Promise<Array<NewsletterPreview | SerializedNewsletterPreview>>;
 
 
 
