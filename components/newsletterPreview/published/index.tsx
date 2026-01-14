@@ -22,10 +22,17 @@ export default async function Newsletters({ title, cta, limit }: NewslettersProp
                 <h2 className="text-center">
                     { title }
                 </h2>
-                <div className="flex max-lg:flex-col lg:grid grid-cols-2 max-w-6xl mx-auto gap-10 md:gap-12 lg:gap-16">
-                    { previews.map((preview) =>
-                        <PreviewCard key={preview.slug} preview={preview} />) }
-                </div>
+                    { previews.length === 0
+                        ? <p className="text-dark-muted-text text-center">
+                            { "La première édition arrive dans les prochains jours." }
+                        </p>
+                        : (
+                            <div className="flex max-lg:flex-col lg:grid grid-cols-2 max-w-6xl mx-auto gap-10 md:gap-12 lg:gap-16">
+                                { previews.map((preview) =>
+                                    <PreviewCard key={preview.slug} preview={preview} />) }
+                            </div>
+                        )
+                    }
                 { cta && <Cta />}
             </div>
         </section>
