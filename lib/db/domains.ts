@@ -6,14 +6,14 @@ import { DOMAIN_CACHE_TTL_DAYS, domainStatus } from "@/lib/constants";
 
 export const getDomainStatus = unstable_cache(
   async (domain: string): Promise<domainStatus | undefined> => {
-    const result = await sql`
+    const [ domainStatus ] = await sql`
       SELECT status
       FROM domains
       WHERE domain = ${domain}
         AND checked_at > now() - make_interval(days => ${DOMAIN_CACHE_TTL_DAYS})
     ` as [{ status: domainStatus }];
 
-    return result[0]?.status;
+    return domainStatus?.status;
   },
   ['domain-validation'],
   { revalidate: 86400 }

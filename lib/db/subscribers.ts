@@ -38,15 +38,13 @@ export async function unsubscribe(emails: Array<string>): Promise<void>
 
 export const getSubscribersStats = unstable_cache(
   async (): Promise<Array<StatResponse>> => {
-    const result = await sql `
+    const [ stats ] = await sql `
       SELECT 
         COUNT(*) FILTER (WHERE unsubscribed = false) as total_subscribers,
         COUNT(*) FILTER (WHERE created_at > now() - INTERVAL '7 days' AND unsubscribed = false) as weekly_subscribers,
         ROUND(100.0 * COUNT(*) FILTER (WHERE unsubscribed = true) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as unsubscribe_rate
       FROM subscribers
     ` as SubscribersStats[];
-
-    const stats = result[0];
 
     return [
       { value: stats.total_subscribers, label:

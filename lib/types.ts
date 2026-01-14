@@ -59,8 +59,13 @@ export type SerializedNewsletterPreview = Omit<NewsletterPreview, "updated_at" |
 
 
 export type InsertNewsletterParam = Pick<Newsletter, "content" | "title" | "excerpt">;
+export type EditorNewsletterParam = InsertNewsletterParam & Partial<Pick<Newsletter, "id">>;
 export type UpdateNewsletterParam = Partial<InsertNewsletterParam> & Pick<Newsletter, "id">;
-export type EditorNewsletterParam = InsertNewsletterParam & Partial<Pick<Newsletter, "id" | "slug">>;
+
+export type UpdateNewsletterResult = {
+  old_slug: string,
+  new_slug: string
+}
 
 
 

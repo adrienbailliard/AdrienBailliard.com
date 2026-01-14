@@ -6,6 +6,7 @@ import EditorField from "./EditorField";
 import { EditorNewsletterParam, InsertNewsletterParam } from "@/lib/types";
 
 
+
 type EditableFieldProps = {
   children: React.ReactNode;
   newsletter: EditorNewsletterParam;

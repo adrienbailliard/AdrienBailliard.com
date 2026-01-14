@@ -8,17 +8,20 @@ import { generateSlug } from "@/lib/utils";
 import { DRAFT_CREATION_SLUG, newsletterStatus } from "@/lib/constants";
 
 import { NewsletterPreview, Newsletter, InsertNewsletterParam, UpdateNewsletterParam, NewsletterSlug,
-    SerializedNewsletterPreview } from '@/lib/types';
+    SerializedNewsletterPreview, UpdateNewsletterResult } from '@/lib/types';
 
 
 
-export async function publishNewsletterById(id: number): Promise<void>
+export async function publishNewsletterById(id: number): Promise<NewsletterSlug | null>
 {
-    await sql`
+    const [ newsletterSlug ] = await sql`
         UPDATE newsletters
         SET published_at = NOW()
         WHERE id = ${id}
-    `;
+        RETURNING slug
+    ` as Array<NewsletterSlug>;
+
+    return newsletterSlug || null;
 }
 
 
@@ -34,12 +37,15 @@ export async function scheduleNewsletterById(id: number, date: Date | null): Pro
 
 
 
-export async function deleteNewsletterById(id: number): Promise<void>
+export async function deleteNewsletterById(id: number): Promise<NewsletterSlug | null>
 {
-    await sql`
+    const [ newsletterSlug ] = await sql`
         DELETE FROM newsletters
         WHERE id = ${id}
-    `;
+        RETURNING slug
+    ` as Array<NewsletterSlug>;
+
+    return newsletterSlug || null;
 }
 
 
@@ -48,7 +54,7 @@ async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
 {
     const baseSlug = generateSlug(title);
 
-    const result = await sql`
+    const [ newsletterSlug ] = await sql`
         SELECT slug FROM newsletters 
         WHERE slug ~ ${ "^" + baseSlug + "(-[0-9]+)?$" }
             ${ excludeId ? sql`AND id != ${excludeId}` : sql`` }
@@ -56,10 +62,10 @@ async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
         LIMIT 1
     `;
 
-    if (result.length === 0)
+    if (!newsletterSlug)
         return baseSlug === DRAFT_CREATION_SLUG ? `${baseSlug}-2` : baseSlug;
 
-    const match = result[0].slug.match(/-(\d+)$/);
+    const match = newsletterSlug.slug.match(/-(\d+)$/);
     const nextNumber = match ? parseInt(match[1]) + 1 : 2;
 
     return `${baseSlug}-${nextNumber}`;
@@ -71,34 +77,37 @@ export async function insertNewsletter(draft: InsertNewsletterParam): Promise<Ne
 {
     const slug = await getUniqueSlug(draft.title);
 
-    const result = await sql`
+    const [ newsletterSlug ] = await sql`
         INSERT INTO newsletters (slug, title, content, excerpt)
         VALUES (${slug}, ${draft.title}, ${draft.content}, ${draft.excerpt})
         RETURNING slug
     ` as NewsletterSlug[];
 
-    return result[0];
+    return newsletterSlug;
 }
 
 
 
-export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<NewsletterSlug | null>
+export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<UpdateNewsletterResult | null>
 {
     const newSlug = draft.title ? await getUniqueSlug(draft.title, draft.id) : undefined;
 
-    const result = await sql`
+    const [ newsletterSlugs ] = await sql`
         UPDATE newsletters
         SET
-            slug = COALESCE(${newSlug}, slug),
+            slug = COALESCE(${newSlug}, newsletters.slug),
             title = COALESCE(${draft.title}, title),
             content = COALESCE(${draft.content}, content),
             excerpt = COALESCE(${draft.excerpt}, excerpt),
             updated_at = now()
-        WHERE id = ${draft.id}
-        RETURNING slug
-    ` as NewsletterSlug[];
+        FROM (
+            SELECT slug FROM newsletters WHERE id = ${draft.id}
+        ) AS old_data
+        WHERE newsletters.id = ${draft.id}
+        RETURNING old_data.slug AS old_slug, newsletters.slug as new_slug
+    ` as UpdateNewsletterResult[];
 
-    return result[0] || null;
+    return newsletterSlugs || null;
 }
 
 
@@ -139,14 +148,14 @@ export const getScheduledNewsletterPreviews = getNewsletterPreviews(newsletterSt
 
 export const getNewsletterBySlug = cache(
     async (slug: string, isPublished: boolean): Promise<Newsletter | null> => {
-        const result = await sql`
+        const [ newsletter ] = await sql`
             SELECT *
             FROM newsletters
             WHERE slug = ${slug}
                 AND published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
         ` as Newsletter[];
 
-        return result[0] || null;
+        return newsletter || null;
     }
 );
 

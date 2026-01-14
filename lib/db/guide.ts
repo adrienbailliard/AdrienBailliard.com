@@ -23,15 +23,13 @@ export async function insertRequestGuide(email: string): Promise<void>
 
 export const getGuideStats = unstable_cache(
   async (): Promise<Array<StatResponse>> => {
-    const result = await sql `
+    const [ stats ] = await sql `
       SELECT 
         COUNT(*) as total_contacts,
         COUNT(*) FILTER (WHERE created_at > now() - INTERVAL '7 days') as weekly_contacts,
         ROUND(100.0 * COUNT(*) FILTER (WHERE request_count > 1) / NULLIF(COUNT(*), 0), ${STATS_PERCENTAGE_PRECISION}) as retries_rate
       FROM guide_requests
     ` as GuideStats[];
-
-    const stats = result[0];
 
     return [
       { value: stats.total_contacts, label:

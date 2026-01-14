@@ -56,15 +56,13 @@ export async function updateMessagesReadStatus(ids: Array<number>, areRead: bool
 
 export const getMessagesStats = unstable_cache(
   async (): Promise<Array<StatResponse>> => {
-    const result = await sql `
+    const [ stats ] = await sql `
       SELECT 
         COUNT(*) as total_messages,
         COUNT(*) FILTER (WHERE created_at > now() - INTERVAL '7 days') as weekly_messages,
         COUNT(DISTINCT email) as contacts
       FROM messages
     ` as MessagesStats[];
-
-    const stats = result[0];
 
     return [
       { value: stats.total_messages, label:

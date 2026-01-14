@@ -31,8 +31,8 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
         try {
             setIsSaving(true);
 
-            newsletter.id && newsletter.slug
-                ? await updateDraft(newsletter.id, newsletter.slug, { [field]: trimmedValue })
+            newsletter.id
+                ? await updateDraft({ id: newsletter.id, [field]: trimmedValue })
                 : await createDraft({ ...newsletter, [field]: trimmedValue });
 
             setIsEditing(false);

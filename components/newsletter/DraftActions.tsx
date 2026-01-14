@@ -9,12 +9,6 @@ import Modal from "@/components/ui/Modal";
 
 
 
-type NewsletterDraftActionsProps = {
-    id: number;
-    slug: string;
-};
-
-
 const modalConfig = {
     publish: {
         confirmText: 'Publier',
@@ -30,17 +24,22 @@ const modalConfig = {
 
 
 
-export default function DraftActions({ id, slug }: NewsletterDraftActionsProps)
+type NewsletterDraftActionsProps = {
+    id: number;
+};
+
+
+export default function DraftActions({ id }: NewsletterDraftActionsProps)
 {
     const [ isActiveModal, setIsActiveModal ] = useState(false);
     const [ isActionPending, setIsActionPending ] = useState(false);
     const [ modalType, setModalType ] = useState<"publish" | "delete">('publish');
 
-    
+
     const executeAction = async () => {
         setIsActionPending(true);
         try {
-            await modalConfig[modalType].action(id, slug);
+            await modalConfig[modalType].action(id);
         }
         catch {
             setIsActionPending(false);

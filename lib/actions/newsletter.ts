@@ -16,14 +16,11 @@ import CACHE_TAGS from '@/lib/db/cache-tags';
 import { sendConfirmation } from "@/lib/email/newsletter";
 import { sendAdminLoginLink } from "@/lib/email/admin";
 
-import { InsertNewsletterParam } from "@/lib/types";
+import { InsertNewsletterParam, UpdateNewsletterParam } from "@/lib/types";
 
 
 
-const DraftActionSchema = z.object({
-  id: z.number().min(1),
-  slug: z.string().min(1)
-});
+const IdSchema = z.number().min(1);
 
 
 const CreateDraftSchema = z.object({
@@ -33,7 +30,7 @@ const CreateDraftSchema = z.object({
 });
 
 
-const UpdateDraftSchema = DraftActionSchema.extend(CreateDraftSchema.partial().shape)
+const UpdateDraftSchema = CreateDraftSchema.partial().extend({ id: IdSchema })
   .refine(data => data.title || data.content || data.excerpt);
 
 
@@ -63,31 +60,33 @@ export async function subscribe(formData: FormData): Promise<void>
 
 
 
-export async function publishDraft(id: number, slug: string): Promise<void>
+export async function publishDraft(id: number): Promise<void>
 {
-  const validData = DraftActionSchema.parse({ id, slug });
+  const validId = IdSchema.parse(id);
+  const result = await publishNewsletterById(validId);
 
-  await publishNewsletterById(validData.id);
+  if (!result) return;
 
   updateTag(CACHE_TAGS.newsletterPublished);
   updateTag(CACHE_TAGS.newsletterDrafts);
 
-  revalidatePath(`/admin/newsletter/${validData.slug}`);
-  revalidatePath(`/newsletter/${validData.slug}`);
+  revalidatePath(`/admin/newsletter/${result.slug}`);
+  revalidatePath(`/newsletter/${result.slug}`);
 
   redirect("/newsletter");
 }
 
 
 
-export async function deleteDraft(id: number, slug: string): Promise<void>
+export async function deleteDraft(id: number): Promise<void>
 {
-  const validData = DraftActionSchema.parse({ id, slug });
+  const validId = IdSchema.parse(id);
+  const result = await deleteNewsletterById(validId);
 
-  await deleteNewsletterById(validData.id);
+  if (!result) return;
 
   updateTag(CACHE_TAGS.newsletterDrafts);
-  revalidatePath(`/admin/newsletter/${validData.slug}`);
+  revalidatePath(`/admin/newsletter/${result.slug}`);
 
   redirect("/newsletter");
 }
@@ -97,32 +96,31 @@ export async function deleteDraft(id: number, slug: string): Promise<void>
 export async function createDraft(draft: InsertNewsletterParam): Promise<void>
 {
   const validData = CreateDraftSchema.parse(draft);
-  const response = await insertNewsletter(validData);
+  const result = await insertNewsletter(validData);
 
   updateTag(CACHE_TAGS.newsletterDrafts);
-  revalidatePath(`/admin/newsletter/${response.slug}`);
+  revalidatePath(`/admin/newsletter/${result.slug}`);
 
-  redirect(`/admin/newsletter/${response.slug}`);
+  redirect(`/admin/newsletter/${result.slug}`);
 }
 
 
 
-export async function updateDraft(id: number, slug: string, data: Partial<InsertNewsletterParam>): Promise<void>
+export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
 {
-  const validData = UpdateDraftSchema.parse({ id, slug, ...data });
-  const response = await updateNewsletter(validData);
+  const validData = UpdateDraftSchema.parse(draft);
+  const result = await updateNewsletter(validData);
 
-  if (!response)
-    throw new Error("Draft not found");
+  if (!result) return;
 
   if (!validData.content)
     updateTag(CACHE_TAGS.newsletterDrafts);
 
-  revalidatePath(`/admin/newsletter/${validData.slug}`);
+  revalidatePath(`/admin/newsletter/${result.old_slug}`);
 
-  if (validData.slug !== response.slug)
+  if (result.old_slug !== result.new_slug)
   {
-    revalidatePath(`/admin/newsletter/${response.slug}`);
-    redirect(`/admin/newsletter/${response.slug}`);
+    revalidatePath(`/admin/newsletter/${result.new_slug}`);
+    redirect(`/admin/newsletter/${result.new_slug}`);
   }
 }
