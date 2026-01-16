@@ -85,7 +85,7 @@ export default function ContactForm()
                             name="submitButton"
                             variant="light-primary"
                         >
-                            { "Démarrer l'échange" }
+                            { "Démarrer l'Échange" }
                         </Button>
                     </div>
                 </form>

@@ -8,7 +8,7 @@ import { z } from "zod";
 import { isValidDomain } from "@/lib/form/domain-checker";
 import { getValidEmail } from "@/lib/form/validators";
 
-import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter } from "@/lib/db/newsletters";
+import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter, scheduleNewsletterById } from "@/lib/db/newsletters";
 import { addSubscriber } from "@/lib/db/subscribers";
 import { isEmailAllowed } from "@/lib/db/blacklist";
 import CACHE_TAGS from '@/lib/db/cache-tags';
@@ -21,6 +21,10 @@ import { InsertNewsletterParam, UpdateNewsletterParam } from "@/lib/types";
 
 
 const IdSchema = z.number().min(1);
+
+const PublishDraftSchema = z.object({
+  date: z.date().optional().nullable()
+}).extend({ id: IdSchema });
 
 
 const CreateDraftSchema = z.object({
@@ -60,19 +64,25 @@ export async function subscribe(formData: FormData): Promise<void>
 
 
 
-export async function publishDraft(id: number): Promise<void>
+export async function submitDraft(id: number, date?: Date | null): Promise<void>
 {
-  const validId = IdSchema.parse(id);
-  const result = await publishNewsletterById(validId);
+  PublishDraftSchema.parse({ id, date });
 
-  if (!result) return;
+  if (date === undefined)
+  {
+    const result = await publishNewsletterById(id);
+    if (!result) return;
 
-  updateTag(CACHE_TAGS.newsletterPublished);
+    updateTag(CACHE_TAGS.newsletterPublished);
+
+    revalidatePath(`/admin/newsletter/${result.slug}`);
+    revalidatePath(`/newsletter/${result.slug}`);
+  }
+  else
+    await scheduleNewsletterById(id, date);
+
   updateTag(CACHE_TAGS.newsletterDrafts);
   updateTag(CACHE_TAGS.newsletterScheduled);
-
-  revalidatePath(`/admin/newsletter/${result.slug}`);
-  revalidatePath(`/newsletter/${result.slug}`);
 
   redirect("/newsletter");
 }
@@ -81,8 +91,8 @@ export async function publishDraft(id: number): Promise<void>
 
 export async function deleteDraft(id: number): Promise<void>
 {
-  const validId = IdSchema.parse(id);
-  const result = await deleteNewsletterById(validId);
+  IdSchema.parse(id);
+  const result = await deleteNewsletterById(id);
 
   if (!result) return;
 
@@ -97,8 +107,8 @@ export async function deleteDraft(id: number): Promise<void>
 
 export async function createDraft(draft: InsertNewsletterParam): Promise<void>
 {
-  const validData = CreateDraftSchema.parse(draft);
-  const result = await insertNewsletter(validData);
+  CreateDraftSchema.parse(draft);
+  const result = await insertNewsletter(draft);
 
   updateTag(CACHE_TAGS.newsletterDrafts);
   revalidatePath(`/admin/newsletter/${result.slug}`);
@@ -110,12 +120,12 @@ export async function createDraft(draft: InsertNewsletterParam): Promise<void>
 
 export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
 {
-  const validData = UpdateDraftSchema.parse(draft);
-  const result = await updateNewsletter(validData);
+  UpdateDraftSchema.parse(draft);
+  const result = await updateNewsletter(draft);
 
   if (!result) return;
 
-  if (!validData.content)
+  if (!draft.content)
   {
     updateTag(CACHE_TAGS.newsletterDrafts);
     updateTag(CACHE_TAGS.newsletterScheduled);

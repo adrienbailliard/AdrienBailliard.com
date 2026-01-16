@@ -37,16 +37,16 @@ export default function Newsletter()
 
       <NewsletterDrafts
         title={{
-          hasItems: "À venir",
-          isEmpty: "Rien de prévu"
+          hasItems: "À Venir",
+          isEmpty: "Rien de Prévu"
         }}
         apiUrl="/api/newsletter/drafts/scheduled"
       />
 
       <NewsletterDrafts
         title={{
-          hasItems: "En cours",
-          isEmpty: "Rien en cours"
+          hasItems: "En Cours",
+          isEmpty: "Rien en Cours"
         }}
         apiUrl="/api/newsletter/drafts"
         showCreate={true}

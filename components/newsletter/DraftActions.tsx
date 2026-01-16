@@ -1,45 +1,59 @@
 "use client"
 import { useState } from 'react';
 
-import { publishDraft, deleteDraft } from "@/lib/actions/newsletter";
+import { submitDraft, deleteDraft } from "@/lib/actions/newsletter";
 
 import Button from "@/components/ui/Button";
 import BlockScroll from "@/components/ui/BlockScroll";
+import Calendar from "@/components/ui/Calendar";
 import Modal from "@/components/ui/Modal";
-
-
-
-const modalConfig = {
-    publish: {
-        confirmText: 'Publier',
-        loadingText: 'Publication...',
-        action: publishDraft
-    },
-    delete: {
-        confirmText: 'Supprimer',
-        loadingText: 'Suppression...',
-        action: deleteDraft
-    },
-};
 
 
 
 type NewsletterDraftActionsProps = {
     id: number;
+    scheduledFor: Date | null;
 };
 
 
-export default function DraftActions({ id }: NewsletterDraftActionsProps)
+export default function DraftActions({ id, scheduledFor }: NewsletterDraftActionsProps)
 {
+    const [selectedDate, setSelectedDate] = useState<Date>();
+
     const [ isActiveModal, setIsActiveModal ] = useState(false);
     const [ isActionPending, setIsActionPending ] = useState(false);
-    const [ modalType, setModalType ] = useState<"publish" | "delete">('publish');
+    const [ modalType, setModalType ] = useState<"publish" | "delete" | "unschedule">('publish');
+
+    const removeActionKey = scheduledFor ? "unschedule" : "delete";
+
+    const modalConfig = {
+        publish: {
+            cta: 'Publier',
+            confirmText: selectedDate 
+                ? `Publier le ${selectedDate.toLocaleDateString()}` 
+                : "Publier Maintenant",
+            loadingText: 'Publication...',
+            action: async () => submitDraft(id, selectedDate)
+        },
+        unschedule: {
+            cta: 'Déprogrammer',
+            confirmText: 'Déprogrammer',
+            loadingText: 'Déprogrammation...',
+            action: async () => submitDraft(id, null)
+        },
+        delete: {
+            cta: 'Supprimer',
+            confirmText: 'Supprimer',
+            loadingText: 'Suppression...',
+            action: async () => deleteDraft(id)
+        },
+    };
 
 
     const executeAction = async () => {
         setIsActionPending(true);
         try {
-            await modalConfig[modalType].action(id);
+            await modalConfig[modalType].action();
         }
         catch {
             setIsActionPending(false);
@@ -57,10 +71,10 @@ export default function DraftActions({ id }: NewsletterDraftActionsProps)
                         variant="light-primary"
                         onClick={ () => {
                             setIsActiveModal(true);
-                            setModalType("delete");
+                            setModalType(removeActionKey);
                         }}
                     >
-                        { modalConfig.delete.confirmText }
+                        { modalConfig[removeActionKey].cta }
                     </Button>
                     <Button
                         variant="dark-primary"
@@ -69,7 +83,7 @@ export default function DraftActions({ id }: NewsletterDraftActionsProps)
                             setModalType("publish");
                         }}
                     >
-                        { modalConfig.publish.confirmText }
+                        { modalConfig.publish.cta }
                     </Button>
                 </div>
             </section>
@@ -78,9 +92,16 @@ export default function DraftActions({ id }: NewsletterDraftActionsProps)
                 isEnabled={ isActiveModal }
                 setIsEnabled={ setIsActiveModal }
             >
-                <h3 className='mb-7 md:mb-11' id="modal-title">
-                    { modalConfig[modalType].confirmText } ce brouillon ?
+                <h3 className="mb-8 md:mb-10" id="modal-title">
+                    { modalConfig[modalType].cta } ce brouillon ?
                 </h3>
+
+                { modalType === "publish" && <Calendar
+                    selectedDate={selectedDate}
+                    setSelectedDate={setSelectedDate}
+                    className="mb-6 md:mb-8"
+                /> }
+
                 <div>
                     <Button
                         variant="light-primary"

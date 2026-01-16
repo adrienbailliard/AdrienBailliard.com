@@ -3,7 +3,7 @@
 */
 
 
-export type BasePage = {
+type BasePage = {
   pathname: string;
   title: string;
   description: string;
