@@ -93,26 +93,26 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
                 setIsEnabled={ setIsActiveModal }
             >
                 <h3 className="mb-8 md:mb-10" id="modal-title">
-                    { modalConfig[modalType].cta } ce brouillon ?
+                    { modalConfig[modalType].cta } le brouillon
                 </h3>
 
                 { modalType === "publish" && <Calendar
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
-                    className="mb-6 md:mb-8"
+                    className="mb-7 md:mb-9"
                 /> }
 
-                <div>
+                <div className='flex gap-5.5 md:gap-7 flex-wrap justify-center'>
                     <Button
                         variant="light-primary"
-                        className='button-compact py-0 mr-5 md:mr-7'
+                        className='button-compact py-0 flex-grow'
                         onClick={ () => setIsActiveModal(false)}
                     >
                         Annuler
                     </Button>
                     <Button
                         variant="dark-primary"
-                        className='button-compact py-0'
+                        className='button-compact py-0 flex-grow'
                         disabled={ isActionPending }
                         onClick={ executeAction }
                     >

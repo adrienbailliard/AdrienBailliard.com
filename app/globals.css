@@ -189,7 +189,7 @@
   }
 
   .illustrations {
-    @apply rounded-md brightness-90;
+    @apply rounded-md brightness-95;
   }
 
   .base-link {
