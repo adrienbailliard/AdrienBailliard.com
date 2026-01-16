@@ -34,7 +34,7 @@ export default function Calendar({ selectedDate, setSelectedDate, className }: C
       startMonth={today}
       onMonthChange={setMonth}
       disabled={{ before: today }}
-      className={`${className} relative select-none`}
+      className={`${className} relative select-none w-fit`}
       classNames={{
         month_caption: "mb-4 h-10 flex items-center justify-center",
         caption_label: "text-base font-medium",

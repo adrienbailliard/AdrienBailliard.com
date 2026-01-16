@@ -99,20 +99,20 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
                 { modalType === "publish" && <Calendar
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
-                    className="mb-7 md:mb-9"
+                    className="mb-7 md:mb-9 m-auto"
                 /> }
 
                 <div className='flex gap-5.5 md:gap-7 flex-wrap justify-center'>
                     <Button
                         variant="light-primary"
-                        className='button-compact py-0 flex-grow'
+                        className='button-compact py-0'
                         onClick={ () => setIsActiveModal(false)}
                     >
                         Annuler
                     </Button>
                     <Button
                         variant="dark-primary"
-                        className='button-compact py-0 flex-grow'
+                        className='button-compact py-0'
                         disabled={ isActionPending }
                         onClick={ executeAction }
                     >
