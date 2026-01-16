@@ -29,7 +29,7 @@ export default function Header()
 
 
     if (!data)
-        return (<h5 className="mb-5">Messages Reçus</h5>);
+        return (<h5 className="mb-5">Réception</h5>);
 
     if (data.length === 0)
         return (<h5>Aucun Message</h5>);
@@ -57,7 +57,7 @@ export default function Header()
                         </button>
                     </div>
                 )
-                : <h5>Messages Reçus</h5>
+                : <h5>Réception</h5>
             }
             <Selector
                 onClick={ toggleSelectAll }
