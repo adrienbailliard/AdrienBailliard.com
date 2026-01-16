@@ -47,7 +47,7 @@ export default function Modal({ isEnabled, setIsEnabled, children }: ModalProps)
                 aria-labelledby="modal-title"
                 aria-modal={isEnabled}
                 className={
-                    "fixed z-50 left-1/2 -translate-y-1/2 -translate-x-1/2 max-h-[100dvh] overflow-y-auto bg-dark-elevated-bg max-[540px]:px-5 py-12 px-16 md:py-14 md:px-18 w-dvw sm:max-w-xl md:max-w-2xl sm:rounded-lg text-center duration-" + animationDuration
+                    "fixed z-50 left-1/2 -translate-y-1/2 -translate-x-1/2 max-h-[100dvh] overflow-y-auto bg-dark-elevated-bg max-[540px]:px-5 py-12 px-16 md:py-14 md:px-18 w-dvw max-w-xl md:max-w-2xl rounded-md text-center duration-" + animationDuration
                     + ( isEnabled
                         ? " visible opacity-100 top-1/2"
                         : " invisible opacity-0 " + (isClosed ? "top-[53%]" : "top-1/2")
