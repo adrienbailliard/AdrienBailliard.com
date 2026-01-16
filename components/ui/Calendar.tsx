@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 
 import { isSameMonth } from "date-fns";
-import { fr } from "date-fns/locale";
+import { fr } from "react-day-picker/locale";
 
 import Arrow from "@/components/icons/arrow";
 
