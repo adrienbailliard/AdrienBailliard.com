@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+
 import fieldMaxLengths from "@/config/fieldMaxLengths";
-import site from "@/config/site";
-import { EMAIL_PATTERN } from "@/lib/constants";
+
+import { EMAIL_PATTERN, ERROR_MESSAGE } from "@/lib/constants";
 import { handleSubmit } from "@/lib/form/handlers";
 import { contact } from "@/lib/actions/message";
 
@@ -30,7 +31,7 @@ export default function ContactForm()
                     variant={ hasError ? "light-error" : "light-primary" }
                     className="block mx-auto"
                 >
-                    { hasError ? site.errorMessage : "Merci ! Je reviens très vite vers toi." }
+                    { hasError ? ERROR_MESSAGE : "Merci ! Je reviens très vite vers toi." }
                 </Button>
             ) : (
                 <form onSubmit={(e) => handleSubmit(e, contact, setIsSubmitted, setHasError)} className="flex justify-between gap-7 sm:gap-9 flex-wrap items-start">

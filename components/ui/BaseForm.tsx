@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+
 import Button from "@/components/ui/Button";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
-import { EMAIL_PATTERN } from "@/lib/constants";
-import site from "@/config/site";
+import { EMAIL_PATTERN, ERROR_MESSAGE } from "@/lib/constants";
+
 import { handleSubmit } from "@/lib/form/handlers";
 import { request } from "@/lib/actions/guide";
 import { subscribe } from "@/lib/actions/newsletter";
@@ -37,7 +38,7 @@ export default function BaseForm({ children, className, isForNewsletter = true }
             }}
             className={"w-full " + className}
           >
-            { hasError ? site.errorMessage : "Tu es dans la boucle !" }
+            { hasError ? ERROR_MESSAGE : "Tu es dans la boucle !" }
           </Button>
         ) :
         (

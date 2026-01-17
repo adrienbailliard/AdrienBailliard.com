@@ -8,9 +8,7 @@ const site = {
     name: "Adrien Bailliard",
     description: "Systèmes pour une Performance d'Élite",
     faviconsFolder: "/assets/favicons/",
-    emailAssetsFolder: "/assets/email/",
-    newsletterSlogan: "Une Clé pour ",
-    errorMessage: "Une erreur est survenue."
+    emailAssetsFolder: "/assets/email/"
 };
 
 
