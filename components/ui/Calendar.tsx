@@ -48,9 +48,10 @@ export default function Calendar({ selectedDate, setSelectedDate, className }: C
         week: "mt-2 grid grid-cols-7",
         
         day_button: "w-10 h-10 text-sm font-sans flex items-center justify-center",
-        
-        selected: "text-primary",
-        disabled: "text-light-muted-text"
+
+        selected: "text-primary font-bold",
+        disabled: "text-light-muted-text",
+        today: "underline underline-offset-3"
       }}
       components={{
         PreviousMonthButton: (props) => isTodayMonth
