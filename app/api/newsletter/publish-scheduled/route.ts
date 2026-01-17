@@ -15,14 +15,17 @@ export async function GET(request: Request)
 
     const response = await publishScheduledNewsletters();
 
-    for (const { slug } of response)
+    if (response.length > 0)
     {
-        revalidatePath(`/newsletter/${slug}`);
-        revalidatePath(`/admin/newsletter/${slug}`);
-    }
+        for (const { slug } of response)
+        {
+            revalidatePath(`/newsletter/${slug}`);
+            revalidatePath(`/admin/newsletter/${slug}`);
+        }
 
-    revalidateTag(CACHE_TAGS.newsletterPublished, { expire: 0 });
-    revalidateTag(CACHE_TAGS.newsletterScheduled, { expire: 0 });
+        revalidateTag(CACHE_TAGS.newsletterPublishedPreviews, { expire: 0 });
+        revalidateTag(CACHE_TAGS.newsletterScheduledPreviews, { expire: 0 });
+    }
 
     return Response.json({ success: true });
 }

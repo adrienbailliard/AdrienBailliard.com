@@ -34,7 +34,7 @@ export default function NewsletterList({ title, apiUrl, showCreate = false, clas
         return null;
 
     const safeData = Array.isArray(data) ? data : null;
-    const nowMidnight = new Date().setHours(0, 0, 0, 0);
+    const nowMidnight = new Date().setHours(0);
 
 
     return (

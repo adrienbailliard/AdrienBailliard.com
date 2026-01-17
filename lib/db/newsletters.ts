@@ -157,9 +157,9 @@ const getNewsletterPreviews = (status: newsletterStatus, tag: string) =>
     ) as () => Promise<Array<NewsletterPreview | SerializedNewsletterPreview>>;
 
 
-export const getNewsletterDraftsPreviews = getNewsletterPreviews(newsletterStatus.DRAFT, CACHE_TAGS.newsletterDrafts);
-export const getPublishedNewsletterPreviews = getNewsletterPreviews(newsletterStatus.PUBLISHED, CACHE_TAGS.newsletterPublished);
-export const getScheduledNewsletterPreviews = getNewsletterPreviews(newsletterStatus.SCHEDULED, CACHE_TAGS.newsletterScheduled);
+export const getNewsletterDraftsPreviews = getNewsletterPreviews(newsletterStatus.DRAFT, CACHE_TAGS.newsletterDraftsPreviews);
+export const getPublishedNewsletterPreviews = getNewsletterPreviews(newsletterStatus.PUBLISHED, CACHE_TAGS.newsletterPublishedPreviews);
+export const getScheduledNewsletterPreviews = getNewsletterPreviews(newsletterStatus.SCHEDULED, CACHE_TAGS.newsletterScheduledPreviews);
 
 
 

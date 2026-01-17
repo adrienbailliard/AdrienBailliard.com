@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
-
-import { isSameMonth } from "date-fns";
 import { fr } from "react-day-picker/locale";
 
+import { isSameMonth, addDays } from "date-fns";
+import { toZonedTime } from 'date-fns-tz';
+
+import newsletterConfig from "@/config/newsletter";
 import Arrow from "@/components/icons/arrow";
 
 
@@ -20,20 +22,36 @@ type CalendarProps = {
 export default function Calendar({ selectedDate, setSelectedDate, className }: CalendarProps)
 {
   const today = new Date();
-  const [month, setMonth] = useState<Date>(today);
+  const parisHour = parseInt(today.toLocaleString("fr-FR", {
+    timeZone: "Europe/Paris",
+    hour: "2-digit"
+  }));
 
-  const isTodayMonth = isSameMonth(month, today);
+  const start = parisHour >= newsletterConfig.publishParisHour
+    ? addDays(today, 1)
+    : today;
+
+  const [month, setMonth] = useState<Date>(start);
+  const isStartMonth = isSameMonth(month, start);
+
+
+  const handleSelectDate = (date: Date | undefined) => setSelectedDate(date
+      ? toZonedTime(
+          date.setHours(newsletterConfig.publishParisHour), "Europe/Paris"
+        )
+      : date
+    );
 
 
   return (
     <DayPicker
       mode="single"
       selected={selectedDate}
-      onSelect={setSelectedDate}
+      onSelect={handleSelectDate}
       locale={fr}
-      startMonth={today}
+      startMonth={start}
       onMonthChange={setMonth}
-      disabled={{ before: today }}
+      disabled={{ before: start }}
       className={`${className} relative select-none w-fit`}
       classNames={{
         month_caption: "mb-4 h-10 flex items-center justify-center",
@@ -54,7 +72,7 @@ export default function Calendar({ selectedDate, setSelectedDate, className }: C
         today: "underline underline-offset-3"
       }}
       components={{
-        PreviousMonthButton: (props) => isTodayMonth
+        PreviousMonthButton: (props) => isStartMonth
           ? <div/>
           : <button {...props}/>,
         Chevron: (props) => props.orientation === "right"

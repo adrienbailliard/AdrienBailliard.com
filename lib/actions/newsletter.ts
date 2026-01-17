@@ -78,13 +78,13 @@ export async function submitDraft(id: number, date?: Date | null): Promise<void>
 
   if (!isScheduling)
   {
-    updateTag(CACHE_TAGS.newsletterPublished);
+    updateTag(CACHE_TAGS.newsletterPublishedPreviews);
     revalidatePath(`/newsletter/${result.slug}`);
   }
 
   revalidatePath(`/admin/newsletter/${result.slug}`);
-  updateTag(CACHE_TAGS.newsletterDrafts);
-  updateTag(CACHE_TAGS.newsletterScheduled);
+  updateTag(CACHE_TAGS.newsletterDraftsPreviews);
+  updateTag(CACHE_TAGS.newsletterScheduledPreviews);
 
   redirect("/newsletter");
 }
@@ -98,8 +98,8 @@ export async function deleteDraft(id: number): Promise<void>
 
   if (!result) return;
 
-  updateTag(CACHE_TAGS.newsletterDrafts);
-  updateTag(CACHE_TAGS.newsletterScheduled);
+  updateTag(CACHE_TAGS.newsletterDraftsPreviews);
+  updateTag(CACHE_TAGS.newsletterScheduledPreviews);
   revalidatePath(`/admin/newsletter/${result.slug}`);
 
   redirect("/newsletter");
@@ -112,7 +112,7 @@ export async function createDraft(draft: InsertNewsletterParam): Promise<void>
   CreateDraftSchema.parse(draft);
   const result = await insertNewsletter(draft);
 
-  updateTag(CACHE_TAGS.newsletterDrafts);
+  updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   revalidatePath(`/admin/newsletter/${result.slug}`);
 
   redirect(`/admin/newsletter/${result.slug}`);
@@ -129,8 +129,8 @@ export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
 
   if (!draft.content)
   {
-    updateTag(CACHE_TAGS.newsletterDrafts);
-    updateTag(CACHE_TAGS.newsletterScheduled);
+    updateTag(CACHE_TAGS.newsletterDraftsPreviews);
+    updateTag(CACHE_TAGS.newsletterScheduledPreviews);
   }
 
   revalidatePath(`/admin/newsletter/${result.old_slug}`);

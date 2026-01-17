@@ -26,7 +26,7 @@ export function formatAdminDate(value: string, nowMidnight: number): string
 {
     const date = new Date(value);
 
-    const timestampDiff = new Date(date).setHours(0, 0, 0, 0) - nowMidnight;
+    const timestampDiff = new Date(date).setHours(0) - nowMidnight;
     const daysDiff = Math.round(timestampDiff / (1000 * 60 * 60 * 24));
 
     if (daysDiff === 0)
@@ -48,9 +48,10 @@ export function formatPublicDate(value: string | Date): string
     const date = typeof value === "string" ? new Date(value) : value;
 
     return date.toLocaleDateString('fr-FR', {
+        timeZone: 'Europe/Paris',
         day: 'numeric',
         month: 'long',
-        year: 'numeric',
+        year: 'numeric'
     });
 }
 
