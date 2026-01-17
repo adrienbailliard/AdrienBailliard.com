@@ -10,7 +10,7 @@ export async function GET(request: Request)
     const authHeader = request.headers.get('authorization');
 
     if (authHeader !== `Bearer ${process.env.CRON_SECRET}`)
-        throw new Error("");
+        throw new Error("Not authorized");
 
 
     const response = await publishScheduledNewsletters();
