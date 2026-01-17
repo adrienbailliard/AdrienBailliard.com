@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
+import TextareaAutosize from 'react-textarea-autosize';
 
 import { InsertNewsletterParam, EditorNewsletterParam } from "@/lib/types";
 import { createDraft, updateDraft } from "@/lib/actions/newsletter";
@@ -71,10 +72,10 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
                     { isSaving ? "Validation..." : "Valider" }
                 </button>
             </div>
-            <textarea
+            <TextareaAutosize
                 ref={ autoFocusAtEnd }
                 aria-label={ `Modifier le champ ${field}` }
-                className="field-sizing-content mt-2 w-full"
+                className="resize-none mt-2 w-full"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 disabled={isSaving}

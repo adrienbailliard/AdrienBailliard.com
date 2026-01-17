@@ -15,6 +15,7 @@
     "react": "19.2.0",
     "react-day-picker": "^9.13.0",
     "react-dom": "19.2.0",
+    "react-textarea-autosize": "^8.5.9",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "resend": "^6.5.2",
