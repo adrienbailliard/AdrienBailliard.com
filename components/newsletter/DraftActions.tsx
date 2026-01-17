@@ -29,10 +29,8 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
     const modalConfig = {
         publish: {
             cta: 'Publier',
-            confirmText: selectedDate 
-                ? `Publier le ${selectedDate.toLocaleDateString()}` 
-                : "Publier Maintenant",
-            loadingText: 'Publication...',
+            confirmText: selectedDate ? "Programmer" : "Publier",
+            loadingText: selectedDate ? "Programmation..." : 'Publication...',
             action: async () => submitDraft(id, selectedDate)
         },
         unschedule: {
@@ -102,7 +100,7 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
                     className="mb-7 md:mb-9 m-auto"
                 /> }
 
-                <div className='flex gap-5.5 md:gap-7 justify-center max-sm:flex-col-reverse'>
+                <div className='flex gap-5.5 md:gap-7 justify-center'>
                     <Button
                         variant="light-primary"
                         className='button-compact py-0'
