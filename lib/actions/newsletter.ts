@@ -68,19 +68,21 @@ export async function submitDraft(id: number, date?: Date | null): Promise<void>
 {
   PublishDraftSchema.parse({ id, date });
 
-  if (date === undefined)
+  const isScheduling = date !== undefined;
+  const result = isScheduling
+    ? await scheduleNewsletterById(id, date)
+    : await publishNewsletterById(id);
+
+  if (!result)
+    return;
+
+  if (!isScheduling)
   {
-    const result = await publishNewsletterById(id);
-    if (!result) return;
-
     updateTag(CACHE_TAGS.newsletterPublished);
-
-    revalidatePath(`/admin/newsletter/${result.slug}`);
     revalidatePath(`/newsletter/${result.slug}`);
   }
-  else
-    await scheduleNewsletterById(id, date);
 
+  revalidatePath(`/admin/newsletter/${result.slug}`);
   updateTag(CACHE_TAGS.newsletterDrafts);
   updateTag(CACHE_TAGS.newsletterScheduled);
 

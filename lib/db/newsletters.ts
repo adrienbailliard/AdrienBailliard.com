@@ -26,13 +26,16 @@ export async function publishNewsletterById(id: number): Promise<NewsletterSlug 
 
 
 
-export async function scheduleNewsletterById(id: number, date: Date | null): Promise<void>
+export async function scheduleNewsletterById(id: number, date: Date | null): Promise<NewsletterSlug | null>
 {
-    await sql`
+    const [ newsletterSlug ] = await sql`
         UPDATE newsletters
         SET scheduled_for = ${ date }
         WHERE id = ${id}
-    `;
+        RETURNING slug
+    ` as Array<NewsletterSlug>;
+
+    return newsletterSlug || null;
 }
 
 
@@ -139,7 +142,6 @@ const getNewsletterPreviews = (status: newsletterStatus, tag: string) =>
     ) as () => Promise<Array<NewsletterPreview | SerializedNewsletterPreview>>;
 
 
-
 export const getNewsletterDraftsPreviews = getNewsletterPreviews(newsletterStatus.DRAFT, CACHE_TAGS.newsletterDrafts);
 export const getPublishedNewsletterPreviews = getNewsletterPreviews(newsletterStatus.PUBLISHED, CACHE_TAGS.newsletterPublished);
 export const getScheduledNewsletterPreviews = getNewsletterPreviews(newsletterStatus.SCHEDULED, CACHE_TAGS.newsletterScheduled);
@@ -160,10 +162,8 @@ export const getNewsletterBySlug = cache(
 );
 
 
-
 export const getNewsletterDraftBySlug =
     async (slug: string) => getNewsletterBySlug(slug, false);
-
 
 
 export const getPublishedNewsletterBySlug =
