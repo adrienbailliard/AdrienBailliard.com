@@ -1,8 +1,11 @@
 import { ResponseCookies } from 'next/dist/server/web/spec-extension/cookies';
 import { SignJWT, jwtVerify } from 'jose';
-import site from "@/config/site";
+
+import authConfig from "@/config/auth";
+
 
 const SECRET = new TextEncoder().encode(process.env.ADMIN_SECRET!);
+
 
 
 export async function generateAdminLoginToken(expirationTime: number)
@@ -12,6 +15,7 @@ export async function generateAdminLoginToken(expirationTime: number)
         .setExpirationTime(`${expirationTime}s`)
         .sign(SECRET);
 }
+
 
 
 export async function isAdminLoginToken(token: string)
@@ -26,12 +30,13 @@ export async function isAdminLoginToken(token: string)
 }
 
 
+
 export async function updateAdminCookie(cookies: ResponseCookies, token?: string | null)
 {
-    cookies.set(site.adminCookie.name, await generateAdminLoginToken(site.adminCookie.maxAge), {
+    cookies.set(authConfig.cookie.name, await generateAdminLoginToken(authConfig.cookie.maxAge), {
         secure: true,
         sameSite: 'lax',
-        path: site.adminCookie.path,
-        maxAge: site.adminCookie.maxAge
+        path: authConfig.cookie.path,
+        maxAge: authConfig.cookie.maxAge
     });
 }

@@ -1,11 +1,13 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { updateAdminCookie, isAdminLoginToken } from '@/lib/adminAuth';
-import site from "@/config/site";
+
+import authConfig from "@/config/auth";
+
 
 
 export async function GET(request: NextRequest)
 {
-    const token = request.nextUrl.searchParams.get(site.adminCookie.name);
+    const token = request.nextUrl.searchParams.get(authConfig.cookie.name);
     const res = NextResponse.redirect(new URL('/', request.url));
 
     if (token && await isAdminLoginToken(token))

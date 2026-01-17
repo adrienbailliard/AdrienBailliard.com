@@ -1,7 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { updateAdminCookie, isAdminLoginToken } from '@/lib/adminAuth';
 
-import site from './config/site';
+import authConfig from "@/config/auth";
+
 
 
 export default async function proxy(request: NextRequest)
@@ -10,7 +11,7 @@ export default async function proxy(request: NextRequest)
   const { pathname } = request.nextUrl;
 
 
-  const adminCookie = request.cookies.get(site.adminCookie.name);
+  const adminCookie = request.cookies.get(authConfig.cookie.name);
 
   if (adminCookie && await isAdminLoginToken(adminCookie.value))
     await updateAdminCookie(res.cookies);

@@ -10,13 +10,8 @@ const site = {
     faviconsFolder: "/assets/favicons/",
     emailAssetsFolder: "/assets/email/",
     newsletterSlogan: "Une Clé pour ",
-    adminCookie: {
-        path: "/",
-        name: "magic_link",
-        tokenExpiration: 15 * 60,
-        maxAge: 2 * 24 * 60 * 60
-    },
     errorMessage: "Une erreur est survenue."
 };
+
 
 export default site;
