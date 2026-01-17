@@ -102,7 +102,7 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
                     className="mb-7 md:mb-9 m-auto"
                 /> }
 
-                <div className='flex gap-5.5 md:gap-7 flex-wrap justify-center'>
+                <div className='flex gap-5.5 md:gap-7 justify-center max-sm:flex-col-reverse'>
                     <Button
                         variant="light-primary"
                         className='button-compact py-0'
