@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 
 import { submitDraft, deleteDraft } from "@/lib/actions/newsletter";
 
@@ -19,9 +19,8 @@ type NewsletterDraftActionsProps = {
 export default function DraftActions({ id, scheduledFor }: NewsletterDraftActionsProps)
 {
     const [selectedDate, setSelectedDate] = useState<Date>();
-
+    const [isPending, startTransition] = useTransition();
     const [ isActiveModal, setIsActiveModal ] = useState(false);
-    const [ isActionPending, setIsActionPending ] = useState(false);
     const [ modalType, setModalType ] = useState<"publish" | "delete" | "unschedule">('publish');
 
     const removeActionKey = scheduledFor ? "unschedule" : "delete";
@@ -48,15 +47,13 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
     };
 
 
-    const executeAction = async () => {
-        setIsActionPending(true);
-        try {
-            await modalConfig[modalType].action();
-        }
-        catch {
-            setIsActionPending(false);
-        }
-    };
+    const executeAction = () =>
+        startTransition(async () => {
+            try {
+                await modalConfig[modalType].action();
+            }
+            catch {}
+        });
 
 
     return (
@@ -111,10 +108,10 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
                     <Button
                         variant="dark-primary"
                         className='button-compact py-0'
-                        disabled={ isActionPending }
+                        disabled={ isPending }
                         onClick={ executeAction }
                     >
-                        { isActionPending
+                        { isPending
                             ? modalConfig[modalType].loadingText
                             : modalConfig[modalType].confirmText }
                     </Button>
