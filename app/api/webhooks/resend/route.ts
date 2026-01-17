@@ -18,7 +18,7 @@ export async function POST(req: Request)
         timestamp: req.headers.get('svix-timestamp')!,
         signature: req.headers.get('svix-signature')!
       },
-      webhookSecret: process.env.RESEND_WEBHOOK_SECRET!,
+      webhookSecret: process.env.RESEND_WEBHOOK_SECRET!
     });
 
 

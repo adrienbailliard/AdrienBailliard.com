@@ -1,0 +1,6 @@
+{
+  "crons": [{
+    "path": "/api/newsletter/publish-scheduled",
+    "schedule": "0 9 * * *"
+  }]
+}

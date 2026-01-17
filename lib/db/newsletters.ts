@@ -26,6 +26,21 @@ export async function publishNewsletterById(id: number): Promise<NewsletterSlug 
 
 
 
+export async function publishScheduledNewsletters(): Promise<NewsletterSlug[]>
+{
+    const publishedNewsletters = await sql`
+        UPDATE newsletters
+        SET published_at = NOW()
+        WHERE scheduled_for <= NOW() 
+            AND published_at IS NULL
+        RETURNING slug
+    ` as Array<NewsletterSlug>;
+
+    return publishedNewsletters;
+}
+
+
+
 export async function scheduleNewsletterById(id: number, date: Date | null): Promise<NewsletterSlug | null>
 {
     const [ newsletterSlug ] = await sql`
@@ -63,7 +78,7 @@ async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
             ${ excludeId ? sql`AND id != ${excludeId}` : sql`` }
         ORDER BY LENGTH(slug) DESC, slug DESC
         LIMIT 1
-    `;
+    ` as NewsletterSlug[];
 
     if (!newsletterSlug)
         return baseSlug === DRAFT_CREATION_SLUG ? `${baseSlug}-2` : baseSlug;
