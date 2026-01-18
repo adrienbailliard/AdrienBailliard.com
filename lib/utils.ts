@@ -22,11 +22,15 @@ export function formatGain(value: number): string
 
 
 
-export function formatAdminDate(value: string, nowMidnight: number): string
+export function formatAdminDate(value: string, isScheduled: boolean = false): string
 {
+    const now = new Date();
     const date = new Date(value);
 
-    const timestampDiff = new Date(date).setHours(0) - nowMidnight;
+    if (isScheduled && now > date)
+        return "prêt";
+
+    const timestampDiff = new Date(date).setHours(0) - now.setHours(0);
     const daysDiff = Math.round(timestampDiff / (1000 * 60 * 60 * 24));
 
     if (daysDiff === 0)

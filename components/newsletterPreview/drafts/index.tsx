@@ -34,7 +34,6 @@ export default function NewsletterList({ title, apiUrl, showCreate = false, clas
         return null;
 
     const safeData = Array.isArray(data) ? data : null;
-    const nowMidnight = new Date().setHours(0);
 
 
     return (
@@ -48,7 +47,7 @@ export default function NewsletterList({ title, apiUrl, showCreate = false, clas
                 {
                     safeData
                         ? safeData.map((preview, i) =>
-                            <PreviewCard draft={preview} nowMidnight={nowMidnight} key={i}/>)
+                            <PreviewCard draft={preview} key={i}/>)
                         : [...Array(3)].map((_, i) => <SkeletonCard key={i}/>)
                 }
             </div>

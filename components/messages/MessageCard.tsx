@@ -9,12 +9,11 @@ import { Message } from '@/lib/types';
 
 type MessageCardProps = {
     message: Message;
-    nowMidnight: number;
 }
 
 
 
-export default function MessageCard({ message, nowMidnight }: MessageCardProps)
+export default function MessageCard({ message }: MessageCardProps)
 {
     const [ isExpanded, setIsExpanded ] = useState(false);
     const { selection, selected, onToggleRead } = useMessageActions();
@@ -67,7 +66,7 @@ export default function MessageCard({ message, nowMidnight }: MessageCardProps)
                 </div>
             </div>
             <time>
-                { formatAdminDate(message.created_at, nowMidnight) }
+                { formatAdminDate(message.created_at) }
             </time>
             <p className="card-container">
                 <span className='text-light-fg'>{ message.category }</span>
