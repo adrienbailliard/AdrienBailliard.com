@@ -87,7 +87,7 @@
 
   input,
   textarea {
-    @apply bg-light-fg text-dark-fg outline-none rounded-lg p-3;
+    @apply bg-light-fg text-dark-fg outline-none rounded-lg p-3 font-sans;
   }
 
   ::placeholder {
@@ -248,7 +248,7 @@
   }
 
   .card-list {
-    @apply grid grid-cols-[minmax(0,1fr)_90px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 font-sans select-none;
+    @apply grid grid-cols-[minmax(0,1fr)_90px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 select-none;
   }
 
   .card-skeleton-title {
