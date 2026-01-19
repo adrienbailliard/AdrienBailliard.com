@@ -61,9 +61,9 @@ export default function MessageCard({ message }: MessageCardProps)
                     ` : ""
                 }
             >
-                <div className="card-title">
+                <p className="card-title">
                     { `${message.first_name} ${message.last_name}` }
-                </div>
+                </p>
             </div>
             <time>
                 { formatAdminDate(message.created_at) }

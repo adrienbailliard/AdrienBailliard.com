@@ -1,7 +1,7 @@
 'use server';
 import { after } from 'next/server';
 import { updateTag, revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+import { redirect, RedirectType } from 'next/navigation';
 
 import { z } from "zod";
 
@@ -86,7 +86,7 @@ export async function submitDraft(id: number, date?: Date | null): Promise<void>
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
 
-  redirect("/newsletter");
+  redirect("/newsletter", RedirectType.replace);
 }
 
 
@@ -102,7 +102,7 @@ export async function deleteDraft(id: number): Promise<void>
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
   revalidatePath(`/admin/newsletter/${result.slug}`);
 
-  redirect("/newsletter");
+  redirect("/newsletter", RedirectType.replace);
 }
 
 
@@ -115,7 +115,7 @@ export async function createDraft(draft: InsertNewsletterParam): Promise<void>
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   revalidatePath(`/admin/newsletter/${result.slug}`);
 
-  redirect(`/admin/newsletter/${result.slug}`);
+  redirect(`/admin/newsletter/${result.slug}`, RedirectType.replace);
 }
 
 
@@ -138,6 +138,6 @@ export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
   if (result.old_slug !== result.new_slug)
   {
     revalidatePath(`/admin/newsletter/${result.new_slug}`);
-    redirect(`/admin/newsletter/${result.new_slug}`);
+    redirect(`/admin/newsletter/${result.new_slug}`, RedirectType.replace);
   }
 }

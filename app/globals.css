@@ -169,7 +169,7 @@
   }
 
   time {
-    @apply text-light-muted-text;
+    @apply text-light-muted-text text-sm;
   }
 
   p a {
@@ -177,7 +177,7 @@
   }
 
   label {
-    @apply text-base font-medium;
+    @apply font-medium;
   }
 }
 
@@ -248,23 +248,23 @@
   }
 
   .card-list {
-    @apply grid grid-cols-[minmax(0,1fr)_90px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 select-none;
+    @apply grid grid-cols-[minmax(0,1fr)_90px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 select-none items-center;
   }
 
   .card-skeleton-title {
-    @apply rounded-lg w-25 h-4.5 bg-light-fg;
+    @apply rounded-lg w-32 h-4 md:h-4.5 bg-light-fg;
   }
 
   .card-skeleton-time {
-    @apply bg-light-muted-text rounded-lg w-8.5 h-4 ml-auto;
+    @apply bg-light-muted-text rounded-lg w-9 h-3.5 ml-auto;
   }
 
-  .card-skeleton-container {
-    @apply bg-light-muted-text rounded-lg w-full max-w-175 h-4;
+  .card-skeleton-content {
+    @apply bg-light-muted-text rounded-lg w-full max-w-225 h-4 col-span-full mt-1;
   }
 
   .card-list time {
-    @apply ml-auto mt-0.5;
+    @apply ml-auto;
   }
 
   .card-container {
@@ -272,7 +272,7 @@
   }
 
   .card-title {
-    @apply text-lg font-medium line-clamp-1 break-all;
+    @apply font-medium line-clamp-1 break-all;
   }
 
   .stat-card {

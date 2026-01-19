@@ -15,9 +15,9 @@ export default function DraftCard({ draft }: DraftCardProps)
     return (
         <Link href={`/admin/newsletter/${draft.slug}`}>
             <div className="card-list">
-                <div className="card-title">
+                <p className="card-title">
                     { draft.title }
-                </div>
+                </p>
                 <time>
                     { formatAdminDate(draft.scheduled_for || draft.updated_at, draft.scheduled_for !== null) }
                 </time>
