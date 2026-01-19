@@ -44,10 +44,10 @@ export default function About()
               { "Fondateur d'Auto Monday" }
             </li>
             <li className="bullet-list">
-              70 000€ générés
+              70 000€ générés
             </li>
             <li className="bullet-list">
-              250 000 vues en 1 mois
+              250 000 vues en 1 mois
             </li>
             <li className="bullet-list">
               { "5 ans d'automatisation" }

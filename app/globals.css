@@ -159,7 +159,7 @@
 
   h1 + p,
   svg + h4,
-  .caption {
+  .caption-subdued {
     @apply mt-7 md:mt-9;
   }
 
@@ -168,8 +168,9 @@
     @apply max-w-[1408px] mx-auto;
   }
 
-  time {
-    @apply text-light-muted-text text-sm;
+  time,
+  .caption-subdued {
+    @apply font-display text-light-muted-text text-sm md:text-base;
   }
 
   p a {
