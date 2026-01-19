@@ -16,16 +16,17 @@ export async function insertEmail(emails: Array<string>): Promise<void>
 
 
 
-export const isEmailAllowed = unstable_cache(
-    async (email: string): Promise<boolean> => {
-        const result = await sql`
-            SELECT 1
-            FROM email_blacklist
-            WHERE email = ${email}
-        `;
+export const isEmailAllowed = (email: string) =>
+    unstable_cache(
+        async (): Promise<boolean> => {
+            const result = await sql`
+                SELECT 1
+                FROM email_blacklist
+                WHERE email = ${email}
+            `;
 
-        return result.length === 0;
-    },
-    [ CACHE_TAGS.emailAllowed ],
-    { tags: [ CACHE_TAGS.emailAllowed ] }
-);
+            return result.length === 0;
+        },
+        [ CACHE_TAGS.emailAllowed, email ],
+        { tags: [ `${CACHE_TAGS.emailAllowed}-${email}` ] }
+    )();
