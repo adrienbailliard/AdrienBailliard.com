@@ -1,3 +1,6 @@
+import { updateTag } from 'next/cache';
+
+import CACHE_TAGS from '@/lib/db/cache-tags';
 import { MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
 import { getDomainValidity, upsertDomain } from "@/lib/db/domains";
 
@@ -16,6 +19,8 @@ export async function isValidDomain(domain: string): Promise<boolean>
     isValid = result.disposable === false && result.mx_record !== null;
 
     await upsertDomain(domain, isValid);
+    updateTag(`${CACHE_TAGS.domainValidity}-${domain}`);
+
     return isValid;
 }
 

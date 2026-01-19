@@ -10,7 +10,9 @@ const CACHE_TAGS = {
 
     subscribersStats: 'subscribers-stats',
 
-    emailAllowed: 'email-allowed'
+    emailAllowed: 'email-allowed',
+
+    domainValidity: 'domain-validity'
 };
 
 
