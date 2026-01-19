@@ -5,7 +5,7 @@ import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 
 import { generateSlug } from "@/lib/utils";
-import { DRAFT_CREATION_SLUG, newsletterStatus } from "@/lib/constants";
+import { DRAFT_CREATION_SLUG, NewsletterStatus } from "@/lib/constants";
 
 import { NewsletterPreview, Newsletter, InsertNewsletterParam, UpdateNewsletterParam, NewsletterSlug,
     SerializedNewsletterPreview, UpdateNewsletterResult } from '@/lib/types';
@@ -130,23 +130,23 @@ export async function updateNewsletter(draft: UpdateNewsletterParam): Promise<Up
 
 
 
-const getNewsletterPreviews = (status: newsletterStatus, tag: string) => 
+const getNewsletterPreviews = (status: NewsletterStatus, tag: string) => 
     unstable_cache(
         async () => {
             return await sql `
                 SELECT slug, title, excerpt, updated_at, published_at, scheduled_for
                 FROM newsletters
                 WHERE ${
-                    status === newsletterStatus.PUBLISHED 
+                    status === NewsletterStatus.Published 
                         ? sql`published_at IS NOT NULL` 
                         : sql`published_at IS NULL AND scheduled_for IS ${
-                            status === newsletterStatus.SCHEDULED ? sql`NOT NULL` : sql`NULL`
+                            status === NewsletterStatus.Scheduled ? sql`NOT NULL` : sql`NULL`
                         }`
                 }
                 ORDER BY ${
-                    status === newsletterStatus.PUBLISHED 
+                    status === NewsletterStatus.Published 
                         ? sql`published_at DESC`
-                        : status === newsletterStatus.SCHEDULED 
+                        : status === NewsletterStatus.Scheduled 
                             ? sql`scheduled_for ASC`
                             : sql`updated_at DESC`
                 }
@@ -157,9 +157,9 @@ const getNewsletterPreviews = (status: newsletterStatus, tag: string) =>
     ) as () => Promise<Array<NewsletterPreview | SerializedNewsletterPreview>>;
 
 
-export const getNewsletterDraftsPreviews = getNewsletterPreviews(newsletterStatus.DRAFT, CACHE_TAGS.newsletterDraftsPreviews);
-export const getPublishedNewsletterPreviews = getNewsletterPreviews(newsletterStatus.PUBLISHED, CACHE_TAGS.newsletterPublishedPreviews);
-export const getScheduledNewsletterPreviews = getNewsletterPreviews(newsletterStatus.SCHEDULED, CACHE_TAGS.newsletterScheduledPreviews);
+export const getNewsletterDraftsPreviews = getNewsletterPreviews(NewsletterStatus.Draft, CACHE_TAGS.newsletterDraftsPreviews);
+export const getPublishedNewsletterPreviews = getNewsletterPreviews(NewsletterStatus.Published, CACHE_TAGS.newsletterPublishedPreviews);
+export const getScheduledNewsletterPreviews = getNewsletterPreviews(NewsletterStatus.Scheduled, CACHE_TAGS.newsletterScheduledPreviews);
 
 
 

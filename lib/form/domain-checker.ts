@@ -1,25 +1,24 @@
-import { domainStatus, MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
-import { getDomainStatus, upsertDomain } from "@/lib/db/domains";
+import { MAX_FECTH_EMAIL_RETRY, FECTH_EMAIL_DELAY } from "@/lib/constants";
+import { getDomainValidity, upsertDomain } from "@/lib/db/domains";
 
 
 
 export async function isValidDomain(domain: string): Promise<boolean>
 {
-    let status = await getDomainStatus(domain);
+    let isValid = await getDomainValidity(domain);
 
-    if (status)
-        return status === domainStatus.VALID;
+    if (isValid !== undefined)
+        return isValid;
 
     const request = await fetchEmailWithRetry(`check@${domain}`);
     const result = await request.json();
 
-    status = result.disposable === true || result.mx_record === null
-        ? domainStatus.INVALID
-        : domainStatus.VALID;
+    isValid = result.disposable === false && result.mx_record !== null;
 
-    await upsertDomain(domain, status);
-    return status === domainStatus.VALID;
+    await upsertDomain(domain, isValid);
+    return isValid;
 }
+
 
 
 async function fetchEmailWithRetry(email: string): Promise<Response>
