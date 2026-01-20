@@ -1,8 +1,8 @@
 "use client";
-
 import { useState } from "react";
-import Button from "@/components/ui/Button";
+import TextareaAutosize from 'react-textarea-autosize';
 
+import Button from "@/components/ui/Button";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 
 import { EMAIL_PATTERN, ERROR_MESSAGE } from "@/lib/constants";
@@ -107,8 +107,8 @@ export default function ContactForm()
                             <input name="category" type="hidden" value={values.category}/>
                             <div className={ "transition-opacity duration-300 " + (values.category == "" ? "h-0 overflow-hidden opacity-0" : "mt-8 opacity-100") }>
                                 <label htmlFor="content">Message</label>
-                                <textarea id="content" name="content" maxLength={fieldMaxLengths.content} required
-                                    value={values.content} onChange={handleChange}
+                                <TextareaAutosize id="content" name="content" maxLength={fieldMaxLengths.content} required
+                                    value={values.content} onChange={handleChange} className="resize-none" minRows={6}
                                 />
                             </div>
                         </div>

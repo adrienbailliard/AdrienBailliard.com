@@ -227,10 +227,6 @@
     @apply h-10.5 p-3;
   }
 
-  .contact textarea {
-    @apply min-h-42;
-  }
-
   .contact button {
     @apply rounded-lg font-medium w-full flex items-center justify-center duration-100; 
   }
