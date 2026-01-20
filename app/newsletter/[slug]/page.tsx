@@ -2,8 +2,11 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Metadata } from 'next';
 
+import { remark } from 'remark';
+import html from 'remark-html';
+
 import NewsletterSignup from "@/components/newsletter/Signup";
-import NewsletterView, { NewsletterTitle, NewsletterContentServer } from "@/components/newsletter/View";
+import NewsletterView, { NewsletterTitle } from "@/components/newsletter/View";
 
 import { metadata } from "@/app/not-found";
 import { getMetadata } from "@/lib/seo/metadata";
@@ -54,6 +57,9 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
   };
 
   const jsonLd = getJsonLd(articlePage);
+  const processedContent = await remark()
+    .use(html)
+    .process(newsletter.content);
 
 
   return (
@@ -65,7 +71,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
           <NewsletterTitle value={ newsletter.title } />
         }
         content={
-          <NewsletterContentServer value={ newsletter.content } />
+          <div dangerouslySetInnerHTML={{ __html: processedContent.toString() }} />
         }
         date={newsletter.published_at!}
       />

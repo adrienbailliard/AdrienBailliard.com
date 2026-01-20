@@ -1,6 +1,3 @@
-import { remark } from 'remark';
-import html from 'remark-html';
-
 import { formatPublicDate } from "@/lib/utils";
 
 
@@ -8,17 +5,6 @@ import { formatPublicDate } from "@/lib/utils";
 export function NewsletterTitle({ value }: { value: string })
 {
     return <h1>{ value }</h1>;
-};
-
-
-
-export async function NewsletterContentServer({ value }: { value: string })
-{
-    const processedContent = await remark()
-        .use(html)
-        .process(value);
-
-    return <div dangerouslySetInnerHTML={{ __html: processedContent.toString() }} />;
 };
 
 
