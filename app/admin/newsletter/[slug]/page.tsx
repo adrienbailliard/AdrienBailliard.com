@@ -68,6 +68,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
           <EditableField
             newsletter={ newsletter }
             field="excerpt"
+            variant="dark"
           >
             <p>{ newsletter.excerpt }</p>
           </EditableField>
@@ -79,6 +80,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
           <EditableField
             newsletter={ newsletter }
             field="title"
+            variant="dark"
           >
             <NewsletterTitle value={ newsletter.title } />
           </EditableField>
@@ -87,6 +89,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
           <EditableField
             newsletter={ newsletter }
             field="content"
+            variant="light"
           >
             <NewsletterContent value={ newsletter.content } />
           </EditableField>

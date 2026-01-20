@@ -11,10 +11,11 @@ type EditableFieldProps = {
   children: React.ReactNode;
   newsletter: EditorNewsletterParam;
   field: keyof InsertNewsletterParam;
+  variant: "light" | "dark";
 }
 
 
-export default function EditableField({ children, newsletter, field }: EditableFieldProps)
+export default function EditableField({ children, newsletter, field, variant }: EditableFieldProps)
 {
     const [isEditing, setIsEditing] = useState(false);
 
@@ -26,6 +27,7 @@ export default function EditableField({ children, newsletter, field }: EditableF
                     setIsEditing={setIsEditing}
                     newsletter={newsletter}
                     field={field}
+                    variant={variant}
                 />
                 : <DisplayField setIsEditing={setIsEditing}>
                     { children }

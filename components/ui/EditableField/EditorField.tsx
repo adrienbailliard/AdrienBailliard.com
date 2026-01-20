@@ -11,22 +11,21 @@ type EditorFieldProps = {
     newsletter: EditorNewsletterParam;
     field: keyof InsertNewsletterParam;
     setIsEditing: (value: boolean) => void;
+    variant: "light" | "dark";
 }
 
 
-export default function EditorField({ newsletter, field, setIsEditing }: EditorFieldProps)
+export default function EditorField({ newsletter, field, setIsEditing, variant }: EditorFieldProps)
 {
     const [isPending, startTransition] = useTransition();
     const [value, setValue] = useState(newsletter[field]);
 
+    const trimmedValue = value.trim();
+    const isToSave = trimmedValue.length !== 0 && newsletter[field] !== trimmedValue;
+
 
     const handleSave = () =>
         startTransition(async () => {
-            const trimmedValue = value.trim();
-
-            if (newsletter[field] === trimmedValue)
-                return setIsEditing(false);
-
             try {
                 newsletter.id
                     ? await updateDraft({ id: newsletter.id, [field]: trimmedValue })
@@ -59,8 +58,8 @@ export default function EditorField({ newsletter, field, setIsEditing }: EditorF
                 </button>
                 <button
                     onClick={handleSave}
-                    className='text-primary font-medium'
-                    disabled={isPending || value.trim().length === 0}
+                    className={ `${isToSave ? "text-primary" : `text-${variant}-muted-text`} font-medium` }
+                    disabled={isPending || !isToSave}
                 >
                     { isPending ? "Validation..." : "Valider" }
                 </button>
