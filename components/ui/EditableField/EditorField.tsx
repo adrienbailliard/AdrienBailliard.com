@@ -30,6 +30,7 @@ export default function EditorField({ newsletter, field, onEdit, variant }: Edit
                     ? await updateDraft({ id: newsletter.id, [field]: trimmedValue })
                     : await createDraft({ ...newsletter, [field]: trimmedValue });
 
+                newsletter[field] = trimmedValue;
                 onEdit(false);
             }
             catch {}
