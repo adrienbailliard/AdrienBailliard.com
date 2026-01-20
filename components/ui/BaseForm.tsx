@@ -45,7 +45,7 @@ export default function BaseForm({ children, className, isForNewsletter = true }
             onClick={ handleReset }
             className={"w-full " + className}
           >
-            { hasError ? ERROR_MESSAGE : "Tu es dans la boucle !" }
+            { hasError ? ERROR_MESSAGE : "Tu es dans la boucle !" }
           </Button>
         ) :
         (

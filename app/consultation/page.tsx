@@ -54,7 +54,7 @@ export default function Consultation()
               href="#cta"
               className="group base-link text-light-muted-text mt-8 md:mt-10 inline-flex"
             >
-              {"Découvrir comment"}
+              {"Découvre comment"}
               <Arrow className="base-arrow rotate-90 shrink-0 group-hover:translate-y-0.5" />
             </a>
           </div>

@@ -52,7 +52,7 @@ export default function ContactForm()
                     variant={ hasError ? "light-error" : "light-primary" }
                     className="block mx-auto"
                 >
-                    { hasError ? ERROR_MESSAGE : "Merci ! Je reviens très vite vers toi." }
+                    { hasError ? ERROR_MESSAGE : "Merci ! À très vite" }
                 </Button>
             ) : (
                 <form onSubmit={(e) => handleSubmit(e, contact, setIsSubmitted, setHasError)} className="flex justify-between gap-7 sm:gap-9 flex-wrap items-start">
@@ -117,7 +117,7 @@ export default function ContactForm()
                             name="submitButton"
                             variant="light-primary"
                         >
-                            { "Démarrer l'Échange" }
+                            { "Lance l'Échange" }
                         </Button>
                     </div>
                 </form>

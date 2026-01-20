@@ -26,7 +26,7 @@ export default function Header()
     const pageEntries = useMemo(() => Array.from(pages.entries()), []);
 
     const [ctaHref, ctaPage] = pageEntries[pageEntries.length - 2];
-    const actionButtonText = isAdmin ? "Quitter" : "S'inscrire";
+    const actionButtonText = isAdmin ? "Quitter" : "Inscris-Toi";
     const getLinkClass = (href: string) => pathname === href ? " underline" : "";
 
     const closeMenuAndHandlePopup = () => {

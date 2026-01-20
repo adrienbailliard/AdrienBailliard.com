@@ -41,7 +41,7 @@ export async function sendConfirmation(email: string): Promise<void>
                 </li>
             </ul>
             <p style="margin-top: 24px; margin-bottom: 0px; color: black; line-height: 24px; font-size: 16px;">
-                À très vite !
+                À très vite !
                 <br />
                 ${ site.name }
             </p>
