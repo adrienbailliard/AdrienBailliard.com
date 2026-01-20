@@ -3,7 +3,7 @@ import Script from "next/script";
 import { Metadata } from 'next';
 
 import NewsletterSignup from "@/components/newsletter/Signup";
-import NewsletterView, { NewsletterTitle, NewsletterContent } from "@/components/newsletter/View";
+import NewsletterView, { NewsletterTitle, NewsletterContentServer } from "@/components/newsletter/View";
 
 import { metadata } from "@/app/not-found";
 import { getMetadata } from "@/lib/seo/metadata";
@@ -65,7 +65,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
           <NewsletterTitle value={ newsletter.title } />
         }
         content={
-          <NewsletterContent value={ newsletter.content } />
+          <NewsletterContentServer value={ newsletter.content } />
         }
         date={newsletter.published_at!}
       />

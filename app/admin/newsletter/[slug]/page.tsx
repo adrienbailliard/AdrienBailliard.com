@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 import { Metadata } from 'next';
 
-import NewsletterView, { NewsletterTitle, NewsletterContent } from "@/components/newsletter/View";
 import Divider from "@/components/ui/Divider";
 import NewsletterDraftActions from "@/components/newsletter/DraftActions";
-import EditableField from "@/components/ui/EditableField";
+import NewsletterEditor from "@/components/newsletter/Editor";
 
 import { metadata } from "@/app/not-found";
 import { getMinimalMetadata } from "@/lib/seo/metadata";
@@ -36,7 +35,6 @@ type NewsletterPageProps = {
 };
 
 
-
 export default async function NewsletterPage({ params }: NewsletterPageProps)
 {
   const { slug } = await params;
@@ -63,39 +61,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
         )
       }
 
-      <section className="bg-dark-bg text-center text-light-muted-text">
-        <div className="max-w-4xl">
-          <EditableField
-            newsletter={ newsletter }
-            field="excerpt"
-            variant="dark"
-          >
-            <p>{ newsletter.excerpt }</p>
-          </EditableField>
-        </div>
-      </section>
-
-      <NewsletterView
-        title={
-          <EditableField
-            newsletter={ newsletter }
-            field="title"
-            variant="dark"
-          >
-            <NewsletterTitle value={ newsletter.title } />
-          </EditableField>
-        }
-        content={
-          <EditableField
-            newsletter={ newsletter }
-            field="content"
-            variant="light"
-          >
-            <NewsletterContent value={ newsletter.content } />
-          </EditableField>
-        }
-        date={ new Date() }
-      />
+      <NewsletterEditor newsletter={newsletter} />
     </main>
   );
 }

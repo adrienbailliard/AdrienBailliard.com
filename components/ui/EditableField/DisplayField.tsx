@@ -1,19 +1,19 @@
-"use client";
-
-
 type DisplayFieldProps = {
   children: React.ReactNode;
-  setIsEditing: (value: boolean) => void;
+  onEdit: (value: boolean) => void;
+  isDisabled: boolean;
+  variant: "light" | "dark";
 }
 
 
-export default function DisplayField({ children, setIsEditing }: DisplayFieldProps)
+export default function DisplayField({ children, onEdit, isDisabled, variant }: DisplayFieldProps)
 {
     return (
         <>
             <button
-                className='text-primary font-medium self-end'
-                onClick={ () => setIsEditing(true) }
+                className={ `${isDisabled ? `text-${variant}-muted-text` : "text-primary"} font-medium self-end` }
+                onClick={ () => onEdit(true) }
+                disabled={isDisabled}
             >
                 Modifier
             </button>

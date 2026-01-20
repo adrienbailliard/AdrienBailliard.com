@@ -12,7 +12,7 @@ export function NewsletterTitle({ value }: { value: string })
 
 
 
-export async function NewsletterContent({ value }: { value: string })
+export async function NewsletterContentServer({ value }: { value: string })
 {
     const processedContent = await remark()
         .use(html)
@@ -30,7 +30,7 @@ type ViewProps = {
 };
 
 
-export default async function View({ title, content, date }: ViewProps)
+export default function View({ title, content, date }: ViewProps)
 {
     return (
         <>

@@ -1,4 +1,3 @@
-"use client";
 import { useState, useCallback, useTransition } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 
@@ -10,12 +9,12 @@ import { createDraft, updateDraft } from "@/lib/actions/newsletter";
 type EditorFieldProps = {
     newsletter: EditorNewsletterParam;
     field: keyof InsertNewsletterParam;
-    setIsEditing: (value: boolean) => void;
+    onEdit: (value: boolean) => void;
     variant: "light" | "dark";
 }
 
 
-export default function EditorField({ newsletter, field, setIsEditing, variant }: EditorFieldProps)
+export default function EditorField({ newsletter, field, onEdit, variant }: EditorFieldProps)
 {
     const [isPending, startTransition] = useTransition();
     const [value, setValue] = useState(newsletter[field]);
@@ -31,7 +30,7 @@ export default function EditorField({ newsletter, field, setIsEditing, variant }
                     ? await updateDraft({ id: newsletter.id, [field]: trimmedValue })
                     : await createDraft({ ...newsletter, [field]: trimmedValue });
 
-                setIsEditing(false);
+                onEdit(false);
             }
             catch {}
         });
@@ -52,7 +51,7 @@ export default function EditorField({ newsletter, field, setIsEditing, variant }
             <div className="flex gap-7 self-end">
                 <button
                     className='text-primary font-medium'
-                    onClick={ () => setIsEditing(false) }
+                    onClick={ () => onEdit(false) }
                 >
                     Annuler
                 </button>
