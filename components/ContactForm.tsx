@@ -11,12 +11,36 @@ import { contact } from "@/lib/actions/message";
 
 
 
+const INITIAL_VALUES = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    category: "",
+    content: ""
+};
+
+
 export default function ContactForm()
 {
     const [hasError, setHasError] = useState(false);
-    const [selected, setSelected] = useState("");
-    const categories = ["Projet", "Collaboration", "Question"];
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [values, setValues] = useState(INITIAL_VALUES);
+
+    const categories = ["Projet", "Collaboration", "Question"];
+
+    const handleReset = () => {
+        if (!hasError)
+            setValues(INITIAL_VALUES); 
+
+        setIsSubmitted(false);
+        setHasError(false);
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setValues(prev => ({ ...prev, [name]: value }));
+    };
 
 
     return (
@@ -24,10 +48,7 @@ export default function ContactForm()
             <div>
             { isSubmitted ? (
                 <Button
-                    onClick={ () => {
-                        setIsSubmitted(false);
-                        setHasError(false);
-                    }}
+                    onClick={ handleReset }
                     variant={ hasError ? "light-error" : "light-primary" }
                     className="block mx-auto"
                 >
@@ -42,19 +63,27 @@ export default function ContactForm()
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
                             <div>
                                 <label htmlFor="firstName">Prénom</label>
-                                <input id="firstName" name="firstName" type="text" autoComplete="given-name" maxLength={fieldMaxLengths.firstName} required/>
+                                <input id="firstName" name="firstName" type="text" autoComplete="given-name" maxLength={fieldMaxLengths.firstName} required
+                                    value={values.firstName} onChange={handleChange}
+                                />
                             </div>
                             <div>
                                 <label htmlFor="lastName">Nom</label>
-                                <input id="lastName" name="lastName" type="text" autoComplete="family-name" maxLength={fieldMaxLengths.lastName} required/>
+                                <input id="lastName" name="lastName" type="text" autoComplete="family-name" maxLength={fieldMaxLengths.lastName} required
+                                    value={values.lastName} onChange={handleChange}
+                                />
                             </div>
                             <div>
                                 <label htmlFor="email">Email</label>
-                                <input id="email" name="email" type="email" autoComplete="email" pattern={EMAIL_PATTERN} maxLength={fieldMaxLengths.email} required/>
+                                <input id="email" name="email" type="email" autoComplete="email" pattern={EMAIL_PATTERN} maxLength={fieldMaxLengths.email} required
+                                    value={values.email} onChange={handleChange}
+                                />
                             </div>
                             <div>
                                 <label htmlFor="company">Entreprise</label>
-                                <input id="company" name="company" type="text" autoComplete="organization" maxLength={fieldMaxLengths.company} required/>
+                                <input id="company" name="company" type="text" autoComplete="organization" maxLength={fieldMaxLengths.company} required
+                                    value={values.company} onChange={handleChange}
+                                />
                             </div>
                         </div>
                     </div>
@@ -68,17 +97,19 @@ export default function ContactForm()
                                     <button
                                         key={category}
                                         type="button"
-                                        onClick={() => setSelected(category)}
-                                        className={ "inset-border " + (selected === category ? "text-light-fg" : "bg-light-bg text-dark-fg") }
+                                        onClick={() => setValues(prev => ({ ...prev, category }))}
+                                        className={ "inset-border " + (values.category === category ? "text-light-fg" : "bg-light-bg text-dark-fg") }
                                     >
                                         {category}
                                     </button>
                                 ))}
                             </div>
-                            <input name="category" type="hidden" value={selected}/>
-                            <div className={ "transition-opacity duration-300 " + (selected == "" ? "h-0 overflow-hidden opacity-0" : "mt-8 opacity-100") }>
+                            <input name="category" type="hidden" value={values.category}/>
+                            <div className={ "transition-opacity duration-300 " + (values.category == "" ? "h-0 overflow-hidden opacity-0" : "mt-8 opacity-100") }>
                                 <label htmlFor="content">Message</label>
-                                <textarea id="content" name="content" maxLength={fieldMaxLengths.content} required/>
+                                <textarea id="content" name="content" maxLength={fieldMaxLengths.content} required
+                                    value={values.content} onChange={handleChange}
+                                />
                             </div>
                         </div>
                         <Button

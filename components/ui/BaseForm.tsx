@@ -23,7 +23,17 @@ export default function BaseForm({ children, className, isForNewsletter = true }
 {
   const [hasError, setHasError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [email, setEmail] = useState("");
+
   const action = isForNewsletter ? subscribe : request;
+
+  const handleReset = () => {
+    if (!hasError)
+      setEmail(""); 
+
+    setIsSubmitted(false);
+    setHasError(false);
+  };
 
 
   return (
@@ -32,10 +42,7 @@ export default function BaseForm({ children, className, isForNewsletter = true }
         (
           <Button
             variant={ hasError ? "light-error" : "light-primary" }
-            onClick={ () => {
-              setIsSubmitted(false);
-              setHasError(false);
-            }}
+            onClick={ handleReset }
             className={"w-full " + className}
           >
             { hasError ? ERROR_MESSAGE : "Tu es dans la boucle !" }
@@ -52,6 +59,8 @@ export default function BaseForm({ children, className, isForNewsletter = true }
                     placeholder="Email"
                     name="email"
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     pattern={EMAIL_PATTERN}
                     autoComplete="email"
                     maxLength={fieldMaxLengths.email}
