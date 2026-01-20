@@ -38,7 +38,7 @@ export default function BaseForm({ children, className, isForNewsletter = true }
 
   return (
     <>
-      { isSubmitted ?
+      { isSubmitted || hasError ?
         (
           <Button
             variant={ hasError ? "light-error" : "light-primary" }

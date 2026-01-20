@@ -74,7 +74,7 @@ export async function submitDraft(id: number, date?: Date | null): Promise<void>
     : await publishNewsletterById(id);
 
   if (!result)
-    return;
+    throw Error("Draft not found");
 
   if (!isScheduling)
   {
@@ -96,7 +96,8 @@ export async function deleteDraft(id: number): Promise<void>
   IdSchema.parse(id);
   const result = await deleteNewsletterById(id);
 
-  if (!result) return;
+  if (!result)
+    throw Error("Draft not found");
 
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
@@ -125,7 +126,8 @@ export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
   UpdateDraftSchema.parse(draft);
   const result = await updateNewsletter(draft);
 
-  if (!result) return;
+  if (!result)
+    throw Error("Draft not found");
 
   if (!draft.content)
   {

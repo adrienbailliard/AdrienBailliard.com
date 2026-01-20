@@ -46,7 +46,7 @@ export default function ContactForm()
     return (
         <section className="bg-light-bg">
             <div>
-            { isSubmitted ? (
+            { isSubmitted || hasError ? (
                 <Button
                     onClick={ handleReset }
                     variant={ hasError ? "light-error" : "light-primary" }

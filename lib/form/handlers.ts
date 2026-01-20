@@ -7,6 +7,9 @@ export async function handleSubmit(
 {
     event.preventDefault();
 
+    if (!navigator.onLine)
+        return setHasError(true);
+    
     const formData = new FormData(event.currentTarget);
     const button = event.currentTarget.elements.namedItem("submitButton") as HTMLButtonElement;
 
@@ -15,10 +18,9 @@ export async function handleSubmit(
 
     try {
         await action(formData);
+        setIsSubmitted(true);
     }
     catch {
         setHasError(true);
     }
-
-    setIsSubmitted(true);
 }
