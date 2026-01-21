@@ -46,7 +46,7 @@ export default function Footer()
           </div>
         </nav>
         <div className="text-xs flex justify-between mt-5 xl:mt-16 max-sm:flex-col-reverse max-sm:items-center max-sm:gap-4 text-center">
-          <div className="text-light-muted-text">
+          <div className="text-light-muted-fg">
             © { new Date().getFullYear() } { site.name }. Tous droits réservés.
           </div>
           <Link href="/conditions-generales" className="font-medium">

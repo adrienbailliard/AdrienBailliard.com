@@ -19,7 +19,7 @@ export default function ServicePreview({ Icon, title, paragraph, href, cta, clas
         <h4>
             {title}
         </h4>
-        <p className="text-light-muted-text max-w-[352px]">
+        <p className="text-light-muted-fg max-w-[352px]">
             {paragraph}
         </p>
         <Link href={href} variant="primary">

@@ -73,7 +73,7 @@ export default function MessageCard({ message }: MessageCardProps)
                 { !isExpanded && ` - ${ message.content }` }
             </p>
             { isExpanded && (
-                <p className="text-base text-light-muted-text col-span-full whitespace-pre-wrap">
+                <p className="text-base text-light-muted-fg col-span-full whitespace-pre-wrap">
                     { message.content }
                 </p>
             )}

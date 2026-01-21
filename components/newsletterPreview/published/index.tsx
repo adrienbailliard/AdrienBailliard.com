@@ -23,7 +23,7 @@ export default async function Newsletters({ title, cta, limit }: NewslettersProp
                     { title }
                 </h2>
                 { previews.length === 0
-                    ? <p className="text-dark-muted-text text-center">
+                    ? <p className="text-dark-muted-fg text-center">
                         { "La première édition arrive dans les prochains jours." }
                     </p>
                     : (

@@ -11,8 +11,8 @@
   --color-light-fg: #FFFFFF;
   --color-dark-fg: #000000;
 
-  --color-dark-muted-text: #707070;
-  --color-light-muted-text: #AAAAAA;
+  --color-dark-muted-fg: #707070;
+  --color-light-muted-fg: #AAAAAA;
 
   --color-light-bg: #F0F0F0;
   --color-dark-bg: #0F0F0F;
@@ -54,11 +54,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-dark-muted-text;
+    @apply rounded-full bg-dark-muted-fg;
   }
 
   ::-webkit-scrollbar-thumb:active {
-    @apply bg-light-muted-text;
+    @apply bg-light-muted-fg;
   }
 
   header, footer, main > * {
@@ -91,7 +91,7 @@
   }
 
   ::placeholder {
-    @apply font-light text-dark-muted-text;
+    @apply font-light text-dark-muted-fg;
   }
 
   h1,
@@ -170,7 +170,7 @@
 
   time,
   .caption-subdued {
-    @apply font-display text-light-muted-text text-sm md:text-base;
+    @apply font-display text-light-muted-fg text-sm md:text-base;
   }
 
   p a {
@@ -253,11 +253,11 @@
   }
 
   .card-skeleton-time {
-    @apply bg-light-muted-text rounded-lg w-9 h-3.5 ml-auto;
+    @apply bg-light-muted-fg rounded-lg w-9 h-3.5 ml-auto;
   }
 
   .card-skeleton-content {
-    @apply bg-light-muted-text rounded-lg w-full max-w-225 h-4 col-span-full mt-1;
+    @apply bg-light-muted-fg rounded-lg w-full max-w-225 h-4 col-span-full mt-1;
   }
 
   .card-list time {
@@ -265,7 +265,7 @@
   }
 
   .card-container {
-    @apply text-base line-clamp-2 sm:line-clamp-1 col-span-full text-light-muted-text;
+    @apply text-base line-clamp-2 sm:line-clamp-1 col-span-full text-light-muted-fg;
   }
 
   .card-title {

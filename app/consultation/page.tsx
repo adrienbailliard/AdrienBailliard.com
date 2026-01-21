@@ -52,7 +52,7 @@ export default function Consultation()
           <div className="max-lg:text-center">
             <a
               href="#cta"
-              className="group base-link text-light-muted-text mt-8 md:mt-10 inline-flex"
+              className="group base-link text-light-muted-fg mt-8 md:mt-10 inline-flex"
             >
               {"Découvre comment"}
               <Arrow className="base-arrow rotate-90 shrink-0 group-hover:translate-y-0.5" />

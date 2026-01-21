@@ -50,7 +50,7 @@ export default function TheEliteSystem()
             </h1>
             <a
               href="#cta"
-              className="group base-link text-light-muted-text inline-flex"
+              className="group base-link text-light-muted-fg inline-flex"
             >
               {"Crée des systèmes performants"}
               <Arrow className="base-arrow rotate-90 shrink-0 group-hover:translate-y-0.5" />

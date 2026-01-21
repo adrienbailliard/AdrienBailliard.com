@@ -62,13 +62,13 @@ export default function Calendar({ selectedDate, setSelectedDate, className }: C
         button_previous: "w-10 h-10 flex justify-center items-center",
 
         weekdays: "flex",
-        weekday: "text-light-muted-text w-10 font-sans text-sm font-normal flex items-center justify-center",
+        weekday: "text-light-muted-fg w-10 font-sans text-sm font-normal flex items-center justify-center",
         week: "mt-2 grid grid-cols-7",
         
         day_button: "w-10 h-10 text-sm font-sans flex items-center justify-center",
 
         selected: "text-primary font-bold",
-        disabled: "text-light-muted-text",
+        disabled: "text-light-muted-fg",
         today: "underline underline-offset-3"
       }}
       components={{

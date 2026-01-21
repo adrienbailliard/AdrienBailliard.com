@@ -25,7 +25,7 @@ export function PreviewCard({ preview }: PreviewCardProps)
                     </h4>
                 </div>
                 <div className="sm:basis-1/2 lg:basis-auto max-sm:mt-5 mt-0 lg:mt-5">
-                    <p className="text-base text-dark-muted-text">
+                    <p className="text-base text-dark-muted-fg">
                         { formatPublicDate(preview.published_at!) }
                     </p>
                     <h5 className="font-medium mt-2">

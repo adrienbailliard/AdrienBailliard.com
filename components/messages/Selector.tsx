@@ -31,7 +31,7 @@ export function Selector({ isSelected, onClick, inSelection, highlightCheckBox, 
             ` }
         >
             <div className={ `h-4.5 w-4.5 bg-transparent border m-auto rounded-xs group-[:hover,:active]:border-light-fg
-                    ${ highlightCheckBox ? "border-light-fg" : "border-dark-muted-text" }
+                    ${ highlightCheckBox ? "border-light-fg" : "border-dark-muted-fg" }
                     ${ inSelection && isSelected && "border-light-fg" }
                 `}
             />

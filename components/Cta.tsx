@@ -17,7 +17,7 @@ export default function Cta({ title, paragraph, variant, children, className }: 
                 <h3>
                     { title }
                 </h3>
-                <p className={"text-" + oppositeColor + "-muted-text max-w-md mx-auto"}>
+                <p className={"text-" + oppositeColor + "-muted-fg max-w-md mx-auto"}>
                     { paragraph }
                 </p>
                 { children }

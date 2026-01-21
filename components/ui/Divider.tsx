@@ -20,7 +20,7 @@ export default function Divider({ variant, adminOnly }: DividerProps)
 
     return (
         <div className={`bg-${oppositeColor}-bg`}>
-            <div className={ `bg-${variant}-muted-text h-px` }></div>
+            <div className={ `bg-${variant}-muted-fg h-px` }></div>
         </div>
     );
 }

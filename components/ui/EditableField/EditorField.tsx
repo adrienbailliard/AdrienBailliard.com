@@ -58,7 +58,7 @@ export default function EditorField({ newsletter, field, onEdit, variant }: Edit
                 </button>
                 <button
                     onClick={handleSave}
-                    className={ `${isToSave ? "text-primary" : `text-${variant}-muted-text`} font-medium` }
+                    className={ `${isToSave ? "text-primary" : `text-${variant}-muted-fg`} font-medium` }
                     disabled={isPending || !isToSave}
                 >
                     { isPending ? "Validation..." : "Valider" }

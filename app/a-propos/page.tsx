@@ -39,7 +39,7 @@ export default function About()
               { "Trop de projets d'automatisation échouent. J'écris pour partager ce qui fonctionne vraiment." }
             </p>
           </div>
-          <ul className="text-dark-muted-text shrink-0">
+          <ul className="text-dark-muted-fg shrink-0">
             <li className="bullet-list">
               { "Fondateur d'Auto Monday" }
             </li>

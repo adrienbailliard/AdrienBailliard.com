@@ -22,7 +22,7 @@ function StatCard({ stat }: StatCardProps)
     return (
         <div className='stat-card'>
             <h4 className='font-bold'>{ stat.value }</h4>
-            <span className="text-light-muted-text text-sm">{ stat.label }</span>
+            <span className="text-light-muted-fg text-sm">{ stat.label }</span>
         </div>
     );
 }
@@ -33,7 +33,7 @@ function StatSkeletonCard()
     return (
         <div className='stat-card animate-pulse'>
             <div className='h-6 md:h-7.5 w-8 md:w-10 mb-3 rounded-lg max-md:mx-auto bg-light-fg'/>
-            <div className='h-3.5 w-20 md:w-25 rounded-lg bg-light-muted-text'/>
+            <div className='h-3.5 w-20 md:w-25 rounded-lg bg-light-muted-fg'/>
         </div>
     );
 }

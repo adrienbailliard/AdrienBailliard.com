@@ -46,7 +46,7 @@ export default function Contact()
             <p>
               { "Présente-moi ton projet ou tes besoins. Je lis chaque message avec attention et j'y réponds personnellement." }
             </p>
-            <div className="flex max-sm:justify-center items-center gap-3 text-light-muted-text">
+            <div className="flex max-sm:justify-center items-center gap-3 text-light-muted-fg">
               <Mail className="h-4" />
               <p>
                 hello@adrienbailliard.com

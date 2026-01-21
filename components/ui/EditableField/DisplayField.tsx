@@ -11,7 +11,7 @@ export default function DisplayField({ children, onEdit, isDisabled, variant }: 
     return (
         <>
             <button
-                className={ `${isDisabled ? `text-${variant}-muted-text` : "text-primary"} font-medium self-end` }
+                className={ `${isDisabled ? `text-${variant}-muted-fg` : "text-primary"} font-medium self-end` }
                 onClick={ () => onEdit(true) }
                 disabled={isDisabled}
             >

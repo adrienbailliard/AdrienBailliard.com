@@ -22,7 +22,7 @@ export default function Editor({ newsletter }: EditorProps)
 
     return (
         <>
-            <section className="bg-dark-bg text-center text-light-muted-text">
+            <section className="bg-dark-bg text-center text-light-muted-fg">
                 <div className="max-w-4xl">
                     <EditableField
                         newsletter={ newsletter }
