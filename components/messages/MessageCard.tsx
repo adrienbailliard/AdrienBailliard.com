@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useMessageActions } from '@/context/messageActions';
+import { useMessageActions } from '@/contexts/messageActions';
 import { Selector, supportSelector } from "@/components/messages/Selector";
 import { formatAdminDate } from '@/lib/utils';
 import { Message } from '@/lib/types';

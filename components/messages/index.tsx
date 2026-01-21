@@ -1,8 +1,8 @@
 "use client";
 import useSWR from 'swr';
 
-import { useAuth } from '@/context/authentification';
-import { MessageActionsProvider } from '@/context/messageActions';
+import { useAuth } from '@/contexts/authentification';
+import { MessageActionsProvider } from '@/contexts/messageActions';
 import { Message } from '@/lib/types';
 
 import Header from "@/components/messages/Header";

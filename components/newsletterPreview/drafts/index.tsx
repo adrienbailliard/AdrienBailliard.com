@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from 'swr';
-import { useAuth } from '@/context/authentification';
+import { useAuth } from '@/contexts/authentification';
 import { SerializedNewsletterPreview } from '@/lib/types';
 
 import Header from "./Header";

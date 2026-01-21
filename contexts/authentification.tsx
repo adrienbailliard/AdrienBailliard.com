@@ -1,6 +1,9 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
+
+import { createContext, useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
+
+import { createHook } from "@/contexts/utils";
 import authConfig from "@/config/auth";
 
 
@@ -40,11 +43,4 @@ export function AuthProvider({ children }: { children: React.ReactNode })
 
 
 
-export function useAuth(): AuthContextType 
-{
-  const context = useContext(AuthContext);
-  if (!context)
-    throw new Error("AuthContext used outside an AuthProvider");
-
-  return context;
-}
+export const useAuth = createHook(AuthContext, "AuthContext");

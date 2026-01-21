@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from '@/context/authentification';
+import { useAuth } from '@/contexts/authentification';
 
 
 type DividerProps = {

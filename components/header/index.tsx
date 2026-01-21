@@ -13,7 +13,7 @@ import BlockScroll from "@/components/ui/BlockScroll";
 import pages from "@/config/navigation";
 import site from "@/config/site";
 
-import { useAuth } from '@/context/authentification';
+import { useAuth } from '@/contexts/authentification';
 
 
 

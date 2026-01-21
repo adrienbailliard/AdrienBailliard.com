@@ -1,8 +1,10 @@
 "use client";
 
 import { KeyedMutator } from 'swr';
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
+
 import { deleteMessages, toggleReadStatus } from "@/components/messages/action";
+import { createHook } from "@/contexts/utils";
 import { Message } from '@/lib/types';
 
 
@@ -17,7 +19,7 @@ type MessageActionsContextType = {
 
 
 type MessageActionsProviderProps = {
-  children: React.ReactNode
+  children: React.ReactNode;
   data: Message[] | null;
   mutate: KeyedMutator<Message[]>;
 }
@@ -56,11 +58,4 @@ export function MessageActionsProvider({ children, data, mutate }: MessageAction
 
 
 
-export function useMessageActions(): MessageActionsContextType 
-{
-  const context = useContext(MessageActionsContext);
-  if (!context)
-    throw new Error("MessageActionsContext used outside an MessageActionsProvider");
-
-  return context;
-}
+export const useMessageActions = createHook(MessageActionsContext, "MessageActionsContext");
