@@ -1,6 +1,8 @@
 "use client"
+
 import { useState, useTransition } from 'react';
 
+import { useNewsletterEditor } from '@/contexts/newsletterEditor';
 import { submitDraft, deleteDraft } from "@/lib/actions/newsletter";
 
 import Button from "@/components/ui/Button";
@@ -8,49 +10,49 @@ import BlockScroll from "@/components/ui/BlockScroll";
 import Calendar from "@/components/ui/Calendar";
 import Modal from "@/components/ui/Modal";
 
+import { Newsletter } from "@/lib/types";
 
 
-type NewsletterDraftActionsProps = {
-    id: number;
-    scheduledFor: Date | null;
-};
 
-
-export default function DraftActions({ id, scheduledFor }: NewsletterDraftActionsProps)
+export default function DraftActions()
 {
+    const { optimisticNewsletter, savingTransition } = useNewsletterEditor();
+    const [ isSavingPending ] = savingTransition;
+
     const [selectedDate, setSelectedDate] = useState<Date>();
-    const [isPending, startTransition] = useTransition();
+    const [isActionPending, startTransition] = useTransition();
     const [ isActiveModal, setIsActiveModal ] = useState(false);
     const [ modalType, setModalType ] = useState<"publish" | "delete" | "unschedule">('publish');
 
-    const removeActionKey = scheduledFor ? "unschedule" : "delete";
+    const hasId = "id" in optimisticNewsletter;
+    const removeActionKey = hasId && optimisticNewsletter.scheduled_for ? "unschedule" : "delete";
 
     const modalConfig = {
         publish: {
             cta: 'Publier',
             confirmText: selectedDate ? "Programmer" : "Publier",
             loadingText: selectedDate ? "Programmation..." : 'Publication...',
-            action: async () => submitDraft(id, selectedDate)
+            action: async (id: number) => submitDraft(id, selectedDate)
         },
         unschedule: {
             cta: 'Déprogrammer',
             confirmText: 'Déprogrammer',
             loadingText: 'Déprogrammation...',
-            action: async () => submitDraft(id, null)
+            action: async (id: number) => submitDraft(id, null)
         },
         delete: {
             cta: 'Supprimer',
             confirmText: 'Supprimer',
             loadingText: 'Suppression...',
-            action: async () => deleteDraft(id)
+            action: async (id: number) => deleteDraft(id)
         },
     };
 
 
-    const executeAction = () =>
+    const executeAction = (id: number) =>
         startTransition(async () => {
             try {
-                await modalConfig[modalType].action();
+                await modalConfig[modalType].action(id);
             }
             catch {}
         });
@@ -64,6 +66,8 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
 
                     <Button
                         variant="light-primary"
+                        disabled={ !hasId }
+                        className={ !hasId ? "!text-dark-muted-fg" : "" }
                         onClick={ () => {
                             setIsActiveModal(true);
                             setModalType(removeActionKey);
@@ -73,6 +77,8 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
                     </Button>
                     <Button
                         variant="dark-primary"
+                        disabled={ !hasId || isSavingPending }
+                        className={ !hasId || isSavingPending ? "!bg-dark-muted-fg" : "" }
                         onClick={ () => {
                             setIsActiveModal(true);
                             setModalType("publish");
@@ -108,10 +114,11 @@ export default function DraftActions({ id, scheduledFor }: NewsletterDraftAction
                     <Button
                         variant="dark-primary"
                         className='button-compact py-0'
-                        disabled={ isPending }
-                        onClick={ executeAction }
+                        disabled={ isActionPending }
+                        onClick={ () =>
+                            executeAction((optimisticNewsletter as Newsletter).id) }
                     >
-                        { isPending
+                        { isActionPending
                             ? modalConfig[modalType].loadingText
                             : modalConfig[modalType].confirmText }
                     </Button>

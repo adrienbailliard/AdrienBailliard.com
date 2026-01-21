@@ -3,21 +3,18 @@
 import { useState } from "react";
 import DisplayField from "./DisplayField";
 import EditorField from "./EditorField";
-import { EditorNewsletterParam, InsertNewsletterParam } from "@/lib/types";
+import { InsertNewsletterParam } from "@/lib/types";
 
 
 
 type EditableFieldProps = {
     children: React.ReactNode;
-    newsletter: EditorNewsletterParam;
     field: keyof InsertNewsletterParam;
     variant: "light" | "dark";
-    selectedEditor: string | null;
-    setSelectedEditor: (value: string | null) => void;
 }
 
 
-export default function EditableField({ children, newsletter, field, variant, selectedEditor, setSelectedEditor }: EditableFieldProps)
+export default function EditableField({ children, field, variant }: EditableFieldProps)
 {
     const [isEditing, setIsEditing] = useState(false);
 

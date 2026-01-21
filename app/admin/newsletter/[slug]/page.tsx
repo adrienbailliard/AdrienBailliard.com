@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from 'next';
 
-import Divider from "@/components/ui/Divider";
-import NewsletterDraftActions from "@/components/newsletter/DraftActions";
+import { NewsletterEditorProvider } from '@/contexts/newsletterEditor';
 import NewsletterEditor from "@/components/newsletter/Editor";
 
 import { metadata } from "@/app/not-found";
@@ -49,19 +48,9 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
 
   return (
     <main className="bg-light-bg">
-      {
-        "id" in newsletter && (
-          <>
-            <NewsletterDraftActions
-              id={newsletter.id}
-              scheduledFor={newsletter.scheduled_for}
-            />
-            <Divider variant="light"/>
-          </>
-        )
-      }
-
-      <NewsletterEditor newsletter={newsletter} />
+      <NewsletterEditorProvider newsletter={newsletter}>
+        <NewsletterEditor/>
+      </NewsletterEditorProvider>
     </main>
   );
 }
