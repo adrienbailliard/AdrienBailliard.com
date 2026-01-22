@@ -1,7 +1,9 @@
 import Link from "next/link";
-import Linkedin from "@/components/icons/linkedin";
-import pages from "@/config/navigation";
 
+import Linkedin from "@/components/icons/linkedin";
+import Github from "@/components/icons/github";
+
+import pages from "@/config/navigation";
 import site from "@/config/site";
 
 
@@ -34,14 +36,22 @@ export default function Footer()
                 )
             }
           </div>
-          <div className="basis-3/16 flex justify-end">
+          <div className="basis-3/16 flex justify-end gap-5 mt-2">
             <a
               href="https://www.linkedin.com/in/adrienbailliard/"
               target="_blank"
               aria-label="Profil LinkedIn d'Adrien Bailliard"
-              className="flex justify-center items-center w-10.5 h-10.5 xl:-mr-2"
+              className="social-link"
             >
-              <Linkedin className="w-6.5"/>
+              <Linkedin/>
+            </a>
+            <a
+              href="https://github.com/adrienbailliard"
+              target="_blank"
+              aria-label="Profil Github d'Adrien Bailliard"
+              className="social-link xl:-mr-2"
+            >
+              <Github/>
             </a>
           </div>
         </nav>
