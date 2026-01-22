@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+
+import { useNewsletterEditor } from '@/contexts/newsletterEditor';
+import { InsertNewsletterParam } from "@/lib/types";
+
 import DisplayField from "./DisplayField";
 import EditorField from "./EditorField";
-import { InsertNewsletterParam } from "@/lib/types";
 
 
 
@@ -16,12 +19,10 @@ type EditableFieldProps = {
 
 export default function EditableField({ children, field, variant }: EditableFieldProps)
 {
+    const { optimisticNewsletter } = useNewsletterEditor();
+    const [value, setValue] = useState(optimisticNewsletter[field]);
     const [isEditing, setIsEditing] = useState(false);
-
-    const onEdit = (value: boolean) => {
-        setIsEditing(value);
-        setSelectedEditor(value ? field : null);
-    };
+    const [hasError, setHasError] = useState(false);
 
 
     return (
@@ -29,15 +30,18 @@ export default function EditableField({ children, field, variant }: EditableFiel
             {
                 isEditing
                 ? <EditorField
-                    onEdit={onEdit}
-                    newsletter={newsletter}
+                    setIsEditing={setIsEditing}
                     field={field}
                     variant={variant}
+                    setHasError={setHasError}
+                    value={value}
+                    setValue={setValue}
                 />
                 : <DisplayField
-                    onEdit={onEdit}
-                    isDisabled={selectedEditor !== null}
+                    setIsEditing={setIsEditing}
+                    field={field}
                     variant={variant}
+                    hasError={hasError}
                 >
                     { children }
                 </DisplayField>

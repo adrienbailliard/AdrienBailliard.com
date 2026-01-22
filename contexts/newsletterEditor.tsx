@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useOptimistic, useTransition, createContext, TransitionStartFunction } from "react";
+import { useState, useOptimistic, createContext } from "react";
 
 import { createHook } from "@/contexts/utils";
 import { Newsletter, InsertNewsletterParam } from "@/lib/types";
@@ -14,7 +14,6 @@ type UpdateOptimisticNewsletterType = {
 
 
 type NewsletterEditorContextType = {
-  savingTransition: [boolean, TransitionStartFunction];
   selectEditor: [string | null, React.Dispatch<React.SetStateAction<string | null>>];
   optimisticNewsletter: Newsletter | InsertNewsletterParam;
   updateOptimisticNewsletter: (data: UpdateOptimisticNewsletterType) => void;
@@ -32,7 +31,6 @@ const NewsletterEditorContext = createContext<NewsletterEditorContextType | null
 
 export function NewsletterEditorProvider({ children, newsletter }: NewsletterEditorProviderProps)
 {
-  const savingTransition = useTransition();
   const selectEditor = useState<string | null>(null);
 
   const [optimisticNewsletter, updateOptimisticNewsletter] = useOptimistic(
@@ -45,7 +43,7 @@ export function NewsletterEditorProvider({ children, newsletter }: NewsletterEdi
 
   return (
     <NewsletterEditorContext.Provider
-      value={{ savingTransition, selectEditor, optimisticNewsletter, updateOptimisticNewsletter }}
+      value={{ selectEditor, optimisticNewsletter, updateOptimisticNewsletter }}
     >
       {children}
     </NewsletterEditorContext.Provider>

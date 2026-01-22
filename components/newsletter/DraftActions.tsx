@@ -16,8 +16,8 @@ import { Newsletter } from "@/lib/types";
 
 export default function DraftActions()
 {
-    const { optimisticNewsletter, savingTransition } = useNewsletterEditor();
-    const [ isSavingPending ] = savingTransition;
+    const { optimisticNewsletter, selectEditor } = useNewsletterEditor();
+    const [ selectedEditor ] = selectEditor;
 
     const [selectedDate, setSelectedDate] = useState<Date>();
     const [isActionPending, startTransition] = useTransition();
@@ -25,6 +25,7 @@ export default function DraftActions()
     const [ modalType, setModalType ] = useState<"publish" | "delete" | "unschedule">('publish');
 
     const hasId = "id" in optimisticNewsletter;
+    const submitDisabled = selectedEditor !== null;
     const removeActionKey = hasId && optimisticNewsletter.scheduled_for ? "unschedule" : "delete";
 
     const modalConfig = {
@@ -77,8 +78,8 @@ export default function DraftActions()
                     </Button>
                     <Button
                         variant="dark-primary"
-                        disabled={ !hasId || isSavingPending }
-                        className={ !hasId || isSavingPending ? "!bg-dark-muted-fg" : "" }
+                        disabled={ !hasId || submitDisabled }
+                        className={ !hasId || submitDisabled ? "!bg-dark-muted-fg" : "" }
                         onClick={ () => {
                             setIsActiveModal(true);
                             setModalType("publish");
