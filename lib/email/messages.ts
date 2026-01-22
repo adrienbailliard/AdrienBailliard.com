@@ -22,7 +22,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
         </h2>
         <table style="width: 100%;">
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0;">
+            <td style="font-size: 16px; color: #AAAAAA; padding: 0;">
               Nom
             </td>
           </tr>
@@ -32,7 +32,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
             </td>
           </tr>
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 24px;">
+            <td style="font-size: 16px; color: #AAAAAA; padding: 0; padding-top: 24px;">
               Entreprise
             </td>
           </tr>
@@ -42,7 +42,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
             </td>
           </tr>
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 24px;">
+            <td style="font-size: 16px; color: #AAAAAA; padding: 0; padding-top: 24px;">
               Email
             </td>
           </tr>
@@ -60,7 +60,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
         </h2>
         <table style="width: 100%;">
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0;">
+            <td style="font-size: 16px; color: #AAAAAA; padding: 0;">
               Catégorie
             </td>
           </tr>
@@ -70,7 +70,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
             </td>
           </tr>
           <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #ADADAD; padding: 0; padding-top: 24px;">
+            <td style="font-size: 16px; color: #AAAAAA; padding: 0; padding-top: 24px;">
               Message
             </td>
           </tr>

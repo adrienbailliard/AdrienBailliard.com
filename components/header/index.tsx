@@ -52,7 +52,7 @@ export default function Header()
                     role="navigation"
                     className="flex justify-between items-center h-header xl:h-header-xl underline-offset-10"
                 >
-                    <Link href="/" className="text-base xl:text-lg font-medium uppercase">
+                    <Link href="/" className="text-base xl:text-lg font-semibold uppercase">
                         { site.name }
                     </Link>
 

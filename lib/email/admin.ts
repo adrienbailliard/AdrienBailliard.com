@@ -27,7 +27,7 @@ export async function sendAdminLoginLink(): Promise<void>
                     Se connecter
                 </a>
             </p>
-            <p style="margin-top: 24px; line-height: 24px; color: black; font-size: 16px;">
+            <p style="margin-top: 24px; line-height: 24px; color: black; font-size: 16px; margin-bottom: 0px;">
                 Ce lien n'est valable que pendant ${tokenExpirationMinutes} minutes.
             </p>
         </div>

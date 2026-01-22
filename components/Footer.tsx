@@ -17,7 +17,7 @@ export default function Footer()
             role="navigation"
             className="flex items-center max-xl:flex-col max-xl:gap-5"
           >
-          <Link href="/" className="text-lg font-medium basis-3/16 uppercase">
+          <Link href="/" className="text-lg font-semibold basis-3/16 uppercase">
             { site.name }
           </Link>
           <div className="flex gap-x-6 md:gap-x-11 gap-y-1 basis-5/8 justify-center flex-wrap">
