@@ -20,66 +20,27 @@ export async function sendMessage({ firstName, lastName, email, company, categor
         <h2 style="font-weight: 400; font-size: 20px; margin-top: 0px; margin-bottom: 20px; color: white;">
           Coordonnées
         </h2>
-        <table style="width: 100%;">
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #AAAAAA; padding: 0;">
-              Nom
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${ firstName } ${ lastName }
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #AAAAAA; padding: 0; padding-top: 24px;">
-              Entreprise
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${ company }
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #AAAAAA; padding: 0; padding-top: 24px;">
-              Email
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${ email }
-            </td>
-          </tr>
-        </table>
+
+        <div style="font-size: 16px; color: #AAAAAA;">Nom</div>
+        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ firstName } ${ lastName }</div>
+
+        <div style="font-size: 16px; color: #AAAAAA; margin-top: 24px;">Entreprise</div>
+        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ company }</div>
+
+        <div style="font-size: 16px; color: #AAAAAA; margin-top: 24px;">Email</div>
+        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ email }</div>
       </div>
 
       <div style="background-color: #0F0F0F; border-radius: 6px; padding: 28px; margin-top: 28px;">
         <h2 style="font-weight: 400; font-size: 20px; margin-top: 0px; margin-bottom: 20px; color: white;">
           Demande
         </h2>
-        <table style="width: 100%;">
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #AAAAAA; padding: 0;">
-              Catégorie
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${ category }
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; color: #AAAAAA; padding: 0; padding-top: 24px;">
-              Message
-            </td>
-          </tr>
-          <tr style="vertical-align: top;">
-            <td style="font-size: 16px; padding: 0; padding-top: 6px; color: white; word-break: break-word;">
-              ${ content.replace(/\n/g, '<br>') }
-            </td>
-          </tr>
-        </table>
+
+        <div style="font-size: 16px; color: #AAAAAA;">Catégorie</div>
+        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ category }</div>
+
+        <div style="font-size: 16px; color: #AAAAAA; margin-top: 24px;">Message</div>
+        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ content.replace(/\n/g, '<br>') }</div>
       </div>
     </div>
   `;
