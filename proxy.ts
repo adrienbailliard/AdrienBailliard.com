@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { updateAdminCookie, isAdminLoginToken } from '@/lib/adminAuth';
+import { updateAdminCookie, verifyJWT } from '@/lib/security';
 
 import authConfig from "@/config/auth";
 
@@ -7,26 +7,32 @@ import authConfig from "@/config/auth";
 
 export default async function proxy(request: NextRequest)
 {
-  const res = NextResponse.next();
   const { pathname } = request.nextUrl;
+  let response = NextResponse.next();
+
+  const jwt = pathname === "/login"
+    ? request.nextUrl.searchParams.get(authConfig.cookie.name)
+    : request.cookies.get(authConfig.cookie.name)?.value;
 
 
-  const adminCookie = request.cookies.get(authConfig.cookie.name);
+  if (jwt && await verifyJWT(jwt))
+  {
+    if (pathname === "/login")
+      response = NextResponse.redirect(new URL('/', request.url))
 
-  if (adminCookie && await isAdminLoginToken(adminCookie.value))
-    await updateAdminCookie(res.cookies);
+    await updateAdminCookie(response.cookies);
+  }
 
-  else if (pathname.startsWith('/api/')
+  else if ((pathname.startsWith('/api/') || pathname.startsWith('/admin'))
     && pathname !== "/api/webhooks/resend"
-    && pathname !== "/api/newsletter/publish-scheduled"
-    || pathname.startsWith('/admin'))
+    && pathname !== "/api/newsletter/publish-scheduled")
     return NextResponse.rewrite(new URL('/404', request.url), { status: 404 });
 
 
-  return res;
+  return response;
 }
 
 
 export const config = {
-  matcher: ['/((?!_next|assets|robots.txt|sitemap.xml|login).*)'],
+  matcher: ['/((?!_next|assets|robots.txt|sitemap.xml).*)'],
 };
