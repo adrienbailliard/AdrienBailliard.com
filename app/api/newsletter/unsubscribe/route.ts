@@ -1,4 +1,3 @@
-import { z } from 'zod';
 import { revalidateTag } from 'next/cache';
 
 import CACHE_TAGS from '@/lib/db/cache-tags';
@@ -7,11 +6,6 @@ import { verifyJWT } from '@/lib/security';
 
 import authConfig from "@/config/auth";
 
-
-
-const PayloadSchema = z.object({
-    email: z.string()
-});
 
 
 export async function POST(request: Request)
@@ -27,9 +21,8 @@ export async function POST(request: Request)
     if (!payload)
         throw Error("JWT is not valid");
 
-    const { email } = PayloadSchema.parse(payload);
-    await unsubscribe([ email ]);
-
+    await unsubscribe([ payload.email ]);
     revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
+    
     return Response.json({ success: true });
 }
