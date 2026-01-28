@@ -15,19 +15,19 @@ import { contact } from "@/lib/actions/message";
 export default function ContactForm()
 {
   const [category, setCategory] = useState("");
-  const [submissionSuccess, onSubmit, isPending, setIsReset] = useFormAction(contact);
+  const [isSubmit, setIsSubmit, onSubmit, isPending] = useFormAction(contact);
 
   const categories = ["Projet", "Collaboration", "Question"];
 
 
-  if (submissionSuccess === true)
+  if (isSubmit === true)
   {
     return (
       <section className="bg-light-bg">
         <Button
           onClick={ () => {
             setCategory("");
-            setIsReset(true);
+            setIsSubmit(null);
           }}
           variant="light-primary"
           className="block mx-auto"
@@ -94,12 +94,12 @@ export default function ContactForm()
             </div>
             <Button
                 type="submit"
-                variant={ submissionSuccess === false && !isPending ? "light-error" : "light-primary" }
+                variant={ isSubmit === false && !isPending ? "light-error" : "light-primary" }
                 disabled={isPending}
             >
               { isPending
                 ? PENDING_MESSAGE
-                : submissionSuccess === false
+                : isSubmit === false
                   ? ERROR_MESSAGE
                   : "Lance l'Échange" }
             </Button>

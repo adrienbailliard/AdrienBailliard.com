@@ -20,15 +20,15 @@ type FormProps = {
 export default function BaseForm({ children, className, isForNewsletter = true }: FormProps)
 {
   const action = isForNewsletter ? subscribe : request;
-  const [submissionSuccess, onSubmit, isPending, setIsReset] = useFormAction(action);
+  const [isSubmit, setIsSubmit, onSubmit, isPending] = useFormAction(action);
 
 
-  if (submissionSuccess === true)
+  if (isSubmit === true)
   {
     return (
       <Button
         variant="dark-primary"
-        onClick={ () => setIsReset(true) }
+        onClick={ () => setIsSubmit(null) }
         className={"w-full " + className}
       >
         { "Tu es dans la boucle !" }
@@ -55,13 +55,13 @@ export default function BaseForm({ children, className, isForNewsletter = true }
           />
           <Button
               type="submit"
-              variant={ submissionSuccess === false && !isPending ? "dark-error" : "dark-primary" }
+              variant={ isSubmit === false && !isPending ? "dark-error" : "dark-primary" }
               className="shrink-0"
               disabled={isPending}
           >
             { isPending
               ? PENDING_MESSAGE
-              : submissionSuccess === false
+              : isSubmit === false
                 ? ERROR_MESSAGE
                 : children }
           </Button>
