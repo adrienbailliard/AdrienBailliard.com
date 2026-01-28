@@ -9,9 +9,19 @@ export default function Layout(children: string): string
           <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <style>
+              @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap');
+
+              p,
+              figcaption,
+              ul {
+                font-family: 'Nunito', system-ui, Arial;
+              }
+            </style>
           </head>
-          <body style="margin: 0; padding: 0; font-family: Helvetica, Arial, sans-serif; background-color: #DADADA; color: #FFFFFF;">
-            <div style="max-width: 660px; margin: auto;">
+          <body style="margin: 0; padding: 0; background-color: #DADADA;">
+            <div style="max-width: 660px; margin: auto; font-family: 'Plus Jakarta Sans', system-ui, Arial; color: #FFFFFF;">
 
               <table style="background-color: #0F0F0F; width: 100%; height: 60px; padding-left: 5%; padding-right: 5%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <tr>
