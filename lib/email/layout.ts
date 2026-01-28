@@ -33,13 +33,13 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
               </table>
 
 
-              ${showNewsletterHeader && `
+              ${showNewsletterHeader ? `
                 <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 48px; padding-bottom: 64px; line-height: 0;">
                   <a target="_blank" href="${site.url}/newsletter">
                       <img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday - Logo" style="width: 100%; border-radius: 6px;"/>
                   </a>
-              </div>
-              `}
+                </div>
+              ` : ""}
 
 
               ${children}
@@ -57,9 +57,9 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
                   </a>
                 </div>
 
-                ${unsubscribeUrl && `
+                ${unsubscribeUrl ? `
                   <a href="${unsubscribeUrl}" style="color: #FFFFFF; text-decoration: none; font-size: 12px; font-weight: 500; margin-bottom: 16px;" target="_blank">Se désabonner</a>
-                `}
+                ` : ""}
 
                 <div style="color: #AAAAAA; font-size: 12px;">© ${new Date().getFullYear()} ${ site.name }. Tous droits réservés.</div>
               </div>
