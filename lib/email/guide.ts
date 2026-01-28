@@ -1,5 +1,5 @@
 import { resend } from './client';
-import Layout from "@/lib/email/layout";
+import layout from "@/lib/email/layout";
 import site from "@/config/site";
 
 
@@ -51,6 +51,6 @@ export async function sendGuide(email: string): Promise<void>
         to: [email],
         replyTo: process.env.EMAIL_RECEIVER!,
         subject: "[Les Protocoles du Top 1%] Ton Guide Est Prêt",
-        html: Layout(content)
+        html: layout(content)
     });
 }

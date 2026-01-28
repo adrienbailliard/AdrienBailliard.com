@@ -1,6 +1,6 @@
 import { resend } from './client';
 import { MessageInput } from "@/lib/types";
-import Layout from "@/lib/email/layout";
+import layout from "@/lib/email/layout";
 import site from "@/config/site";
 
 
@@ -51,6 +51,6 @@ export async function sendMessage({ firstName, lastName, email, company, categor
     to: [process.env.EMAIL_RECEIVER!],
     replyTo: email,
     subject: `Nouveau Message - ${firstName} ${lastName}`,
-    html: Layout(html)
+    html: layout(html)
   });
 }

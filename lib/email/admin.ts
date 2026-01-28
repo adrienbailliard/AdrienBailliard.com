@@ -3,7 +3,7 @@ import { resend } from './client';
 import site from "@/config/site";
 import authConfig from "@/config/auth";
 
-import Layout from "@/lib/email/layout";
+import layout from "@/lib/email/layout";
 import { generateJWT } from "@/lib/security";
 
 
@@ -38,6 +38,6 @@ export async function sendAdminLoginLink(): Promise<void>
         from: process.env.EMAIL_SENDER!,
         to: [process.env.EMAIL_RECEIVER!],
         subject: "[Admin] Ton Lien de Connexion",
-        html: Layout(content)
+        html: layout(content)
     });
 }

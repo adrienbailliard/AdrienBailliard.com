@@ -1,17 +1,11 @@
 import { resend } from './client';
-import Layout from "@/lib/email/layout";
+import layout from "@/lib/email/layout";
 import site from "@/config/site";
 
 
 export async function sendConfirmation(email: string): Promise<void>
 {
     const content = `
-        <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 48px; padding-bottom: 64px; line-height: 0;">
-            <a target="_blank" href="${site.url}/newsletter">
-                <img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday - Logo" style="width: 100%; border-radius: 6px;"/>
-            </a>
-        </div>
-
         <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-bottom: 64px; color: black; font-size: 16px;">
             <p style="color: black; margin-bottom: 16px; margin-top: 0px; font-size: 16px;">
                 Hello,
@@ -59,6 +53,6 @@ export async function sendConfirmation(email: string): Promise<void>
         to: [email],
         replyTo: process.env.EMAIL_RECEIVER!,
         subject: "Bienvenue dans Auto Monday",
-        html: Layout(content)
+        html: layout(content, true)
     });
 }
