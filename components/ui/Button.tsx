@@ -1,6 +1,6 @@
 type ButtonProps = {
   type?: "submit" | "button";
-  variant: "dark-primary" | "light-primary" | "light-error";
+  variant: "dark-primary" | "light-primary" | "light-error" | "dark-error";
   children: React.ReactNode;
   name?: string;
   onClick?: () => void;
@@ -15,6 +15,7 @@ export default function Button({ children, variant, type = "button", name, onCli
 
   const variantStyles = {
     "dark-primary": "bg-primary text-dark-fg",
+    "dark-error": "bg-error text-dark-fg",
     "light-primary": "inset-border text-primary",
     "light-error": "inset-border text-error"
   };

@@ -37,11 +37,8 @@ export default function EditorField({ field, setIsEditing, setHasError, variant,
     
     const handleSave = () => {
         setIsEditing(false);
-
-        if (!navigator.onLine)
-            return setHasError(true);
-
         setHasError(false);
+        
         startTransition(async () => {
             updateOptimisticNewsletter({ field, value: trimmedValue });
 
