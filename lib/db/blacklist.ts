@@ -5,7 +5,7 @@ import CACHE_TAGS from '@/lib/db/cache-tags';
 
 
 
-export async function insertEmail(emails: Array<string>): Promise<void>
+export async function blacklistEmails(emails: Array<string>): Promise<void>
 {
     await sql`
         INSERT INTO email_blacklist (email)

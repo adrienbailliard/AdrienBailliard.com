@@ -2,7 +2,7 @@ import { revalidateTag } from 'next/cache';
 import CACHE_TAGS from '@/lib/db/cache-tags';
 
 import { resend } from "@/lib/email/client";
-import { insertEmail } from "@/lib/db/blacklist";
+import { blacklistEmails } from "@/lib/db/blacklist";
 import { unsubscribe } from "@/lib/db/subscribers";
 
 
@@ -27,7 +27,7 @@ export async function POST(req: Request)
       const emails = result.data.to;
 
       await Promise.all([
-          insertEmail(emails),
+          blacklistEmails(emails),
           unsubscribe(emails)
       ]);
 

@@ -25,7 +25,8 @@ export default async function proxy(request: NextRequest)
 
   else if ((pathname.startsWith('/api/') || pathname.startsWith('/admin'))
     && pathname !== "/api/webhooks/resend"
-    && pathname !== "/api/newsletter/publish-scheduled")
+    && pathname !== "/api/newsletter/publish-scheduled"
+    && pathname !== "/api/newsletter/unsubscribe")
     return NextResponse.rewrite(new URL('/404', request.url), { status: 404 });
 
 
