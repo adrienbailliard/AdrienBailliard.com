@@ -39,10 +39,11 @@ function getIconsMetadata(): Metadata
 
 
 
-export function getMinimalMetadata(title: string): Metadata
+export function getUtilityMetadata(title: string): Metadata
 {
     return {
       title: title,
+      robots: 'noindex',
       ...getIconsMetadata()
     };
 }

@@ -57,6 +57,7 @@ export async function subscribe(formData: FormData): Promise<void>
     else if (await addSubscriber(email))
     {
       updateTag(CACHE_TAGS.subscribersStats);
+      updateTag(`${CACHE_TAGS.isSubscribed}-${email}`);
       await sendConfirmation(email);
     }
   });

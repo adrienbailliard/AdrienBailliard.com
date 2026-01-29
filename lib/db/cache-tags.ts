@@ -9,6 +9,7 @@ const CACHE_TAGS = {
     newsletterScheduledPreviews: 'newsletter-scheduled-previews',
 
     subscribersStats: 'subscribers-stats',
+    isSubscribed: "is-subscribed",
 
     emailAllowed: 'email-allowed',
 

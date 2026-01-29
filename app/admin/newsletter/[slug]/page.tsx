@@ -5,7 +5,7 @@ import { NewsletterEditorProvider } from '@/contexts/newsletterEditor';
 import NewsletterEditor from "@/components/newsletter/Editor";
 
 import { metadata } from "@/app/not-found";
-import { getMinimalMetadata } from "@/lib/seo/metadata";
+import { getUtilityMetadata } from "@/lib/seo/metadata";
 import { DRAFT_CREATION_SLUG } from "@/lib/constants";
 import { getNewsletterDraftBySlug } from "@/lib/db/newsletters";
 
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
     : await getNewsletterDraftBySlug(slug);
 
   return newsletter
-    ? getMinimalMetadata(newsletter.title)
+    ? getUtilityMetadata(newsletter.title)
     : metadata;
 }
 

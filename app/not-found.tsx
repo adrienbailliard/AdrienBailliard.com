@@ -1,9 +1,9 @@
 import Link from "@/components/ui/Link";
-import { getMinimalMetadata } from "@/lib/seo/metadata";
+import { getUtilityMetadata } from "@/lib/seo/metadata";
 
 
 
-export const metadata = getMinimalMetadata("Page Introuvable");
+export const metadata = getUtilityMetadata("Page Introuvable");
 
 
 export default function NotFound()

@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { updateAdminCookie, verifyJWT } from '@/lib/security';
 
+import { LOGIN_ROUTE } from "@/lib/constants";
 import authConfig from "@/config/auth";
 
 
@@ -10,14 +11,14 @@ export default async function proxy(request: NextRequest)
   const { pathname } = request.nextUrl;
   let response = NextResponse.next();
 
-  const jwt = pathname === "/login"
+  const jwt = pathname === LOGIN_ROUTE
     ? request.nextUrl.searchParams.get(authConfig.cookie.name)
     : request.cookies.get(authConfig.cookie.name)?.value;
 
 
   if (jwt && await verifyJWT(jwt))
   {
-    if (pathname === "/login")
+    if (pathname === LOGIN_ROUTE)
       response = NextResponse.redirect(new URL('/', request.url))
 
     await updateAdminCookie(response.cookies);

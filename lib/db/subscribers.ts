@@ -25,6 +25,24 @@ export async function addSubscriber(email: string): Promise<boolean>
 
 
 
+export const isSubscribed = (email: string) =>
+  unstable_cache(
+    async (): Promise<boolean> => {
+      const result = await sql `
+        SELECT unsubscribed FROM subscribers
+        WHERE email = ${email}
+      `;
+
+      return result.length === 0
+        ? false
+        : !result[0].unsubscribed;
+    },
+    [ CACHE_TAGS.isSubscribed, email ],
+    { tags: [ `${CACHE_TAGS.isSubscribed}-${email}` ] }
+  )();
+
+
+
 export async function unsubscribe(emails: Array<string>): Promise<void>
 {
     await sql `

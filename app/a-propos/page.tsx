@@ -81,7 +81,7 @@ export default function About()
       <section className="bg-dark-bg text-light-fg pt-0">
         <div className="max-w-4xl mx-auto text-pretty">
           <h2>
-            { "J'ai choisi la performance." }
+            { "J'ai choisi la performance" }
           </h2>
           <p>
             { "1. À 15 ans, je découvre le développement web. Très vite, je veux aller plus loin et créer des systèmes qui travaillent à ma place." }

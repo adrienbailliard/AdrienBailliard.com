@@ -2,6 +2,7 @@ import { resend } from './client';
 
 import site from "@/config/site";
 import authConfig from "@/config/auth";
+import { LOGIN_ROUTE } from "@/lib/constants";
 
 import layout from "@/lib/email/layout";
 import { generateJWT } from "@/lib/security";
@@ -23,7 +24,7 @@ export async function sendAdminLoginLink(): Promise<void>
             <p style="color: black; margin-top: 24px; line-height: 24px; font-size: 16px;">
                 Ceci est ton accès à l'admin :
             <br>
-                → <a target="_blank" href="${site.url}/login?${authConfig.cookie.name}=${jwt}" style="color: #306CE4; font-weight: bold; text-underline-offset: 3px; font-size: 16px;">
+                → <a target="_blank" href="${site.url}${LOGIN_ROUTE}?${authConfig.cookie.name}=${jwt}" style="color: #306CE4; font-weight: bold; text-underline-offset: 3px; font-size: 16px;">
                     Se connecter
                 </a>
             </p>

@@ -15,3 +15,5 @@ export const STATS_PERCENTAGE_PRECISION = 1;
 export const DRAFT_CREATION_SLUG = 'creer';
 export const ERROR_MESSAGE = "Réessaie l'Envoi";
 export const PENDING_MESSAGE = "Envoi...";
+
+export const LOGIN_ROUTE = "/connexion";
