@@ -5,6 +5,7 @@ import { redirect, RedirectType } from 'next/navigation';
 
 import { z } from "zod";
 
+import { verifyJWT } from '@/lib/security';
 import { isValidDomain } from "@/lib/form/domain-checker";
 import { getValidEmail } from "@/lib/form/validators";
 
@@ -52,15 +53,32 @@ export async function subscribe(formData: FormData): Promise<void>
     if (!isDomainValid) return;
 
     if (email === process.env.EMAIL_RECEIVER!)
-      await sendAdminLoginLink();
+      return await sendAdminLoginLink();
 
-    else if (await addSubscriber(email))
+    if (await addSubscriber(email))
     {
       updateTag(CACHE_TAGS.subscribersStats);
       updateTag(`${CACHE_TAGS.isSubscribed}-${email}`);
+
       await sendConfirmation(email);
     }
   });
+}
+
+
+
+export async function resubscribe(jwt: string): Promise<void>
+{
+  z.string().parse(jwt);
+  const payload = await verifyJWT(jwt);
+
+  if (!payload)
+    throw Error("JWT not valid");
+
+  await addSubscriber(payload.email);
+
+  updateTag(CACHE_TAGS.subscribersStats);
+  updateTag(`${CACHE_TAGS.isSubscribed}-${payload.email}`);
 }
 
 

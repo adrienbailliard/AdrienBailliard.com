@@ -26,10 +26,9 @@ const getValidData = cache(
     if (!payload)
       return null;
 
-    const email = payload.email;
-    const active = await isSubscribed(email);
+    const isActive = await isSubscribed(payload.email);
 
-    return { jwt, email, isSubscribed: active };
+    return { jwt, isSubscribed: isActive };
   }
 );
 
@@ -64,7 +63,7 @@ export default async function NewsletterPage({ searchParams }: NewsletterPagePro
     <main className="bg-dark-bg">
       <section className="hero text-center">
         <h2>Gère ton abonnement</h2>
-        <SubscriptionToggle jwt={data.jwt} email={data.email} isSubscribed={data.isSubscribed}/>
+        <SubscriptionToggle jwt={data.jwt} initialIsSubscribed={data.isSubscribed}/>
       </section>
     </main>
   );

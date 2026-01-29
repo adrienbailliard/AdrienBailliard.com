@@ -19,7 +19,7 @@ export async function POST(request: Request)
     const payload = await verifyJWT(jwt);
 
     if (!payload)
-        throw Error("JWT is not valid");
+        throw Error("JWT not valid");
 
     await unsubscribe([ payload.email ]);
     revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
