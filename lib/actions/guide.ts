@@ -1,5 +1,4 @@
 'use server';
-import { after } from 'next/server';
 import { updateTag } from 'next/cache';
 
 import { insertRequestGuide } from "@/lib/db/guide";
@@ -16,19 +15,16 @@ export async function request(formData: FormData): Promise<void>
 {
     const email = getValidEmail(formData);
 
-    after(async () =>
-    {
-        const isAllowed = await isEmailAllowed(email);
-        if (!isAllowed) return;
+    const isAllowed = await isEmailAllowed(email);
+    if (!isAllowed) return;
 
-        const isDomainValid = await isValidDomain(email.split("@")[1]);
-        if (!isDomainValid) return;
+    const isDomainValid = await isValidDomain(email.split("@")[1]);
+    if (!isDomainValid) return;
 
-        await Promise.all([
-            insertRequestGuide(email),
-            sendGuide(email)
-        ]);
+    await Promise.all([
+        insertRequestGuide(email),
+        sendGuide(email)
+    ]);
 
-        updateTag(CACHE_TAGS.guideStats);
-    });
+    updateTag(CACHE_TAGS.guideStats);
 }

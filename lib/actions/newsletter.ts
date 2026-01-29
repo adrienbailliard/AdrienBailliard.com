@@ -1,5 +1,4 @@
 'use server';
-import { after } from 'next/server';
 import { updateTag, revalidatePath } from 'next/cache';
 import { redirect, RedirectType } from 'next/navigation';
 
@@ -44,25 +43,24 @@ export async function subscribe(formData: FormData): Promise<void>
 {
   const email = getValidEmail(formData);
 
-  after(async () =>
+  const isAllowed = await isEmailAllowed(email);
+  if (!isAllowed) return; 
+
+  const isDomainValid = await isValidDomain(email.split("@")[1]);
+  if (!isDomainValid) return;
+
+  if (email === process.env.EMAIL_RECEIVER!)
+    return await sendAdminLoginLink();
+
+  const statusChanged = await addSubscriber(email);
+
+  if (statusChanged)
   {
-    const isAllowed = await isEmailAllowed(email);
-    if (!isAllowed) return; 
+    updateTag(CACHE_TAGS.subscribersStats);
+    updateTag(`${CACHE_TAGS.isSubscribed}-${email}`);
 
-    const isDomainValid = await isValidDomain(email.split("@")[1]);
-    if (!isDomainValid) return;
-
-    if (email === process.env.EMAIL_RECEIVER!)
-      return await sendAdminLoginLink();
-
-    if (await addSubscriber(email))
-    {
-      updateTag(CACHE_TAGS.subscribersStats);
-      updateTag(`${CACHE_TAGS.isSubscribed}-${email}`);
-
-      await sendConfirmation(email);
-    }
-  });
+    await sendConfirmation(email);
+  }
 }
 
 

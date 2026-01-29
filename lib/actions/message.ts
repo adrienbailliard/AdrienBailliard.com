@@ -1,5 +1,4 @@
 'use server';
-import { after } from 'next/server'
 import { updateTag } from 'next/cache';
 
 import CACHE_TAGS from '@/lib/db/cache-tags';
@@ -16,20 +15,17 @@ export async function contact(formData: FormData): Promise<void>
 {
     const validData = getValidContactData(formData);
 
-    after(async () =>
-    {
-        const isAllowed = await isEmailAllowed(validData.email);
-        if (!isAllowed) return; 
+    const isAllowed = await isEmailAllowed(validData.email);
+    if (!isAllowed) return; 
 
-        const isDomainValid = await isValidDomain(validData.email.split("@")[1]);
-        if (!isDomainValid) return;
+    const isDomainValid = await isValidDomain(validData.email.split("@")[1]);
+    if (!isDomainValid) return;
 
-        await Promise.all([
-            insertMessage(validData),
-            sendMessage(validData)
-        ]);
+    await Promise.all([
+        insertMessage(validData),
+        sendMessage(validData)
+    ]);
 
-        updateTag(CACHE_TAGS.messagesStats);
-        updateTag(CACHE_TAGS.messages);
-    });
+    updateTag(CACHE_TAGS.messagesStats);
+    updateTag(CACHE_TAGS.messages);
 }

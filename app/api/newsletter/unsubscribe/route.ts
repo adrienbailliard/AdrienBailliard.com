@@ -22,7 +22,9 @@ export async function POST(request: Request)
         throw Error("JWT not valid");
 
     await unsubscribe([ payload.email ]);
+
     revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
-    
+    revalidateTag(`${CACHE_TAGS.isSubscribed}-${payload.email}`, { expire: 0 });
+
     return Response.json({ success: true });
 }
