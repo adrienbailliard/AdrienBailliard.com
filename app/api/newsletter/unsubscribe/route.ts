@@ -1,9 +1,4 @@
-import { revalidateTag } from 'next/cache';
-
-import CACHE_TAGS from '@/lib/db/cache-tags';
-import { unsubscribe } from "@/lib/db/subscribers";
-import { verifyJWT } from '@/lib/security';
-
+import { updateSubscription } from '@/lib/services/subscribers';
 import authConfig from "@/config/auth";
 
 
@@ -16,15 +11,7 @@ export async function POST(request: Request)
     if (!jwt)
         throw Error("JWT not found");
 
-    const payload = await verifyJWT(jwt);
-
-    if (!payload)
-        throw Error("JWT not valid");
-
-    await unsubscribe([ payload.email ]);
-
-    revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
-    revalidateTag(`${CACHE_TAGS.isSubscribed}-${payload.email}`, { expire: 0 });
+    await updateSubscription(jwt, false);
 
     return Response.json({ success: true });
 }

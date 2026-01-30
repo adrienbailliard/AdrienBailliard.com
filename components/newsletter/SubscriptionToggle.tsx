@@ -1,43 +1,37 @@
 "use client"
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 
-import { resubscribe } from "@/lib/actions/newsletter";
+import { resubscribe, unsubscribe } from "@/lib/actions/subscribers";
 import Button from "@/components/ui/Button";
-
-import authConfig from "@/config/auth";
 
 
 
 type SubscriptionToggleProps = {
   jwt: string;
-  initialIsSubscribed: boolean;
+  isSubscribed: boolean;
 };
 
 
-export default function SubscriptionToggle({ jwt, initialIsSubscribed }: SubscriptionToggleProps)
+export default function SubscriptionToggle({ jwt, isSubscribed }: SubscriptionToggleProps)
 {
-    const [isSubscribed, setIsSubscribed] = useState(initialIsSubscribed);
-    const [ isPending, setIsPending ] = useState(false);
-    const [ hasError, setHasError ] = useState(false);
+    const [hasError, setHasError] = useState(false);
+    const [isPending, startTransition] = useTransition();
 
-    const handleClick = async () => {
-        setIsPending(true);
 
-        try {
-            isSubscribed
-                ? await fetch(`/api/newsletter/unsubscribe?${authConfig.cookie.name}=${jwt}`, { method: "POST" })
-                : await resubscribe(jwt);
+    const handleClick = () =>
+        startTransition(async () => {
+            try {
+                isSubscribed
+                    ? await unsubscribe(jwt)
+                    : await resubscribe(jwt);
 
-            setHasError(false);
-            setIsSubscribed(prev => !prev);
-        }
-        catch {
-            setHasError(true);
-        }
-
-        setIsPending(false);
-    };
+                setHasError(false);
+            }
+            catch {
+                setHasError(true);
+            }
+        });
 
 
     return (

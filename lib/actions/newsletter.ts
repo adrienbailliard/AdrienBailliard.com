@@ -1,20 +1,12 @@
-'use server';
+'use server'
+
 import { updateTag, revalidatePath } from 'next/cache';
 import { redirect, RedirectType } from 'next/navigation';
 
 import { z } from "zod";
 
-import { verifyJWT } from '@/lib/security';
-import { isValidDomain } from "@/lib/form/domain-checker";
-import { getValidEmail } from "@/lib/form/validators";
-
 import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter, scheduleNewsletterById } from "@/lib/db/newsletters";
-import { addSubscriber } from "@/lib/db/subscribers";
-import { isEmailAllowed } from "@/lib/db/blacklist";
 import CACHE_TAGS from '@/lib/db/cache-tags';
-
-import { sendConfirmation } from "@/lib/email/newsletter";
-import { sendAdminLoginLink } from "@/lib/email/admin";
 
 import { InsertNewsletterParam, UpdateNewsletterParam } from "@/lib/types";
 
@@ -36,48 +28,6 @@ const CreateDraftSchema = z.object({
 
 const UpdateDraftSchema = CreateDraftSchema.partial().extend({ id: IdSchema })
   .refine(data => data.title || data.content || data.excerpt);
-
-
-
-export async function subscribe(formData: FormData): Promise<void>
-{
-  const email = getValidEmail(formData);
-
-  const isAllowed = await isEmailAllowed(email);
-  if (!isAllowed) return; 
-
-  const isDomainValid = await isValidDomain(email.split("@")[1]);
-  if (!isDomainValid) return;
-
-  if (email === process.env.EMAIL_RECEIVER!)
-    return await sendAdminLoginLink();
-
-  const statusChanged = await addSubscriber(email);
-
-  if (statusChanged)
-  {
-    updateTag(CACHE_TAGS.subscribersStats);
-    updateTag(`${CACHE_TAGS.isSubscribed}-${email}`);
-
-    await sendConfirmation(email);
-  }
-}
-
-
-
-export async function resubscribe(jwt: string): Promise<void>
-{
-  z.string().parse(jwt);
-  const payload = await verifyJWT(jwt);
-
-  if (!payload)
-    throw Error("JWT not valid");
-
-  await addSubscriber(payload.email);
-
-  updateTag(CACHE_TAGS.subscribersStats);
-  updateTag(`${CACHE_TAGS.isSubscribed}-${payload.email}`);
-}
 
 
 

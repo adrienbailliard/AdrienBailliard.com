@@ -63,7 +63,7 @@ export default async function NewsletterPage({ searchParams }: NewsletterPagePro
     <main className="bg-dark-bg">
       <section className="hero text-center">
         <h2>Gère ton abonnement</h2>
-        <SubscriptionToggle jwt={data.jwt} initialIsSubscribed={data.isSubscribed}/>
+        <SubscriptionToggle jwt={data.jwt} isSubscribed={data.isSubscribed}/>
       </section>
     </main>
   );

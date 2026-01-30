@@ -1,4 +1,5 @@
-'use server';
+'use server'
+
 import { updateTag } from 'next/cache';
 
 import CACHE_TAGS from '@/lib/db/cache-tags';

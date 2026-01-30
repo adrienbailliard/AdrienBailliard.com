@@ -6,7 +6,7 @@ import { EMAIL_PATTERN, ERROR_MESSAGE, PENDING_MESSAGE } from "@/lib/constants";
 
 import { useFormAction } from "@/lib/form/hooks";
 import { request } from "@/lib/actions/guide";
-import { subscribe } from "@/lib/actions/newsletter";
+import { subscribe } from "@/lib/actions/subscribers";
 
 
 
