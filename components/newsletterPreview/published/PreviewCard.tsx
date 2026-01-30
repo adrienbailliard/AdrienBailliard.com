@@ -3,6 +3,7 @@ import newsletterConfig from "@/config/newsletter";
 
 import { SerializedNewsletterPreview, NewsletterPreview } from "@/lib/types";
 import { formatPublicDate } from "@/lib/utils";
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
 
@@ -14,7 +15,7 @@ type PreviewCardProps = {
 export function PreviewCard({ preview }: PreviewCardProps)
 {
     return (
-        <Link href={`/newsletter/${preview.slug}`}>
+        <Link href={`${NEWSLETTER_ROUTE}/${preview.slug}`}>
             <div className="flex max-sm:flex-col sm:gap-8 lg:gap-0 lg:flex-col lg:max-w-md m-auto">
                 <div className="bg-dark-bg text-light-fg h-54 sm:h-44 md:h-54 lg:h-64 rounded-md flex items-center justify-center p-8 lg:p-10 sm:basis-1/2 lg:basis-auto">
                     <h4 className="text-center uppercase">

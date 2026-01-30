@@ -13,6 +13,8 @@ import { getMetadata } from "@/lib/seo/metadata";
 import { getJsonLd } from "@/lib/seo/jsonld";
 import { getPublishedNewsletterBySlug } from "@/lib/db/newsletters";
 
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
+
 
 
 export const dynamic = 'force-static';
@@ -25,7 +27,7 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
 
   return newsletter
     ? getMetadata({
-      pathname: `/newsletter/${slug}`,
+      pathname: `${NEWSLETTER_ROUTE}/${slug}`,
       title: newsletter.title,
       description: newsletter.excerpt,
       publishedAt: newsletter.published_at
@@ -50,7 +52,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
 
 
   const articlePage = {
-    pathname: `/newsletter/${slug}`,
+    pathname: `${NEWSLETTER_ROUTE}/${slug}`,
     title: newsletter.title,
     description: newsletter.excerpt,
     publishedAt: newsletter.published_at

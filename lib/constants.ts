@@ -16,3 +16,5 @@ export const ERROR_MESSAGE = "Réessaie l'Envoi";
 export const PENDING_MESSAGE = "Envoi...";
 
 export const LOGIN_ROUTE = "/connexion";
+export const NEWSLETTER_ROUTE = "/newsletter";
+export const ADMIN_ROUTE = "/admin";

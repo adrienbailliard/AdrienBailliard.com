@@ -10,11 +10,12 @@ import Stats from "@/components/Stats";
 import Divider from "@/components/ui/Divider";
 
 import { StaticPage } from "@/lib/types";
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
 
 const page: StaticPage = {
-  pathname: "/newsletter",
+  pathname: NEWSLETTER_ROUTE,
   title: "Auto Monday",
   description: "Auto Monday est une newsletter qui partage, chaque lundi, une clé pour automatiser comme le Top 1%. Abonne-toi gratuitement."
 };

@@ -1,6 +1,10 @@
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
+
+
+
 const pages: Map<string, string> = new Map([
     [ "/", "Accueil" ],
-    [ "/newsletter", "Newsletter" ],
+    [ NEWSLETTER_ROUTE, "Newsletter" ],
     [ "/consultation", "Consultation" ],
     [ "/le-systeme-d-elite", "Le Système d'Élite" ],
     [ "/a-propos", "À Propos" ],

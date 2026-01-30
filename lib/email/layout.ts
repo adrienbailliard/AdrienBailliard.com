@@ -1,4 +1,5 @@
 import site from "@/config/site";
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
 
@@ -35,7 +36,7 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
 
               ${showNewsletterHeader ? `
                 <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 48px; padding-bottom: 64px; line-height: 0;">
-                  <a target="_blank" href="${site.url}/newsletter">
+                  <a target="_blank" href="${site.url}${NEWSLETTER_ROUTE}">
                       <img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday - Logo" style="width: 100%; border-radius: 6px;"/>
                   </a>
                 </div>

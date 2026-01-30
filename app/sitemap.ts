@@ -4,6 +4,7 @@ import site from "@/config/site";
 import pages from "@/config/navigation";
 
 import { getPublishedNewsletterPreviews } from "@/lib/db/newsletters";
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
 
@@ -20,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap>
 
   for (const newsletter of newsletterPreview)
     result[i++] = {
-      url: `${site.url}/newsletter/${newsletter.slug}`,
+      url: `${site.url}${NEWSLETTER_ROUTE}/${newsletter.slug}`,
       lastModified: newsletter.published_at!
     };
 

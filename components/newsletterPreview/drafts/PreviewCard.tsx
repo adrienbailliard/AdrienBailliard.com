@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { formatAdminDate } from '@/lib/utils';
 import { SerializedNewsletterPreview } from "@/lib/types";
+import { NEWSLETTER_ROUTE, ADMIN_ROUTE } from "@/lib/constants";
 
 
 
@@ -13,7 +14,7 @@ type DraftCardProps = {
 export default function DraftCard({ draft }: DraftCardProps)
 {
     return (
-        <Link href={`/admin/newsletter/${draft.slug}`}>
+        <Link href={`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${draft.slug}`}>
             <div className="card-list">
                 <p className="card-title">
                     { draft.title }

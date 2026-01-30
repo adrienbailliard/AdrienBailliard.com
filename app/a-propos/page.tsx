@@ -7,6 +7,7 @@ import Image from "next/image";
 
 import Logo from "@/components/icons/logo";
 import { StaticPage } from "@/lib/types";
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
 
@@ -107,7 +108,7 @@ export default function About()
           </p>
           <p>
             { "7. " }
-            <Link href="/newsletter">
+            <Link href={NEWSLETTER_ROUTE}>
               Auto Monday
             </Link>
             { " est né d'une ambition : libérer le temps des ambitieux grâce à des systèmes qui accélèrent leur croissance." }

@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { createHook } from "@/contexts/utils";
 import authConfig from "@/config/auth";
 
+import { ADMIN_ROUTE } from "@/lib/constants";
+
 
 
 type AuthContextType = {
@@ -26,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode })
     setIsAdmin(false);
     document.cookie = `${authConfig.cookie.name}=; path=${authConfig.cookie.path}; max-age=0`;
 
-    if (window.location.pathname.startsWith('/admin'))
+    if (window.location.pathname.startsWith(ADMIN_ROUTE))
       router.push('/');
   };
 

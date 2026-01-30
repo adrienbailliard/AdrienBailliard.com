@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { updateAdminCookie, verifyJWT } from '@/lib/security';
 
-import { LOGIN_ROUTE } from "@/lib/constants";
+import { LOGIN_ROUTE, ADMIN_ROUTE } from "@/lib/constants";
 import authConfig from "@/config/auth";
 
 
@@ -24,7 +24,7 @@ export default async function proxy(request: NextRequest)
     await updateAdminCookie(response.cookies);
   }
 
-  else if ((pathname.startsWith('/api/') || pathname.startsWith('/admin'))
+  else if ((pathname.startsWith('/api/') || pathname.startsWith(ADMIN_ROUTE))
     && pathname !== "/api/webhooks/resend"
     && pathname !== "/api/newsletter/publish-scheduled"
     && pathname !== "/api/newsletter/unsubscribe")

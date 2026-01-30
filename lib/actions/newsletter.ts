@@ -10,6 +10,7 @@ import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNe
 import CACHE_TAGS from '@/lib/db/cache-tags';
 
 import { InsertNewsletterParam, UpdateNewsletterParam } from "@/lib/types";
+import { NEWSLETTER_ROUTE, ADMIN_ROUTE } from "@/lib/constants";
 
 
 
@@ -40,11 +41,11 @@ export async function scheduleDraft(id: number, date: Date | null): Promise<void
   if (!result)
     throw Error("Draft not found");
 
-  revalidatePath(`/admin/newsletter/${result.slug}`);
+  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
 
-  redirect("/newsletter", RedirectType.replace);
+  redirect(NEWSLETTER_ROUTE, RedirectType.replace);
 }
 
 
@@ -57,15 +58,15 @@ export async function publishDraft(id: number): Promise<void>
   if (!result)
     throw Error("Draft not found");
 
-  revalidatePath(`/admin/newsletter/${result.slug}`);
-  revalidatePath(`/newsletter/${result.slug}`);
+  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
+  revalidatePath(`${NEWSLETTER_ROUTE}/${result.slug}`);
   updateTag(CACHE_TAGS.newsletterPublishedPreviews);
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
 
   await sendNewsletterEmails(result);
 
-  redirect("/newsletter", RedirectType.replace);
+  redirect(NEWSLETTER_ROUTE, RedirectType.replace);
 }
 
 
@@ -80,9 +81,9 @@ export async function deleteDraft(id: number): Promise<void>
 
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
-  revalidatePath(`/admin/newsletter/${result.slug}`);
+  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
 
-  redirect("/newsletter", RedirectType.replace);
+  redirect(NEWSLETTER_ROUTE, RedirectType.replace);
 }
 
 
@@ -93,9 +94,9 @@ export async function createDraft(draft: InsertNewsletterParam): Promise<void>
   const result = await insertNewsletter(draft);
 
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
-  revalidatePath(`/admin/newsletter/${result.slug}`);
+  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
 
-  redirect(`/admin/newsletter/${result.slug}`, RedirectType.replace);
+  redirect(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`, RedirectType.replace);
 }
 
 
@@ -114,11 +115,11 @@ export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
     updateTag(CACHE_TAGS.newsletterScheduledPreviews);
   }
 
-  revalidatePath(`/admin/newsletter/${result.old_slug}`);
+  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.old_slug}`);
 
   if (result.old_slug !== result.new_slug)
   {
-    revalidatePath(`/admin/newsletter/${result.new_slug}`);
-    redirect(`/admin/newsletter/${result.new_slug}`, RedirectType.replace);
+    revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.new_slug}`);
+    redirect(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.new_slug}`, RedirectType.replace);
   }
 }

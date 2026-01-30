@@ -16,6 +16,7 @@ import PublishedNewsletters from "@/components/newsletterPreview/published";
 
 import site from "@/config/site";
 import { StaticPage } from "@/lib/types";
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
 
@@ -108,7 +109,7 @@ export default function Home()
               Icon={Newsletter}
               title="Newsletter"
               paragraph="Chaque lundi, des systèmes concrets pour automatiser intelligemment."
-              href="/newsletter"
+              href={NEWSLETTER_ROUTE}
               cta="Reçois la Newsletter"
             />
             <ServicePreview

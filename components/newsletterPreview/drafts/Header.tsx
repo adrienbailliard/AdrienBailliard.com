@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DRAFT_CREATION_SLUG } from "@/lib/constants";
+import { DRAFT_CREATION_SLUG, NEWSLETTER_ROUTE, ADMIN_ROUTE } from "@/lib/constants";
 
 
 
@@ -25,7 +25,7 @@ export default function Header({ dataCount, title, showCreate }: HeaderProps)
                 : <h5 className="mb-5">{ title.hasItems }</h5>
             }
             { showCreate && (
-                <Link href={ `/admin/newsletter/${DRAFT_CREATION_SLUG}` } className='text-primary font-medium'>
+                <Link href={ `${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${DRAFT_CREATION_SLUG}` } className='text-primary font-medium'>
                     Créer
                 </Link>
             )}
