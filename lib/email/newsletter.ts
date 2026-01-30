@@ -1,6 +1,10 @@
 import { resend } from './client';
 
 import layout from "@/lib/email/layout";
+import { generateJWT } from "@/lib/security";
+
+import authConfig from "@/config/auth";
+import newsletterConfig from "@/config/newsletter";
 import site from "@/config/site";
 
 import { Newsletter } from "@/lib/types";
@@ -65,5 +69,27 @@ export async function sendConfirmation(email: string): Promise<void>
 
 export async function sendEdition(emails: Array<string>, newsletter: Newsletter): Promise<void>
 {
-    
+    const content = `
+        
+    `;
+
+    const promises = emails.map(async (email) => {
+        const jwt = await generateJWT({ email });
+        const unsubscribeUrl = `${site.url}/preferences?${authConfig.cookie.name}=${jwt}`;
+
+        return {
+            from: process.env.EMAIL_SENDER!,
+            to: [email],
+            replyTo: process.env.EMAIL_RECEIVER!,
+            subject: newsletterConfig.slogan + newsletter.title,
+            html: layout(content, true, unsubscribeUrl),
+            headers: {
+                'List-Unsubscribe': `<${site.url}/api/newsletter/unsubscribe?${authConfig.cookie.name}=${jwt}>`,
+                'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+            }
+        };
+    });
+
+    const payload = await Promise.all(promises);
+    await resend.batch.send(payload);
 }

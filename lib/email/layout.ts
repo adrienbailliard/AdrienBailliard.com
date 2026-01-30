@@ -59,7 +59,9 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
                 </div>
 
                 ${unsubscribeUrl ? `
-                  <a href="${unsubscribeUrl}" style="color: #FFFFFF; text-decoration: none; font-size: 12px; font-weight: 500; margin-bottom: 16px;" target="_blank">Se désabonner</a>
+                  <div style="margin-bottom: 16px; font-size: 12px; font-weight: 500;">
+                    <a href="${unsubscribeUrl}" style="color: #FFFFFF; text-decoration: none;" target="_blank">Se désabonner</a>
+                  </div>
                 ` : ""}
 
                 <div style="color: #AAAAAA; font-size: 12px;">© ${new Date().getFullYear()} ${ site.name }. Tous droits réservés.</div>
