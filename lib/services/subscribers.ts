@@ -17,6 +17,6 @@ export async function updateSubscription(jwt: string, subscribe: boolean): Promi
         ? await addSubscriber(payload.email)
         : await unsubscribe([ payload.email ]);
 
-    revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
+    revalidateTag(CACHE_TAGS.subscribers, { expire: 0 });
     revalidateTag(`${CACHE_TAGS.isSubscribed}-${payload.email}`, { expire: 0 });
 }

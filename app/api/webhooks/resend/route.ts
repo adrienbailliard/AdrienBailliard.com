@@ -31,7 +31,7 @@ export async function POST(req: Request)
           unsubscribe(emails)
       ]);
 
-      revalidateTag(CACHE_TAGS.subscribersStats, { expire: 0 });
+      revalidateTag(CACHE_TAGS.subscribers, { expire: 0 });
 
       for (const email of emails)
       {

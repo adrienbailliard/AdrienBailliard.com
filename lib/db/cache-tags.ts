@@ -8,7 +8,7 @@ const CACHE_TAGS = {
     newsletterPublishedPreviews: 'published-newsletter-previews',
     newsletterScheduledPreviews: 'newsletter-scheduled-previews',
 
-    subscribersStats: 'subscribers-stats',
+    subscribers: 'subscribers',
     isSubscribed: "is-subscribed",
 
     emailAllowed: 'email-allowed',

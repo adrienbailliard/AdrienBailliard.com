@@ -5,6 +5,7 @@ import { redirect, RedirectType } from 'next/navigation';
 
 import { z } from "zod";
 
+import { sendNewsletterEmails } from "@/lib/services/newsletter";
 import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter, scheduleNewsletterById } from "@/lib/db/newsletters";
 import CACHE_TAGS from '@/lib/db/cache-tags';
 
@@ -14,8 +15,8 @@ import { InsertNewsletterParam, UpdateNewsletterParam } from "@/lib/types";
 
 const IdSchema = z.number().min(1);
 
-const PublishDraftSchema = z.object({
-  date: z.date().optional().nullable()
+const ScheduleDraftSchema = z.object({
+  date: z.date().nullable()
 }).extend({ id: IdSchema });
 
 
@@ -31,27 +32,38 @@ const UpdateDraftSchema = CreateDraftSchema.partial().extend({ id: IdSchema })
 
 
 
-export async function submitDraft(id: number, date?: Date | null): Promise<void>
+export async function scheduleDraft(id: number, date: Date | null): Promise<void>
 {
-  PublishDraftSchema.parse({ id, date });
-
-  const isScheduling = date !== undefined;
-  const result = isScheduling
-    ? await scheduleNewsletterById(id, date)
-    : await publishNewsletterById(id);
+  ScheduleDraftSchema.parse({ id, date });
+  const result = await scheduleNewsletterById(id, date)
 
   if (!result)
     throw Error("Draft not found");
 
-  if (!isScheduling)
-  {
-    updateTag(CACHE_TAGS.newsletterPublishedPreviews);
-    revalidatePath(`/newsletter/${result.slug}`);
-  }
-
   revalidatePath(`/admin/newsletter/${result.slug}`);
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
+
+  redirect("/newsletter", RedirectType.replace);
+}
+
+
+
+export async function publishDraft(id: number): Promise<void>
+{
+  IdSchema.parse(id);
+  const result = await publishNewsletterById(id);
+
+  if (!result)
+    throw Error("Draft not found");
+
+  revalidatePath(`/admin/newsletter/${result.slug}`);
+  revalidatePath(`/newsletter/${result.slug}`);
+  updateTag(CACHE_TAGS.newsletterPublishedPreviews);
+  updateTag(CACHE_TAGS.newsletterDraftsPreviews);
+  updateTag(CACHE_TAGS.newsletterScheduledPreviews);
+
+  await sendNewsletterEmails(result);
 
   redirect("/newsletter", RedirectType.replace);
 }

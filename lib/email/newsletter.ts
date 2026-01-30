@@ -1,6 +1,10 @@
 import { resend } from './client';
+
 import layout from "@/lib/email/layout";
 import site from "@/config/site";
+
+import { Newsletter } from "@/lib/types";
+
 
 
 export async function sendConfirmation(email: string): Promise<void>
@@ -55,4 +59,11 @@ export async function sendConfirmation(email: string): Promise<void>
         subject: "Bienvenue dans Auto Monday",
         html: layout(content, true)
     });
+}
+
+
+
+export async function sendEdition(emails: Array<string>, newsletter: Newsletter): Promise<void>
+{
+    
 }

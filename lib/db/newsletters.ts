@@ -12,29 +12,29 @@ import { NewsletterPreview, Newsletter, InsertNewsletterParam, UpdateNewsletterP
 
 
 
-export async function publishNewsletterById(id: number): Promise<NewsletterSlug | null>
+export async function publishNewsletterById(id: number): Promise<Newsletter | null>
 {
     const [ newsletterSlug ] = await sql`
         UPDATE newsletters
         SET published_at = NOW()
         WHERE id = ${id}
-        RETURNING slug
-    ` as Array<NewsletterSlug>;
+        RETURNING *
+    ` as Array<Newsletter>;
 
     return newsletterSlug || null;
 }
 
 
 
-export async function publishScheduledNewsletters(): Promise<NewsletterSlug[]>
+export async function publishScheduledNewsletters(): Promise<Newsletter[]>
 {
     const publishedNewsletters = await sql`
         UPDATE newsletters
         SET published_at = NOW()
         WHERE scheduled_for <= NOW() 
             AND published_at IS NULL
-        RETURNING slug
-    ` as Array<NewsletterSlug>;
+        RETURNING *
+    ` as Array<Newsletter>;
 
     return publishedNewsletters;
 }

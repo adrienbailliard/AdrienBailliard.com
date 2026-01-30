@@ -7,6 +7,7 @@ export enum NewsletterStatus {
 
 export const EMAIL_PATTERN = String.raw`[a-zA-Z0-9._%+\-]{1,64}@[a-zA-Z0-9.\-]{1,255}\.[a-zA-Z]{2,}$`;
 
+export const BATCH_SIZE = 100;
 export const DOMAIN_CACHE_TTL_DAYS = 30;
 export const STATS_PERCENTAGE_PRECISION = 1;
 

@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react';
 
 import { useNewsletterEditor } from '@/contexts/newsletterEditor';
-import { submitDraft, deleteDraft } from "@/lib/actions/newsletter";
+import { publishDraft, scheduleDraft, deleteDraft } from "@/lib/actions/newsletter";
 
 import Button from "@/components/ui/Button";
 import BlockScroll from "@/components/ui/BlockScroll";
@@ -33,13 +33,15 @@ export default function DraftActions()
             cta: 'Publier',
             confirmText: selectedDate ? "Programmer" : "Publier",
             loadingText: selectedDate ? "Programmation..." : 'Publication...',
-            action: async (id: number) => submitDraft(id, selectedDate)
+            action: async (id: number) => selectedDate
+                ? scheduleDraft(id, selectedDate)
+                : publishDraft(id)
         },
         unschedule: {
             cta: 'Déprogrammer',
             confirmText: 'Déprogrammer',
             loadingText: 'Déprogrammation...',
-            action: async (id: number) => submitDraft(id, null)
+            action: async (id: number) => scheduleDraft(id, null)
         },
         delete: {
             cta: 'Supprimer',

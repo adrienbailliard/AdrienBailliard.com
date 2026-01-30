@@ -43,6 +43,21 @@ export const isSubscribed = (email: string) =>
 
 
 
+export const getActiveSubscribers = unstable_cache(
+    async (): Promise<Array<string>> => {
+      const result = await sql `
+        SELECT email FROM subscribers
+        WHERE unsubscribed = false
+      `;
+
+      return result.map(data => data.email);
+    },
+    [ "get-active-subscribers" ],
+    { tags: [ CACHE_TAGS.subscribers ] }
+  );
+
+
+
 export async function unsubscribe(emails: Array<string>): Promise<void>
 {
     await sql `
@@ -74,6 +89,6 @@ export const getSubscribersStats = unstable_cache(
       { value: formatPercentage(stats.unsubscribe_rate), label: 'Taux de désinscription' }
     ];
   },
-  [ CACHE_TAGS.subscribersStats ],
-  { tags: [ CACHE_TAGS.subscribersStats ] }
+  [ "subscribers-stats" ],
+  { tags: [ CACHE_TAGS.subscribers ] }
 );
