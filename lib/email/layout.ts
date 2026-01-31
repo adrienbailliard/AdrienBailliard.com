@@ -22,8 +22,8 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
               }
             </style>
           </head>
-          <body style="margin: 0; padding: 0; background-color: #DADADA;">
-            <div style="max-width: 660px; margin: auto; font-family: 'Plus Jakarta Sans', system-ui, Arial; color: #FFFFFF;">
+          <body style="margin: 0; padding: 0;">
+            <div style="max-width: 660px; margin: auto; font-family: 'Plus Jakarta Sans', system-ui, Arial;">
 
               <table style="background-color: #0F0F0F; width: 100%; height: 60px; padding-left: 5%; padding-right: 5%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <tr>
