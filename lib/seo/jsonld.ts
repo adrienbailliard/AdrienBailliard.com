@@ -76,7 +76,7 @@ function getBreadcrumbList(pathname: string, nameFallback: string): Array<Breadc
 export function getJsonLd({ pathname, title, description, publishedAt }: Page): Record<string, unknown>
 {
     const pageUrl = site.url + pathname;
-    const publishedAtISO = publishedAt && publishedAt.toISOString();
+    const publishedAtISO = publishedAt instanceof Date ? publishedAt.toISOString() : publishedAt;
 
 
     const graph: Array<Record<string, any>> = [

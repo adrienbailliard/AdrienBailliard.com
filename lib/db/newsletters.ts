@@ -8,7 +8,7 @@ import { generateSlug } from "@/lib/utils";
 import { DRAFT_CREATION_SLUG, NewsletterStatus } from "@/lib/constants";
 
 import { NewsletterPreview, Newsletter, InsertNewsletterParam, UpdateNewsletterParam, NewsletterSlug,
-    SerializedNewsletterPreview, UpdateNewsletterResult } from '@/lib/types';
+    SerializedNewsletterPreview, UpdateNewsletterResult, SerializedNewsletter } from '@/lib/types';
 
 
 
@@ -163,23 +163,30 @@ export const getScheduledNewsletterPreviews = getNewsletterPreviews(NewsletterSt
 
 
 
-export const getNewsletterBySlug = cache(
-    async (slug: string, isPublished: boolean): Promise<Newsletter | null> => {
-        const [ newsletter ] = await sql`
-            SELECT *
-            FROM newsletters
-            WHERE slug = ${slug}
-                AND published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
-        ` as Newsletter[];
+export const getNewsletterBySlug = cache((slug: string, isPublished: boolean) =>
+    unstable_cache(
+        async (): Promise<Newsletter | null> => {
+            const [ newsletter ] = await sql`
+                SELECT *
+                FROM newsletters
+                WHERE slug = ${slug}
+                    AND published_at IS ${isPublished ? sql`NOT NULL` : sql`NULL`}
+            ` as Newsletter[];
 
-        return newsletter || null;
-    }
+            return newsletter || null;
+        },
+        [ CACHE_TAGS.newsletter, slug, isPublished.toString() ],
+        { tags: [
+            `${CACHE_TAGS.newsletter}-${slug}`,
+            `${CACHE_TAGS.newsletter}-${slug}-${isPublished}`
+        ] }
+    )() as Promise<Newsletter | SerializedNewsletter | null>
 );
 
 
 export const getNewsletterDraftBySlug =
-    async (slug: string) => getNewsletterBySlug(slug, false);
+    (slug: string) => getNewsletterBySlug(slug, false);
 
 
 export const getPublishedNewsletterBySlug =
-    async (slug: string) => getNewsletterBySlug(slug, true);
+    (slug: string) => getNewsletterBySlug(slug, true);

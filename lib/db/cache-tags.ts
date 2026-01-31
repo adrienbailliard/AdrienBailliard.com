@@ -4,6 +4,7 @@ const CACHE_TAGS = {
     messages: 'messages',
     messagesStats: 'messages-stats',
 
+    newsletter: 'newsletter',
     newsletterDraftsPreviews: 'newsletter-drafts-previews',
     newsletterPublishedPreviews: 'published-newsletter-previews',
     newsletterScheduledPreviews: 'newsletter-scheduled-previews',

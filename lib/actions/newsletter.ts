@@ -1,6 +1,6 @@
 'use server'
 
-import { updateTag, revalidatePath } from 'next/cache';
+import { updateTag } from 'next/cache';
 import { redirect, RedirectType } from 'next/navigation';
 
 import { z } from "zod";
@@ -41,7 +41,7 @@ export async function scheduleDraft(id: number, date: Date | null): Promise<void
   if (!result)
     throw Error("Draft not found");
 
-  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
+  updateTag(`${CACHE_TAGS.newsletter}-${result.slug}-false`);
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
 
@@ -58,8 +58,7 @@ export async function publishDraft(id: number): Promise<void>
   if (!result)
     throw Error("Draft not found");
 
-  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
-  revalidatePath(`${NEWSLETTER_ROUTE}/${result.slug}`);
+  updateTag(`${CACHE_TAGS.newsletter}-${result.slug}`);
   updateTag(CACHE_TAGS.newsletterPublishedPreviews);
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
@@ -81,7 +80,7 @@ export async function deleteDraft(id: number): Promise<void>
 
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
-  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
+  updateTag(`${CACHE_TAGS.newsletter}-${result.slug}-false`);
 
   redirect(NEWSLETTER_ROUTE, RedirectType.replace);
 }
@@ -94,7 +93,7 @@ export async function createDraft(draft: InsertNewsletterParam): Promise<void>
   const result = await insertNewsletter(draft);
 
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
-  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`);
+  updateTag(`${CACHE_TAGS.newsletter}-${result.slug}-false`);
 
   redirect(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`, RedirectType.replace);
 }
@@ -115,11 +114,11 @@ export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
     updateTag(CACHE_TAGS.newsletterScheduledPreviews);
   }
 
-  revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.old_slug}`);
+  updateTag(`${CACHE_TAGS.newsletter}-${result.old_slug}-false`);
 
   if (result.old_slug !== result.new_slug)
   {
-    revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.new_slug}`);
+    updateTag(`${CACHE_TAGS.newsletter}-${result.new_slug}-false`);
     redirect(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.new_slug}`, RedirectType.replace);
   }
 }

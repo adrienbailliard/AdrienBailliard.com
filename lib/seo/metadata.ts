@@ -53,7 +53,7 @@ export function getUtilityMetadata(title: string): Metadata
 export function getMetadata({ pathname, title, description, publishedAt }: Page): Metadata
 {
     const htmlTitle = pathname == "/" ? title : title + " - " + site.name;
-    const publishedAtISO = publishedAt && publishedAt.toISOString();
+    const publishedAtISO = publishedAt instanceof Date ? publishedAt.toISOString() : publishedAt;
 
 
     return {

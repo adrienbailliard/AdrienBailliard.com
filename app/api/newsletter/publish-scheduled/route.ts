@@ -1,10 +1,8 @@
-import { revalidateTag, revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 import { sendNewsletterEmails } from "@/lib/services/newsletter";
 import { publishScheduledNewsletters } from '@/lib/db/newsletters';
 import CACHE_TAGS from '@/lib/db/cache-tags';
-
-import { NEWSLETTER_ROUTE, ADMIN_ROUTE } from "@/lib/constants";
 
 
 
@@ -24,9 +22,7 @@ export async function GET(request: Request)
         revalidateTag(CACHE_TAGS.newsletterScheduledPreviews, { expire: 0 });
 
         await Promise.all(response.map(newsletter => {
-            revalidatePath(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${newsletter.slug}`);
-            revalidatePath(`${NEWSLETTER_ROUTE}/${newsletter.slug}`);
-
+            revalidateTag(`${CACHE_TAGS.newsletter}-${newsletter.slug}`, { expire: 0 });
             return sendNewsletterEmails(newsletter);
         }));
     }

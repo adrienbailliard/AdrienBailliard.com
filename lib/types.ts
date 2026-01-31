@@ -16,7 +16,7 @@ export type StaticPage = BasePage & {
 
 
 export type ArticlePage = BasePage & {
-  publishedAt: Date | null
+  publishedAt: Date | string | null
 };
 
 
@@ -56,6 +56,8 @@ export type SerializedNewsletterPreview = Omit<NewsletterPreview, "updated_at" |
   published_at: string | null;
   scheduled_for: string | null;
 };
+
+export type SerializedNewsletter = SerializedNewsletterPreview & NewsletterContent;
 
 
 export type InsertNewsletterParam = Pick<Newsletter, "content" | "title" | "excerpt">;

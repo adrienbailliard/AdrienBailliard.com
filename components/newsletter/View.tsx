@@ -12,7 +12,7 @@ export function NewsletterTitle({ value }: { value: string })
 type ViewProps = {
   title: React.ReactNode;
   content: React.ReactNode;
-  date: Date;
+  date: Date | string;
 };
 
 
