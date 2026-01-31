@@ -1,11 +1,13 @@
 import { updateTag } from 'next/cache';
+import { after } from 'next/server';
 
 import CACHE_TAGS from '@/lib/db/cache-tags';
 import { getDomainValidity, upsertDomain } from "@/lib/db/domains";
+import { isEmailAllowed } from "@/lib/db/blacklist";
 
 
 
-export async function isValidDomain(domain: string): Promise<boolean>
+async function isValidDomain(domain: string): Promise<boolean>
 {
     let isValid = await getDomainValidity(domain);
 
@@ -20,8 +22,24 @@ export async function isValidDomain(domain: string): Promise<boolean>
     const { disposable, mx_record } = await request.json();
     isValid = disposable === false && mx_record !== null;
 
-    await upsertDomain(domain, isValid);
-    updateTag(`${CACHE_TAGS.domainValidity}-${domain}`);
+    after(async () => {
+        await upsertDomain(domain, isValid);
+        updateTag(`${CACHE_TAGS.domainValidity}-${domain}`);
+    });
 
     return isValid;
+}
+
+
+
+export async function verifyEmail(email: string): Promise<boolean>
+{
+    const domain = email.split("@")[1];
+
+    const [isAllowed, isDomainValid] = await Promise.all([
+        isEmailAllowed(email),
+        isValidDomain(domain)
+    ]);
+
+    return isAllowed && isDomainValid;
 }

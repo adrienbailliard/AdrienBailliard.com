@@ -2,15 +2,14 @@
 
 import { z } from "zod";
 import { updateTag } from 'next/cache';
+import { after } from 'next/server';
 
 import { updateSubscription } from '@/lib/services/subscribers';
-
-import { isValidDomain } from "@/lib/form/domain-checker";
+import { verifyEmail } from "@/lib/services/verification";
 import { getValidEmail } from "@/lib/form/validators";
 
 import CACHE_TAGS from '@/lib/db/cache-tags';
 import { addSubscriber } from "@/lib/db/subscribers";
-import { isEmailAllowed } from "@/lib/db/blacklist";
 
 import { sendConfirmation } from "@/lib/email/newsletter";
 import { sendAdminLoginLink } from "@/lib/email/admin";
@@ -25,11 +24,8 @@ export async function subscribe(formData: FormData): Promise<void>
 {
     const email = getValidEmail(formData);
 
-    const isAllowed = await isEmailAllowed(email);
-    if (!isAllowed) return; 
-
-    const isDomainValid = await isValidDomain(email.split("@")[1]);
-    if (!isDomainValid) return;
+    if (!await verifyEmail(email))
+        return;
 
     if (email === process.env.EMAIL_RECEIVER!)
         return await sendAdminLoginLink();
@@ -41,7 +37,7 @@ export async function subscribe(formData: FormData): Promise<void>
         updateTag(CACHE_TAGS.subscribers);
         updateTag(`${CACHE_TAGS.isSubscribed}-${email}`);
 
-        await sendConfirmation(email);
+        after(async () => await sendConfirmation(email));
     }
 }
 
