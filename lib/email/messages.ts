@@ -22,13 +22,13 @@ export async function sendMessage({ firstName, lastName, email, company, categor
         </h2>
 
         <div style="font-size: 16px; color: #AAAAAA;">Nom</div>
-        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ firstName } ${ lastName }</div>
+        <p style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word; margin-bottom: 0;">${ firstName } ${ lastName }</p>
 
         <div style="font-size: 16px; color: #AAAAAA; margin-top: 24px;">Entreprise</div>
-        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ company }</div>
+        <p style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word; margin-bottom: 0;">${ company }</p>
 
         <div style="font-size: 16px; color: #AAAAAA; margin-top: 24px;">Email</div>
-        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ email }</div>
+        <p style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word; margin-bottom: 0;">${ email }</p>
       </div>
 
       <div style="background-color: #0F0F0F; border-radius: 6px; padding: 28px; margin-top: 28px;">
@@ -37,10 +37,10 @@ export async function sendMessage({ firstName, lastName, email, company, categor
         </h2>
 
         <div style="font-size: 16px; color: #AAAAAA;">Catégorie</div>
-        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ category }</div>
+        <p style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word; margin-bottom: 0;">${ category }</p>
 
         <div style="font-size: 16px; color: #AAAAAA; margin-top: 24px;">Message</div>
-        <div style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word;">${ content.replace(/\n/g, '<br>') }</div>
+        <p style="font-size: 16px; color: white; margin-top: 8px; word-break: break-word; white-space: pre-wrap; margin-bottom: 0;">${ content }</p>
       </div>
     </div>
   `;
