@@ -35,7 +35,7 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
 
 
               ${showNewsletterHeader ? `
-                <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 48px; padding-bottom: 64px; line-height: 0;">
+                <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 64px; padding-bottom: 48px; font-size: 0;">
                   <a target="_blank" href="${site.url}${NEWSLETTER_ROUTE}">
                       <img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday - Logo" style="width: 100%; border-radius: 6px;"/>
                   </a>
@@ -49,7 +49,7 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
               <div style="background-color: #222222; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding-top: 48px; padding-bottom: 36px; padding-left: 5%; padding-right: 5%; text-align: center;">
                 <a href="${site.url}" style="color: #FFFFFF; text-decoration: none; text-transform: uppercase; font-size: 18px; font-weight: 600;" target="_blank">${ site.name }</a>
 
-                <div style="margin-top: 28px; margin-bottom: 20px; line-height: 0;">
+                <div style="margin-top: 28px; margin-bottom: 20px; font-size: 0;">
                   <a target="_blank" href="https://www.linkedin.com/in/adrienbailliard/" style="margin-right: 20px; text-decoration: none;">
                     <img style="padding: 8px;" src="${site.url}${site.emailAssetsFolder}linkedin.png" alt="LinkedIn - ${ site.name }"/>
                   </a>

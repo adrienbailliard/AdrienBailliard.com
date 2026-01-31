@@ -77,7 +77,7 @@ export async function sendEdition(emails: Array<string>, newsletter: Newsletter)
             </a>
 
             <h1 style="font-weight: 400; font-size: 24px; margin-top: 48px; margin-bottom: 36px; color: black; text-align: center;">
-                ${newsletter.title}
+                ${newsletterConfig.slogan}${newsletter.title}
             </h1>
         </div>
     `;
