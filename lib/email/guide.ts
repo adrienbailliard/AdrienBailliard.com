@@ -14,13 +14,13 @@ export async function sendGuide(email: string): Promise<void>
         </tr>
         <tr style="background-image: url('${site.url}${site.emailAssetsFolder}guide-gradient.png'); background-size: 660px 71px;">
           <td height="71px" style="font-size: 32px; padding: 0; padding-left: 5%; padding-right: 5%; vertical-align: bottom; color: white;">
-            Le Système d'Élite
+            Les Secrets du Top 1%
           </td>
         </tr>
         <tr align="center" style="background: black;">
           <td height="132px" style="font-size: 16px; padding: 0; padding-left: 5%; padding-right: 5%;">
             <p style="max-width: 330px; margin-bottom: 64px; margin-top: 32px; color: white;">
-              Les protocoles exacts derrière les systèmes performants du Top 1%.
+              Les protocoles exacts du Top 1% mondial, applicables dès aujourd'hui.
             </p>
           </td>
         </tr>
