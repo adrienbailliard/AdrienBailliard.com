@@ -73,7 +73,7 @@ export async function sendEdition(emails: Array<string>, newsletter: Newsletter)
     const content = `
         <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-bottom: 64px;">
             <a target="_blank" href="${site.url}${NEWSLETTER_ROUTE}/${newsletter.slug}" style="text-decoration: none; color: #306CE4; font-weight: 600; font-size: 16px;">
-                Lis en Ligne<img style="margin-left: 16px;" src="${site.url}${site.emailAssetsFolder}right-chevron-primary.png"/>
+                Lis en Ligne<img style="margin-left: 16px; width: 8px;" src="${site.url}${site.emailAssetsFolder}right-chevron.png"/>
             </a>
 
             <h1 style="font-weight: 400; font-size: 24px; margin-top: 48px; margin-bottom: 36px; color: black; text-align: center;">

@@ -37,7 +37,7 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
               ${showNewsletterHeader ? `
                 <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 64px; padding-bottom: 48px; font-size: 0;">
                   <a target="_blank" href="${site.url}${NEWSLETTER_ROUTE}">
-                      <img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday - Logo" style="width: 100%; border-radius: 6px;"/>
+                      <img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday" style="width: 100%; border-radius: 6px;"/>
                   </a>
                 </div>
               ` : ""}
@@ -51,10 +51,10 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
 
                 <div style="margin-top: 28px; margin-bottom: 20px; font-size: 0;">
                   <a target="_blank" href="https://www.linkedin.com/in/adrienbailliard/" style="margin-right: 20px; text-decoration: none;">
-                    <img style="padding: 8px;" src="${site.url}${site.emailAssetsFolder}linkedin.png" alt="LinkedIn - ${ site.name }"/>
+                    <img style="padding: 8px; width: 26px;" src="${site.url}${site.emailAssetsFolder}linkedin-icon.png" alt="LinkedIn - ${ site.name }"/>
                   </a>
                   <a target="_blank" href="https://github.com/adrienbailliard">
-                    <img style="padding: 8px;" src="${site.url}${site.emailAssetsFolder}github.png" alt="Github - ${ site.name }"/>
+                    <img style="padding: 8px; width: 26px;" src="${site.url}${site.emailAssetsFolder}github-icon.png" alt="Github - ${ site.name }"/>
                   </a>
                 </div>
 

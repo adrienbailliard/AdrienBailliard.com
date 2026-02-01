@@ -8,7 +8,7 @@ export async function sendMessage({ firstName, lastName, email, company, categor
 {
   const html = `
     <div style="background-color: #0F0F0F; text-align: center; padding-bottom: 64px; padding-left: 5%; padding-right: 5%; padding-top: 45px;">
-      <img src="${ site.url }${ site.emailAssetsFolder }plane.png" alt="Message qui s'envoie">
+      <img src="${ site.url }${ site.emailAssetsFolder }plane.png" style="width: 100px;" alt="">
       <h1 style="font-weight: 400; font-size: 32px; margin-top: 28px; margin-bottom: 0; color: white;">
         Un message vient d'être envoyé
       </h1>

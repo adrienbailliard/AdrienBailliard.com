@@ -7,12 +7,12 @@ export async function sendGuide(email: string): Promise<void>
 {
     const content = `
       <table cellspacing="0" cellpadding="0" style="background-color: #0F0F0F; text-align: center; width: 100%;
-        background-image: url('${site.url}${site.emailAssetsFolder}le-systeme-d-elite.png'); background-repeat: no-repeat; background-position: center center; height: 445px;"
+        background-image: url('${site.url}${site.emailAssetsFolder}le-systeme-d-elite.png'); background-repeat: no-repeat; background-position: center center; background-size: 224px 317px; height: 445px;"
       >
         <tr>
           <td></td>
         </tr>
-        <tr style="background-image: url('${site.url}${site.emailAssetsFolder}guide-gradient.png');">
+        <tr style="background-image: url('${site.url}${site.emailAssetsFolder}guide-gradient.png'); background-size: 660px 71px;">
           <td height="71px" style="font-size: 32px; padding: 0; padding-left: 5%; padding-right: 5%; vertical-align: bottom; color: white;">
             Le Système d'Élite
           </td>
