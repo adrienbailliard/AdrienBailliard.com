@@ -6,16 +6,16 @@ import Modal from "@/components/ui/Modal";
 
 type PopupProps = {
   isEnabled: boolean;
-  setIsEnabled: (isEnabled: boolean) => void;
+  onClose: () => void;
 };
 
 
-export default function Popup({ isEnabled, setIsEnabled }: PopupProps)
+export default function Popup({ isEnabled, onClose }: PopupProps)
 {
     return (
         <Modal
             isEnabled={isEnabled}
-            setIsEnabled={setIsEnabled}
+            onClose={onClose}
         >
             <h2 id="modal-title">
                 Reçois <span className="[letter-spacing:-0.04em]">AUTO <span className="font-extralight">MONDAY</span></span>

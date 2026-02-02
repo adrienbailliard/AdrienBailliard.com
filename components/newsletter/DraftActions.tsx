@@ -14,93 +14,106 @@ import { Newsletter } from "@/lib/types";
 
 
 
+type ModalType = "primary" | "delete" | "unschedule";
+
+
+const modalConfig = {
+    publish: {
+        cta: 'Publier',
+        loadingText: 'Publication...',
+        action: (id: number) => publishDraft(id)
+    },
+    schedule: {
+        cta: 'Programmer',
+        loadingText: "Programmation...",
+        action: (id: number, selectedDate: Date) => scheduleDraft(id, selectedDate)
+    },
+    unschedule: {
+        cta: 'Déprogrammer',
+        loadingText: 'Déprogrammation...',
+        action: (id: number) => scheduleDraft(id, null)
+    },
+    delete: {
+        cta: 'Supprimer',
+        loadingText: 'Suppression...',
+        action: (id: number) => deleteDraft(id)
+    },
+};
+
+
+
 export default function DraftActions()
 {
     const { optimisticNewsletter, selectEditor } = useNewsletterEditor();
     const [ selectedEditor ] = selectEditor;
 
-    const [selectedDate, setSelectedDate] = useState<Date>();
     const [isActionPending, startTransition] = useTransition();
-    const [ isActiveModal, setIsActiveModal ] = useState(false);
-    const [ modalType, setModalType ] = useState<"publish" | "delete" | "unschedule">('publish');
+    const [selectedDate, setSelectedDate] = useState<Date>();
+    const [isModalActive, setIsModalActive] = useState(false);
+    const [modal, setModal] = useState<ModalType>("delete");
 
     const hasId = "id" in optimisticNewsletter;
-    const submitDisabled = selectedEditor !== null;
-    const removeActionKey = hasId && optimisticNewsletter.scheduled_for ? "unschedule" : "delete";
+    const isSubmitDisabled = selectedEditor !== null || !hasId;
 
-    const modalConfig = {
-        publish: {
-            cta: 'Publier',
-            confirmText: selectedDate ? "Programmer" : "Publier",
-            loadingText: selectedDate ? "Programmation..." : 'Publication...',
-            action: async (id: number) => selectedDate
-                ? scheduleDraft(id, selectedDate)
-                : publishDraft(id)
-        },
-        unschedule: {
-            cta: 'Déprogrammer',
-            confirmText: 'Déprogrammer',
-            loadingText: 'Déprogrammation...',
-            action: async (id: number) => scheduleDraft(id, null)
-        },
-        delete: {
-            cta: 'Supprimer',
-            confirmText: 'Supprimer',
-            loadingText: 'Suppression...',
-            action: async (id: number) => deleteDraft(id)
-        },
-    };
+    const leftAction = !hasId || !optimisticNewsletter.scheduled_for ? "delete" : "unschedule";
+    const rightAction = selectedDate ? "schedule" : "publish";
 
+    const config = modal === "primary"
+        ? modalConfig[rightAction]
+        : modalConfig[modal];
+
+
+    const closeModal = () => setIsModalActive(false);
 
     const executeAction = (id: number) =>
         startTransition(async () => {
             try {
-                await modalConfig[modalType].action(id);
+                await config.action(id, selectedDate!);
+                closeModal();
             }
             catch {}
         });
+    
+    const openModal = (modalType: ModalType) => {
+        setModal(modalType);
+        setIsModalActive(true);
+    };
 
 
     return (
         <>
             <section className="bg-dark-bg text-light-fg">
                 <div className="flex gap-7 justify-center flex-wrap">
-                    <BlockScroll isEnabled={ isActiveModal }/>
+                    <BlockScroll isEnabled={isModalActive}/>
 
                     <Button
                         variant="light-primary"
                         disabled={ !hasId }
                         className={ !hasId ? "!text-dark-muted-fg" : "" }
-                        onClick={ () => {
-                            setIsActiveModal(true);
-                            setModalType(removeActionKey);
-                        }}
+                        onClick={ () => openModal(leftAction) }
                     >
-                        { modalConfig[removeActionKey].cta }
+                        { modalConfig[leftAction].cta }
                     </Button>
                     <Button
                         variant="dark-primary"
-                        disabled={ !hasId || submitDisabled }
-                        className={ !hasId || submitDisabled ? "!bg-dark-muted-fg" : "" }
-                        onClick={ () => {
-                            setIsActiveModal(true);
-                            setModalType("publish");
-                        }}
+                        disabled={ isSubmitDisabled }
+                        className={ isSubmitDisabled ? "!bg-dark-muted-fg" : "" }
+                        onClick={ () => openModal("primary") }
                     >
-                        { modalConfig.publish.cta }
+                        { modalConfig[rightAction].cta }
                     </Button>
                 </div>
             </section>
 
             <Modal
-                isEnabled={ isActiveModal }
-                setIsEnabled={ setIsActiveModal }
+                isEnabled={isModalActive}
+                onClose={closeModal}
             >
                 <h3 className="mb-8 md:mb-10" id="modal-title">
-                    { modalConfig[modalType].cta } le brouillon
+                    { config.cta } le brouillon
                 </h3>
 
-                { modalType === "publish" && <Calendar
+                { modal === "primary" && <Calendar
                     selectedDate={selectedDate}
                     setSelectedDate={setSelectedDate}
                     className="mb-7 md:mb-9 m-auto"
@@ -110,7 +123,7 @@ export default function DraftActions()
                     <Button
                         variant="light-primary"
                         className='button-compact py-0'
-                        onClick={ () => setIsActiveModal(false)}
+                        onClick={closeModal}
                     >
                         Annuler
                     </Button>
@@ -121,9 +134,7 @@ export default function DraftActions()
                         onClick={ () =>
                             executeAction((optimisticNewsletter as Newsletter).id) }
                     >
-                        { isActionPending
-                            ? modalConfig[modalType].loadingText
-                            : modalConfig[modalType].confirmText }
+                        { isActionPending ? config.loadingText : config.cta }
                     </Button>
                 </div>
             </Modal>

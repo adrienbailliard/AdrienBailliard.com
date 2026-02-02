@@ -89,7 +89,7 @@ export default function Header()
             </header>
             <Popup
                 isEnabled={isPopupOpen}
-                setIsEnabled={setIsPopupOpen}
+                onClose={ () => setIsPopupOpen(false) }
             />
         </>
     );

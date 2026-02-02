@@ -7,13 +7,13 @@ import Cross from "@/components/icons/cross";
 
 type ModalProps = {
   isEnabled: boolean;
-  setIsEnabled: (value: boolean) => void;
+  onClose: () => void;
   children: React.ReactNode;
 };
 
 
 
-export default function Modal({ isEnabled, setIsEnabled, children }: ModalProps)
+export default function Modal({ isEnabled, onClose, children }: ModalProps)
 {
     const animationDuration = 500;
     const [ isClosed, setIsClosed ] = useState(true);
@@ -35,7 +35,7 @@ export default function Modal({ isEnabled, setIsEnabled, children }: ModalProps)
     return (
         <>
             <div
-                onClick={ () => setIsEnabled(false) }
+                onClick={onClose}
                 className={ "duration-300 bg-black/55 fixed inset-0 z-50 "
                 + ( isEnabled
                     ? "visible opacity-100"
@@ -56,7 +56,7 @@ export default function Modal({ isEnabled, setIsEnabled, children }: ModalProps)
             >
                 <button
                     aria-label="Fermer"
-                    onClick={() => setIsEnabled(false)}
+                    onClick={onClose}
                     className="absolute top-3 right-3 flex justify-center items-center h-10.5 w-10.5 "
                 >
                     <Cross className="w-4.5"/>

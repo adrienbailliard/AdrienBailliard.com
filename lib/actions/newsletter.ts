@@ -45,7 +45,8 @@ export async function scheduleDraft(id: number, date: Date | null): Promise<void
   updateTag(CACHE_TAGS.newsletterDraftsPreviews);
   updateTag(CACHE_TAGS.newsletterScheduledPreviews);
 
-  redirect(NEWSLETTER_ROUTE);
+  if (date)
+    redirect(NEWSLETTER_ROUTE);
 }
 
 
