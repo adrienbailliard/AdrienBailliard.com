@@ -5,7 +5,7 @@ import newsletterConfig from "@/config/newsletter";
 
 export function NewsletterTitle({ value }: { value: string })
 {
-    return <h1>{ newsletterConfig.slogan }{ value }</h1>;
+    return <h2>{ newsletterConfig.slogan }{ value }</h2>;
 };
 
 
