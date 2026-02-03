@@ -1,4 +1,5 @@
 import Link from "next/link";
+import newsletterConfig from "@/config/newsletter";
 
 import { formatAdminDate } from '@/lib/utils';
 import { SerializedNewsletterPreview } from "@/lib/types";
@@ -17,7 +18,7 @@ export default function DraftCard({ draft }: DraftCardProps)
         <Link href={`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${draft.slug}`}>
             <div className="card-list">
                 <p className="card-title">
-                    { draft.title }
+                    { newsletterConfig.slogan }{ draft.title }
                 </p>
                 <time>
                     { formatAdminDate(draft.scheduled_for || draft.updated_at, draft.scheduled_for !== null) }

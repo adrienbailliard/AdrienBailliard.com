@@ -1,10 +1,11 @@
 import { formatPublicDate } from "@/lib/utils";
+import newsletterConfig from "@/config/newsletter";
 
 
 
 export function NewsletterTitle({ value }: { value: string })
 {
-    return <h1>{ value }</h1>;
+    return <h1>{ newsletterConfig.slogan }{ value }</h1>;
 };
 
 
