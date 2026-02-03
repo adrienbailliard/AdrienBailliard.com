@@ -254,11 +254,11 @@
   }
 
   .card-list {
-    @apply grid grid-cols-[minmax(0,1fr)_90px] gap-x-3 sm:gap-x-4 py-3 sm:py-4 select-none items-center;
+    @apply grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 sm:gap-x-4 py-3 sm:py-4 select-none items-center;
   }
 
   .card-skeleton-title {
-    @apply rounded-lg w-32 h-4 md:h-4.5 bg-light-fg;
+    @apply rounded-lg w-full max-w-32 h-4 md:h-4.5 bg-light-fg;
   }
 
   .card-skeleton-time {
