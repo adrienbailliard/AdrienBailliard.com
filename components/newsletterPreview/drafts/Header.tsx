@@ -15,15 +15,12 @@ type HeaderProps = {
 
 export default function Header({ dataCount, title, showCreate }: HeaderProps)
 {
-    if (dataCount === undefined)
-        return (<h5 className="mb-5">{ title.hasItems }</h5>);
+    const isEmpty = dataCount === 0;
 
     return (
-        <div className="flex justify-between items-center">
-            { dataCount === 0
-                ? <h5>{ title.isEmpty }</h5>
-                : <h5 className="mb-5">{ title.hasItems }</h5>
-            }
+        <div className={ `flex justify-between items-center ${ isEmpty ? "" : "mb-5" }` }>
+            <h5>{ isEmpty ? title.isEmpty : title.hasItems }</h5>
+
             { showCreate && (
                 <Link href={ `${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${DRAFT_CREATION_SLUG}` } className='text-primary font-medium'>
                     Créer
