@@ -24,7 +24,7 @@ export default function View({ title, content, date }: ViewProps)
             <section className="bg-dark-bg text-light-fg">
                 <div className="text-center max-w-4xl">
                     { title }
-                    <time className='block mt-5'>
+                    <time className='block mt-7'>
                         { formatPublicDate(date) }
                     </time>
                 </div>
