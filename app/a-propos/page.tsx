@@ -41,16 +41,16 @@ export default function About()
             </p>
           </div>
           <ul className="text-dark-muted-fg shrink-0">
-            <li className="bullet-list">
+            <li>
               { "Fondateur d'Auto Monday" }
             </li>
-            <li className="bullet-list">
+            <li>
               70 000€ générés
             </li>
-            <li className="bullet-list">
+            <li>
               250 000 vues en 1 mois
             </li>
-            <li className="bullet-list">
+            <li>
               { "5 ans d'automatisation" }
             </li>
           </ul>

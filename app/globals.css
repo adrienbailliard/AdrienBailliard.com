@@ -134,8 +134,8 @@
     @apply mt-4 md:mt-5;
   }
 
-  li + li {
-    @apply mt-5.5 md:mt-7;
+  li {
+    @apply flex items-center ml-3 gap-4 before:w-3 before:h-3 before:bg-transparent before:border-primary before:border-2 before:rounded-full;
   }
 
   p,
@@ -144,7 +144,10 @@
     @apply font-sans md:text-lg;
   }
 
-  p + p {
+  p + p,
+  li + li:not(article li),
+  article * + ul,
+  article ul + * {
     @apply mt-3 md:mt-4;
   }
 
@@ -283,10 +286,6 @@
 
   .stat-card {
     @apply flex flex-col max-md:items-center md:px-12 lg:px-16;
-  }
-
-  .bullet-list {
-    @apply flex items-center gap-3.5 before:w-3.5 before:h-3.5 before:bg-transparent before:border-primary before:border-2 before:rounded-full;
   }
 }
 
