@@ -109,12 +109,8 @@ export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
   if (!result)
     throw Error("Draft not found");
 
-  if (!draft.content)
-  {
-    updateTag(CACHE_TAGS.newsletterDraftsPreviews);
-    updateTag(CACHE_TAGS.newsletterScheduledPreviews);
-  }
-
+  updateTag(CACHE_TAGS.newsletterDraftsPreviews);
+  updateTag(CACHE_TAGS.newsletterScheduledPreviews);
   updateTag(`${CACHE_TAGS.newsletter}-${result.old_slug}-false`);
 
   if (result.old_slug !== result.new_slug)
