@@ -88,7 +88,7 @@ export default function About()
             { "1. À 15 ans, je découvre le développement web. Très vite, je veux aller plus loin et créer des systèmes qui travaillent à ma place." }
           </p>
           <p>
-            { "2. À 17 ans, j'ai créé un robot de trading générant jusqu'à 15 000 €/mois en autonomie. J'en dévoile les coulisses dans " }
+            { "2. À 17 ans, j'ai créé un robot de trading générant jusqu'à 15 000€/mois en autonomie. J'en dévoile les coulisses dans " }
             <Link href="/le-systeme-d-elite">
               { "Le Système d'Élite" }
             </Link>

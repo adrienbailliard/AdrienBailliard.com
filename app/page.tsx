@@ -77,7 +77,7 @@ export default function Home()
             <p>
               { "En parallèle, je conçois des systèmes complexes comme mon market maker sur le XRP Ledger, classé "}
               <strong>Top 1% mondial</strong>
-              { " et ayant déjà généré jusqu'à 15 000 €/mois." }
+              { " et ayant déjà généré jusqu'à 15 000€/mois." }
             </p>
             <div className="flex items-center justify-between">
               <Link href="/a-propos" variant="light-primary">
