@@ -1,5 +1,8 @@
 import { resend } from './client';
 
+import { remark } from 'remark';
+import html from 'remark-html';
+
 import layout from "@/lib/email/layout";
 import { generateJWT } from "@/lib/security";
 
@@ -9,6 +12,18 @@ import site from "@/config/site";
 
 import { Newsletter } from "@/lib/types";
 import { NEWSLETTER_ROUTE } from "@/lib/constants";
+
+
+
+const styles: Record<string, string> = {
+    h3: 'margin-top: 32px; margin-bottom: 20px; color: black; font-size: 24px; font-weight: 500;',
+    p: 'margin-top: 12px; margin-bottom: 0; line-height: 24px; color: black; font-size: 16px;',
+    li: 'margin-top: 0; margin-bottom: 0; line-height: 24px; color: black; font-size: 16px; list-style: none;',
+    ul: 'margin-top: 12px; margin-bottom: 0; margin-left: 12px; padding: 0;'
+};
+
+const STYLE_TAGS = Object.keys(styles).join('|');
+const tagMatcher = new RegExp(`<(${STYLE_TAGS})`, 'g');
 
 
 
@@ -68,19 +83,41 @@ export async function sendConfirmation(email: string): Promise<void>
 
 
 
+async function getNewsletterHtml(newsletter: Newsletter): Promise<string>
+{
+    let newsletterHtml = (await remark()
+        .use(html)
+        .process(newsletter.content)).toString();
+
+    return newsletterHtml.replace(tagMatcher, (match, tagName) => {
+        const baseStyle = `${match} style="${styles[tagName]}"`;
+
+        return tagName === 'li'
+            ? `${baseStyle}><img src="${site.url}${site.emailAssetsFolder}bullet-point.png" alt="•" style="width: 12px; margin-right: 16px;" /`
+            : baseStyle;
+    });
+}
+
+
+
 export async function sendEdition(emails: Array<string>, newsletter: Newsletter): Promise<void>
 {
+    const newsletterContent = await getNewsletterHtml(newsletter);
+
     const content = `
         <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-bottom: 64px;">
             <a target="_blank" href="${site.url}${NEWSLETTER_ROUTE}/${newsletter.slug}" style="text-decoration: none; color: #306CE4; font-weight: 600; font-size: 16px;">
                 Lis en Ligne<img style="margin-left: 16px; width: 8px;" src="${site.url}${site.emailAssetsFolder}right-chevron.png"/>
             </a>
 
-            <h1 style="font-weight: 400; font-size: 24px; margin-top: 48px; margin-bottom: 36px; color: black; text-align: center;">
+            <h1 style="font-weight: 400; font-size: 32px; margin-top: 64px; margin-bottom: 48px; color: black; text-align: center;">
                 ${newsletterConfig.slogan}${newsletter.title}
             </h1>
+
+            ${ newsletterContent }
         </div>
     `;
+
 
     const promises = emails.map(async (email) => {
         const jwt = await generateJWT({ email });
@@ -98,6 +135,7 @@ export async function sendEdition(emails: Array<string>, newsletter: Newsletter)
             }
         };
     });
+
 
     const payload = await Promise.all(promises);
     await resend.batch.send(payload);
