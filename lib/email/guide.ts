@@ -1,6 +1,8 @@
 import { resend } from './client';
-import layout from "@/lib/email/layout";
 import site from "@/config/site";
+
+import layout from "@/lib/email/layout";
+import { stylizeBodyContent } from "@/lib/email/stylizer";
 
 
 export async function sendGuide(email: string): Promise<void>
@@ -27,22 +29,24 @@ export async function sendGuide(email: string): Promise<void>
       </table>
 
 
-      <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 64px; padding-bottom: 64px;">
-        <p style="color: black; line-height: 24px; margin-top: 0px; font-size: 16px;">
-          Hello,
-        </p>
-        <p style="color: black; margin-top: 24px; line-height: 24px; font-size: 16px;">
-          Comme convenu, voici ton accès au guide :
-          <br>
-          → <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ" style="color: #306CE4; font-weight: bold; text-underline-offset: 3px; font-size: 16px;">Télécharger le PDF</a>
-        </p>
-        <p style="margin-top: 24px; line-height: 24px; color: black; font-size: 16px;">
-          Découvre comment automatiser pour gagner en performance.
-        </p>
-        <p style="margin-top: 24px; line-height: 24px; margin-bottom: 0px; color: black; font-size: 16px;">
-          ${ site.name }
-        </p>
-      </div>
+      ${ stylizeBodyContent(`
+        <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 52px; padding-bottom: 64px;">
+          <p>
+            Hello,
+          </p>
+          <p>
+            Comme convenu, voici ton accès au guide :
+            <br>
+            → <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ">Télécharger le PDF</a>
+          </p>
+          <p>
+            Découvre comment automatiser pour gagner en performance.
+          </p>
+          <p>
+            ${ site.name }
+          </p>
+        </div>
+      `) }
     `;
 
 

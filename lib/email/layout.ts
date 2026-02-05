@@ -35,7 +35,7 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
 
 
               ${showNewsletterHeader ? `
-                <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 64px; padding-bottom: 48px; font-size: 0;">
+                <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 64px; font-size: 0;">
                   <a target="_blank" href="${site.url}${NEWSLETTER_ROUTE}">
                       <img src="${site.url}${site.emailAssetsFolder}auto-monday.png" alt="Auto Monday" style="width: 100%; border-radius: 6px;"/>
                   </a>
