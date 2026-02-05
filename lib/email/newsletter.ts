@@ -33,7 +33,7 @@ export async function sendConfirmation(email: string): Promise<void>
                 LE GAIN
             </h3>
             <p>
-                Tous les lundis, un petit mail avec un conseil applicable pour automatiser intelligemment.
+                Tous les lundis, un petit mail avec un conseil applicable pour automatiser <em>intelligemment</em>.
             </p>
             <p>
                 Je ne partage que ce qui a une réelle valeur.

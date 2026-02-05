@@ -5,22 +5,23 @@ import layout from "@/lib/email/layout";
 import { stylizeBodyContent } from "@/lib/email/stylizer";
 
 
+
 export async function sendGuide(email: string): Promise<void>
 {
     const content = `
-      <table cellspacing="0" cellpadding="0" style="background-color: #0F0F0F; text-align: center; width: 100%;
+      <table border="0" cellpadding="0" cellspacing="0" style="background-color: #0F0F0F; text-align: center; width: 100%;
         background-image: url('${site.url}${site.emailAssetsFolder}le-systeme-d-elite.png'); background-repeat: no-repeat; background-position: center center; background-size: 224px 317px; height: 445px;"
       >
         <tr>
           <td></td>
         </tr>
         <tr style="background-image: url('${site.url}${site.emailAssetsFolder}guide-gradient.png'); background-size: 660px 71px;">
-          <td height="71px" style="font-size: 32px; padding: 0; padding-left: 5%; padding-right: 5%; vertical-align: bottom; color: white;">
+          <td height="71px" style="font-size: 32px; padding-left: 5%; padding-right: 5%; vertical-align: bottom; color: white;">
             Les Secrets du Top 1%
           </td>
         </tr>
         <tr align="center" style="background: black;">
-          <td height="132px" style="font-size: 16px; padding: 0; padding-left: 5%; padding-right: 5%;">
+          <td height="132px" style="font-size: 16px; padding-left: 5%; padding-right: 5%;">
             <p style="max-width: 330px; margin-bottom: 64px; margin-top: 32px; color: white;">
               Les protocoles exacts du Top 1% mondial, applicables dès aujourd'hui.
             </p>

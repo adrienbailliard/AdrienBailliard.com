@@ -25,9 +25,9 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
           <body style="margin: 0; padding: 0;">
             <div style="max-width: 660px; margin: auto; font-family: 'Plus Jakarta Sans', system-ui, Arial;">
 
-              <table style="background-color: #0F0F0F; width: 100%; height: 60px; padding-left: 5%; padding-right: 5%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+              <table border="0" cellpadding="0" cellspacing="0" style="background-color: #0F0F0F; width: 100%; height: 60px; padding-left: 5%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <tr>
-                  <td style="font-size: 16px; font-weight: 600; padding: 0;">
+                  <td style="font-size: 16px; font-weight: 600;">
                     <a href="${site.url}" style="color: #FFFFFF; text-decoration: none; text-transform: uppercase;" target="_blank">${ site.name }</a>
                   </td>
                 </tr>
