@@ -41,8 +41,9 @@ export async function sendGuide(email: string): Promise<void>
             → <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ">Télécharger le PDF</a>
           </p>
           <p>
-            Découvre comment automatiser pour gagner en performance.
+            Découvre comment automatiser pour gagner en <em>performance</em>.
           </p>
+          <p>_</p>
           <p>
             ${ site.name }
           </p>
