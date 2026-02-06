@@ -45,7 +45,7 @@ export default function Consultation()
               alt="Consultation 1:1"
               width={875}
               height={500}
-              className="w-3xs sm:w-sm md:w-md lg:absolute max-sm:-mr-24 max-lg:-mr-40 lg:-right-40 lg:top-1/2 lg:-translate-y-1/2 lg:w-2xl xl:w-3xl 2xl:w-4xl"
+              className="w-48 sm:w-sm md:w-md lg:absolute max-sm:-mr-16 max-lg:-mr-30 lg:-right-35 lg:top-1/2 lg:-translate-y-1/2 lg:w-2xl xl:w-3xl 2xl:w-4xl"
               preload={true}
             />
           </div>
