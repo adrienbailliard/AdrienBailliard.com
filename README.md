@@ -1,6 +1,6 @@
 # AdrienBailliard.com
 
-Personal branding infrastructure: showcase & operations.
+My personal branding infrastructure: showcase & operations.
 
 ## The Architecture
 
