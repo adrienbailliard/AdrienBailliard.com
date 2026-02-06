@@ -102,7 +102,7 @@ export default function Home()
       <section className="bg-dark-bg text-light-fg text-center">
         <div className="w-full">
           <h2>
-            { "3 Manières Dont Je Peux T'Aider" }
+            { "3 Manières dont Je Peux t'Aider" }
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-17">
             <ServicePreview

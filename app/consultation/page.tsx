@@ -34,7 +34,7 @@ export default function Consultation()
       <section className="hero lg:relative overflow-hidden">
         <div className="w-full">
           <h1 className="lg:w-[50%] max-w-2xl max-lg:text-center max-lg:mx-auto">
-            Les Systèmes du Top 1% pour Ton Business
+            Les Systèmes du Top 1% pour ton Business
           </h1>
           <div className="max-lg:flex max-lg:justify-between mt-9 sm:mt-12 md:mt-16 lg:mt-9 max-lg:items-center">
             <p className="max-w-2xs sm:max-w-xs md:max-w-sm lg:w-[50%] lg:max-w-2xl">
@@ -62,7 +62,7 @@ export default function Consultation()
       </section>
 
       <Cta
-        title="Parle-Moi de Ton Projet"
+        title="Parle-Moi de ton Projet"
         paragraph="Chaque système est conçu pour ton activité. Voyons comment libérer ton temps et affiner tes process."
         variant="light"
         className="-mt-16 md:-mt-26 lg:-mt-30"
@@ -72,7 +72,7 @@ export default function Consultation()
           href="/contact"
           variant="light-primary"
         >
-          { "Réserve Mon Audit Gratuit" }
+          { "Réserve mon Audit Gratuit" }
         </Link>
       </Cta>
     </main>

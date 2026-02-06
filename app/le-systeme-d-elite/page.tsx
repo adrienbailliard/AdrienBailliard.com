@@ -61,7 +61,7 @@ export default function TheEliteSystem()
       </section>
 
       <Cta
-        title={ <>Construis Ton <span className="italic">{ "Système d'Élite" }</span></> }
+        title={ <>Construis ton <span className="italic">{ "Système d'Élite" }</span></> }
         paragraph="Les protocoles exacts du Top 1% mondial, applicables dès aujourd'hui."
         variant="dark"
       >
