@@ -66,9 +66,7 @@ export function generateSlug(title: string): string {
         .normalize("NFD")
         .replace(/\p{Diacritic}/gu, "")
         .toLowerCase()
-        .replace(/[^\w\s-]/g, '')
-        .trim()
-        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9]/g, '-')
         .replace(/-+/g, '-')
         .replace(/^-+|-+$/g, '');
 }
