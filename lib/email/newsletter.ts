@@ -78,6 +78,7 @@ export async function sendConfirmation(email: string): Promise<void>
 
 export async function sendEdition(emails: Array<string>, newsletter: Newsletter): Promise<void>
 {
+    const subject = newsletterConfig.slogan + newsletter.title;
     const markdownProcessed = await remark()
         .use(html)
         .process(newsletter.content);
@@ -89,7 +90,7 @@ export async function sendEdition(emails: Array<string>, newsletter: Newsletter)
             </a>
 
             <h1 style="font-weight: 400; font-size: 32px; margin-top: 64px; margin-bottom: 48px; color: black; text-align: center;">
-                ${newsletterConfig.slogan}${newsletter.title}
+                ${subject}
             </h1>
 
             ${ stylizeBodyContent(markdownProcessed.toString()) }
@@ -105,7 +106,7 @@ export async function sendEdition(emails: Array<string>, newsletter: Newsletter)
             from: process.env.EMAIL_SENDER!,
             to: [email],
             replyTo: process.env.EMAIL_RECEIVER!,
-            subject: newsletterConfig.slogan + newsletter.title,
+            subject,
             html: layout(content, true, unsubscribeUrl),
             headers: {
                 'List-Unsubscribe': `<${site.url}/api/newsletter/unsubscribe?${authConfig.cookie.name}=${jwt}>`,

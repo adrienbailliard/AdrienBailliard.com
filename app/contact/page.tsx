@@ -7,7 +7,6 @@ import ContactForm from "@/components/ContactForm";
 import Messages from "@/components/messages";
 import Stats from "@/components/Stats";
 import Plane from "@/components/icons/plane";
-import Mail from "@/components/icons/mail";
 import Divider from "@/components/ui/Divider";
 
 import { StaticPage } from "@/lib/types";
@@ -38,7 +37,7 @@ export default function Contact()
       <Messages />
 
       <section className="bg-dark-bg text-light-fg">
-        <div className="flex max-sm:gap-7 max-sm:text-center max-sm:flex-col-reverse sm:justify-between items-center gap-12">
+        <div className="flex max-sm:gap-10 max-sm:text-center max-sm:flex-col-reverse sm:justify-between items-center gap-14">
           <div className="max-w-2xl">
             <h1>
               Parlons Business
@@ -46,18 +45,16 @@ export default function Contact()
             <p>
               { "Présente-moi ton projet ou tes besoins. Je lis chaque message avec attention et j'y réponds personnellement." }
             </p>
-            <div className="flex max-sm:justify-center items-center gap-3 text-light-muted-fg">
-              <Mail className="h-4" />
-              <p>
-                hello@adrienbailliard.com
-              </p>
-            </div>
           </div>
-          <Plane className="w-37.5 max-sm:w-25 max-md:w-30 text-primary"/>
+          <Plane className="shrink-0 w-37.5 max-sm:w-25 max-md:w-30 text-primary"/>
         </div>
       </section>
 
-      <ContactForm/>
+      <section className="bg-light-bg">
+        <div>
+          <ContactForm/>
+        </div>
+      </section>
     </main>
   );
 }
