@@ -9,10 +9,11 @@ import NewsletterSignup from "@/components/newsletter/Signup";
 import NewsletterView, { NewsletterTitle } from "@/components/newsletter/View";
 
 import { metadata } from "@/app/not-found";
+import newsletterConfig from "@/config/newsletter";
+
 import { getMetadata } from "@/lib/seo/metadata";
 import { getJsonLd } from "@/lib/seo/jsonld";
 import { getPublishedNewsletterBySlug } from "@/lib/db/newsletters";
-
 import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
   return newsletter
     ? getMetadata({
       pathname: `${NEWSLETTER_ROUTE}/${slug}`,
-      title: newsletter.title,
+      title: newsletterConfig.slogan + newsletter.title,
       description: newsletter.excerpt,
       publishedAt: newsletter.published_at
     })
@@ -53,7 +54,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
 
   const articlePage = {
     pathname: `${NEWSLETTER_ROUTE}/${slug}`,
-    title: newsletter.title,
+    title: newsletterConfig.slogan + newsletter.title,
     description: newsletter.excerpt,
     publishedAt: newsletter.published_at
   };

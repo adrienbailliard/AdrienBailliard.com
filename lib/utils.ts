@@ -1,3 +1,7 @@
+import newsletterConfig from "@/config/newsletter";
+
+
+
 export function formatPercentage(value: number): string
 {
     if (value === null)
@@ -62,7 +66,7 @@ export function formatPublicDate(value: string | Date): string
 
 
 export function generateSlug(title: string): string {
-    return title
+    return (newsletterConfig.slogan + title)
         .normalize("NFD")
         .replace(/\p{Diacritic}/gu, "")
         .toLowerCase()

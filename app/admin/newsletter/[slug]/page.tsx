@@ -5,6 +5,8 @@ import { NewsletterEditorProvider } from '@/contexts/newsletterEditor';
 import NewsletterEditor from "@/components/newsletter/Editor";
 
 import { metadata } from "@/app/not-found";
+import newsletterConfig from "@/config/newsletter";
+
 import { getUtilityMetadata } from "@/lib/seo/metadata";
 import { DRAFT_CREATION_SLUG } from "@/lib/constants";
 import { getNewsletterDraftBySlug } from "@/lib/db/newsletters";
@@ -19,11 +21,11 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
   const { slug } = await params;
 
   const newsletter = slug === DRAFT_CREATION_SLUG
-    ? { title: "Nouveau Brouillon" }
+    ? { title: newsletterConfig.defaultDraftTitle }
     : await getNewsletterDraftBySlug(slug);
 
   return newsletter
-    ? getUtilityMetadata(newsletter.title)
+    ? getUtilityMetadata(newsletterConfig.slogan + newsletter.title)
     : metadata;
 }
 
@@ -39,7 +41,7 @@ export default async function NewsletterPage({ params }: NewsletterPageProps)
   const { slug } = await params;
 
   const newsletter = slug === DRAFT_CREATION_SLUG
-    ? { excerpt: "Description courte", title: "Titre", content: "Écris ton contenu..." }
+    ? { excerpt: "Description courte", title: newsletterConfig.defaultDraftTitle, content: "Écris ton contenu..." }
     : await getNewsletterDraftBySlug(slug);
 
   if (!newsletter)
