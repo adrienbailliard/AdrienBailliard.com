@@ -1,7 +1,6 @@
 import { sql } from '@/lib/db/client';
 import CACHE_TAGS from '@/lib/db/cache-tags';
 
-import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 
 import { generateSlug } from "@/lib/utils";
@@ -163,7 +162,7 @@ export const getScheduledNewsletterPreviews = getNewsletterPreviews(NewsletterSt
 
 
 
-export const getNewsletterBySlug = cache((slug: string, isPublished: boolean) =>
+export const getNewsletterBySlug = (slug: string, isPublished: boolean) =>
     unstable_cache(
         async (): Promise<Newsletter | null> => {
             const [ newsletter ] = await sql`
@@ -180,8 +179,7 @@ export const getNewsletterBySlug = cache((slug: string, isPublished: boolean) =>
             `${CACHE_TAGS.newsletter}-${slug}`,
             `${CACHE_TAGS.newsletter}-${slug}-${isPublished}`
         ] }
-    )() as Promise<Newsletter | SerializedNewsletter | null>
-);
+    )() as Promise<Newsletter | SerializedNewsletter | null>;
 
 
 export const getNewsletterDraftBySlug =

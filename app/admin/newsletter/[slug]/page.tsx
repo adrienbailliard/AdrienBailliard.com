@@ -1,10 +1,10 @@
-import { notFound } from "next/navigation";
+import { cache } from 'react';
 import { Metadata } from 'next';
+import { notFound } from "next/navigation";
 
 import { NewsletterEditorProvider } from '@/contexts/newsletterEditor';
 import NewsletterEditor from "@/components/newsletter/Editor";
 
-import { metadata } from "@/app/not-found";
 import newsletterConfig from "@/config/newsletter";
 
 import { getUtilityMetadata } from "@/lib/seo/metadata";
@@ -16,37 +16,38 @@ import { getNewsletterDraftBySlug } from "@/lib/db/newsletters";
 export const dynamic = 'force-static';
 
 
-export async function generateMetadata({ params }: NewsletterPageProps): Promise<Metadata>
+type Parameters = Promise<{ slug: string }>;
+
+
+
+const getNewsletter = cache(
+  async (slug: string) => {
+    const newsletter = slug === DRAFT_CREATION_SLUG
+      ? { excerpt: "Description courte", title: newsletterConfig.defaultDraftTitle, content: "Écris ton contenu..." }
+      : await getNewsletterDraftBySlug(slug);
+
+    if (!newsletter)
+      notFound();
+
+    return newsletter;
+  });
+
+
+
+export async function generateMetadata({ params }: { params: Parameters }): Promise<Metadata>
 {
   const { slug } = await params;
+  const newsletter = await getNewsletter(slug);
 
-  const newsletter = slug === DRAFT_CREATION_SLUG
-    ? { title: newsletterConfig.defaultDraftTitle }
-    : await getNewsletterDraftBySlug(slug);
-
-  return newsletter
-    ? getUtilityMetadata(newsletterConfig.slogan + newsletter.title)
-    : metadata;
+  return getUtilityMetadata(newsletterConfig.slogan + newsletter.title);
 }
 
 
 
-type NewsletterPageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-
-export default async function NewsletterPage({ params }: NewsletterPageProps)
+export default async function NewsletterPage({ params }: { params: Parameters })
 {
   const { slug } = await params;
-
-  const newsletter = slug === DRAFT_CREATION_SLUG
-    ? { excerpt: "Description courte", title: newsletterConfig.defaultDraftTitle, content: "Écris ton contenu..." }
-    : await getNewsletterDraftBySlug(slug);
-
-  if (!newsletter)
-    notFound();
-
+  const newsletter = await getNewsletter(slug);
 
   return (
     <main className="bg-light-bg">
