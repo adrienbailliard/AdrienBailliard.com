@@ -14,7 +14,7 @@ import { NEWSLETTER_ROUTE } from "@/lib/constants";
 const page: StaticPage = {
   pathname: "/a-propos",
   title: "À Propos",
-  description: "Fondateur d'Auto Monday, Adrien Bailliard conçoit des systèmes performants qui libèrent ton temps. Découvre son histoire."
+  description: "Fondateur d'Auto Monday, Adrien Bailliard automatise la croissance pour libérer ton temps. Découvre son histoire."
 };
 
 
@@ -48,10 +48,10 @@ export default function About()
               70 000€ générés
             </li>
             <li>
-              250 000 vues en 1 mois
+              280 000 impressions
             </li>
             <li>
-              { "5 ans d'automatisation" }
+              { "Systèmes critiques" }
             </li>
           </ul>
         </div>
@@ -70,10 +70,10 @@ export default function About()
           />
           <figure className="rounded-lg bg-light-bg sm:w-[60%] max-w-4xl p-4 md:p-6 lg:p-8 xl:p-10 sm:absolute">
             <blockquote>
-              { "« L'excellence n'est pas un acte, mais une habitude. »" }
+              { "« Vous ne vous élevez pas au niveau de vos objectifs. Vous retombez au niveau de vos systèmes. »" }
             </blockquote>
             <figcaption className="text-right">
-              Aristote
+              Archiloque
             </figcaption>
           </figure>
         </div>
@@ -82,36 +82,36 @@ export default function About()
       <section className="bg-dark-bg text-light-fg pt-0">
         <div className="max-w-4xl mx-auto text-pretty">
           <h2>
-            { "J'ai choisi la performance" }
+            { "La méthode doit l'emporter." }
           </h2>
           <p>
-            { "1. À 15 ans, je découvre le développement web. Très vite, je veux aller plus loin et créer des systèmes qui travaillent à ma place." }
+            { "1. J'ai commencé le développement web à 15 ans. Ce plaisir du concret m'a poussé à construire des systèmes de plus en plus complexes." }
           </p>
           <p>
-            { "2. À 17 ans, j'ai créé un robot de trading générant jusqu'à 15 000€/mois en autonomie. J'en dévoile les coulisses dans " }
+            { "2. À 17 ans, j'ai lancé un market maker sur le XRP Ledger générant jusqu'à 15 000€/mois en autonomie. Je détaille ces protocoles dans " }
             <Link href="/le-systeme-d-elite">
               { "Le Système d'Élite" }
             </Link>
             { "." }
           </p>
           <p>
-            { "3. À l'école 42, j'affine ce qui fait un système performant : fiabilité, optimisation et scalabilité." }
+            { "3. À l'école 42, j'ai appris que coder n'est qu'un prérequis. La vraie valeur se trouve dans la rencontre et la transmission." }
           </p>
           <p>
-            { "4. Mon chien Thatcher (Texas de Tara des Hauts Lilas) est titré Champion dans 3 pays. La réussite ne tombe pas du ciel, et se construit avec méthode." }
+            { "4. Mon chien Thatcher est titré Champion dans 3 pays. Qu'elle soit technique ou non, la performance se construit méthodiquement." }
           </p>
           <p>
-            { "5. Le scoutisme m'a appris le leadership et l'organisation. Les meilleures organisations fonctionnent même lorsque le chef s'absente." }
+            { "5. Le scoutisme m'a appris le leadership. Une organisation n'est efficace que si elle continue de tourner lorsque le responsable s'absente." }
           </p>
           <p>
-            { "6. Chaque été, dans les Alpes à Briançon, je suis éducateur bénévole. Là-haut, j'apprends que les méthodes les plus puissantes sont celles qui servent les autres." }
+            { "6. Chaque été, je pars dans les Alpes à Briançon comme éducateur bénévole. Là-bas, je me rappelle que la technologie n'est qu'un outil pour servir des projets humains." }
           </p>
           <p>
-            { "7. " }
+            { "7. J'ai lancé " }
             <Link href={NEWSLETTER_ROUTE}>
               Auto Monday
             </Link>
-            { " est né d'une ambition : libérer le temps des ambitieux grâce à des systèmes qui accélèrent leur croissance." }
+            { " pour partager l'automatisation intelligente, qui libère le temps et stabilise la croissance." }
           </p>
         </div>
       </section>
