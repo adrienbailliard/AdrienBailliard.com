@@ -16,7 +16,7 @@ import { StaticPage } from "@/lib/types";
 const page: StaticPage = {
   pathname: "/contact",
   title: "Contact",
-  description: "Contacte Adrien Bailliard à propos d'automatisation, de systèmes performants et d'opportunités de collaboration."
+  description: "Présente ton projet ou tes enjeux à Adrien Bailliard. Chaque message est traité personnellement pour en isoler les leviers de performance."
 };
 
 
@@ -43,7 +43,7 @@ export default function Contact()
               Parlons Business
             </h1>
             <p>
-              { "Présente-moi ton projet ou tes besoins. Je lis chaque message avec attention et j'y réponds personnellement." }
+              { "Présente-moi ton projet ou tes enjeux. Je traite personnellement chaque message pour en isoler les leviers de performance." }
             </p>
           </div>
           <Plane className="shrink-0 w-37.5 max-sm:w-25 max-md:w-30 text-primary"/>
