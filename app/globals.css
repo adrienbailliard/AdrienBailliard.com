@@ -129,7 +129,6 @@
     @apply mt-5 md:mt-6;
   }
 
-  blockquote + figcaption,
   h4 + p {
     @apply mt-4 md:mt-5;
   }
