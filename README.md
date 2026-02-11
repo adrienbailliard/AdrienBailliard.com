@@ -1,16 +1,15 @@
 # AdrienBailliard.com
 
-My personal branding infrastructure: showcase & operations.
+The operational backbone of my minimalist ecosystem.
 
-## The Architecture
+## Architecture
 
-Unlike a standard portfolio, this infrastructure is built on three operational pillars:
-* **Authority Front-end** - A minimalist, high-conversion interface designed for elite positioning.
-* **Newsletter Engine** - Proprietary authoring and distribution system, engineered for maximum deliverability.
-* **Operational Dashboard** - Private administration layer for real-time monitoring of messages, subscribers, and performance analytics.
+* **Authority**: High-conversion interface designed for elite positioning.
+* **Engine**: Proprietary distribution stack optimized for deliverability.
+* **Operations**: Private command layer for real-time systems monitoring.
 
-## Engineering Standards
+## Standards
 
-+ **Operational Integrity** - Integrated webhook handling and automated email flows designed for high deliverability.
-+ **Architecture Patterns** - Strict separation of concerns between business logic, UI, and API routes.
-+ **Performance First** - Built with Next.js 16, Tailwind, and TypeScript for a production-ready environment.
+* **Logic**: Strict separation of concerns.
+* **Integrity**: Data validation and source verification.
+* **Stack**: TypeScript, Next.js, Tailwind, PostgreSQL.
