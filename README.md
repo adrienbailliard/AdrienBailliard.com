@@ -10,6 +10,6 @@ The operational backbone of my minimalist ecosystem.
 
 ## Standards
 
-* **Logic**: Strict separation of concerns.
+* **Modularity**: Strict separation of concerns.
 * **Integrity**: Data validation and source verification.
 * **Stack**: TypeScript, Next.js, Tailwind, PostgreSQL.
