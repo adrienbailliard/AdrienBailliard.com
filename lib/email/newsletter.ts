@@ -24,7 +24,7 @@ export async function sendConfirmation(email: string): Promise<void>
                 Hello,
             </p>
             <p>
-                Il est temps de franchir un cap et de libérer ton potentiel grâce à l'automatisation.
+                Il est temps de franchir un cap et de libérer ton temps grâce à l'automatisation.
             </p>
             <p>
                 Pour cela, tu dois comprendre les clés des systèmes du Top 1%.
@@ -33,7 +33,7 @@ export async function sendConfirmation(email: string): Promise<void>
                 LE GAIN
             </h3>
             <p>
-                Tous les lundis, un petit mail avec un conseil applicable pour automatiser <em>intelligemment</em>.
+                Tous les lundis, un système pour automatiser <em>intelligemment</em>.
             </p>
             <p>
                 Je ne partage que ce qui a une réelle valeur.

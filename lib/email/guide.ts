@@ -23,7 +23,7 @@ export async function sendGuide(email: string): Promise<void>
         <tr align="center" style="background: black;">
           <td height="132px" style="font-size: 16px; padding-left: 5%; padding-right: 5%;">
             <p style="max-width: 330px; margin-bottom: 64px; margin-top: 32px; color: white;">
-              Les protocoles exacts du Top 1% mondial, applicables dès aujourd'hui.
+              Un système d'élite se construit méthodiquement.
             </p>
           </td>
         </tr>
@@ -41,7 +41,7 @@ export async function sendGuide(email: string): Promise<void>
             → <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ">Télécharger le PDF</a>
           </p>
           <p>
-            Découvre comment automatiser pour gagner en <em>performance</em>.
+            Découvre comment automatiser au-delà de la <em>performance</em>.
           </p>
           <p>_</p>
           <p>
@@ -56,7 +56,7 @@ export async function sendGuide(email: string): Promise<void>
         from: process.env.EMAIL_SENDER!,
         to: [email],
         replyTo: process.env.EMAIL_RECEIVER!,
-        subject: "[Les Protocoles du Top 1%] Ton Guide Est Prêt",
+        subject: "[Le Système d'Élite] Ton Guide Est Prêt",
         html: layout(content)
     });
 }
