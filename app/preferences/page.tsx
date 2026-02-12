@@ -50,7 +50,7 @@ export default async function NewsletterPage({ searchParams }: { searchParams: S
   return (
     <main className="bg-dark-bg">
       <section className="hero text-center">
-        <h2>Gère ton abonnement</h2>
+        <h2>Contrôle ton Flux</h2>
         <SubscriptionToggle jwt={jwt} isSubscribed={isSubscribed}/>
       </section>
     </main>

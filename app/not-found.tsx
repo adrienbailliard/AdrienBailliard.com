@@ -3,7 +3,7 @@ import { getUtilityMetadata } from "@/lib/seo/metadata";
 
 
 
-export const metadata = getUtilityMetadata("Page Introuvable");
+export const metadata = getUtilityMetadata("Destination Inconnue");
 
 
 export default function NotFound()
@@ -11,9 +11,9 @@ export default function NotFound()
   return (
     <main className="bg-dark-bg">
       <section className="hero text-center">
-        <h2>Cette Page est Introuvable</h2>
+        <h2>Cette Destination est Inconnue</h2>
         <Link href="/" variant="primary">
-          { "Revenir à l'Accueil" }
+          { "Retour à la Base" }
         </Link>
       </section>
     </main>

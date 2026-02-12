@@ -41,14 +41,12 @@ export default function SubscriptionToggle({ jwt, isSubscribed }: SubscriptionTo
             disabled={isPending}
         >
             { isPending
-                ? isSubscribed
-                    ? "Désabonnement..."
-                    : "Réabonnement..."
+                ? "Mise à jour..."
                 : hasError
                     ? "Réessayer"
                     : isSubscribed
-                        ? "Se Désabonner"
-                        : "Se Réabonner" }
+                        ? "Suspendre"
+                        : "Rétablir" }
         </Button>
     );
 }
