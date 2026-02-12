@@ -16,7 +16,7 @@ import { StaticPage } from "@/lib/types";
 const page: StaticPage = {
   pathname: "/le-systeme-d-elite",
   title: "Le Système d'Élite",
-  description: "Les protocoles exacts du Top 1% en market making, rassemblés dans un guide gratuit pour créer des systèmes performants."
+  description: "Construis ton Système d'Élite à travers les protocoles d'automatisation du Top 1%. Accède au guide dès maintenant."
 };
 
 
@@ -62,7 +62,7 @@ export default function TheEliteSystem()
 
       <Cta
         title={ <>Construis ton <span className="italic">{ "Système d'Élite" }</span></> }
-        paragraph="Les protocoles exacts du Top 1% mondial, applicables dès aujourd'hui."
+        paragraph="L'automatisation se construit méthodiquement. Obtiens les protocoles du Top 1% dès aujourd'hui."
         variant="dark"
       >
         <Form
