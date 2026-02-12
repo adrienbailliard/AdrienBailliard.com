@@ -1,14 +1,15 @@
-import { getMetadata } from "@/lib/seo/metadata";
-import { getJsonLd } from "@/lib/seo/jsonld";
-
 import Script from "next/script";
 import Image from "next/image";
+
+import site from "@/config/site";
+import { StaticPage } from "@/lib/types";
+
+import { getMetadata } from "@/lib/seo/metadata";
+import { getJsonLd } from "@/lib/seo/jsonld";
 
 import Arrow from "@/components/icons/arrow";
 import Link from "@/components/ui/Link";
 import Cta from "@/components/Cta";
-
-import { StaticPage } from "@/lib/types";
 
 
 
@@ -41,7 +42,7 @@ export default function Consultation()
               Réserve ta consultation 1:1 pour bâtir des systèmes qui stabiliseront ta croissance et libéreront ton temps.
             </p>
             <Image
-              src="/assets/illustrations/consultation.png"
+              src={ `${site.illustrationsFolder}consultation.png` }
               alt="Consultation 1:1 - Adrien Bailliard"
               width={875}
               height={500}

@@ -10,7 +10,7 @@ export async function sendGuide(email: string): Promise<void>
 {
     const content = `
       <table border="0" cellpadding="0" cellspacing="0" style="background-color: #0F0F0F; text-align: center; width: 100%;
-        background-image: url('${site.url}${site.emailAssetsFolder}le-systeme-d-elite.png'); background-repeat: no-repeat; background-position: center center; background-size: 224px 317px; height: 445px;"
+        background-image: url('${site.url}${site.illustrationsFolder}le-systeme-d-elite.png'); background-repeat: no-repeat; background-position: center center; background-size: 224px 317px; height: 445px;"
       >
         <tr>
           <td></td>

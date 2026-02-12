@@ -1,14 +1,15 @@
-import { getMetadata } from "@/lib/seo/metadata";
-import { getJsonLd } from "@/lib/seo/jsonld";
-
 import Script from "next/script";
 import Image from "next/image";
+
+import site from "@/config/site";
 
 import Cta from "@/components/Cta";
 import Form from '@/components/ui/BaseForm';
 import Arrow from "@/components/icons/arrow";
 import Stats from "@/components/Stats";
 
+import { getMetadata } from "@/lib/seo/metadata";
+import { getJsonLd } from "@/lib/seo/jsonld";
 import { StaticPage } from "@/lib/types";
 
 
@@ -37,10 +38,10 @@ export default function TheEliteSystem()
       <section className="text-light-fg bg-dark-bg relative">
         <div className="relative max-sm:min-h-80">
           <Image
-            src="/assets/illustrations/le-systeme-d-elite.png"
+            src={ `${site.illustrationsFolder}le-systeme-d-elite.png` }
             alt="Guide - Le Système d'Élite"
-            width={400}
-            height={566}
+            width={288}
+            height={407.25}
             className="mx-auto w-full max-w-48 sm:max-w-56 md:max-w-3xs lg:max-w-2xs"
             preload={true}
           />

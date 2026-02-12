@@ -1,11 +1,13 @@
-import { getMetadata } from "@/lib/seo/metadata";
-import { getJsonLd } from "@/lib/seo/jsonld";
-
 import Script from "next/script";
 import Link from "next/link";
 import Image from "next/image";
 
+import site from "@/config/site";
 import Logo from "@/components/icons/logo";
+
+import { getMetadata } from "@/lib/seo/metadata";
+import { getJsonLd } from "@/lib/seo/jsonld";
+
 import { StaticPage } from "@/lib/types";
 import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
@@ -61,7 +63,7 @@ export default function About()
       <section className="bg-dark-bg text-dark-fg">
         <div className="flex items-center max-sm:flex-col max-sm:gap-10">
           <Image
-            src="/assets/illustrations/about.png"
+            src={ `${site.illustrationsFolder}about.png` }
             alt="Montagne - Adrien Bailliard"
             width={512}
             height={512}

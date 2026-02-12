@@ -88,7 +88,7 @@ export default function Home()
           </div>
           <div className="basis-1/2">
               <Image
-                src="/assets/illustrations/home.png"
+                src={ `${site.illustrationsFolder}home.png` }
                 alt="Adrien Bailliard"
                 width={600}
                 height={607}
