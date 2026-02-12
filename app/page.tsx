@@ -23,7 +23,7 @@ import { NEWSLETTER_ROUTE } from "@/lib/constants";
 const page: StaticPage = {
   pathname: "/",
   title: site.name + " - " + site.description,
-  description: "Automatise comme le Top 1% avec Auto Monday, en recevant les systèmes qui libèrent ton temps. Chaque lundi, dans ta boîte mail."
+  description: "Automatise comme le Top 1% avec Auto Monday. Reçois chaque lundi les systèmes qui libèrent ton temps, dans ta boîte mail."
 };
 
 
@@ -67,17 +67,17 @@ export default function Home()
               Hello, je suis Adrien Bailliard.
             </h2>
             <p>
-              { "La plupart des gens pensent que l'automatisation, c'est faire toujours plus. En réalité, c'est "}
-              <strong>créer des systèmes qui libèrent ton temps</strong>
-              {" et te permettent de te concentrer sur l'essentiel." }
+              { "L'automatisation n'est pas une course à l'outil. C'est "}
+              <strong>bâtir des systèmes</strong>
+              {" qui te permettent de te concentrer sur ta stratégie." }
             </p>
             <p>
-              { "J'ai donc créé Auto Monday, une newsletter qui t'enseigne des systèmes concrets pour automatiser intelligemment." }
+              { "J'ai créé Auto Monday, une " }
+              <strong>newsletter gratuite</strong>
+              { " qui applique l'ingénierie à ton business. Abonne-toi pour recevoir les méthodes pour automatiser intelligemment." }
             </p>
             <p>
-              { "En parallèle, je conçois des systèmes complexes comme mon market maker sur le XRP Ledger, classé "}
-              <strong>Top 1% mondial</strong>
-              { " et ayant déjà généré jusqu'à 15 000€/mois." }
+              { "En parallèle, je conçois des systèmes critiques comme mon market maker sur le XRP Ledger, opérant au niveau du Top 1% mondial, avec des pics à 15 000€/mois." }
             </p>
             <div className="flex items-center justify-between">
               <Link href="/a-propos" variant="light-primary">
@@ -124,7 +124,7 @@ export default function Home()
               title="Consultation"
               paragraph="Un accompagnement 1:1 pour créer des systèmes sur mesure."
               href="/consultation"
-              cta="Réserve ton Appel"
+              cta="Réserve mon Diagnostic"
               className="max-lg:col-span-full"
             />
           </div>
