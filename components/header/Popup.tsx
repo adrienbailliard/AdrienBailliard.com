@@ -21,10 +21,10 @@ export default function Popup({ isEnabled, onClose }: PopupProps)
                 Reçois <span className="[letter-spacing:-0.04em]">AUTO <span className="font-extralight">MONDAY</span></span>
             </h2>
             <p className='max-w-xs md:max-w-sm mx-auto'>
-                Accède chaque lundi aux meilleurs systèmes pour automatiser comme le top 1%.
+                Accède chaque lundi à une clé pour automatiser comme le top 1%.
             </p>
             <Form>
-                Reçois-La
+                Inscris-Toi
             </Form>
         </Modal>
     );
