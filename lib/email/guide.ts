@@ -38,7 +38,7 @@ export async function sendGuide(email: string): Promise<void>
           <p>
             Comme convenu, voici ton accès au guide :
             <br>
-            → <a target="_blank" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ">Télécharger le PDF</a>
+            → <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ">Télécharger le PDF</a>
           </p>
           <p>
             Découvre comment automatiser au-delà de la <em>performance</em>.

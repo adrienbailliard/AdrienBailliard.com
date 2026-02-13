@@ -59,7 +59,7 @@ export async function sendConfirmation(email: string): Promise<void>
                 ${ site.name }
             </p>
             <p>
-                PS : En attendant la prochaine newsletter, tu peux <a target="_blank" href="${site.url}/consultation">réserver une consultation 1:1</a> pour libérer ton temps grâce à des systèmes sur mesure.
+                PS : En attendant la prochaine newsletter, tu peux <a href="${site.url}/consultation">réserver une consultation 1:1</a> pour libérer ton temps grâce à des systèmes sur mesure.
             </p>
         </div>
     `);
@@ -85,7 +85,7 @@ export async function sendEdition(emails: Array<string>, newsletter: Newsletter)
 
     const content = `
         <div style="background-color: #F0F0F0; padding-left: 5%; padding-right: 5%; padding-top: 48px; padding-bottom: 64px;">
-            <a target="_blank" href="${site.url}${NEWSLETTER_ROUTE}/${newsletter.slug}" style="text-decoration: none; color: #306CE4; font-weight: 600; font-size: 16px;">
+            <a href="${site.url}${NEWSLETTER_ROUTE}/${newsletter.slug}" style="text-decoration: none; color: #306CE4; font-weight: 600; font-size: 16px;">
                 Lis en Ligne<img style="margin-left: 16px; width: 8px;" src="${site.url}${site.emailAssetsFolder}right-chevron.png"/>
             </a>
 
