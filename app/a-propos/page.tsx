@@ -39,7 +39,7 @@ export default function About()
               Je suis Adrien Bailliard
             </h1>
             <p className="max-w-xl">
-              { "Trop de projets d'automatisation échouent. J'écris pour partager ce qui fonctionne vraiment." }
+              { "Trop de projets d'automatisation échouent. J'écris pour partager ce qui fonctionne réellement." }
             </p>
           </div>
           <ul className="text-dark-muted-fg shrink-0">
