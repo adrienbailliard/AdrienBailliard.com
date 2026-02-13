@@ -53,7 +53,7 @@ export default function Home()
           <p className="caption-subdued">
             { "Découvre comment mes systèmes ont généré " }
             <span className="text-primary font-bold">
-              +70 000€
+              70 000€
             </span>
               { " automatiquement." }
           </p>
