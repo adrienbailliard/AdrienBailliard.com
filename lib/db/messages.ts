@@ -77,5 +77,8 @@ export const getMessagesStats = unstable_cache(
     ];
   },
   [ CACHE_TAGS.messagesStats ],
-  { tags: [ CACHE_TAGS.messagesStats ] }
+  {
+    tags: [ CACHE_TAGS.messagesStats ],
+    revalidate: 3600
+  }
 );

@@ -27,7 +27,7 @@ export async function sendConfirmation(email: string): Promise<void>
                 Il est temps de franchir un cap et de libérer ton temps grâce à l'automatisation.
             </p>
             <p>
-                Pour cela, tu dois comprendre les clés des systèmes du Top 1%.
+                Pour cela, tu dois comprendre les clés des systèmes du Top 1%.
             </p>
             <h3>
                 LE GAIN

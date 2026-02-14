@@ -42,5 +42,8 @@ export const getGuideStats = unstable_cache(
     ];
   },
   [ CACHE_TAGS.guideStats ],
-  { tags: [ CACHE_TAGS.guideStats ] }
+  {
+    tags: [ CACHE_TAGS.guideStats ],
+    revalidate: 3600
+  }
 );

@@ -40,9 +40,9 @@ export default function TheEliteSystem()
           <Image
             src={ `${site.illustrationsFolder}le-systeme-d-elite.png` }
             alt="Guide - Le Système d'Élite"
-            width={288}
-            height={407.25}
-            className="mx-auto w-full max-w-48 sm:max-w-56 md:max-w-3xs lg:max-w-2xs"
+            width={320}
+            height={452.5}
+            className="mx-auto w-full max-w-56 md:max-w-xs"
             preload={true}
           />
           <div className="absolute w-full -bottom-0 left-1/2 -translate-x-1/2 text-center max-w-2xl z-1">

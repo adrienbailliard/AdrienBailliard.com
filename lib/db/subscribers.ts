@@ -90,5 +90,8 @@ export const getSubscribersStats = unstable_cache(
     ];
   },
   [ "subscribers-stats" ],
-  { tags: [ CACHE_TAGS.subscribers ] }
+  {
+    tags: [ CACHE_TAGS.subscribers ],
+    revalidate: 3600
+  }
 );
