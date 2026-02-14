@@ -142,7 +142,6 @@
   }
 
   p,
-  figcaption,
   ul {
     @apply font-sans md:text-lg;
   }

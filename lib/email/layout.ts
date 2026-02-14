@@ -16,7 +16,6 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
               @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
               p,
-              figcaption,
               ul {
                 font-family: 'Nunito', system-ui, Arial;
               }

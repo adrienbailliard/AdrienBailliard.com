@@ -70,13 +70,10 @@ export default function About()
             className="illustrations max-sm:m-auto sm:ml-auto sm:w-[38%]"
             preload={true}
           />
-          <figure className="rounded-lg bg-light-bg sm:w-[60%] max-w-4xl p-4 md:p-6 lg:p-8 xl:p-10 sm:absolute">
+          <figure className="rounded-lg bg-light-bg sm:w-[60%] max-w-235 p-4 md:p-6 lg:p-8 xl:p-10 sm:absolute">
             <blockquote>
-              { "« Vous ne vous élevez pas au niveau de vos objectifs. Vous retombez au niveau de vos systèmes. »" }
+              { "« On ne s'élève pas au niveau de ses objectifs. On retombe au niveau de ses systèmes. »" }
             </blockquote>
-            <figcaption className="text-right">
-              Archiloque
-            </figcaption>
           </figure>
         </div>
       </section>
