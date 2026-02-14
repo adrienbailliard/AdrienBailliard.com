@@ -100,7 +100,7 @@ export default function About()
             { "3. À l'école 42, j'ai appris que coder n'est qu'un prérequis. La vraie valeur se trouve dans la rencontre et la transmission." }
           </p>
           <p>
-            { "4. Mon chien Thatcher est titré Champion dans 3 pays. Qu'elle soit technique ou non, la performance se construit méthodiquement." }
+            { "4. Mon chien Thatcher est titré Champion dans 3 pays. Face à la complexité, la méthode est la seule réponse." }
           </p>
           <p>
             { "5. Le scoutisme m'a appris le leadership. Une organisation n'est efficace que si elle continue de tourner lorsque le responsable s'absente." }

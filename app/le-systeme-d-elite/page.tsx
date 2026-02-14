@@ -63,7 +63,7 @@ export default function TheEliteSystem()
 
       <Cta
         title={ <>Construis ton <span className="italic">{ "Système d'Élite" }</span></> }
-        paragraph="L'automatisation se construit méthodiquement. Obtiens les protocoles du Top 1% dès aujourd'hui."
+        paragraph="Face à la complexité, la méthode est la seule réponse. Obtiens les protocoles du Top 1% dès aujourd'hui."
         variant="dark"
       >
         <Form

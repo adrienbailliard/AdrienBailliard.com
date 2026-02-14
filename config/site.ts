@@ -9,6 +9,7 @@ const site = {
     description: "Systèmes pour une Performance d'Élite",
     faviconsFolder: "/assets/favicons/",
     illustrationsFolder: "/assets/illustrations/",
+    documentsFolder: "/assets/documents/",
     emailAssetsFolder: "/assets/email/"
 };
 
