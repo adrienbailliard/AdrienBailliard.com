@@ -13,7 +13,7 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
             <style>
-              @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+              @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
               p,
               ul {
@@ -24,7 +24,7 @@ export default function layout(children: string, showNewsletterHeader?: boolean,
           <body style="margin: 0; padding: 0;">
             <div style="max-width: 660px; margin: auto; font-family: 'Plus Jakarta Sans', system-ui, Arial;">
 
-              <table border="0" cellpadding="0" cellspacing="0" style="background-color: #0F0F0F; width: 100%; height: 60px; padding-left: 5%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #0F0F0F; width: 100%; height: 60px; padding-left: 5%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                 <tr>
                   <td style="font-size: 16px; font-weight: 600;">
                     <a href="${site.url}" style="color: #FFFFFF; text-decoration: none; text-transform: uppercase;">${ site.name }</a>

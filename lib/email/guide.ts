@@ -9,7 +9,7 @@ import { stylizeBodyContent } from "@/lib/email/stylizer";
 export async function sendGuide(email: string): Promise<void>
 {
     const content = `
-      <table border="0" cellpadding="0" cellspacing="0" style="background-color: #0F0F0F; text-align: center; width: 100%;
+      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #0F0F0F; text-align: center; width: 100%;
         background-image: url('${site.url}${site.illustrationsFolder}le-systeme-d-elite.png'); background-repeat: no-repeat; background-position: center bottom; background-size: 224px 317px; height: 381px;"
       >
         <tr><td></td></tr>
