@@ -43,7 +43,7 @@ export default function DisplayField({ children, setIsEditing, field, variant, h
                         ? "Renvoyer"
                         : "Modifier" }
             </button>
-            { children }
+            <div>{ children }</div>
         </>
     );
 }

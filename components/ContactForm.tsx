@@ -85,7 +85,7 @@ export default function ContactForm()
             <input name="category" type="hidden" value={category}/>
             <div className={ "transition-opacity duration-300 " + (category == "" ? "h-0 overflow-hidden opacity-0" : "mt-8 opacity-100") }>
                 <label htmlFor="content">Message</label>
-                <TextareaAutosize id="content" name="content" maxLength={fieldMaxLengths.content} required className="resize-none" minRows={6}/>
+                <TextareaAutosize id="content" name="content" maxLength={fieldMaxLengths.content} required minRows={6}/>
             </div>
         </div>
         <Button

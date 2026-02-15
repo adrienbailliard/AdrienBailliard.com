@@ -90,6 +90,10 @@
     @apply bg-light-fg text-dark-fg outline-none rounded-lg p-3 font-sans;
   }
 
+  textarea {
+    @apply overflow-hidden resize-none;
+  }
+
   ::placeholder {
     @apply font-light text-dark-muted-fg;
   }

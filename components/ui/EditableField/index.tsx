@@ -26,9 +26,8 @@ export default function EditableField({ children, field, variant }: EditableFiel
 
 
     return (
-        <div className="flex flex-col gap-1.5">
-            {
-                isEditing
+        <div className="flex flex-col gap-2">
+            { isEditing
                 ? <EditorField
                     setIsEditing={setIsEditing}
                     field={field}
