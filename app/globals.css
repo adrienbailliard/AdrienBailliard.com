@@ -90,6 +90,10 @@
     @apply bg-light-fg text-dark-fg outline-none rounded-lg p-3 font-sans;
   }
 
+  textarea {
+    @apply overflow-hidden resize-none mt-2 w-full;
+  }
+
   ::placeholder {
     @apply font-light text-dark-muted-fg;
   }
@@ -235,8 +239,7 @@
     @apply p-7 sm:p-9 bg-dark-bg text-light-fg rounded-md;
   }
 
-  .contact input,
-  .contact textarea {
+  .contact input {
     @apply w-full mt-2;
   }
 

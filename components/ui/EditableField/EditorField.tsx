@@ -87,7 +87,6 @@ export default function EditorField({ field, setIsEditing, setHasError, variant,
             <TextareaAutosize
                 ref={ autoFocusAtEnd }
                 aria-label={ `Modifier le champ ${field}` }
-                className="resize-none mt-2 w-full"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
             />
