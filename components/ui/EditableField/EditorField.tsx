@@ -1,4 +1,4 @@
-import { useCallback, useTransition } from "react";
+import { useTransition } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { isRedirectError } from "next/dist/client/components/redirect-error";
@@ -57,16 +57,6 @@ export default function EditorField({ field, setIsEditing, setHasError, variant,
     };
 
 
-    const autoFocusAtEnd = useCallback((node: HTMLTextAreaElement | null) => {
-        if (!node)
-            return;
-
-        const length = node.value.length;
-        node.focus();
-        node.setSelectionRange(length, length);
-    }, []);
-
-
     return (
         <>
             <div className="flex gap-7 self-end">
@@ -85,7 +75,6 @@ export default function EditorField({ field, setIsEditing, setHasError, variant,
                 </button>
             </div>
             <TextareaAutosize
-                ref={ autoFocusAtEnd }
                 aria-label={ `Modifier le champ ${field}` }
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
