@@ -51,7 +51,7 @@ export default async function NewsletterPage({ params }: { params: Parameters })
 
   return (
     <main className="bg-light-bg">
-      <NewsletterEditorProvider newsletter={newsletter}>
+      <NewsletterEditorProvider initialNewsletter={newsletter}>
         <NewsletterEditor/>
       </NewsletterEditorProvider>
     </main>

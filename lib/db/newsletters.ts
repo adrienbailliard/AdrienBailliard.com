@@ -90,17 +90,17 @@ async function getUniqueSlug(title: string, excludeId?: number): Promise<string>
 
 
 
-export async function insertNewsletter(draft: InsertNewsletterParam): Promise<NewsletterSlug>
+export async function insertNewsletter(draft: InsertNewsletterParam): Promise<Newsletter>
 {
     const slug = await getUniqueSlug(draft.title);
 
-    const [ newsletterSlug ] = await sql`
+    const [ newsletter ] = await sql`
         INSERT INTO newsletters (slug, title, content, excerpt)
         VALUES (${slug}, ${draft.title}, ${draft.content}, ${draft.excerpt})
-        RETURNING slug
-    ` as NewsletterSlug[];
+        RETURNING *
+    ` as Newsletter[];
 
-    return newsletterSlug;
+    return newsletter;
 }
 
 

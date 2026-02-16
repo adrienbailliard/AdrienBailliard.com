@@ -6,30 +6,19 @@ import { redirect, RedirectType } from 'next/navigation';
 import { z } from "zod";
 
 import { sendNewsletterEmails } from "@/lib/services/newsletter";
-import { publishNewsletterById, deleteNewsletterById, insertNewsletter, updateNewsletter, scheduleNewsletterById } from "@/lib/db/newsletters";
+import { publishNewsletterById, deleteNewsletterById, scheduleNewsletterById } from "@/lib/db/newsletters";
 import CACHE_TAGS from '@/lib/db/cache-tags';
 
-import { InsertNewsletterParam, UpdateNewsletterParam } from "@/lib/types";
-import { NEWSLETTER_ROUTE, ADMIN_ROUTE } from "@/lib/constants";
+import { NEWSLETTER_ROUTE } from "@/lib/constants";
 
 
 
 const IdSchema = z.number().min(1);
 
+
 const ScheduleDraftSchema = z.object({
   date: z.date().nullable()
 }).extend({ id: IdSchema });
-
-
-const CreateDraftSchema = z.object({
-  title: z.string().trim().min(1),
-  content: z.string().trim().min(1),
-  excerpt: z.string().trim().min(1)
-});
-
-
-const UpdateDraftSchema = CreateDraftSchema.partial().extend({ id: IdSchema })
-  .refine(data => data.title || data.content || data.excerpt);
 
 
 
@@ -84,38 +73,4 @@ export async function deleteDraft(id: number): Promise<void>
   updateTag(`${CACHE_TAGS.newsletter}-${result.slug}-false`);
 
   redirect(NEWSLETTER_ROUTE, RedirectType.replace);
-}
-
-
-
-export async function createDraft(draft: InsertNewsletterParam): Promise<void>
-{
-  CreateDraftSchema.parse(draft);
-  const result = await insertNewsletter(draft);
-
-  updateTag(CACHE_TAGS.newsletterDraftsPreviews);
-  updateTag(`${CACHE_TAGS.newsletter}-${result.slug}-false`);
-
-  redirect(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.slug}`, RedirectType.replace);
-}
-
-
-
-export async function updateDraft(draft: UpdateNewsletterParam): Promise<void>
-{
-  UpdateDraftSchema.parse(draft);
-  const result = await updateNewsletter(draft);
-
-  if (!result)
-    throw Error("Draft not found");
-
-  updateTag(CACHE_TAGS.newsletterDraftsPreviews);
-  updateTag(CACHE_TAGS.newsletterScheduledPreviews);
-  updateTag(`${CACHE_TAGS.newsletter}-${result.old_slug}-false`);
-
-  if (result.old_slug !== result.new_slug)
-  {
-    updateTag(`${CACHE_TAGS.newsletter}-${result.new_slug}-false`);
-    redirect(`${ADMIN_ROUTE}${NEWSLETTER_ROUTE}/${result.new_slug}`, RedirectType.replace);
-  }
 }

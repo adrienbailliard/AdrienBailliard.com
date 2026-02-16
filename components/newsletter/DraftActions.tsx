@@ -44,18 +44,17 @@ const modalConfig = {
 
 export default function DraftActions()
 {
-    const { optimisticNewsletter, selectEditor } = useNewsletterEditor();
-    const [ selectedEditor ] = selectEditor;
+    const { newsletter, selectedEditors } = useNewsletterEditor();
 
     const [isActionPending, startTransition] = useTransition();
     const [selectedDate, setSelectedDate] = useState<Date>();
     const [isModalActive, setIsModalActive] = useState(false);
     const [modal, setModal] = useState<ModalType>("delete");
 
-    const hasId = "id" in optimisticNewsletter;
-    const isSubmitDisabled = selectedEditor !== null || !hasId;
+    const hasId = "id" in newsletter;
+    const isSubmitDisabled = selectedEditors.size > 0 || !hasId;
 
-    const leftAction = !hasId || !optimisticNewsletter.scheduled_for ? "delete" : "unschedule";
+    const leftAction = !hasId || !newsletter.scheduled_for ? "delete" : "unschedule";
     const rightAction = selectedDate ? "schedule" : "publish";
 
     const config = modal === "primary"
@@ -132,7 +131,7 @@ export default function DraftActions()
                         className='button-compact py-0'
                         disabled={ isActionPending }
                         onClick={ () =>
-                            executeAction((optimisticNewsletter as Newsletter).id) }
+                            executeAction((newsletter as Newsletter).id) }
                     >
                         { isActionPending ? config.loadingText : config.cta }
                     </Button>

@@ -7,35 +7,34 @@ type DisplayFieldProps = {
   children: React.ReactNode;
   field: keyof InsertNewsletterParam;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  variant: "light" | "dark";
+  handleSave: (newValue?: string) => Promise<void>;
   hasError: boolean;
 }
 
 
-export default function DisplayField({ children, setIsEditing, field, variant, hasError }: DisplayFieldProps)
+export default function DisplayField({ children, setIsEditing, field, hasError, handleSave }: DisplayFieldProps)
 {
-    const { selectEditor } = useNewsletterEditor();
-    const [ selectedEditor, setSelectedEditor ] = selectEditor;
+    const { selectedEditors, openEditor } = useNewsletterEditor();
+    const inSavingState = selectedEditors.has(field) && !hasError;
 
-    const inSavingState = selectedEditor === field && !hasError;
-    const isDisabled = selectedEditor !== null && selectedEditor !== field;
-
-    const handleEdit = () => {
-        setIsEditing(true);
-        setSelectedEditor(field);
+    const handleClick = () => {
+        if (hasError)
+            handleSave();
+        else {
+            setIsEditing(true);
+            openEditor(field);
+        }
     };
 
 
     return (
         <>
             <button
-                className={ `${isDisabled
-                    ? `text-${variant}-muted-fg`
-                    : hasError
-                        ? "text-error"
-                        : "text-primary"} font-medium self-end` }
-                onClick={handleEdit}
-                disabled={isDisabled || inSavingState}
+                className={ `${ hasError
+                    ? "text-error"
+                    : "text-primary"} font-medium self-end` }
+                onClick={handleClick}
+                disabled={inSavingState}
             >
                 { inSavingState
                     ? "Validation..."

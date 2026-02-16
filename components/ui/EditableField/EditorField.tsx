@@ -1,60 +1,32 @@
-import { useTransition } from "react";
+import { useState } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 
-import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { useNewsletterEditor } from '@/contexts/newsletterEditor';
-
 import { InsertNewsletterParam } from "@/lib/types";
-import { createDraft, updateDraft } from "@/lib/actions/newsletter";
 
 
 
 type EditorFieldProps = {
     field: keyof InsertNewsletterParam;
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-    setHasError: React.Dispatch<React.SetStateAction<boolean>>;
-    value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
+    handleSave: (newValue: string) => Promise<void>;
     variant: "light" | "dark";
 }
 
 
-export default function EditorField({ field, setIsEditing, setHasError, variant, value, setValue }: EditorFieldProps)
+export default function EditorField({ field, setIsEditing, handleSave, variant }: EditorFieldProps)
 {
-    const { selectEditor, optimisticNewsletter, updateOptimisticNewsletter } = useNewsletterEditor();
-    const [ , startTransition ] = useTransition();
-    const [ , setSelectedEditor ] = selectEditor;
+    const { closeEditor, newsletter } = useNewsletterEditor();
+    const [value, setValue] = useState(newsletter[field]);
 
     const trimmedValue = value.trim();
-    const isToSave = trimmedValue.length !== 0 && optimisticNewsletter[field] !== trimmedValue;
+    const isToSave = trimmedValue.length !== 0 && newsletter[field] !== trimmedValue;
 
 
     const handleCancellation = () => {
         setIsEditing(false);
-        setSelectedEditor(null);
+        closeEditor(field);
     }
-
-    
-    const handleSave = () => {
-        setIsEditing(false);
-        setHasError(false);
-        
-        startTransition(async () => {
-            updateOptimisticNewsletter({ field, value: trimmedValue });
-
-            try {
-                "id" in optimisticNewsletter
-                    ? await updateDraft({ id: optimisticNewsletter.id, [field]: trimmedValue })
-                    : await createDraft({ ...optimisticNewsletter, [field]: trimmedValue });
-
-                setSelectedEditor(null);
-            }
-            catch (error) {
-                if (!isRedirectError(error))
-                    setHasError(true);
-            }
-        });
-    };
 
 
     return (
@@ -67,7 +39,7 @@ export default function EditorField({ field, setIsEditing, setHasError, variant,
                     Annuler
                 </button>
                 <button
-                    onClick={handleSave}
+                    onClick={() => handleSave(trimmedValue)}
                     className={ `${isToSave ? "text-primary" : `text-${variant}-muted-fg`} font-medium` }
                     disabled={!isToSave}
                 >

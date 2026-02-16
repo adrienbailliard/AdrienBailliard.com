@@ -13,7 +13,7 @@ import NewsletterDraftActions from "@/components/newsletter/DraftActions";
 
 export default function Editor()
 {
-    const { optimisticNewsletter } = useNewsletterEditor();
+    const { newsletter } = useNewsletterEditor();
 
     return (
         <>
@@ -26,7 +26,7 @@ export default function Editor()
                         field="excerpt"
                         variant="dark"
                     >
-                        <p>{ optimisticNewsletter.excerpt }</p>
+                        <p>{ newsletter.excerpt }</p>
                     </EditableField>
                 </div>
             </section>
@@ -37,7 +37,7 @@ export default function Editor()
                         field="title"
                         variant="dark"
                     >
-                        <NewsletterTitle value={ optimisticNewsletter.title } />
+                        <NewsletterTitle value={ newsletter.title } />
                     </EditableField>
                 }
                 content={
@@ -45,7 +45,7 @@ export default function Editor()
                         field="content"
                         variant="light"
                     >
-                        <Markdown>{ optimisticNewsletter.content }</Markdown>
+                        <Markdown>{ newsletter.content }</Markdown>
                     </EditableField>
                 }
                 date={ new Date() }

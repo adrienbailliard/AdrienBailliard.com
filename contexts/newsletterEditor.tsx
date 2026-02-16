@@ -1,49 +1,46 @@
 "use client";
 
-import { useState, useOptimistic, createContext } from "react";
+import { useState, createContext } from "react";
 
 import { createHook } from "@/contexts/utils";
 import { Newsletter, InsertNewsletterParam } from "@/lib/types";
 
 
 
-type UpdateOptimisticNewsletterType = {
-  field: keyof InsertNewsletterParam;
-  value: string;
-}
-
-
 type NewsletterEditorContextType = {
-  selectEditor: [string | null, React.Dispatch<React.SetStateAction<string | null>>];
-  optimisticNewsletter: Newsletter | InsertNewsletterParam;
-  updateOptimisticNewsletter: (data: UpdateOptimisticNewsletterType) => void;
+  selectedEditors: Set<string>;
+  openEditor: (field: string) => void,
+  closeEditor: (field: string) => void,
+  newsletter: Newsletter | InsertNewsletterParam;
+  setNewsletter: React.Dispatch<React.SetStateAction<Newsletter | InsertNewsletterParam>>;
 }
 
 
 type NewsletterEditorProviderProps = {
   children: React.ReactNode;
-  newsletter: Newsletter | InsertNewsletterParam;
+  initialNewsletter: Newsletter | InsertNewsletterParam;
 }
 
 
 const NewsletterEditorContext = createContext<NewsletterEditorContextType | null>(null);
 
 
-export function NewsletterEditorProvider({ children, newsletter }: NewsletterEditorProviderProps)
+export function NewsletterEditorProvider({ children, initialNewsletter }: NewsletterEditorProviderProps)
 {
-  const selectEditor = useState<string | null>(null);
+  const [selectedEditors, setSelectedEditors] = useState<Set<string>>(new Set());
+  const [newsletter, setNewsletter] = useState(initialNewsletter);
 
-  const [optimisticNewsletter, updateOptimisticNewsletter] = useOptimistic(
-    newsletter,
-    (currentNewsletter, { field, value }: UpdateOptimisticNewsletterType) => ({
-        ...currentNewsletter,
-        [field]: value
-    })
-  );
+  const openEditor = (field: string) => setSelectedEditors(prev => new Set(prev).add(field));
+  const closeEditor = (field: string) => setSelectedEditors(prev => {
+    const next = new Set(prev);
+    next.delete(field);
+    return next;
+  });
+
 
   return (
     <NewsletterEditorContext.Provider
-      value={{ selectEditor, optimisticNewsletter, updateOptimisticNewsletter }}
+      value={{ selectedEditors, openEditor, closeEditor, newsletter, setNewsletter }}
     >
       {children}
     </NewsletterEditorContext.Provider>
