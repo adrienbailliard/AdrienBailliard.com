@@ -45,7 +45,7 @@ const modalConfig = {
 
 export default function DraftActions()
 {
-    const { newsletter, selectedEditors } = useNewsletterEditor();
+    const { newsletter, selectedEditors, setNewsletter } = useNewsletterEditor();
 
     const [isActionPending, startTransition] = useTransition();
     const [selectedDate, setSelectedDate] = useState<Date>();
@@ -70,6 +70,7 @@ export default function DraftActions()
         startTransition(async () => {
             try {
                 await config.action(id, selectedDate!);
+                setNewsletter((prev) => ({ ...prev, scheduled_for: null }));
                 setHasError(false);
                 closeModal();
             }
