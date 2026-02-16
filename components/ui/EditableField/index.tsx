@@ -29,7 +29,7 @@ export default function EditableField({ children, field, variant }: EditableFiel
 
         setIsEditing(false);
         setHasError(false);
-        setNewsletter({ ...newsletter, [field]: valueToSave });
+        setNewsletter((prev) => ({ ...prev, [field]: valueToSave }));
 
         try {
             const { method, argument } = "id" in newsletter
