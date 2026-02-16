@@ -1,5 +1,9 @@
-import { formatPublicDate } from "@/lib/utils";
+import Image from "next/image";
+
+import site from "@/config/site";
 import newsletterConfig from "@/config/newsletter";
+
+import { formatPublicDate } from "@/lib/utils";
 
 
 
@@ -24,9 +28,19 @@ export default function View({ title, content, date }: ViewProps)
             <section className="bg-dark-bg text-light-fg">
                 <div className="text-center max-w-4xl">
                     { title }
-                    <time className='block mt-7'>
-                        { formatPublicDate(date) }
-                    </time>
+                    <div className="flex justify-center items-center gap-7 edition-date">
+                        <Image
+                            src={ `${site.illustrationsFolder}profile-picture.png` }
+                            alt="Adrien Bailliard"
+                            width={56}
+                            height={56}
+                            className="illustrations"
+                            preload={true}
+                        />
+                        <time>
+                            { formatPublicDate(date) }
+                        </time>
+                    </div>
                 </div>
             </section>
 

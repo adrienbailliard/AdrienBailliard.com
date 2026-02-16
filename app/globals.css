@@ -173,6 +173,7 @@
 
   h1 + p,
   svg + h4,
+  .edition-date,
   .caption-subdued {
     @apply mt-7 md:mt-9;
   }
