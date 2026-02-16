@@ -2,6 +2,7 @@ import { useState } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 
 import { useNewsletterEditor } from '@/contexts/newsletterEditor';
+import { fixTypography } from "@/lib/utils";
 import { InsertNewsletterParam } from "@/lib/types";
 
 
@@ -19,8 +20,8 @@ export default function EditorField({ field, setIsEditing, handleSave, variant }
     const { closeEditor, newsletter } = useNewsletterEditor();
     const [value, setValue] = useState(newsletter[field]);
 
-    const trimmedValue = value.trim();
-    const isToSave = trimmedValue.length !== 0 && newsletter[field] !== trimmedValue;
+    const formattedInput = fixTypography(value.trim());
+    const isToSave = formattedInput.length !== 0 && newsletter[field] !== formattedInput;
 
 
     const handleCancellation = () => {
@@ -39,7 +40,7 @@ export default function EditorField({ field, setIsEditing, handleSave, variant }
                     Annuler
                 </button>
                 <button
-                    onClick={() => handleSave(trimmedValue)}
+                    onClick={() => handleSave(formattedInput)}
                     className={ `${isToSave ? "text-primary" : `text-${variant}-muted-fg`} font-medium` }
                     disabled={!isToSave}
                 >

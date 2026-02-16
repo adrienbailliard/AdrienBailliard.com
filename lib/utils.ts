@@ -74,3 +74,12 @@ export function generateSlug(title: string): string {
         .replace(/-+/g, '-')
         .replace(/^-+|-+$/g, '');
 }
+
+
+
+export function fixTypography(text: string): string {
+  return text
+    .replace(/\s([!?:;»])/g, '\u00A0$1')
+    .replace(/(«)\s/g, '$1\u00A0')
+    .replace(/(\d)\s(\d{3})/g, '$1\u00A0$2');
+}
