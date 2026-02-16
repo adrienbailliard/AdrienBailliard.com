@@ -2,7 +2,7 @@
 
 import Button from "@/components/ui/Button";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
-import { EMAIL_PATTERN, ERROR_MESSAGE, PENDING_MESSAGE } from "@/lib/constants";
+import { EMAIL_PATTERN, FORM_RETRY_LABEL, PENDING_MESSAGE } from "@/lib/constants";
 
 import { useFormAction } from "@/lib/form/hooks";
 import { request } from "@/lib/actions/guide";
@@ -62,7 +62,7 @@ export default function BaseForm({ children, className, isForNewsletter = true }
             { isPending
               ? PENDING_MESSAGE
               : isSubmit === false
-                ? ERROR_MESSAGE
+                ? FORM_RETRY_LABEL
                 : children }
           </Button>
       </div>

@@ -6,7 +6,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import Button from "@/components/ui/Button";
 import fieldMaxLengths from "@/config/fieldMaxLengths";
 
-import { EMAIL_PATTERN, ERROR_MESSAGE, PENDING_MESSAGE } from "@/lib/constants";
+import { EMAIL_PATTERN, FORM_RETRY_LABEL, PENDING_MESSAGE } from "@/lib/constants";
 import { useFormAction } from "@/lib/form/hooks";
 import { contact } from "@/lib/actions/message";
 
@@ -96,7 +96,7 @@ export default function ContactForm()
           { isPending
             ? PENDING_MESSAGE
             : isSubmit === false
-              ? ERROR_MESSAGE
+              ? FORM_RETRY_LABEL
               : "Lance l'Échange" }
         </Button>
       </div>

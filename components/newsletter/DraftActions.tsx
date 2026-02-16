@@ -10,6 +10,7 @@ import BlockScroll from "@/components/ui/BlockScroll";
 import Calendar from "@/components/ui/Calendar";
 import Modal from "@/components/ui/Modal";
 
+import { ACTION_RETRY_LABEL } from "@/lib/constants";
 import { Newsletter } from "@/lib/types";
 
 
@@ -49,6 +50,7 @@ export default function DraftActions()
     const [isActionPending, startTransition] = useTransition();
     const [selectedDate, setSelectedDate] = useState<Date>();
     const [isModalActive, setIsModalActive] = useState(false);
+    const [hasError, setHasError] = useState(false);
     const [modal, setModal] = useState<ModalType>("delete");
 
     const hasId = "id" in newsletter;
@@ -68,12 +70,16 @@ export default function DraftActions()
         startTransition(async () => {
             try {
                 await config.action(id, selectedDate!);
+                setHasError(false);
                 closeModal();
             }
-            catch {}
+            catch {
+                setHasError(true);
+            }
         });
     
     const openModal = (modalType: ModalType) => {
+        setHasError(false);
         setModal(modalType);
         setIsModalActive(true);
     };
@@ -127,13 +133,17 @@ export default function DraftActions()
                         Annuler
                     </Button>
                     <Button
-                        variant="dark-primary"
+                        variant={ hasError && !isActionPending ? "dark-error" : "dark-primary" }
                         className='button-compact py-0'
                         disabled={ isActionPending }
                         onClick={ () =>
                             executeAction((newsletter as Newsletter).id) }
                     >
-                        { isActionPending ? config.loadingText : config.cta }
+                        { isActionPending
+                            ? config.loadingText
+                            : hasError
+                                ? ACTION_RETRY_LABEL
+                                : config.cta }
                     </Button>
                 </div>
             </Modal>

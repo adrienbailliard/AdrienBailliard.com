@@ -12,7 +12,8 @@ export const DOMAIN_CACHE_TTL_DAYS = 30;
 export const STATS_PERCENTAGE_PRECISION = 1;
 
 export const DRAFT_CREATION_SLUG = 'creer';
-export const ERROR_MESSAGE = "Réessaie l'Envoi";
+export const FORM_RETRY_LABEL = "Réessaie l'Envoi";
+export const ACTION_RETRY_LABEL = "Réessayer";
 export const PENDING_MESSAGE = "Envoi...";
 
 export const LOGIN_ROUTE = "/connexion";

@@ -5,6 +5,8 @@ import { useState, useTransition } from 'react';
 import { resubscribe, unsubscribe } from "@/lib/actions/subscribers";
 import Button from "@/components/ui/Button";
 
+import { ACTION_RETRY_LABEL } from "@/lib/constants";
+
 
 
 type SubscriptionToggleProps = {
@@ -43,7 +45,7 @@ export default function SubscriptionToggle({ jwt, isSubscribed }: SubscriptionTo
             { isPending
                 ? "Mise à jour..."
                 : hasError
-                    ? "Réessayer"
+                    ? ACTION_RETRY_LABEL
                     : isSubscribed
                         ? "Suspendre"
                         : "Rétablir" }
