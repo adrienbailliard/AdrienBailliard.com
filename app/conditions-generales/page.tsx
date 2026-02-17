@@ -32,14 +32,14 @@ export default function GeneralTerms()
               Conditions Générales
             </h2>
             <p>
-              { "Dernière mise à jour le 29 octobre 2025." }
+              { "Dernière mise à jour le 17 février 2025." }
             </p>
           </div>
           <h4>
             Accord Sur Nos Conditions Légales
           </h4>
           <p>
-            { "Veuillez lire attentivement les présentes Conditions d'Utilisation (« Conditions », « Conditions d'Utilisation ») avant d'utiliser adrienbailliard.com (le « Service ») exploité par Adrien Bailliard (« nous », « notre » ou « nos »)." }
+            { "Veuillez lire attentivement les présentes Conditions d'Utilisation («\u00A0Conditions\u00A0», «\u00A0Conditions d'Utilisation\u00A0») avant d'utiliser adrienbailliard.com (le «\u00A0Service\u00A0») exploité par Adrien Bailliard («\u00A0nous\u00A0», «\u00A0notre\u00A0» ou «\u00A0nos\u00A0»)." }
           </p>
           <p>
             { "Votre accès et votre utilisation du Service sont conditionnés par votre acceptation et votre respect de ces Conditions. Ces Conditions s'appliquent à tous les visiteurs, utilisateurs et autres personnes qui accèdent ou utilisent le Service." }
@@ -78,7 +78,7 @@ export default function GeneralTerms()
             Exclusion de Garantie
           </h4>
           <p>
-            { "Votre utilisation du Service se fait à vos seuls risques. Le Service est fourni « EN L'ÉTAT » et « TEL QUE DISPONIBLE ». Le Service est fourni sans garantie d'aucune sorte, expresse ou implicite, notamment, mais sans s'y limiter, les garanties implicites de qualité marchande, d'adaptation à un usage particulier, d'absence de contrefaçon ou de bon fonctionnement." }
+            { "Votre utilisation du Service se fait à vos seuls risques. Le Service est fourni «\u00A0EN L'ÉTAT\u00A0» et «\u00A0TEL QUE DISPONIBLE\u00A0». Le Service est fourni sans garantie d'aucune sorte, expresse ou implicite, notamment, mais sans s'y limiter, les garanties implicites de qualité marchande, d'adaptation à un usage particulier, d'absence de contrefaçon ou de bon fonctionnement." }
           </p>
           <h4>
             Politique de Confidentialité
@@ -87,7 +87,7 @@ export default function GeneralTerms()
             { "Adrien Bailliard s'engage à ce que la collecte et le traitement de vos données, effectués à partir du portail adrienbailliard.com, soient conformes au règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés." }
           </p>
           <p>
-            { "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Pour exercer ce droit, veuillez envoyer un courrier au mail figurant dans la section « Contact »." }
+            { "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Pour exercer ce droit, veuillez envoyer un courrier au mail figurant dans la section «\u00A0Contact\u00A0»." }
           </p>
           <h4>
             Droit Applicable
@@ -111,7 +111,7 @@ export default function GeneralTerms()
             Contact
           </h4>
           <p>
-            { "Si vous avez des questions concernant ces Conditions, veuillez nous contacter : contact@adrienbailliard.com." }
+            { "Si vous avez des questions concernant ces Conditions, veuillez nous contacter\u00A0: contact@adrienbailliard.com." }
           </p>
         </div>
       </section>
