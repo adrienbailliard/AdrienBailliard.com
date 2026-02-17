@@ -13,7 +13,7 @@ const staticHtml = layout(`
     <tr><td></td></tr>
     <tr style="background-image: url('${site.url}${site.emailAssetsFolder}guide-gradient.png'); background-size: 660px 68px;">
       <td height="68px" style="font-size: 32px; padding-left: 5%; padding-right: 5%; vertical-align: bottom; color: white;">
-        Les Secrets du Top 1%
+        Les Secrets du Top\u00A01%
       </td>
     </tr>
     <tr style="background: black;">
@@ -28,7 +28,7 @@ const staticHtml = layout(`
         Hello,
       </p>
       <p>
-        Comme convenu, voici ton accès au guide :
+        Comme convenu, voici ton accès au guide\u00A0:
         <br>
         → <a href="${site.url}${site.documentsFolder}Le%20Syst%C3%A8me%20d'%C3%89lite%20-%20Adrien%20Bailliard.pdf">Télécharger le PDF</a>
       </p>

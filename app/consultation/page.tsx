@@ -35,7 +35,7 @@ export default function Consultation()
       <section className="hero lg:relative overflow-hidden">
         <div className="w-full">
           <h1 className="lg:w-[50%] max-w-2xl max-lg:text-center max-lg:mx-auto">
-            Les Systèmes du Top 1% pour ton Business
+            Les Systèmes du Top&nbsp;1% pour ton Business
           </h1>
           <div className="max-lg:flex max-lg:justify-between mt-9 sm:mt-12 md:mt-16 lg:mt-9 max-lg:items-center">
             <p className="max-w-2xs sm:max-w-xs md:max-w-sm lg:w-[50%] lg:max-w-2xl">

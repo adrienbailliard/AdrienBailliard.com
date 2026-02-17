@@ -31,7 +31,7 @@ export default function BaseForm({ children, className, isForNewsletter = true }
         onClick={ () => setIsSubmit(null) }
         className={"w-full " + className}
       >
-        { "Tu es dans la boucle !" }
+        { "Tu es dans la boucle\u00A0!" }
       </Button>
     )
   }

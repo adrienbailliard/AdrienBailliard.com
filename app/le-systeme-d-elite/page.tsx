@@ -17,7 +17,7 @@ import { StaticPage } from "@/lib/types";
 const page: StaticPage = {
   pathname: "/le-systeme-d-elite",
   title: "Le Système d'Élite",
-  description: "Construis ton Système d'Élite à travers les protocoles d'automatisation du Top 1%. Accède au guide dès maintenant."
+  description: "Construis ton Système d'Élite à travers les protocoles d'automatisation du Top\u00A01%. Accède au guide dès maintenant."
 };
 
 
@@ -47,7 +47,7 @@ export default function TheEliteSystem()
           />
           <div className="absolute w-full -bottom-0 left-1/2 -translate-x-1/2 text-center max-w-2xl z-1">
             <h1>
-              Les Secrets du Top 1%
+              Les Secrets du Top&nbsp;1%
             </h1>
             <a
               href="#cta"
@@ -63,7 +63,7 @@ export default function TheEliteSystem()
 
       <Cta
         title={ <>Construis ton <span className="italic">{ "Système d'Élite" }</span></> }
-        paragraph="Face à la complexité, la méthode est la seule réponse. Obtiens les protocoles du Top 1% dès aujourd'hui."
+        paragraph="Face à la complexité, la méthode est la seule réponse. Obtiens les protocoles du Top&nbsp;1% dès aujourd'hui."
         variant="dark"
       >
         <Form

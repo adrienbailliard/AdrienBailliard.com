@@ -25,7 +25,7 @@ const staticHtml = layout(stylizeBodyContent(`
             Il est temps de franchir un cap et de libérer ton temps grâce à l'automatisation.
         </p>
         <p>
-            Pour cela, tu dois comprendre les clés des systèmes du Top 1%.
+            Pour cela, tu dois comprendre les clés des systèmes du Top\u00A01%.
         </p>
         <h3>
             LE GAIN
@@ -40,11 +40,11 @@ const staticHtml = layout(stylizeBodyContent(`
             LA PRÉPARATION
         </h3>
         <p>
-            Pour être sûr de recevoir mes emails :
+            Pour être sûr de recevoir mes emails\u00A0:
         </p>
         <ul>
             <li>
-                Réponds « merci » à ce mail.
+                Réponds «\u00A0merci\u00A0» à ce mail.
             </li>
             <li>
                 Si ce mail a atterri dans ton dossier Spam ou Promotions, déplace-le dans ta boîte de réception principale.
@@ -52,12 +52,12 @@ const staticHtml = layout(stylizeBodyContent(`
         </ul>
         <p>_</p>
         <p>
-            À très vite !
+            À très vite\u00A0!
             <br />
             ${ site.name }
         </p>
         <p>
-            PS : En attendant la prochaine newsletter, tu peux <a href="${site.url}/consultation">réserver une consultation 1:1</a> pour libérer ton temps grâce à des systèmes sur mesure.
+            PS\u00A0: En attendant la prochaine newsletter, tu peux <a href="${site.url}/consultation">réserver une consultation 1:1</a> pour libérer ton temps grâce à des systèmes sur mesure.
         </p>
     </div>
 `), true);

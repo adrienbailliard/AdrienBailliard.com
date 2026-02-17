@@ -23,7 +23,7 @@ import { NEWSLETTER_ROUTE } from "@/lib/constants";
 const page: StaticPage = {
   pathname: "/",
   title: site.name + " - " + site.description,
-  description: "Automatise comme le Top 1% avec Auto Monday. Reçois chaque lundi les systèmes qui libèrent ton temps, dans ta boîte mail."
+  description: "Automatise comme le Top\u00A01% avec Auto Monday. Reçois chaque lundi les systèmes qui libèrent ton temps, dans ta boîte mail."
 };
 
 
@@ -42,7 +42,7 @@ export default function Home()
       <section className="hero relative">
         <div>
           <h1 className="max-sm:max-w-md max-md:max-w-xl max-[860px]:max-w-2xl">
-            Automatise comme le Top 1%
+            Automatise comme le Top&nbsp;1%
           </h1>
           <p className="max-w-sm md:max-w-md">
             Auto Monday - Les systèmes qui libèrent ton temps, chaque lundi dans ta boîte mail.
@@ -53,7 +53,7 @@ export default function Home()
           <p className="caption-subdued">
             { "Découvre comment mes systèmes ont généré " }
             <span className="text-primary font-bold">
-              70 000€
+              70&nbsp;000€
             </span>
               { " automatiquement." }
           </p>
@@ -77,7 +77,7 @@ export default function Home()
               { " qui applique l'ingénierie à ton business. Abonne-toi pour recevoir les méthodes pour automatiser intelligemment." }
             </p>
             <p>
-              { "En parallèle, je conçois des systèmes critiques comme mon market maker sur le XRP Ledger, opérant au niveau du Top 1% mondial, avec des pics à 15 000€/mois." }
+              { "En parallèle, je conçois des systèmes critiques comme mon market maker sur le XRP Ledger, opérant au niveau du Top 1% mondial, avec des pics à 15\u00A0000€/mois." }
             </p>
             <div className="flex items-center justify-between">
               <Link href="/a-propos" variant="light-primary">

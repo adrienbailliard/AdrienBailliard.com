@@ -24,7 +24,7 @@ export async function sendAdminLoginLink(): Promise<void>
                 Hello,
             </p>
             <p>
-                Ceci est ton accès à l'admin :
+                Ceci est ton accès à l'admin\u00A0:
             <br>
                 → <a href="${site.url}${LOGIN_ROUTE}?${authConfig.cookie.name}=${jwt}">
                     Se connecter

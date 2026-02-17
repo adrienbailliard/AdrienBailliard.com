@@ -31,7 +31,7 @@ export default function ContactForm()
         variant="light-primary"
         className="block mx-auto"
       >
-        { "Merci ! À très vite" }
+        { "Merci\u00A0! À très vite" }
       </Button>
     );
   }

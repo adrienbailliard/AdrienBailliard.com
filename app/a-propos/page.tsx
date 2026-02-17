@@ -47,10 +47,10 @@ export default function About()
               { "Fondateur d'Auto Monday" }
             </li>
             <li>
-              70 000€ générés
+              70&nbsp;000€ générés
             </li>
             <li>
-              280 000 impressions
+              280&nbsp;000 impressions
             </li>
             <li>
               { "Systèmes critiques" }
@@ -72,7 +72,7 @@ export default function About()
           />
           <figure className="rounded-lg bg-light-bg sm:w-[60%] max-w-235 p-4 md:p-6 lg:p-8 xl:p-10 sm:absolute">
             <blockquote>
-              { "« On ne s'élève pas au niveau de ses objectifs. On retombe au niveau de ses systèmes. »" }
+              { "«\u00A0On ne s'élève pas au niveau de ses objectifs. On retombe au niveau de ses systèmes.\u00A0»" }
             </blockquote>
           </figure>
         </div>
@@ -87,7 +87,7 @@ export default function About()
             { "1. J'ai commencé le développement web à 15 ans. Ce plaisir du concret m'a poussé à construire des systèmes de plus en plus complexes." }
           </p>
           <p>
-            { "2. À 17 ans, j'ai lancé un market maker sur le XRP Ledger générant jusqu'à 15 000€/mois en autonomie. Je détaille ces protocoles dans " }
+            { "2. À 17 ans, j'ai lancé un market maker sur le XRP Ledger générant jusqu'à 15\u00A0000€/mois en autonomie. Je détaille ces protocoles dans " }
             <Link href="/le-systeme-d-elite">
               { "Le Système d'Élite" }
             </Link>
