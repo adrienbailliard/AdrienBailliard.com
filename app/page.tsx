@@ -67,8 +67,8 @@ export default function Home()
               Hello, je suis Adrien Bailliard.
             </h2>
             <p>
-              { "L'automatisation n'est pas une course à l'outil. C'est "}
-              <strong>bâtir des systèmes</strong>
+              { "L'automatisation est une question d'architecture. C'est "}
+              <strong>concevoir des systèmes</strong>
               {" qui te permettent de te concentrer sur ta stratégie." }
             </p>
             <p>

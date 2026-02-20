@@ -16,7 +16,7 @@ import Cta from "@/components/Cta";
 const page: StaticPage = {
   pathname: "/consultation",
   title: "Consultation",
-  description: "Réserve une consultation 1:1 avec Adrien Bailliard pour bâtir les systèmes qui automatiseront ta croissance."
+  description: "Réserve une consultation 1:1 avec Adrien Bailliard pour concevoir les systèmes qui automatiseront ta croissance."
 };
 
 
@@ -39,7 +39,7 @@ export default function Consultation()
           </h1>
           <div className="max-lg:flex max-lg:justify-between mt-9 sm:mt-12 md:mt-16 lg:mt-9 max-lg:items-center">
             <p className="max-w-2xs sm:max-w-xs md:max-w-sm lg:w-[50%] lg:max-w-2xl">
-              Réserve ta consultation 1:1 pour bâtir des systèmes qui stabiliseront ta croissance et libéreront ton temps.
+              Réserve ta consultation 1:1 pour concevoir des systèmes qui stabiliseront ta croissance et libéreront ton temps.
             </p>
             <Image
               src={ `${site.illustrationsFolder}consultation.png` }

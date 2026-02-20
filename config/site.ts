@@ -6,7 +6,7 @@ const site = {
         height: 630
     },
     name: "Adrien Bailliard",
-    description: "Systèmes pour une Performance d'Élite",
+    description: "L'ingénierie des systèmes d'élite",
     faviconsFolder: "/assets/favicons/",
     illustrationsFolder: "/assets/illustrations/",
     documentsFolder: "/assets/documents/",

@@ -13,7 +13,7 @@ export default function Signup()
                 <AutoMonday className="max-lg:w-full h-17.5 max-lg:m-auto max-sm:h-12.5 max-md:h-15"/>
                 </h1>
                 <p className="max-w-xl">
-                { "L'ingénierie pour ton business. Chaque lundi, une clé pour automatiser comme le Top\u00A01%." }
+                { "L'ingénierie pour ta performance. Chaque lundi, une clé pour automatiser comme le Top\u00A01%." }
                 </p>
             </div>
             <Form
