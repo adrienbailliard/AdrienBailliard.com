@@ -53,7 +53,7 @@ export default function TheEliteSystem()
               href="#cta"
               className="group base-link text-light-muted-fg inline-flex"
             >
-              {"Crée des systèmes performants"}
+              {"Optimise tes process"}
               <Arrow className="base-arrow rotate-90 shrink-0 group-hover:translate-y-0.5" />
             </a>
           </div>
