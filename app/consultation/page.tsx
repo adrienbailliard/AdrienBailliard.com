@@ -39,7 +39,7 @@ export default function Consultation()
           </h1>
           <div className="max-lg:flex max-lg:justify-between mt-9 sm:mt-12 md:mt-16 lg:mt-9 max-lg:items-center">
             <p className="max-w-2xs sm:max-w-xs md:max-w-sm lg:w-[50%] lg:max-w-2xl">
-              Réserve ta consultation 1:1 pour concevoir des systèmes qui stabiliseront ta croissance et libéreront ton temps.
+              Réserve ta consultation 1:1 pour concevoir des systèmes qui automatiseront ta croissance et libéreront ton temps.
             </p>
             <Image
               src={ `${site.illustrationsFolder}consultation.png` }
@@ -55,7 +55,7 @@ export default function Consultation()
               href="#cta"
               className="group base-link text-light-muted-fg mt-8 md:mt-10 inline-flex"
             >
-              {"Découvre la méthode"}
+              {"Découvre le plan"}
               <Arrow className="base-arrow rotate-90 shrink-0 group-hover:translate-y-0.5" />
             </a>
           </div>
@@ -63,8 +63,8 @@ export default function Consultation()
       </section>
 
       <Cta
-        title="Bâtissons tes Systèmes"
-        paragraph="Chaque architecture est pensée pour ton activité. Analysons tes process pour libérer ton temps."
+        title="Tes Systèmes sur Mesure"
+        paragraph="Chaque architecture est pensée pour ton activité. Analysons tes process pour décupler ta performance."
         variant="light"
         className="-mt-16 md:-mt-26 lg:-mt-30"
       >
