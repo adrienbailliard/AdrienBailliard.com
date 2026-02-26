@@ -17,7 +17,7 @@ import { NEWSLETTER_ROUTE } from "@/lib/constants";
 const page: StaticPage = {
   pathname: NEWSLETTER_ROUTE,
   title: "Auto Monday",
-  description: "L'ingénierie pour ta performance. Chaque lundi, une clé pour automatiser comme le Top\u00A01%."
+  description: "Une approche ne vaut rien sans méthode. Chaque lundi, une clé pour automatiser comme le Top\u00A01%."
 };
 
 
