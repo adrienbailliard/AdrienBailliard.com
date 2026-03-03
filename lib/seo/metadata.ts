@@ -8,31 +8,18 @@ import { Page } from "@/lib/types";
 function getIconsMetadata(): Metadata
 {
     return {
-        icons: [
-            {
-                rel: "icon",
-                type: "image/png",
-                sizes: "96x96",
-                url: site.faviconsFolder + "favicon-96x96.png",
-            },
-            {
-                rel: "icon",
-                type: "image/svg+xml",
-                url: site.faviconsFolder + "favicon.svg",
-            },
-            {
-                rel: "shortcut icon",
-                url: site.faviconsFolder + "favicon.ico",
-            },
-            {
-                rel: "apple-touch-icon",
-                sizes: "180x180",
-                url: site.faviconsFolder + "apple-touch-icon.png",
-            },
-        ],
+        icons: {
+            apple: [
+                { url: site.faviconsFolder + "apple-touch-icon.png", sizes: "180x180" }
+            ],
+            icon: [
+                { url: site.faviconsFolder + "favicon.svg", type: "image/svg+xml" },
+                { url: site.faviconsFolder + "favicon-96x96.png", type: "image/png", sizes: "96x96" }
+            ]
+        },
         manifest: site.faviconsFolder + "site.webmanifest",
-        other: {
-            "apple-mobile-web-app-title": site.name
+        appleWebApp: {
+            title: site.name
         }
     };
 }
