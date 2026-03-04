@@ -37,11 +37,8 @@ const staticHtml = layout(stylizeBodyContent(`
             Je ne partage que ce qui a une réelle valeur.
         </p>
         <h3>
-            LA PRÉPARATION
+            POUR EN BÉNÉFICIER
         </h3>
-        <p>
-            Pour être sûr de recevoir mes emails\u00A0:
-        </p>
         <ul>
             <li>
                 Réponds «\u00A0merci\u00A0» à ce mail.
