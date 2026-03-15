@@ -50,7 +50,7 @@ export default function About()
               70&nbsp;000€ générés
             </li>
             <li>
-              320&nbsp;000 impressions
+              345&nbsp;000 impressions
             </li>
             <li>
               { "Systèmes critiques" }
